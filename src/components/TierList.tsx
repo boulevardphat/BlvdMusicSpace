@@ -528,21 +528,7 @@ export function TierList({
             BẢNG PHÂN HẠNG METRO
           </h1>
         </div>
-        <div className="flex items-center gap-2">
-          {onResetTiers && (
-            <button
-              onClick={onResetTiers}
-              className="flex items-center gap-1.5 bg-white/10 hover:bg-red-600 hover:text-white border border-white/15 text-white font-mono text-[9.5px] font-black uppercase tracking-wider px-3 py-1.5 transition-all cursor-pointer rounded-none"
-              title="Khôi phục lại dữ liệu mẫu"
-            >
-              <RotateCcw className="w-3.5 h-3.5 animate-pulse" />
-              <span>Reset Khâu</span>
-            </button>
-          )}
-          <div className="bg-white/10 text-white border border-white/15 px-3 py-1.5 font-mono text-[9.5px] uppercase font-black tracking-widest">
-            V8.5 PRO
-          </div>
-        </div>
+
       </div>
 
       {/* 2. Scrolling grid body - Stretched vertically */}
@@ -562,32 +548,34 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-full bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-4 md:pt-6 pb-6 border-r border-white/10 relative min-w-[max-content] rounded-none gap-3 md:gap-5 justify-start`}
+              className={`flex-none flex flex-col h-full bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-6 md:pb-8 border-r border-white/10 relative min-w-[max-content] rounded-none`}
             >
-              {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly above lane */}
-              <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-start md:items-end gap-1.5 md:gap-8 mb-1 md:mb-3 w-max drop-shadow-xl select-none pt-1">
-                {/* Text Group - NO BOX background, floating purely */}
-                <div className="text-left mt-0.5 md:mt-0">
-                  <h2 className="text-[36px] md:text-6xl font-sans font-black tracking-tighter uppercase leading-[0.9] text-white drop-shadow-2xl" title={cleanedName}>
-                    {cleanedName}
-                  </h2>
-                </div>
+              {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly centered vertically within distance X */}
+              <div className="flex-grow flex flex-col justify-center min-h-[110px] md:min-h-[160px] xl:min-h-[180px] py-4 select-none">
+                <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-10 w-max drop-shadow-xl">
+                  {/* Text Group - NO BOX background, floating purely */}
+                  <div className="text-left flex items-center pr-2 md:pr-10 border-r-0 md:border-r border-white/10">
+                    <h2 className="text-[44px] md:text-7xl xl:text-8xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-2xl" title={cleanedName}>
+                      {cleanedName}
+                    </h2>
+                  </div>
 
-                {/* Exhibition Description floating right beside/below */}
-                <div className="flex flex-col mb-1 md:mb-1.5 max-w-[280px] md:max-w-[450px] mt-1 md:mt-0">
-                   <div className="text-[8.5px] md:text-[11.5px] font-mono text-white font-black tracking-widest uppercase mb-1 md:mb-1.5 drop-shadow-md">
-                     [ {tier.albums.length} RECORDINGS ]
-                   </div>
-                   <p className="text-[11px] md:text-[14px] leading-snug text-slate-100 italic font-semibold border-l-2 md:border-l-[3px] border-white/40 pl-2.5 md:pl-4 drop-shadow-xl">
-                     "{tier.description}"
-                   </p>
+                  {/* Exhibition Description floating right beside */}
+                  <div className="flex flex-col justify-center max-w-[280px] md:max-w-[480px] xl:max-w-[560px]">
+                     <div className="text-[10px] md:text-[13px] xl:text-[14px] font-mono text-white/95 font-black tracking-widest uppercase mb-1.5 md:mb-2 drop-shadow-md">
+                       [ {tier.albums.length} RECORDINGS ]
+                     </div>
+                     <p className="text-[12px] md:text-[16.5px] xl:text-[18.5px] leading-snug text-slate-100 italic font-semibold border-l-2 md:border-l-[3.5px] border-white/40 pl-3 md:pl-5 drop-shadow-xl">
+                       "{tier.description}"
+                     </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Album tiles flow area */}
-              <div className="flex-grow flex flex-row items-center gap-2.5 md:gap-5 pb-2 md:pb-5 select-none pl-1 md:pl-0">
+              {/* Album tiles flow area - Anchored at the bottom with fixed-aligned dimensions */}
+              <div className="flex-none h-[240px] md:h-[420px] xl:h-[460px] flex flex-row items-center gap-2.5 md:gap-5 pb-2 md:pb-5 select-none pl-1 md:pl-0">
                 {cols.length === 0 ? (
-                  <div className="w-[150px] md:w-[420px] h-[240px] md:h-[400px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8 mt-4">
+                  <div className="w-[150px] md:w-[420px] h-[240px] md:h-[400px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />
                     <p className="text-[9px] text-slate-300 font-mono">Trống bậc</p>
                   </div>
@@ -793,12 +781,11 @@ export function TierList({
                                     transition={{ type: "tween", duration: 0.2 }}
                                     className="absolute inset-0 bg-white p-2.5 md:p-4 flex flex-col z-35 border-t border-slate-300 animate-fade-in"
                                   >
-                                    <div className="flex justify-between items-center mb-1 pb-1 border-b border-slate-150">
-                                      <span className="text-[7.5px] md:text-[9px] font-bold uppercase tracking-wider text-slate-600 flex items-center gap-0.5">
-                                        <Sparkles className="w-2.5 h-2.5 text-yellow-600 animate-spin" />
-                                        <span>QUÉT ẢNH CHUẨN MẠNG</span>
+                                    <div className="flex justify-between items-center mb-1.5 pb-1 border-b border-slate-150">
+                                      <span className="text-[7.5px] md:text-[9.5px] font-black uppercase tracking-wider text-slate-700 font-mono">
+                                        QUÉT ẢNH CHUẨN MẠNG
                                       </span>
-                                      <button onClick={() => setCoverPanelOpen(false)} className="text-[8px] md:text-[9.5px] font-bold text-rose-500 uppercase">Hủy</button>
+                                      <button onClick={() => setCoverPanelOpen(false)} className="text-[8px] md:text-[9.5px] font-bold text-rose-500 hover:text-rose-600 uppercase font-mono tracking-wider">Hủy</button>
                                     </div>
 
                                     <div className="flex gap-1 mb-1.5">
@@ -826,7 +813,7 @@ export function TierList({
 
                                     <div className="flex-grow overflow-y-auto space-y-1.5 custom-scrollbar p-0.5 select-none">
                                       {loadingCandidates ? (
-                                        <p className="text-[8px] md:text-[9.5px] text-slate-400 italic text-center py-2">Dò tìm dữ liệu từ Deezer/iTunes...</p>
+                                        <p className="text-[8px] md:text-[9.5px] text-slate-400 italic text-center py-2">Dò tìm dữ liệu từ Google & APIs...</p>
                                       ) : candidates.length > 0 ? (
                                         candidates.map((cand, idx) => (
                                           <div

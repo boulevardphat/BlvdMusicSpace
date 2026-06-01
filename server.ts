@@ -79,7 +79,42 @@ async function startServer() {
 
       const candidates: any[] = [];
 
-      // Fetch up to 6 results from iTunes
+      // 1. Fetch 10 high-quality images from Google Search via Gemini 3.5-flash with Web Grounding
+      try {
+        const searchPrompt = `Search Google for high quality album cover images of: "${q}".
+Find up to 10 direct image URLs of this album cover from reliable web and music sources (like Apple Music, Spotify, Deezer, Discogs, Last.fm, Pitchfork, RateYourMusic, or Last.fm).
+These MUST be direct, public image URLs (e.g. ending in .jpg, .jpeg, .png, or direct CDN image links) that can be embedded in an <img> tag without authentication.
+Return ONLY a valid JSON object matching the following structure (do NOT wrap in markdown backticks, do NOT write any other words or explanation, just the raw JSON):
+{
+  "candidates": [
+    {
+      "coverUrl": "https://...",
+      "title": "Album Title",
+      "artist": "Artist Name",
+      "source": "Google"
+    }
+  ]
+}`;
+
+        const googleResponse = await ai.models.generateContent({
+          model: "gemini-3.5-flash",
+          contents: [{ role: "user", parts: [{ text: searchPrompt }] }],
+          config: {
+            tools: [{ googleSearch: {} }],
+          }
+        });
+
+        const textResponse = googleResponse.text || "";
+        const cleanJson = textResponse.replace(/```json/g, "").replace(/```/g, "").trim();
+        const parsed = JSON.parse(cleanJson);
+        if (parsed && Array.isArray(parsed.candidates)) {
+          candidates.push(...parsed.candidates);
+        }
+      } catch (geminiSearchErr) {
+        console.error("Gemini Google search for cover candidates failed:", geminiSearchErr);
+      }
+
+      // 2. Fetch up to 6 results from iTunes as companion/fallback
       try {
         const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=album&limit=6`;
         const response = await fetch(itunesUrl);
@@ -91,8 +126,8 @@ async function startServer() {
               const highRes = artUrl.replace(/100x100(bb)?\.jpg$/, "600x600bb.jpg").replace(/100x100/, "600x600");
               candidates.push({
                 coverUrl: highRes,
-                title: item.collectionName,
-                artist: item.artistName,
+                title: item.collectionName || "",
+                artist: item.artistName || "",
                 source: "iTunes"
               });
             }
@@ -102,7 +137,7 @@ async function startServer() {
         console.error("Candidates fetch iTunes error:", err);
       }
 
-      // Fetch up to 6 results from Deezer
+      // 3. Fetch up to 6 results from Deezer as companion/fallback
       try {
         const url = `https://api.deezer.com/search/album?q=${encodeURIComponent(q)}&limit=6`;
         const response = await fetch(url);
@@ -111,7 +146,7 @@ async function startServer() {
           data.data.forEach((item: any) => {
             candidates.push({
               coverUrl: item.cover_xl || item.cover_medium,
-              title: item.title,
+              title: item.title || "",
               artist: item.artist?.name || "",
               source: "Deezer"
             });
@@ -124,6 +159,7 @@ async function startServer() {
       // De-duplicate candidates by coverUrl
       const seen = new Set();
       const uniqueCandidates = candidates.filter(item => {
+        if (!item || !item.coverUrl) return false;
         if (seen.has(item.coverUrl)) return false;
         seen.add(item.coverUrl);
         return true;
@@ -280,7 +316,7 @@ Let's maintain their music database in real-time. If the user only wants to chat
   });
 
   // Update a single album
-  app.put("/api/albums/:id", (req, res) => {
+  app.put("/api/albums/:id", async (req, res) => {
     try {
       const albumId = req.params.id;
       const updates = req.body;
@@ -294,6 +330,32 @@ Let's maintain their music database in real-time. If the user only wants to chat
          albums[albumId] = {};
          if (updates.id) {
            albums[albumId].id = updates.id;
+         }
+      }
+
+      // Automatically generate a beautifully styled dominant color matching the new cover image
+      if (updates.coverUrl) {
+         try {
+           const existingAlbum = albums[albumId] || {};
+           const artist = updates.artist || existingAlbum.artist || "Unknown Artist";
+           const title = updates.title || existingAlbum.title || "Unknown Album";
+           const prompt = `You are an expert music visualizer. For the album cover of "${title}" by "${artist}" at URL "${updates.coverUrl}", select a single visually dominant dark key color hex code.
+This color MUST match the album's mood perfectly but MUST have a high contrast with white text overlay (luma < 0.25, for example, a deeply saturated dark shade like a dark navy blue, forest green, maroon, dark magenta, dark slate grey).
+Return ONLY the raw 7-character hex code starting with # (e.g. #112233). Do NOT include any markdown formatting, backticks or explanation. Just #RRGGBB.`;
+           
+           const colorResponse = await ai.models.generateContent({
+             model: "gemini-3.5-flash",
+             contents: [{ role: "user", parts: [{ text: prompt }] }],
+           });
+           
+           const resText = colorResponse.text?.trim() || "";
+           const hexMatch = resText.match(/#[0-9a-fA-F]{6}/);
+           if (hexMatch) {
+             updates.hex = hexMatch[0];
+             console.log(`Generated dynamic dominant color ${updates.hex} for album ${title} by ${artist}`);
+           }
+         } catch (colorGenErr) {
+           console.error("Failed to automatically generate album color inside PUT handler:", colorGenErr);
          }
       }
 
