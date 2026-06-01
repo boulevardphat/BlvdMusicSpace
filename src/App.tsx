@@ -131,7 +131,16 @@ export default function App() {
 
   const fetchAlbumsData = () => {
     fetch("/api/albums")
-      .then(res => res.json())
+      .then(async res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Response is not JSON");
+        }
+        return res.json();
+      })
       .then((data: Record<string, any>) => {
         let allInitialAlbums = INITIAL_TIERS.flatMap(t => t.albums);
         
@@ -184,7 +193,8 @@ export default function App() {
         setLoading(false);
       })
       .catch(err => {
-        console.error("Failed to fetch albums", err);
+        console.warn("Failed to fetch albums from server, falling back to static INITIAL_TIERS:", err);
+        setTiers(INITIAL_TIERS);
         setLoading(false);
       });
   };
