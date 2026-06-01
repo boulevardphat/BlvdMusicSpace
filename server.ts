@@ -18,6 +18,31 @@ const firebaseConfig = JSON.parse(fs.readFileSync(firebaseConfigPath, "utf-8"));
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp, firebaseConfig.firestoreDatabaseId || "(default)");
 
+// Asynchronously clean up legacy "13" document from Firestore and local database
+(async () => {
+  try {
+    const docRef = doc(db, "albums", "13");
+    await deleteDoc(docRef);
+    console.log("Dynamically cleaned up legacy ID 13 from Firestore.");
+  } catch (e) {
+    console.warn("Cleanup of Firestore legacy document 13 skipped or not needed:", e);
+  }
+
+  try {
+    const albumsFile = path.join(process.cwd(), "src", "albums.json");
+    if (fs.existsSync(albumsFile)) {
+      const parsed = JSON.parse(fs.readFileSync(albumsFile, "utf-8"));
+      if (parsed["13"]) {
+        delete parsed["13"];
+        fs.writeFileSync(albumsFile, JSON.stringify(parsed, null, 2), "utf-8");
+        console.log("Dynamically cleaned up legacy ID 13 from albums.json.");
+      }
+    }
+  } catch (e) {
+    console.error("Cleanup of local legacy entry 13 failed:", e);
+  }
+})();
+
 async function startServer() {
   const app = express();
   const PORT = 3000;

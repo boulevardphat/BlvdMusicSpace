@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Tier, Album } from "../data";
-import { fetchAlbumCover, getAlbumCriticReview } from "../utils";
+import { getImgbbCoverUrl, getAlbumCriticReview } from "../utils";
 import { motion, AnimatePresence } from "motion/react";
 import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight } from "lucide-react";
 
@@ -173,7 +173,7 @@ function MetroTile({
   hexColor
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const mCover = album.coverUrl || covers[album.id];
+  const mCover = getImgbbCoverUrl(album.artist, album.title);
   
   const currentPalette = hexColor ? { bg: hexColor, darkBg: hexColor, text: "text-white" } : { bg: theme.accent, darkBg: theme.accent, text: "text-white" };
 
@@ -283,18 +283,7 @@ export interface TierListProps {
   setSelectedAlbum: React.Dispatch<React.SetStateAction<(Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null>>;
   onAlbumClick: (album: Album, tierName: string, rankNumber: number, coverUrl?: string) => void;
   onResetTiers?: () => void;
-  onAutoSaveCover?: (albumId: number, coverUrl: string) => void;
   handleDeleteAlbum: (albumId: number, tierId: string) => Promise<void>;
-
-  coverSearchQuery: string;
-  setCoverSearchQuery: (q: string) => void;
-  candidates: any[];
-  loadingCandidates: boolean;
-  coverPanelOpen: boolean;
-  setCoverPanelOpen: (open: boolean) => void;
-  coverSuccessMsg: string;
-  fetchCoverCandidates: () => Promise<void>;
-  handleSelectBgCover: (coverUrl: string) => Promise<void>;
 }
 
 export function TierList({
@@ -304,19 +293,9 @@ export function TierList({
   setSelectedAlbum,
   onAlbumClick,
   onResetTiers,
-  onAutoSaveCover,
-  handleDeleteAlbum,
-  coverSearchQuery,
-  setCoverSearchQuery,
-  candidates,
-  loadingCandidates,
-  coverPanelOpen,
-  setCoverPanelOpen,
-  coverSuccessMsg,
-  fetchCoverCandidates,
-  handleSelectBgCover
+  handleDeleteAlbum
 }: TierListProps) {
-  const [covers, setCovers] = useState<Record<string, string>>({});
+  const [covers] = useState<Record<string, string>>({});
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [liveFlippedIds, setLiveFlippedIds] = useState<number[]>([]);
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
@@ -422,64 +401,6 @@ export function TierList({
     };
   }, []);
 
-  const coversRef = useRef(covers);
-  useEffect(() => {
-    coversRef.current = covers;
-  }, [covers]);
-
-  // Fetch albums covers gracefully and in parallel
-  useEffect(() => {
-    let active = true;
-
-    const loadCovers = async () => {
-      const albumsToFetch: Array<{ id: number; artist: string; title: string }> = [];
-      
-      tiers.forEach(tier => {
-        tier.albums.forEach(album => {
-          const key = `${album.id}`;
-          if (album.coverUrl) {
-            if (coversRef.current[key] !== album.coverUrl) {
-              setCovers(prev => ({ ...prev, [key]: album.coverUrl! }));
-            }
-          } else if (!coversRef.current[key]) {
-            albumsToFetch.push({ id: album.id, artist: album.artist, title: album.title });
-          }
-        });
-      });
-
-      if (albumsToFetch.length === 0) return;
-
-      // Parallelized background fetching
-      albumsToFetch.forEach(async (album) => {
-        try {
-          const url = await fetchAlbumCover(album.artist, album.title);
-          if (url && active) {
-            setCovers(prev => {
-              if (prev[`${album.id}`] === url) return prev;
-              return {
-                ...prev,
-                [`${album.id}`]: url
-              };
-            });
-            if (onAutoSaveCover) {
-              onAutoSaveCover(album.id, url);
-            }
-          }
-        } catch (e) {
-          console.error("Failed to load cover in background for:", album.title, e);
-        }
-      });
-    };
-
-    if (tiers.length > 0) {
-      loadCovers();
-    }
-
-    return () => {
-      active = false;
-    };
-  }, [tiers]);
-
   const cleanTierName = (name: string) => {
     return name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim();
   };
@@ -578,7 +499,7 @@ export function TierList({
                     </div>
                   ) : (
                     tier.mappedAlbums.map((album) => {
-                      const mCover = album.coverUrl || covers[`${album.id}`] || "";
+                      const mCover = getImgbbCoverUrl(album.artist, album.title);
                       const isSelected = selectedAlbum && selectedAlbum.id === album.id;
                       
                       return (
@@ -770,15 +691,6 @@ export function TierList({
                                       <Music className="w-7 h-7 text-slate-600" />
                                     )}
                                   </div>
-
-                                  <button
-                                    type="button"
-                                    onClick={() => setCoverPanelOpen(!coverPanelOpen)}
-                                    className="w-full py-1.5 md:py-2.5 bg-white text-slate-950 hover:bg-sky-400 transition-colors font-mono font-black text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest flex items-center justify-center gap-1.5 cursor-pointer rounded-none active:scale-95 mt-2 md:mt-4 shadow-md"
-                                  >
-                                    <RotateCcw className="w-3 md:w-3.5 h-3 md:h-3.5 animate-spin-slow" />
-                                    <span>ĐỔI BÌA CHUẨN</span>
-                                  </button>
                                 </div>
 
                                 <button
@@ -888,71 +800,6 @@ export function TierList({
                                   </div>
                                 </div>
                               </div>
-
-                              {/* Searching Overlay widget */}
-                              <AnimatePresence>
-                                {coverPanelOpen && (
-                                  <motion.div
-                                    initial={{ y: "100%" }}
-                                    animate={{ y: 0 }}
-                                    exit={{ y: "100%" }}
-                                    transition={{ type: "tween", duration: 0.2 }}
-                                    className="absolute inset-0 bg-white p-2.5 md:p-4 flex flex-col z-35 border-t border-slate-300 animate-fade-in"
-                                  >
-                                    <div className="flex justify-between items-center mb-1.5 pb-1 border-b border-slate-150">
-                                      <span className="text-[7.5px] md:text-[9.5px] font-black uppercase tracking-wider text-slate-700 font-mono">
-                                        QUÉT ẢNH CHUẨN MẠNG
-                                      </span>
-                                      <button onClick={() => setCoverPanelOpen(false)} className="text-[8px] md:text-[9.5px] font-bold text-rose-500 hover:text-rose-600 uppercase font-mono tracking-wider">Hủy</button>
-                                    </div>
-
-                                    <div className="flex gap-1 mb-1.5">
-                                      <input
-                                        type="text"
-                                        value={coverSearchQuery}
-                                        onChange={(e) => setCoverSearchQuery(e.target.value)}
-                                        className="flex-1 px-2 py-1 text-[9px] md:text-xs bg-slate-100 border border-slate-300 text-slate-900 focus:outline-none focus:border-slate-800 font-mono"
-                                        onKeyDown={(e) => {
-                                          if (e.key === 'Enter') fetchCoverCandidates();
-                                        }}
-                                      />
-                                      <button
-                                        onClick={fetchCoverCandidates}
-                                        disabled={loadingCandidates}
-                                        className="px-3 bg-blue-600 hover:bg-blue-700 text-white text-[8px] md:text-[9.5px] font-bold uppercase disabled:opacity-50"
-                                      >
-                                        Tìm
-                                      </button>
-                                    </div>
-
-                                    {coverSuccessMsg && (
-                                      <p className="text-[7.5px] md:text-[9px] font-bold text-center text-emerald-600 mb-1">{coverSuccessMsg}</p>
-                                    )}
-
-                                    <div className="flex-grow overflow-y-auto space-y-1.5 custom-scrollbar p-0.5 select-none">
-                                      {loadingCandidates ? (
-                                        <p className="text-[8px] md:text-[9.5px] text-slate-400 italic text-center py-2">Dò tìm dữ liệu từ Google & APIs...</p>
-                                      ) : candidates.length > 0 ? (
-                                        candidates.map((cand, idx) => (
-                                          <div
-                                            key={idx}
-                                            onClick={() => handleSelectBgCover(cand.coverUrl)}
-                                            className="flex items-center gap-2 p-1 md:p-1.5 border border-slate-200 hover:border-blue-500 cursor-pointer bg-slate-50 text-left transition-colors"
-                                          >
-                                            <img src={cand.coverUrl} className="w-8 h-8 md:w-10 md:h-10 object-cover border border-slate-200" referrerPolicy="no-referrer" />
-                                            <div className="min-w-0 flex-1">
-                                              <p className="text-[8.5px] md:text-[10px] font-bold text-slate-800 truncate leading-tight">{cand.title}</p>
-                                              <p className="text-[7.5px] md:text-[8px] text-slate-500 truncate leading-none mt-0.5 font-mono uppercase">{cand.artist}</p>
-                                            </div>
-                                          </div>
-                                        ))
-                                      ) : (
-                                        <p className="text-[7.5px] md:text-[9px] text-slate-400 italic text-center py-2">Nhập tên album + nhấn Tìm hàng chính chủ...</p>
-                                      )}
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
 
                             </motion.div>
                           )}

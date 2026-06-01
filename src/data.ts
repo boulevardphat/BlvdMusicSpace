@@ -44,7 +44,6 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 10, artist: "Phùng Khánh Linh", title: "GIỮA MỘT VẠN NGƯỜI" },
       { id: 11, artist: "Madonna", title: "Erotica (PA Version)" },
       { id: 12, artist: "Kesha", title: "Gag Order" },
-      { id: 13, artist: "Kesha", title: "Eat The Acid" },
       { id: 14, artist: "FKA twigs", title: "EUSEXUA" },
       { id: 15, artist: "FKA twigs", title: "EUSEXUA Afterglow" },
       { id: 16, artist: "Kylie Minogue", title: "Fever" },

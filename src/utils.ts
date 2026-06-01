@@ -1,69 +1,30 @@
 import { Album } from "./data";
 
-const CACHE_KEY = "itunes_cover_cache";
+// Base URL for ImgBB direct image serving.
+// When you upload your images to ImgBB and get the direct folder/hash, replace this constant value with your actual ImgBB base URL (e.g., https://i.ibb.co/your_hash).
+export const IMGBB_BASE_URL = "https://i.ibb.co";
 
-function getCache(): Record<string, string> {
-  try {
-    return JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
-  } catch {
-    return {};
-  }
-}
-
-function setCache(cache: Record<string, string>) {
-  localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+/**
+ * Normalizes artist name and album title into a secure, standard URL filename syntax [artist]_[title].png.
+ * Conversions: lowercases, strips Vietnamese accents/diacritics, removes non-alphanumeric special characters, replaces spaces/dashes with a single underscore.
+ */
+export function getImgbbCoverUrl(artist: string, title: string): string {
+  const clean = (val: string) => {
+    return (val || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // remove Vietnamese accents
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D")
+      .replace(/[^a-z0-9\s-_]/g, "") // keep only alphanumeric and basic separations
+      .trim()
+      .replace(/[\s-]+/g, "_"); // join with a single underscore symbol
+  };
+  return `${IMGBB_BASE_URL}/${clean(artist)}_${clean(title)}.png`;
 }
 
 export async function fetchAlbumCover(artist: string, title: string): Promise<string | undefined> {
-  const query = `${artist || ""} ${title || ""}`.toLowerCase().trim();
-  const cache = getCache();
-  
-  if (cache[query] !== undefined) {
-    return cache[query] === "FAILED" ? undefined : cache[query];
-  }
-
-  // 1. Try backend server proxy /api/cover first
-  try {
-    const url = `/api/cover?q=${encodeURIComponent(query)}`;
-    const res = await fetch(url);
-    if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
-      const data = await res.json();
-      if (data && data.coverUrl) {
-        cache[query] = data.coverUrl;
-        setCache(cache);
-        return data.coverUrl;
-      }
-    }
-  } catch (err) {
-    console.warn("Server API /api/cover failed, trying client iTunes fallback:", err);
-  }
-
-  // 2. Direct Client-side Fallback to CORS-enabled iTunes Search API
-  try {
-    const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=album&limit=1`;
-    const response = await fetch(itunesUrl);
-    if (response.ok) {
-      const data = await response.json();
-      if (data.results && data.results.length > 0) {
-        const artworkUrl = data.results[0].artworkUrl100;
-        if (artworkUrl) {
-          const highResUrl = artworkUrl
-            .replace(/100x100(bb)?\.jpg$/, "600x600bb.jpg")
-            .replace(/100x100/, "600x600");
-          cache[query] = highResUrl;
-          setCache(cache);
-          return highResUrl;
-        }
-      }
-    }
-  } catch (err) {
-    console.error("Direct client-side iTunes fallback failed:", err);
-  }
-
-  // Cache failure to avoid repeated requests in this session/render cycle
-  cache[query] = "FAILED";
-  setCache(cache);
-  return undefined;
+  return getImgbbCoverUrl(artist, title);
 }
 
 // Fixed Professional Critic Reviews Map for iconic albums

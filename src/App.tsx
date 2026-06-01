@@ -6,6 +6,7 @@ import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Music, Activity, Disc, BarChart2, MessageSquare, Plus, X, Menu, Settings, Users, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
+import { getImgbbCoverUrl } from "./utils";
 
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
@@ -18,13 +19,6 @@ export default function App() {
   
   // Selected Album detailing state (held globally for synchronization)
   const [selectedAlbum, setSelectedAlbum] = useState<(Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null>(null);
-
-  // States for album cover candidates search and edit
-  const [coverSearchQuery, setCoverSearchQuery] = useState("");
-  const [candidates, setCandidates] = useState<any[]>([]);
-  const [loadingCandidates, setLoadingCandidates] = useState(false);
-  const [coverPanelOpen, setCoverPanelOpen] = useState(false);
-  const [coverSuccessMsg, setCoverSuccessMsg] = useState("");
 
   // Stateful minimized Sidebar on desktop
   const [isChatMinimized, setIsChatMinimized] = useState(true);
@@ -60,96 +54,6 @@ export default function App() {
       document.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isDragging]);
-
-  useEffect(() => {
-    if (selectedAlbum) {
-      setCoverSearchQuery(`${selectedAlbum.artist} ${selectedAlbum.title}`);
-      setCandidates([]);
-      setCoverPanelOpen(false);
-      setCoverSuccessMsg("");
-    }
-  }, [selectedAlbum]);
-
-  const handleAutoSaveCover = async (albumId: number, coverUrl: string) => {
-    try {
-      await fetch(`/api/albums/${albumId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ coverUrl })
-      });
-      fetchAlbumsData();
-    } catch(err) {
-      console.error(err);
-    }
-  };
-
-  const handleSaveAlbumCover = async (albumId: number, coverUrl: string) => {
-    try {
-      await fetch(`/api/albums/${albumId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ coverUrl })
-      });
-      fetchAlbumsData();
-    } catch(err) {
-      console.error(err);
-    }
-  };
-
-  const fetchCoverCandidates = async () => {
-    if (!coverSearchQuery.trim()) return;
-    try {
-      setLoadingCandidates(true);
-      setCoverSuccessMsg("");
-      let fetchedCandidates: any[] = [];
-      try {
-        const res = await fetch(`/api/cover-candidates?q=${encodeURIComponent(coverSearchQuery.trim())}`);
-        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
-          const data = await res.json();
-          fetchedCandidates = data.candidates || [];
-        } else {
-          throw new Error("Server cover-candidates API not available or did not return JSON");
-        }
-      } catch (serverErr) {
-        console.warn("Server API for candidates failed, falling back to direct client-side iTunes search:", serverErr);
-        const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(coverSearchQuery.trim())}&media=music&entity=album&limit=10`;
-        const response = await fetch(itunesUrl);
-        if (response.ok) {
-          const data = await response.json();
-          if (data.results && data.results.length > 0) {
-            fetchedCandidates = data.results.map((item: any) => {
-              const artUrl = item.artworkUrl100;
-              const highRes = artUrl 
-                ? artUrl.replace(/100x100(bb)?\.jpg$/, "600x600bb.jpg").replace(/100x100/, "600x600")
-                : "";
-              return {
-                coverUrl: highRes,
-                title: item.collectionName || "",
-                artist: item.artistName || "",
-                source: "iTunes (Direct)"
-              };
-            }).filter((item: any) => !!item.coverUrl);
-          }
-        }
-      }
-      setCandidates(fetchedCandidates);
-    } catch (e) {
-      console.error("Error fetching cover candidates:", e);
-    } finally {
-      setLoadingCandidates(false);
-    }
-  };
-
-  const handleSelectBgCover = async (coverUrl: string) => {
-    if (!selectedAlbum) return;
-    try {
-      await handleSaveAlbumCover(selectedAlbum.id, coverUrl);
-      setCoverSuccessMsg("CỐ ĐỊNH ẢNH BÌA THÀNH CÔNG! ⚡");
-      setSelectedAlbum(prev => prev ? { ...prev, coverUrl } : null);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleDeleteAlbumRow = async (albumId: number, tierId: string) => {
     if (window.confirm("Bạn có chắc chắn muốn xóa album này khỏi bảng xếp hạng không?")) {
@@ -332,19 +236,9 @@ export default function App() {
                       tiers={tiers}
                       selectedAlbum={selectedAlbum}
                       setSelectedAlbum={setSelectedAlbum}
-                      onAlbumClick={(album, tierName, rankNumber, coverUrl) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl })} 
+                      onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: getImgbbCoverUrl(album.artist, album.title) })} 
                       onResetTiers={handleResetTiers}
-                      onAutoSaveCover={handleAutoSaveCover}
                       handleDeleteAlbum={handleDeleteAlbumRow}
-                      coverSearchQuery={coverSearchQuery}
-                      setCoverSearchQuery={setCoverSearchQuery}
-                      candidates={candidates}
-                      loadingCandidates={loadingCandidates}
-                      coverPanelOpen={coverPanelOpen}
-                      setCoverPanelOpen={setCoverPanelOpen}
-                      coverSuccessMsg={coverSuccessMsg}
-                      fetchCoverCandidates={fetchCoverCandidates}
-                      handleSelectBgCover={handleSelectBgCover}
                     />
                   </div>
 
@@ -358,19 +252,9 @@ export default function App() {
                         tiers={tiers}
                         selectedAlbum={selectedAlbum}
                         setSelectedAlbum={setSelectedAlbum}
-                        onAlbumClick={(album, tierName, rankNumber, coverUrl) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl })} 
+                        onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: getImgbbCoverUrl(album.artist, album.title) })} 
                         onResetTiers={handleResetTiers}
-                        onAutoSaveCover={handleAutoSaveCover}
                         handleDeleteAlbum={handleDeleteAlbumRow}
-                        coverSearchQuery={coverSearchQuery}
-                        setCoverSearchQuery={setCoverSearchQuery}
-                        candidates={candidates}
-                        loadingCandidates={loadingCandidates}
-                        coverPanelOpen={coverPanelOpen}
-                        setCoverPanelOpen={setCoverPanelOpen}
-                        coverSuccessMsg={coverSuccessMsg}
-                        fetchCoverCandidates={fetchCoverCandidates}
-                        handleSelectBgCover={handleSelectBgCover}
                       />
                     )}
                   </div>

@@ -1,98 +1,710 @@
 {
-  "1": { "rank": 1, "artist": "Björk", "title": "Vespertine", "hex": "#1a2530" },
-  "2": { "rank": 2, "artist": "Kylie Minogue", "title": "Impossible Princess", "hex": "#301323" },
-  "3": { "rank": 3, "artist": "Madonna", "title": "Confessions on a Dance Floor", "hex": "#4a1936" },
-  "4": { "rank": 4, "artist": "Charli xcx", "title": "BRAT", "hex": "#2e4513" },
-  "5": { "rank": 5, "artist": "Lana Del Rey", "title": "Did you know that there's a tunnel under Ocean Blvd", "hex": "#2b2a28" },
-  "6": { "rank": 6, "artist": "Madonna", "title": "Ray of Light", "hex": "#14314c" },
-  "7": { "rank": 7, "artist": "Lorde", "title": "Pure Heroine", "hex": "#1a1a1a" },
-  "8": { "rank": 8, "artist": "tlinh", "title": "ái", "hex": "#401c27" },
-  "9": { "rank": 9, "artist": "Lana Del Rey", "title": "Norman Fucking Rockwell!", "hex": "#273040" },
-  "10": { "rank": 10, "artist": "Phùng Khánh Linh", "title": "GIỮA MỘT VẠN NGƯỜI", "hex": "#253327" },
-  "11": { "rank": 11, "artist": "Madonna", "title": "Erotica (PA Version)", "hex": "#272a33" },
-  "12": { "rank": 12, "artist": "Kesha", "title": "Gag Order", "hex": "#2b2b2b" },
-  "13": { "rank": 13, "artist": "Kesha", "title": "Eat The Acid", "hex": "#32383c" },
-  "14": { "rank": 14, "artist": "FKA twigs", "title": "EUSEXUA", "hex": "#302621" },
-  "15": { "rank": 15, "artist": "FKA twigs", "title": "EUSEXUA Afterglow", "hex": "#2a1c22" },
-  "16": { "rank": 16, "artist": "Kylie Minogue", "title": "Fever", "hex": "#e0ebd3" },
-  "17": { "rank": 17, "artist": "Kylie Minogue", "title": "Light Years", "hex": "#182a4d" },
-  "18": { "rank": 18, "artist": "Zara Larsson", "title": "Midnight Sun", "hex": "#3a2a30" },
-  "19": { "rank": 19, "artist": "Miley Cyrus", "title": "Something Beautiful", "hex": "#362734" },
-  "20": { "rank": 20, "artist": "Lorde", "title": "Virgin", "hex": "#282a32" },
-  "21": { "rank": 21, "artist": "Obito", "title": "Đánh Đổi", "hex": "#342217" },
-  "22": { "rank": 22, "artist": "Wren Evans", "title": "LOI CHOI: The Neo Pop Punk", "hex": "#241935" },
-  "23": { "rank": 23, "artist": "Addison Rae", "title": "Addison", "hex": "#182736" },
-  "24": { "rank": 24, "artist": "Björk", "title": "Vulnicura", "hex": "#2f3613" },
-  "25": { "rank": 25, "artist": "PinkPantheress", "title": "Fancy That", "hex": "#1a2c3a" },
-  "26": { "rank": 26, "artist": "Wren Evans", "title": "NỔ", "hex": "#401313" },
-  "27": { "rank": 27, "artist": "Björk", "title": "Biophilia", "hex": "#402613" },
-  "28": { "rank": 28, "artist": "Björk", "title": "Volta", "hex": "#3d1326" },
-  "29": { "rank": 29, "artist": "C418", "title": "Minecraft - Volume Alpha", "hex": "#233321" },
-  "30": { "rank": 30, "artist": "C418", "title": "Minecraft - Volume Beta", "hex": "#332121" },
-  "31": { "rank": 31, "artist": "tlinh", "title": "FLVR", "hex": "#181a33" },
-  "32": { "rank": 32, "artist": "Bích Phương", "title": "tâm trạng tan hơi chậm một chút", "hex": "#3d2b33" },
-  "33": { "rank": 33, "artist": "cupcakKe", "title": "Dauntless Manifesto", "hex": "#19363d" },
-  "34": { "rank": 34, "artist": "Kylie Minogue", "title": "Body Language", "hex": "#2b3d36" },
-  "35": { "rank": 35, "artist": "Kylie Minogue", "title": "Kylie Minogue (1994)", "hex": "#3b3d30" },
-  "36": { "rank": 36, "artist": "Billie Eilish", "title": "HIT ME HARD AND SOFT", "hex": "#193b2a" },
-  "37": { "rank": 37, "artist": "Beyoncé", "title": "RENAISSANCE", "hex": "#1a1a1a" },
-  "38": { "rank": 38, "artist": "Madonna", "title": "Madame X", "hex": "#2a1f26" },
-  "39": { "rank": 39, "artist": "Madonna", "title": "American Life", "hex": "#11261d" },
-  "40": { "rank": 40, "artist": "Phương Mỹ Chi", "title": "Vũ Trụ Cò Bay", "hex": "#1b332b" },
-  "41": { "rank": 41, "artist": "Rose Gray", "title": "Louder, Please", "hex": "#301d2c" },
-  "42": { "rank": 42, "artist": "Lana Del Rey", "title": "Born To Die - The Paradise Edition", "hex": "#302613" },
-  "43": { "rank": 43, "artist": "Jessie Ware", "title": "What's Your Pleasure?", "hex": "#2d1624" },
-  "44": { "rank": 44, "artist": "Madonna", "title": "Bedtime Stories", "hex": "#3d3639" },
-  "45": { "rank": 45, "artist": "Madonna", "title": "Music", "hex": "#1f1d33" },
-  "46": { "rank": 46, "artist": "Thể Thiên", "title": "Trần Thế", "hex": "#102326" },
-  "47": { "rank": 47, "artist": "Lana Del Rey", "title": "Blue Banisters", "hex": "#23260c" },
-  "48": { "rank": 48, "artist": "Madonna", "title": "Like a Prayer", "hex": "#331826" },
-  "49": { "rank": 49, "artist": "Tate McRae", "title": "So Close To What", "hex": "#111426" },
-  "50": { "rank": 50, "artist": "Lady Gaga", "title": "The Fame Monster", "hex": "#262426" },
-  "51": { "rank": 51, "artist": "Taylor Swift", "title": "evermore", "hex": "#2e2e2e" },
-  "52": { "rank": 52, "artist": "Björk", "title": "Homogenic", "hex": "#112e20" },
-  "53": { "rank": 53, "artist": "Imogen Heap", "title": "Speak for Yourself", "hex": "#2a222f" },
-  "54": { "rank": 54, "artist": "Ms. Lauryn Hill", "title": "The Miseducation of Lauryn Hill", "hex": "#212b1d" },
-  "55": { "rank": 55, "artist": "Billie Eilish", "title": "Happier Than Ever", "hex": "#372e29" },
-  "56": { "rank": 56, "artist": "Nelly Furtado", "title": "Loose", "hex": "#2b1a13" },
-  "57": { "rank": 57, "artist": "Taylor Swift", "title": "1989 (Taylor's Version)", "hex": "#123c4a" },
-  "58": { "rank": 58, "artist": "Billie Eilish", "title": "dont smile at me", "hex": "#401010" },
-  "59": { "rank": 59, "artist": "Lady Gaga", "title": "MAYHEM", "hex": "#2f1140" },
-  "60": { "rank": 60, "artist": "Lorde", "title": "Melodrama", "hex": "#131640" },
-  "61": { "rank": 61, "artist": "Chappell Roan", "title": "The Rise and Fall of a Midwest Princess", "hex": "#40132f" },
-  "62": { "rank": 62, "artist": "Caroline Polachek", "title": "Desire, I Want To Turn Into You", "hex": "#36161c" },
-  "63": { "rank": 63, "artist": "St. Vincent", "title": "MASSEDUCTION", "hex": "#36112d" },
-  "64": { "rank": 64, "artist": "Olivia Rodrigo", "title": "GUTS (spilled)", "hex": "#241030" },
-  "65": { "rank": 65, "artist": "Olivia Rodrigo", "title": "SOUR", "hex": "#221338" },
-  "66": { "rank": 66, "artist": "Orange", "title": "CAM'ON", "hex": "#402010" },
-  "70": { "rank": 70, "artist": "TOWA TEI", "title": "SOUND MUSEUM", "hex": "#2b3b28" },
-  "71": { "rank": 71, "artist": "cupcakKe", "title": "Cum Cake", "hex": "#3d192c" },
-  "72": { "rank": 72, "artist": "cupcakKe", "title": "S.T.D", "hex": "#183820" },
-  "73": { "rank": 73, "artist": "cupcakKe", "title": "The BakKery", "hex": "#362016" },
-  "74": { "rank": 74, "artist": "Cardi B", "title": "AM I THE DRAMA?", "hex": "#38192a" },
-  "75": { "rank": 75, "artist": "Low G", "title": "L2K", "hex": "#202a36" },
-  "76": { "rank": 76, "artist": "2pillz", "title": "PILLZCASSO", "hex": "#132b1d" },
-  "77": { "rank": 77, "artist": "Esthero", "title": "Breath From Another", "hex": "#32111f" },
-  "78": { "rank": 78, "artist": "Taylor Swift", "title": "reputation", "hex": "#1a1a1a" },
-  "79": { "rank": 79, "artist": "Tyler, The Creator", "title": "IGOR", "hex": "#3b222d" },
-  "80": { "rank": 80, "artist": "The Weeknd", "title": "Starboy", "hex": "#1a2133" },
-  "81": { "rank": 81, "artist": "Charli xcx", "title": "CRASH (Deluxe)", "hex": "#28171f" },
-  "82": { "rank": 82, "artist": "FKA twigs", "title": "MAGDALENE", "hex": "#2d2421" },
-  "83": { "rank": 83, "artist": "Hoàng Thùy Linh", "title": "LINK", "hex": "#2e1d3d" },
-  "84": { "rank": 84, "artist": "Madonna", "title": "Rebel Heart", "hex": "#2c1719" },
-  "85": { "rank": 85, "artist": "Camila Cabello", "title": "C,XOXO", "hex": "#112638" },
-  "86": { "rank": 86, "artist": "JADE", "title": "THAT'S SHOWBIZ BABY!", "hex": "#262c3d" },
-  "87": { "rank": 87, "artist": "ADÉLA", "title": "The Provocateur", "hex": "#3b211f" },
-  "88": { "rank": 88, "artist": "ROSALÍA", "title": "LUX", "hex": "#2e212f" },
-  "89": { "rank": 89, "artist": "Lily Allen", "title": "West End Girl", "hex": "#1c3b28" },
-  "90": { "rank": 90, "artist": "Kylie Minogue", "title": "Tension", "hex": "#2b1022" },
-  "91": { "rank": 91, "artist": "Kylie Minogue", "title": "Aphrodite", "hex": "#162842" },
-  "92": { "rank": 92, "artist": "Ariana Grande", "title": "Dangerous Woman", "hex": "#1f1f1f" },
-  "93": { "rank": 93, "artist": "Ariana Grande", "title": "eternal sunshine", "hex": "#382329" },
-  "94": { "rank": 94, "artist": "Charli xcx", "title": "True Romance", "hex": "#2b192c" },
-  "95": { "rank": 95, "artist": "Charli xcx", "title": "SUCKER", "hex": "#331627" },
-  "96": { "rank": 96, "artist": "Lana Del Rey", "title": "Honeymoon", "hex": "#382419" },
-  "97": { "rank": 97, "artist": "Lana Del Rey", "title": "Chemtrails", "hex": "#1e2b26" },
-  "98": { "rank": 98, "artist": "Taylor Swift", "title": "folklore (deluxe version)", "hex": "#1f221e" },
-  "100": { "rank": 100, "artist": "SOPHIE", "title": "OIL OF EVERY PEARL'S UN-INSIDES", "hex": "#332230" }
+  "1": {
+    "rank": 1,
+    "artist": "Björk",
+    "title": "Vespertine",
+    "hex": "#1a2530",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/32/d6/28/32d62861-0e24-2111-d3ed-3b54f23083d5/081227607265.jpg/300x300bb.jpg"
+  },
+  "2": {
+    "hex": "#120521",
+    "title": "Impossible Princess",
+    "rank": 2,
+    "artist": "Kylie Minogue",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/f65da4c6fea5cd6ee2aa2920bd166908/1000x1000-000000-80-0-0.jpg",
+    "id": 2
+  },
+  "3": {
+    "rank": 3,
+    "artist": "Madonna",
+    "title": "Confessions on a Dance Floor",
+    "hex": "#4a1936",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/24/5a/e8/245ae865-c767-310b-c8ee-6b3a05e43fd4/dj.hgvybcjz.jpg/300x300bb.jpg"
+  },
+  "4": {
+    "rank": 4,
+    "artist": "Charli xcx",
+    "title": "BRAT",
+    "hex": "#2e4513",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c2/67/11/c26711b1-97de-448d-7564-6129d83e0eab/075679578068.jpg/300x300bb.jpg"
+  },
+  "5": {
+    "rank": 5,
+    "artist": "Lana Del Rey",
+    "title": "Did you know that there's a tunnel under Ocean Blvd",
+    "hex": "#2b2a28",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e3/0f/86/e30f8670-8893-36bb-fa55-950e161c9dc1/198009918355.png/300x300bb.jpg"
+  },
+  "6": {
+    "rank": 6,
+    "artist": "Madonna",
+    "title": "Ray of Light",
+    "hex": "#14314c",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/dd/2b/8d/dd2b8d84-e032-94d2-473a-3f8efd18fe36/dj.rwfgroxa.jpg/300x300bb.jpg"
+  },
+  "7": {
+    "rank": 7,
+    "artist": "Lorde",
+    "title": "Pure Heroine",
+    "hex": "#1a1a1a",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/6c/c8/d1/6cc8d1f5-6be1-b708-da61-e688ee868fd2/707541004237.jpg/300x300bb.jpg"
+  },
+  "8": {
+    "rank": 8,
+    "artist": "tlinh",
+    "title": "ái",
+    "hex": "#401c27",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d8/87/d7/d887d7f7-6568-c81c-2bc5-24f9285d0690/00602458392609_Cover.jpg/300x300bb.jpg"
+  },
+  "9": {
+    "rank": 9,
+    "artist": "Lana Del Rey",
+    "title": "Norman Fucking Rockwell!",
+    "hex": "#273040",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/c4/e2/2a/c4e22a8a-c333-6f92-912a-0ab314586d92/5063112655563_cover.jpg/300x300bb.jpg"
+  },
+  "10": {
+    "rank": 10,
+    "artist": "Phùng Khánh Linh",
+    "title": "GIỮA MỘT VẠN NGƯỜI",
+    "hex": "#253327",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/21/9a/5b/219a5b6d-9bb0-3997-3334-1ac6abf65a8b/cover.jpg/300x300bb.jpg"
+  },
+  "11": {
+    "rank": 11,
+    "artist": "Madonna",
+    "title": "Erotica (PA Version)",
+    "hex": "#272a33",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/00eba6517f89cd953072782206b3bad9/1000x1000-000000-80-0-0.jpg"
+  },
+  "12": {
+    "rank": 12,
+    "artist": "Kesha",
+    "title": "Gag Order",
+    "hex": "#2b2b2b",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/11baaf008c8fb34cf47c9d2a77f324ac/1000x1000-000000-80-0-0.jpg"
+  },
+  "14": {
+    "rank": 14,
+    "artist": "FKA twigs",
+    "title": "EUSEXUA",
+    "hex": "#302621",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a0/88/96/a088960d-68af-40a1-89d1-8e068051c55d/075679643292.jpg/300x300bb.jpg"
+  },
+  "15": {
+    "rank": 15,
+    "artist": "FKA twigs",
+    "title": "EUSEXUA Afterglow",
+    "hex": "#2a1c22",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/c076e624ca089d65eec6050237d52d17/1000x1000-000000-80-0-0.jpg"
+  },
+  "16": {
+    "rank": 16,
+    "artist": "Kylie Minogue",
+    "title": "Fever",
+    "hex": "#e0ebd3",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/3a/1a/38/3a1a38cc-48d1-efb2-9657-31f6844f44f7/724353767051.jpg/300x300bb.jpg"
+  },
+  "17": {
+    "rank": 17,
+    "artist": "Kylie Minogue",
+    "title": "Light Years",
+    "hex": "#182a4d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/2b/16/2d/2b162db8-324b-d30c-d47a-66ccbcaac21f/724353212957.jpg/300x300bb.jpg"
+  },
+  "18": {
+    "rank": 18,
+    "artist": "Zara Larsson",
+    "title": "Midnight Sun",
+    "hex": "#3a2a30",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/43/77/0f/43770f19-e3ea-98d0-abf1-abe396197cd5/196874161357.jpg/300x300bb.jpg"
+  },
+  "19": {
+    "rank": 19,
+    "artist": "Miley Cyrus",
+    "title": "Something Beautiful",
+    "hex": "#362734",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/be/b1/63/beb16362-169d-b53f-7186-eccf028d7830/196872959222.jpg/300x300bb.jpg"
+  },
+  "20": {
+    "rank": 20,
+    "artist": "Lorde",
+    "title": "Virgin",
+    "hex": "#282a32",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/c3a27407eeeba58aa3cc00e83d55c81a/1000x1000-000000-80-0-0.jpg"
+  },
+  "21": {
+    "rank": 21,
+    "artist": "Obito",
+    "title": "Đánh Đổi",
+    "hex": "#342217",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/078d21a4254c381cb40417353990b3ee/1000x1000-000000-80-0-0.jpg"
+  },
+  "22": {
+    "rank": 22,
+    "artist": "Wren Evans",
+    "title": "LOI CHOI: The Neo Pop Punk",
+    "hex": "#241935",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8f/6b/8d/8f6b8d5d-dcb4-3205-6e11-2af72f46437b/23UM1IM65964.rgb.jpg/300x300bb.jpg"
+  },
+  "23": {
+    "rank": 23,
+    "artist": "Addison Rae",
+    "title": "Addison",
+    "hex": "#182736",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/34/20/3e/34203e53-30cf-e82a-374a-2b3c855b4448/0045778794102.png/300x300bb.jpg"
+  },
+  "24": {
+    "rank": 24,
+    "artist": "Björk",
+    "title": "Vulnicura",
+    "hex": "#2f3613",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music49/v4/9b/c4/90/9bc4904d-0a8c-c4a8-b3fb-c67800a2264c/dj.ahdiityx.jpg/300x300bb.jpg"
+  },
+  "25": {
+    "rank": 25,
+    "artist": "PinkPantheress",
+    "title": "Fancy That",
+    "hex": "#1a2c3a",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/0b8720478ef28aedf91af614d36721ec/1000x1000-000000-80-0-0.jpg"
+  },
+  "26": {
+    "rank": 26,
+    "artist": "Wren Evans",
+    "title": "NỔ",
+    "hex": "#401313",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/45/4e/11/454e11ba-66e9-bc85-cdf7-01331fe11303/25UM2IM10673.rgb.jpg/300x300bb.jpg"
+  },
+  "27": {
+    "rank": 27,
+    "artist": "Björk",
+    "title": "Biophilia",
+    "hex": "#402613",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/37/fe/66/37fe66c4-5ecc-81e0-a7de-162534df2459/5016958144937.png/300x300bb.jpg"
+  },
+  "28": {
+    "rank": 28,
+    "artist": "Björk",
+    "title": "Volta",
+    "hex": "#3d1326",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d2/61/ef/d261ef00-bb64-a784-3a95-253d68ab11bf/075679998927.jpg/300x300bb.jpg"
+  },
+  "29": {
+    "rank": 29,
+    "artist": "C418",
+    "title": "Minecraft - Volume Alpha",
+    "hex": "#233321",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/497c1174c4325b6c3f5be36ea97fd129/1000x1000-000000-80-0-0.jpg"
+  },
+  "30": {
+    "rank": 30,
+    "artist": "C418",
+    "title": "Minecraft - Volume Beta",
+    "hex": "#332121",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/20259a08299998530c0517e1657fc7db/1000x1000-000000-80-0-0.jpg"
+  },
+  "31": {
+    "rank": 31,
+    "artist": "tlinh",
+    "title": "FLVR",
+    "hex": "#181a33",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/c4a9932d9628b9c1dff2399a4d78f203/1000x1000-000000-80-0-0.jpg"
+  },
+  "32": {
+    "rank": 32,
+    "artist": "Bích Phương",
+    "title": "tâm trạng tan hơi chậm một chút",
+    "hex": "#3d2b33",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c8/a0/08/c8a00853-b96d-bde3-9ff0-f4c63693088d/5034644784618.jpg/300x300bb.jpg"
+  },
+  "33": {
+    "rank": 33,
+    "artist": "cupcakKe",
+    "title": "Dauntless Manifesto",
+    "hex": "#19363d",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/e41e021b06fc7ce1f48c12828bd18579/1000x1000-000000-80-0-0.jpg"
+  },
+  "34": {
+    "rank": 34,
+    "artist": "Kylie Minogue",
+    "title": "Body Language",
+    "hex": "#2b3d36",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/2f/d8/f0/2fd8f02d-fc74-f260-897b-c1fa10bfd6d0/dj.frdkawlz.jpg/300x300bb.jpg"
+  },
+  "35": {
+    "rank": 35,
+    "artist": "Kylie Minogue",
+    "title": "Kylie Minogue (1994)",
+    "hex": "#3b3d30",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8e/2f/62/8e2f6200-bc3e-971e-eb31-57378fd144a9/5026854149592.jpg/300x300bb.jpg"
+  },
+  "36": {
+    "rank": 36,
+    "artist": "Billie Eilish",
+    "title": "HIT ME HARD AND SOFT",
+    "hex": "#193b2a",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/92/9f/69/929f69f1-9977-3a44-d674-11f70c852d1b/24UMGIM36186.rgb.jpg/300x300bb.jpg"
+  },
+  "37": {
+    "rank": 37,
+    "artist": "Beyoncé",
+    "title": "RENAISSANCE",
+    "hex": "#1a1a1a",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/fe/ba/43/feba43be-99e8-ad8c-9fad-1bfdea7a4e98/196589344267.jpg/300x300bb.jpg"
+  },
+  "38": {
+    "rank": 38,
+    "artist": "Madonna",
+    "title": "Madame X",
+    "hex": "#2a1f26",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/72/f7/5f/72f75f3e-a544-b420-fae9-5d07a741b83f/603497807550.jpg/300x300bb.jpg"
+  },
+  "39": {
+    "rank": 39,
+    "artist": "Madonna",
+    "title": "American Life",
+    "hex": "#11261d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music/y2005/m09/d19/h20/mzi.umfqxdaj.jpg/300x300bb.jpg"
+  },
+  "40": {
+    "rank": 40,
+    "artist": "Phương Mỹ Chi",
+    "title": "Vũ Trụ Cò Bay",
+    "hex": "#1b332b",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/92/92/12/92921232-a921-5e74-e36d-cd9bc5db08a7/5054197811159.jpg/300x300bb.jpg"
+  },
+  "41": {
+    "rank": 41,
+    "artist": "Rose Gray",
+    "title": "Louder, Please",
+    "hex": "#301d2c",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/6d543c2e9f83aee26a8fad0974a6d9e0/1000x1000-000000-80-0-0.jpg"
+  },
+  "42": {
+    "rank": 42,
+    "artist": "Lana Del Rey",
+    "title": "Born To Die - The Paradise Edition",
+    "hex": "#302613",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/59/10/66/591066ea-3c85-3dfe-ef82-ffdbbcdfc8b9/12UMGIM00033.rgb.jpg/300x300bb.jpg"
+  },
+  "43": {
+    "rank": 43,
+    "artist": "Jessie Ware",
+    "title": "What's Your Pleasure?",
+    "hex": "#2d1624",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c9/3f/d9/c93fd9fd-dc20-e051-0a58-b8799c5acde4/21UMGIM06864.rgb.jpg/300x300bb.jpg"
+  },
+  "44": {
+    "rank": 44,
+    "artist": "Madonna",
+    "title": "Bedtime Stories",
+    "hex": "#3d3639",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/ea/4d/2eea4d57-8c5b-8961-1541-40c3adf571b8/dj.ckcxloql.jpg/300x300bb.jpg"
+  },
+  "45": {
+    "rank": 45,
+    "artist": "Madonna",
+    "title": "Music",
+    "hex": "#1f1d33",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/1c/46/da/1c46da55-6dff-2c58-837e-bdd419ff9ca8/093624759829.jpg/300x300bb.jpg"
+  },
+  "46": {
+    "rank": 46,
+    "artist": "Thể Thiên",
+    "title": "Trần Thế",
+    "hex": "#102326",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2d/a6/63/2da66350-cc54-28c9-f9d1-50ed8417e4d5/24UM1IM33639.rgb.jpg/300x300bb.jpg"
+  },
+  "47": {
+    "rank": 47,
+    "artist": "Lana Del Rey",
+    "title": "Blue Banisters",
+    "hex": "#23260c",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0b/d0/82/0bd082c7-2392-82b8-8ec6-5fdc5fc02a39/21UMGIM38933.rgb.jpg/300x300bb.jpg"
+  },
+  "48": {
+    "rank": 48,
+    "artist": "Madonna",
+    "title": "Like a Prayer",
+    "hex": "#331826",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/20/3c/f5/203cf53d-689e-528f-29d7-ba33758254aa/mzi.rotbotfl.jpg/300x300bb.jpg"
+  },
+  "49": {
+    "rank": 49,
+    "artist": "Tate McRae",
+    "title": "So Close To What",
+    "hex": "#111426",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/49/10/ce/4910cef7-177b-3608-8ec1-692e42e45983/196873833439.jpg/300x300bb.jpg"
+  },
+  "50": {
+    "rank": 50,
+    "artist": "Lady Gaga",
+    "title": "The Fame Monster",
+    "hex": "#262426",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/e9/1a/4e/e91a4eb9-31e7-89fb-3aad-e8172e534bb6/09UMGIM42295.rgb.jpg/300x300bb.jpg"
+  },
+  "51": {
+    "rank": 51,
+    "artist": "Taylor Swift",
+    "title": "evermore",
+    "hex": "#2e2e2e",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/18/93/99/189399a7-95e1-324b-e40a-bd9e3ea22a95/20UM1IM14847.rgb.jpg/300x300bb.jpg"
+  },
+  "52": {
+    "rank": 52,
+    "artist": "Björk",
+    "title": "Homogenic",
+    "hex": "#112e20",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music/80/01/7e/mzi.jmcslmlj.jpg/300x300bb.jpg"
+  },
+  "53": {
+    "rank": 53,
+    "artist": "Imogen Heap",
+    "title": "Speak for Yourself",
+    "hex": "#2a222f",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e3/ac/ac/e3acac09-d933-bd4c-e6e1-3d66dc66bac2/886445364729_cover.jpg/300x300bb.jpg"
+  },
+  "54": {
+    "rank": 54,
+    "artist": "Ms. Lauryn Hill",
+    "title": "The Miseducation of Lauryn Hill",
+    "hex": "#212b1d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/09/6b/55/096b55c4-ee8f-23bd-df8f-0ca0821f3028/886446727189.jpg/300x300bb.jpg"
+  },
+  "55": {
+    "rank": 55,
+    "artist": "Billie Eilish",
+    "title": "Happier Than Ever",
+    "hex": "#372e29",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/02/b7/6d/02b76dd3-4006-bc65-9f33-33b70a95222a/21UMGIM36684.rgb.jpg/300x300bb.jpg"
+  },
+  "56": {
+    "rank": 56,
+    "artist": "Nelly Furtado",
+    "title": "Loose",
+    "hex": "#2b1a13",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/20/f2/be/20f2be1f-716d-a2df-913e-1aff99c08619/06UMGIM31170.rgb.jpg/300x300bb.jpg"
+  },
+  "57": {
+    "rank": 57,
+    "artist": "Taylor Swift",
+    "title": "1989 (Taylor's Version)",
+    "hex": "#123c4a",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c1/31/18/c131181b-ca3e-d945-16b2-48ea6bcd64d4/23UM1IM11868.rgb.jpg/300x300bb.jpg"
+  },
+  "58": {
+    "rank": 58,
+    "artist": "Billie Eilish",
+    "title": "dont smile at me",
+    "hex": "#401010",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/02/1d/30/021d3036-5503-3ed3-df00-882f2833a6ae/17UM1IM17026.rgb.jpg/300x300bb.jpg"
+  },
+  "59": {
+    "rank": 59,
+    "artist": "Lady Gaga",
+    "title": "MAYHEM",
+    "hex": "#2f1140",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5d/4d/f9/5d4df96a-e95e-2fe9-404a-5d570513762d/20UMGIM15390.rgb.jpg/300x300bb.jpg"
+  },
+  "60": {
+    "rank": 60,
+    "artist": "Lorde",
+    "title": "Melodrama",
+    "hex": "#131640",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/58/11/b1/5811b172-e180-25a6-69e6-4385fbbfb5dc/17UM1IM02207.rgb.jpg/300x300bb.jpg"
+  },
+  "61": {
+    "rank": 61,
+    "artist": "Chappell Roan",
+    "title": "The Rise and Fall of a Midwest Princess",
+    "hex": "#40132f",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/42/a0/c5/42a0c5e6-6b98-f1f9-7d6b-6d6c61aba562/23UMGIM84225.rgb.jpg/300x300bb.jpg"
+  },
+  "62": {
+    "rank": 62,
+    "artist": "Caroline Polachek",
+    "title": "Desire, I Want To Turn Into You",
+    "hex": "#36161c",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/10/51/f2/1051f2cc-195f-ddb6-2d9e-26c74f0387fd/197187988518.jpg/300x300bb.jpg"
+  },
+  "63": {
+    "rank": 63,
+    "artist": "St. Vincent",
+    "title": "MASSEDUCTION",
+    "hex": "#36112d",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/9cb8e7bb37509a8de6b41dcd108a2207/1000x1000-000000-80-0-0.jpg"
+  },
+  "64": {
+    "rank": 64,
+    "artist": "Olivia Rodrigo",
+    "title": "GUTS (spilled)",
+    "hex": "#241030",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/08/9e/07/089e0799-b405-9e69-b648-e6a19df9879c/24UMGIM30485.rgb.jpg/300x300bb.jpg"
+  },
+  "65": {
+    "rank": 65,
+    "artist": "Olivia Rodrigo",
+    "title": "SOUR",
+    "hex": "#221338",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/02/ed/8c/02ed8cab-c089-2fdd-7ce6-ab334a9a4e19/21UMGIM26093.rgb.jpg/300x300bb.jpg"
+  },
+  "66": {
+    "rank": 66,
+    "artist": "Orange",
+    "title": "CAM'ON",
+    "hex": "#402010",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/20/9d/7c/209d7c21-5618-eea2-7940-e96eb6dffeee/25UMGIM92593.rgb.jpg/300x300bb.jpg"
+  },
+  "70": {
+    "rank": 70,
+    "artist": "TOWA TEI",
+    "title": "SOUND MUSEUM",
+    "hex": "#2b3b28",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/97/23/cd/9723cdf3-b45f-a9d3-fefd-8ece279867a6/825646217878.jpg/300x300bb.jpg"
+  },
+  "71": {
+    "rank": 71,
+    "artist": "cupcakKe",
+    "title": "Cum Cake",
+    "hex": "#3d192c",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/949fa91dd3e11166d3c81ccf33f83d22/1000x1000-000000-80-0-0.jpg"
+  },
+  "72": {
+    "rank": 72,
+    "artist": "cupcakKe",
+    "title": "S.T.D",
+    "hex": "#183820",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/ff43339b2de0d1e917f99ea2da625519/1000x1000-000000-80-0-0.jpg"
+  },
+  "73": {
+    "rank": 73,
+    "artist": "cupcakKe",
+    "title": "The BakKery",
+    "hex": "#362016",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/29323532c88e29bf200467c3fde4caf3/1000x1000-000000-80-0-0.jpg"
+  },
+  "74": {
+    "rank": 74,
+    "artist": "Cardi B",
+    "title": "AM I THE DRAMA?",
+    "hex": "#38192a",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/59/ff/2a/59ff2a82-085d-07f2-e146-01fadd7d6888/075679604835.jpg/300x300bb.jpg"
+  },
+  "75": {
+    "rank": 75,
+    "artist": "Low G",
+    "title": "L2K",
+    "hex": "#202a36",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/741cd191676299e60a3ec02a375386f8/1000x1000-000000-80-0-0.jpg"
+  },
+  "76": {
+    "rank": 76,
+    "artist": "2pillz",
+    "title": "PILLZCASSO",
+    "hex": "#132b1d",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/ed075419f83db76ba290e4a4ecf11bef/1000x1000-000000-80-0-0.jpg"
+  },
+  "77": {
+    "rank": 77,
+    "artist": "Esthero",
+    "title": "Breath From Another",
+    "hex": "#32111f",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2b/34/6c/2b346c49-1829-f225-9023-a1a53056bcf6/074646869826.jpg/300x300bb.jpg"
+  },
+  "78": {
+    "rank": 78,
+    "artist": "Taylor Swift",
+    "title": "reputation",
+    "hex": "#1a1a1a",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/e6f3afd8a5c3d8ea797f458694166e47/1000x1000-000000-80-0-0.jpg"
+  },
+  "79": {
+    "rank": 79,
+    "artist": "Tyler, The Creator",
+    "title": "IGOR",
+    "hex": "#3b222d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6f/e3/09/6fe30938-89fb-e4ae-d67a-648746c26db1/196871668248.jpg/300x300bb.jpg"
+  },
+  "80": {
+    "rank": 80,
+    "artist": "The Weeknd",
+    "title": "Starboy",
+    "hex": "#1a2133",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b5/92/bb/b592bb72-52e3-e756-9b26-9f56d08f47ab/16UMGIM67864.rgb.jpg/300x300bb.jpg"
+  },
+  "81": {
+    "rank": 81,
+    "artist": "Charli xcx",
+    "title": "CRASH (Deluxe)",
+    "hex": "#28171f",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/0ba9a7c2b836db622fa7ff071b070fb1/1000x1000-000000-80-0-0.jpg"
+  },
+  "82": {
+    "rank": 82,
+    "artist": "FKA twigs",
+    "title": "MAGDALENE",
+    "hex": "#2d2421",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/63593ab6be8e57a118b9b53784eda751/1000x1000-000000-80-0-0.jpg"
+  },
+  "83": {
+    "rank": 83,
+    "artist": "Hoàng Thùy Linh",
+    "title": "LINK",
+    "hex": "#2e1d3d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/47/95/92/4795925a-bee3-79c3-3900-7e89f831af48/196589364418.jpg/300x300bb.jpg"
+  },
+  "84": {
+    "rank": 84,
+    "artist": "Madonna",
+    "title": "Rebel Heart",
+    "hex": "#2c1719",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8b/4d/94/8b4d9445-b635-201c-96b7-6184df8ea4e9/603497807468.jpg/300x300bb.jpg"
+  },
+  "85": {
+    "rank": 85,
+    "artist": "Camila Cabello",
+    "title": "C,XOXO",
+    "hex": "#112638",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/45/dd/5e/45dd5e87-8af3-1f92-2f18-3d447b85b9ff/24UMGIM38421.rgb.jpg/300x300bb.jpg"
+  },
+  "86": {
+    "rank": 86,
+    "artist": "JADE",
+    "title": "THAT'S SHOWBIZ BABY!",
+    "hex": "#262c3d",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b2/09/02/b20902b8-9855-fe29-3de5-2de06f4e5098/196873845432.jpg/300x300bb.jpg"
+  },
+  "87": {
+    "rank": 87,
+    "artist": "ADÉLA",
+    "title": "The Provocateur",
+    "hex": "#3b211f",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8a/d3/7d/8ad37dea-e5cc-85d5-24e7-201da46b321f/25UMGIM95437.rgb.jpg/300x300bb.jpg"
+  },
+  "88": {
+    "rank": 88,
+    "artist": "ROSALÍA",
+    "title": "LUX",
+    "hex": "#2e212f",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/0dd6cd0e783f1505cd57778953ab77a1/1000x1000-000000-80-0-0.jpg"
+  },
+  "89": {
+    "rank": 89,
+    "artist": "Lily Allen",
+    "title": "West End Girl",
+    "hex": "#1c3b28",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/dc/0d/ba/dc0dbabe-8b7a-cfbe-4d84-4d43147a8cb4/4099964220278.jpg/300x300bb.jpg"
+  },
+  "90": {
+    "rank": 90,
+    "artist": "Kylie Minogue",
+    "title": "Tension",
+    "hex": "#2b1022",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/192d2fcb96b33b6a6a43dff4c8ef50f8/1000x1000-000000-80-0-0.jpg"
+  },
+  "91": {
+    "rank": 91,
+    "artist": "Kylie Minogue",
+    "title": "Aphrodite",
+    "hex": "#162842",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/1b5dd108c495b822fe17b44b07c7d700/1000x1000-000000-80-0-0.jpg"
+  },
+  "92": {
+    "rank": 92,
+    "artist": "Ariana Grande",
+    "title": "Dangerous Woman",
+    "hex": "#1f1f1f",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/1a8f399e9ddbb8ec2530232c0dfd953f/1000x1000-000000-80-0-0.jpg"
+  },
+  "93": {
+    "rank": 93,
+    "artist": "Ariana Grande",
+    "title": "eternal sunshine",
+    "hex": "#382329",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/9349b2fcb4bd060060a33f054a619e83/1000x1000-000000-80-0-0.jpg"
+  },
+  "94": {
+    "rank": 94,
+    "artist": "Charli xcx",
+    "title": "True Romance",
+    "hex": "#2b192c",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/60889a9aea1fc2f6c5de0d007f48c576/1000x1000-000000-80-0-0.jpg"
+  },
+  "95": {
+    "rank": 95,
+    "artist": "Charli xcx",
+    "title": "SUCKER",
+    "hex": "#331627",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/1fa08179c353b52af4752b8d9bbf5817/1000x1000-000000-80-0-0.jpg"
+  },
+  "96": {
+    "rank": 96,
+    "artist": "Lana Del Rey",
+    "title": "Honeymoon",
+    "hex": "#382419",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/e69dade74de5e1f3f524f1c985696330/1000x1000-000000-80-0-0.jpg"
+  },
+  "97": {
+    "rank": 97,
+    "artist": "Lana Del Rey",
+    "title": "Chemtrails",
+    "hex": "#1e2b26",
+    "coverUrl": "https://cdn-images.dzcdn.net/images/cover/bfcc4fdda18be0e2f6fecc3aeebebe6c/1000x1000-000000-80-0-0.jpg"
+  },
+  "98": {
+    "rank": 98,
+    "artist": "Taylor Swift",
+    "title": "folklore (deluxe version)",
+    "hex": "#1f221e",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8c/ef/c2/8cefc23a-61b7-05ff-b52a-bb1e4922087c/20UMGIM64216.rgb.jpg/300x300bb.jpg"
+  },
+  "100": {
+    "rank": 100,
+    "artist": "SOPHIE",
+    "title": "OIL OF EVERY PEARL'S UN-INSIDES",
+    "hex": "#332230",
+    "coverUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/72/30/86723032-da83-af74-0888-7cb7588130d6/0044003196520_Cover.jpg/300x300bb.jpg"
+  },
+  "200": {
+    "hex": "#1a1d26"
+  },
+  "201": {
+    "hex": "#3b2414"
+  },
+  "202": {
+    "hex": "#2c242c"
+  },
+  "203": {
+    "hex": "#3b2808"
+  },
+  "204": {
+    "hex": "#6a0e0e"
+  },
+  "205": {
+    "hex": "#352a22"
+  },
+  "206": {
+    "hex": "#4a0e4a"
+  },
+  "207": {
+    "hex": "#3b2f21"
+  },
+  "208": {
+    "hex": "#1a2a3f"
+  },
+  "209": {
+    "hex": "#6a0a2f"
+  },
+  "210": {
+    "hex": "#28343f"
+  },
+  "211": {
+    "hex": "#4d183f"
+  },
+  "212": {
+    "hex": "#094018"
+  },
+  "213": {
+    "hex": "#0a2f5f"
+  }
 }

@@ -388,8 +388,7 @@ export function ChatSidebar({ tiers }: { tiers: Tier[] }) {
                     title: album.title,
                     artist: album.artist,
                     note: album.note || "",
-                    rank: calculatedRank,
-                    coverUrl: album.coverUrl || ""
+                    rank: calculatedRank
                   }, { merge: true });
                 });
               }
