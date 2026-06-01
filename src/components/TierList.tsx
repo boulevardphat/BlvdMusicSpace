@@ -178,8 +178,8 @@ function MetroTile({
   const currentPalette = hexColor ? { bg: hexColor, darkBg: hexColor, text: "text-white" } : { bg: theme.accent, darkBg: theme.accent, text: "text-white" };
 
   let dimensionClasses = size === "large" 
-    ? "w-[240px] h-[240px] md:w-[420px] md:h-[420px] xl:w-[460px] xl:h-[460px]" 
-    : "w-[115px] h-[115px] md:w-[200px] md:h-[200px] xl:w-[220px] xl:h-[220px]";
+    ? "w-[240px] h-[240px] md:w-[320px] md:h-[320px] xl:w-[380px] xl:h-[380px]" 
+    : "w-[115px] h-[115px] md:w-[150px] md:h-[150px] xl:w-[180px] xl:h-[180px]";
 
   const flipActive = isHovered || isLiveFlipped;
 
@@ -655,7 +655,7 @@ export function TierList({
       {/* 2. Scrolling grid body - Stretched vertically */}
       <div 
         ref={scrollContainerRef}
-        className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth h-full w-full md:w-auto"
+        className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto"
       >
         {albumsWithRank.map((tier) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
@@ -669,10 +669,10 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-10 md:pb-8 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
+              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-16 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
                {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly centered vertically within distance X */}
-              <div className="flex-grow flex flex-col justify-center select-none py-6 md:py-8 xl:py-10">
+              <div className="flex-grow flex flex-col justify-center select-none py-2 md:py-4 xl:py-6">
                 <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12 w-full md:w-max max-w-full drop-shadow-xl">
                   {/* Text Group - NO BOX background, floating purely */}
                   <div className="text-left flex items-center pr-3 md:pr-12 border-b md:border-b-0 md:border-r border-white/20 pb-3 md:pb-0">
@@ -694,9 +694,9 @@ export function TierList({
               </div>
 
               {/* Album tiles flow area - Anchored at the bottom with fixed-aligned dimensions */}
-              <div className="flex-none h-[240px] md:h-[420px] xl:h-[460px] flex flex-row items-center gap-2.5 md:gap-5 pb-2 md:pb-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
+              <div className="flex-none h-[240px] md:h-[320px] xl:h-[380px] flex flex-row items-center gap-2.5 md:gap-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
                 {cols.length === 0 ? (
-                  <div className="w-[150px] md:w-[420px] h-[240px] md:h-[400px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
+                  <div className="w-[150px] md:w-[320px] xl:w-[380px] h-[240px] md:h-[320px] xl:h-[380px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />
                     <p className="text-[9px] text-slate-300 font-mono">Trống bậc</p>
                   </div>
@@ -755,7 +755,7 @@ export function TierList({
                               animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 700 : 780, opacity: 1, scale: 1 }}
                               exit={{ width: 0, opacity: 0, scale: 0.95 }}
                               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                              className={`h-[240px] md:h-[420px] xl:h-[460px] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
+                              className={`h-[240px] md:h-[320px] xl:h-[380px] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
                               style={{ backgroundColor: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover & changer trigger & actions */}

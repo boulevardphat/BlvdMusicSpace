@@ -324,7 +324,7 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="flex-grow h-full overflow-hidden">
+                <div className="flex-grow min-h-0 overflow-hidden">
                   {/* Desktop view */}
                   <div className="hidden md:block h-full">
                     <TierList 

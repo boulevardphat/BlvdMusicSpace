@@ -289,6 +289,7 @@ export function ChatSidebar({ tiers }: { tiers: Tier[] }) {
         } else if (parsedUpdate && Array.isArray(parsedUpdate.operations)) {
           let updatedTiers = JSON.parse(JSON.stringify(tiers)) as Tier[];
           let dbChanged = false;
+          let deletedAlbumIds: number[] = [];
 
           parsedUpdate.operations.forEach((op: any) => {
             if (op.type === "ADD" && op.album) {
@@ -339,6 +340,7 @@ export function ChatSidebar({ tiers }: { tiers: Tier[] }) {
                   if (idx !== -1) {
                     t.albums.splice(idx, 1);
                     dbChanged = true;
+                    deletedAlbumIds.push(op.albumId);
                   }
                 }
               });
@@ -367,11 +369,41 @@ export function ChatSidebar({ tiers }: { tiers: Tier[] }) {
 
           if (dbChanged) {
             const batch = writeBatch(db);
+            const startRankOffsets: Record<string, number> = {
+              "t1": 1,
+              "t2": 10,
+              "t3": 25,
+              "t4": 57,
+              "t5": 90
+            };
+
             updatedTiers.forEach((t) => {
-              const tDoc = doc(db, "tiers", t.id);
-              batch.set(tDoc, { albums: t.albums || [] }, { merge: true });
+              const offset = startRankOffsets[t.id] || 90;
+              if (t.albums) {
+                t.albums.forEach((album, index) => {
+                  const calculatedRank = offset + index;
+                  const albumDoc = doc(db, "albums", String(album.id));
+                  batch.set(albumDoc, {
+                    id: album.id,
+                    title: album.title,
+                    artist: album.artist,
+                    note: album.note || "",
+                    rank: calculatedRank,
+                    coverUrl: album.coverUrl || ""
+                  }, { merge: true });
+                });
+              }
             });
+
+            deletedAlbumIds.forEach((id) => {
+              const albumDoc = doc(db, "albums", String(id));
+              batch.delete(albumDoc);
+            });
+
             await batch.commit();
+
+            // Notify parent to fetch new updates instantly
+            window.dispatchEvent(new CustomEvent("albumUpdated"));
           }
         }
       }

@@ -50,7 +50,7 @@ export function TasteProfile({ tiers }: { tiers: Tier[] }) {
   ];
 
   return (
-    <div className="flex-grow overflow-y-auto h-full p-6 md:p-8 space-y-8 pb-40 custom-scrollbar bg-white rounded-none border border-slate-300">
+    <div className="flex-grow overflow-y-auto min-h-0 p-6 md:p-8 space-y-8 pb-40 custom-scrollbar bg-white rounded-none border border-slate-300">
       
       {/* Main Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-slate-900 pb-6 relative">
