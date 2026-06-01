@@ -1,5 +1,20 @@
 {
   "entities": {
+    "Album": {
+      "title": "Album",
+      "description": "Custom verified details for an album override",
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "artist": { "type": "string" },
+        "title": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "note": { "type": "string" },
+        "hex": { "type": "string" },
+        "persDesc": { "type": "string" }
+      },
+      "required": ["id", "artist", "title"]
+    },
     "Tier": {
       "title": "Tier",
       "description": "A rank tier in the album ranking",
@@ -28,6 +43,10 @@
     }
   },
   "firestore": {
+    "albums/{albumId}": {
+      "schema": "Album",
+      "description": "Stored album covers, descriptions, notes, and custom hex codes"
+    },
     "tiers/{tierId}": {
       "schema": "Tier",
       "description": "A rank tier containing album objects"

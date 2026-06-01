@@ -32,6 +32,16 @@ export default function App() {
   const [chatSidebarWidth, setChatSidebarWidth] = useState(380);
   const [isDragging, setIsDragging] = useState(false);
   const [albumColors, setAlbumColors] = useState<Record<string, any>>({});
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
+
+  useEffect(() => {
+    // Check if user is on mobile (<768px) and hasn't dismissed it in the current session
+    const isMobileDevice = window.innerWidth < 768;
+    const dismissed = sessionStorage.getItem("dismissedMobileWarning");
+    if (isMobileDevice && !dismissed) {
+      setShowMobileWarning(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isDragging) return;
@@ -236,41 +246,9 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden font-sans relative rounded-none border-0">
-      
-      {/* 1. Global Navigation Bar - Metro sharp styling */}
-      <header className="flex-none bg-white border-b-2 border-slate-950 px-6 h-16 flex items-center justify-between relative z-30 rounded-none">
-        
-        {/* Flat Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-slate-950 flex items-center justify-center rounded-none">
-            <Disc className="w-4 h-4 text-white animate-spin [animation-duration:5s]" />
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-sans font-black text-xl tracking-tighter leading-none text-slate-950">BLVD METRO</span>
-            <span className="text-[9px] font-mono font-bold text-blue-600 uppercase tracking-widest pl-1.5 border-l border-slate-300">
-              Pop Critic
-            </span>
-          </div>
-        </div>
-
-
-
-        {/* Right Info Details */}
-        <div className="hidden sm:flex items-center gap-3">
-          <div className="text-right">
-            <div className="text-[10px] font-sans font-black text-slate-900 leading-none">NOCHIWANO</div>
-            <div className="text-[8px] font-mono text-blue-600 uppercase tracking-widest leading-none font-bold mt-1">
-              Avant Curator
-            </div>
-          </div>
-          <div className="w-8 h-8 bg-slate-100 border border-slate-350 flex items-center justify-center rounded-none">
-            <Laptop className="w-4 h-4 text-slate-800" />
-          </div>
-        </div>
-      </header>
 
       {/* 2. Main Content Split Panel with Restored Chat Sidebar and Seamless Grid Viewport */}
-      <div className="flex-1 flex flex-row h-[calc(100vh-64px)] overflow-hidden relative rounded-none">
+      <div className="flex-1 flex flex-row h-full overflow-hidden relative rounded-none">
         
         {/* DESKTOP SIDEBAR LOGIC WITH SHARP ANIMATED WIDTH & CENTERED SEAM DIVIDER */}
         {activeTab === "ranking" && (
@@ -516,6 +494,39 @@ export default function App() {
                   Đóng
                 </button>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      
+      {/* Mobile view warning popup */}
+      <AnimatePresence>
+        {showMobileWarning && (
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white border-[3px] border-slate-950 p-6 rounded-none shadow-2xl w-full max-w-sm relative text-slate-950"
+            >
+              <div className="flex items-center gap-3 mb-4 text-blue-600">
+                <Laptop className="w-6 h-6 shrink-0" />
+                <h3 className="text-sm font-mono font-black uppercase tracking-widest leading-none">RECOMMENDATION</h3>
+              </div>
+              
+              <p className="text-zinc-650 text-xs font-sans leading-relaxed mb-6">
+                Bảng phân hạng <strong className="text-slate-950 font-black">BLVD Metro</strong> được thiết kế tối ưu nhất cho màn hình lớn của <strong className="text-slate-950 font-black">máy tính</strong> để thao tác kéo thả và trải nghiệm thị giác hoạt động mượt mà hoàn mỹ. Bạn vẫn có thể tiếp tục xem trên di động với giao diện cuộn dọc thích ứng.
+              </p>
+
+              <button
+                onClick={() => {
+                  sessionStorage.setItem("dismissedMobileWarning", "true");
+                  setShowMobileWarning(false);
+                }}
+                className="w-full py-2.5 bg-slate-950 hover:bg-blue-600 text-white font-sans font-black text-xs uppercase tracking-wider rounded-none cursor-pointer transition-colors active:scale-[0.98]"
+              >
+                Tiếp tục trên điện thoại
+              </button>
             </motion.div>
           </div>
         )}

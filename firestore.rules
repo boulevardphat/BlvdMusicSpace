@@ -1,6 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /albums/{albumId} {
+      allow read, write: if true;
+    }
     match /tiers/{tierId} {
       allow read, write: if true;
     }

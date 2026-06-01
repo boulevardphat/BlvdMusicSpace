@@ -320,6 +320,14 @@ export function TierList({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [liveFlippedIds, setLiveFlippedIds] = useState<number[]>([]);
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   useEffect(() => {
     if (selectedAlbum && selectedAlbum.id && albumColors[selectedAlbum.id]?.hex) {
@@ -518,6 +526,120 @@ export function TierList({
 
   const totalAlbumsCount = currentRank - 1;
 
+  if (isMobile) {
+    return (
+      <div className="flex-1 flex flex-col h-full bg-[#0b0c0e] overflow-y-auto px-4 py-6 text-white text-left select-none">
+        
+        {/* Metro Header */}
+        <div className="flex-none flex items-center justify-between border-b border-white/10 pb-4 bg-transparent mb-6">
+          <h1 className="text-2xl font-sans font-black text-white tracking-tighter leading-none">
+            BẢNG PHÂN HẠNG METRO
+          </h1>
+          <span className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-widest pl-1.5 border-l border-white/10">
+            V8.5 PRO
+          </span>
+        </div>
+
+        {/* Vertical Tiers Feed */}
+        <div className="flex flex-col gap-8 pb-16">
+          {albumsWithRank.map((tier) => {
+            const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
+            const gradientClass = TIER_GRADIENTS[tier.id] || "from-slate-50 to-slate-20";
+            const cleanedName = cleanTierName(tier.name);
+
+            return (
+              <div 
+                key={tier.id}
+                className="flex flex-col gap-4 border-b border-white/5 pb-2 last:border-b-0"
+              >
+                {/* Custom Tier Header Card */}
+                <div className={`p-4 bg-gradient-to-br ${gradientClass} flex flex-col gap-2 rounded-none shadow-lg relative overflow-hidden`}>
+                  <div className="flex justify-between items-center z-10">
+                    <h2 className="text-2xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-md">
+                      {cleanedName}
+                    </h2>
+                    <span className="text-[10px] font-mono text-white/90 font-black tracking-widest uppercase bg-black/25 px-2 py-0.5">
+                      [ {tier.albums.length} RECORDINGS ]
+                    </span>
+                  </div>
+                  <p className="text-xs leading-snug text-slate-100/90 italic font-medium mt-1 select-text border-l-2 border-white/30 pl-2.5 z-10">
+                    "{tier.description}"
+                  </p>
+                  
+                  {/* Subtle decorative background detail */}
+                  <div className="absolute right-0 bottom-0 translate-y-4 translate-x-4 opacity-5 pointer-events-none select-none">
+                    <Disc className="w-32 h-32 animate-spin-slow" />
+                  </div>
+                </div>
+
+                {/* Vertical Album List */}
+                <div className="flex flex-col gap-3">
+                  {tier.mappedAlbums.length === 0 ? (
+                    <div className="border border-dashed border-white/10 py-8 px-4 text-center bg-white/5 shrink-0 flex flex-col items-center justify-center">
+                      <Music className="w-5 h-5 text-slate-500 mb-1" />
+                      <p className="text-[10px] text-slate-400 font-mono">Trống bậc này</p>
+                    </div>
+                  ) : (
+                    tier.mappedAlbums.map((album) => {
+                      const mCover = album.coverUrl || covers[`${album.id}`] || "";
+                      const isSelected = selectedAlbum && selectedAlbum.id === album.id;
+                      
+                      return (
+                        <div
+                          key={album.id}
+                          onClick={(e) => handleMetroTileClick(e, album, cleanedName, album.globalRank, mCover)}
+                          className={`flex items-center gap-4 p-3 border border-white/10 hover:border-blue-500/55 bg-white/5 hover:bg-white/10 active:scale-[0.99] transition-all cursor-pointer relative ${
+                            isSelected ? "ring-2 ring-blue-500 bg-white/12 border-blue-500/50" : ""
+                          }`}
+                        >
+                          {/* Album Index Badge */}
+                          <div className="text-sm font-mono font-black text-slate-400/90 shrink-0 w-6 text-center">
+                            {album.globalRank}
+                          </div>
+
+                          {/* Cover Image square */}
+                          <div className="w-16 h-16 bg-slate-900 flex-none overflow-hidden border border-white/10 relative shadow-inner">
+                            {mCover ? (
+                              <img
+                                src={mCover}
+                                alt={album.title}
+                                className="w-full h-full object-cover animate-fade-in"
+                                referrerPolicy="no-referrer"
+                              />
+                            ) : (
+                              <Music className="w-5 h-5 text-slate-600 absolute inset-0 m-auto" />
+                            )}
+                          </div>
+
+                          {/* Info Block */}
+                          <div className="flex-1 min-w-0 pr-2 pb-0.5">
+                            <h3 className="font-sans font-black text-sm text-white uppercase leading-tight truncate tracking-tight">
+                              {album.title}
+                            </h3>
+                            <p className="font-mono text-[10px] text-blue-400 font-bold uppercase tracking-wider truncate mt-0.5">
+                              {album.artist}
+                            </p>
+                            
+                            {/* Short preview snippet of the note if exists */}
+                            {album.note && (
+                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-1 mt-1 border-l border-white/20 pl-2">
+                                "{album.note}"
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden select-none">
       
@@ -528,13 +650,12 @@ export function TierList({
             BẢNG PHÂN HẠNG METRO
           </h1>
         </div>
-
       </div>
 
       {/* 2. Scrolling grid body - Stretched vertically */}
       <div 
         ref={scrollContainerRef}
-        className="flex-grow flex flex-row items-stretch overflow-x-auto overflow-y-hidden gap-0 py-0 pr-4 md:pr-12 no-scrollbar scroll-smooth"
+        className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth h-full w-full md:w-auto"
       >
         {albumsWithRank.map((tier) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
@@ -548,24 +669,24 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-full bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-6 md:pb-8 border-r border-white/10 relative min-w-[max-content] rounded-none`}
+              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-10 md:pb-8 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
-              {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly centered vertically within distance X */}
-              <div className="flex-grow flex flex-col justify-center min-h-[110px] md:min-h-[160px] xl:min-h-[180px] py-4 select-none">
-                <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-10 w-max drop-shadow-xl">
+               {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly centered vertically within distance X */}
+              <div className="flex-grow flex flex-col justify-center select-none py-6 md:py-8 xl:py-10">
+                <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12 w-full md:w-max max-w-full drop-shadow-xl">
                   {/* Text Group - NO BOX background, floating purely */}
-                  <div className="text-left flex items-center pr-2 md:pr-10 border-r-0 md:border-r border-white/10">
-                    <h2 className="text-[44px] md:text-7xl xl:text-8xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-2xl" title={cleanedName}>
+                  <div className="text-left flex items-center pr-3 md:pr-12 border-b md:border-b-0 md:border-r border-white/20 pb-3 md:pb-0">
+                    <h2 className="text-5xl md:text-8xl xl:text-9xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-2xl" title={cleanedName}>
                       {cleanedName}
                     </h2>
                   </div>
 
                   {/* Exhibition Description floating right beside */}
-                  <div className="flex flex-col justify-center max-w-[280px] md:max-w-[480px] xl:max-w-[560px]">
-                     <div className="text-[10px] md:text-[13px] xl:text-[14px] font-mono text-white/95 font-black tracking-widest uppercase mb-1.5 md:mb-2 drop-shadow-md">
+                  <div className="flex flex-col justify-center max-w-[280px] md:max-w-[500px] xl:max-w-[640px]">
+                     <div className="text-[10px] md:text-[14px] xl:text-[15px] font-mono text-white/95 font-black tracking-widest uppercase mb-1.5 md:mb-3 drop-shadow-md">
                        [ {tier.albums.length} RECORDINGS ]
                      </div>
-                     <p className="text-[12px] md:text-[16.5px] xl:text-[18.5px] leading-snug text-slate-100 italic font-semibold border-l-2 md:border-l-[3.5px] border-white/40 pl-3 md:pl-5 drop-shadow-xl">
+                     <p className="text-[12.5px] md:text-[18px] xl:text-[20.5px] leading-snug text-slate-100 italic font-semibold border-l-2 md:border-l-[4px] border-white/40 pl-3 md:pl-6 drop-shadow-xl">
                        "{tier.description}"
                      </p>
                   </div>
@@ -573,7 +694,7 @@ export function TierList({
               </div>
 
               {/* Album tiles flow area - Anchored at the bottom with fixed-aligned dimensions */}
-              <div className="flex-none h-[240px] md:h-[420px] xl:h-[460px] flex flex-row items-center gap-2.5 md:gap-5 pb-2 md:pb-5 select-none pl-1 md:pl-0">
+              <div className="flex-none h-[240px] md:h-[420px] xl:h-[460px] flex flex-row items-center gap-2.5 md:gap-5 pb-2 md:pb-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
                 {cols.length === 0 ? (
                   <div className="w-[150px] md:w-[420px] h-[240px] md:h-[400px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />

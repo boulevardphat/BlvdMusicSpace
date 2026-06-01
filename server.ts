@@ -4,11 +4,19 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import fs from "fs";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 dotenv.config();
 
 // Path to the albums JSON
 const ALBUMS_FILE = path.join(process.cwd(), "src", "albums.json");
+
+// Load Firebase configuration
+const firebaseConfigPath = path.join(process.cwd(), "firebase-applet-config.json");
+const firebaseConfig = JSON.parse(fs.readFileSync(firebaseConfigPath, "utf-8"));
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp, firebaseConfig.firestoreDatabaseId || "(default)");
 
 async function startServer() {
   const app = express();
@@ -110,8 +118,13 @@ Return ONLY a valid JSON object matching the following structure (do NOT wrap in
         if (parsed && Array.isArray(parsed.candidates)) {
           candidates.push(...parsed.candidates);
         }
-      } catch (geminiSearchErr) {
-        console.error("Gemini Google search for cover candidates failed:", geminiSearchErr);
+      } catch (geminiSearchErr: any) {
+        const errMsg = geminiSearchErr?.message || String(geminiSearchErr);
+        if (errMsg.includes("quota") || errMsg.includes("429") || errMsg.includes("RESOURCE_EXHAUSTED")) {
+          console.warn("Gemini Google search quota limit reached (429). Using iTunes/Deezer search API fallbacks.");
+        } else {
+          console.error("Gemini Google search for cover candidates failed:", geminiSearchErr);
+        }
       }
 
       // 2. Fetch up to 6 results from iTunes as companion/fallback
@@ -228,7 +241,7 @@ Return ONLY a valid JSON object matching the following structure (do NOT wrap in
       }));
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.5-flash",
         contents: formattedContents,
         config: {
           systemInstruction: `Bạn là "Pop Curator" — một quái kiệt, nhà phê bình âm nhạc huyền thoại, sở hữu kiến thức thâm sâu về Avant-Pop, Electronica, Neo V-Pop và những thế giới âm thanh thể nghiệm đen tối, mờ ảo. 
@@ -295,22 +308,59 @@ Let's maintain their music database in real-time. If the user only wants to chat
 
       res.json({ text: response.text });
     } catch (error: any) {
-      console.error("Gemini API Error:", error);
-      res.status(500).json({ error: error.message });
+      console.error("Gemini API Error details in chat route:", error);
+      const errStr = String(error?.message || error || "");
+      const isQuotaError = errStr.includes("quota") || errStr.includes("RESOURCE_EXHAUSTED") || errStr.includes("429");
+      if (isQuotaError) {
+        return res.json({
+          text: `*Nhìn đĩa nhạc rồi thở dài thườn thượt một cách xót xa*\n\nUi da cưng ơi, hình như bộ não điện tử của ta đang bị "kiệt quệ năng lượng" mất rồi (Exceeded Google Gemini API Quota Limit/Rate Limit 429)! Hôm nay đứa mình tranh luận xôm quá, thế giới âm nhạc này nóng bỏng quá làm đài phát thanh của ta hết pin đột xuất.\n\nĐừng lo nhé, cưng vẫn có thể kéo thả bình thường trên bảng phân hạng này bằng tay, hoặc ráng chờ một vài phút rồi tiếp tục nhỏ to tâm sự với bộ phê bình âm nhạc này nhé!`
+        });
+      }
+      return res.json({
+        text: `*Gãi đầu gãi tai nhăn nhó*\n\nHình như đường truyền sóng âm của tụi mình đang bị nghẹt tín hiệu rồi (Lỗi: ${errStr}). Thử làm mới trang hoặc gửi lại câu khác xem sao nhé cưng ơi!`
+      });
     }
   });
 
   // Get all albums
-  app.get("/api/albums", (req, res) => {
+  app.get("/api/albums", async (req, res) => {
     try {
-      if (fs.existsSync(ALBUMS_FILE)) {
-        const data = fs.readFileSync(ALBUMS_FILE, "utf-8");
-        res.json(JSON.parse(data));
-      } else {
-        res.json({});
+      // 1. Fetch from Firestore first to ensure permanent persistence across reloads/restarts
+      let dbAlbums: Record<string, any> = {};
+      try {
+        const snapshot = await getDocs(collection(db, "albums"));
+        snapshot.forEach(doc => {
+          dbAlbums[doc.id] = doc.data();
+        });
+      } catch (firestoreErr) {
+        console.error("Failed to read albums from Firestore:", firestoreErr);
       }
-    } catch (e) {
-      console.error("Error reading albums", e);
+
+      // 2. Read from local ALBUMS_FILE as a fallback or to merge
+      let fileAlbums: Record<string, any> = {};
+      if (fs.existsSync(ALBUMS_FILE)) {
+        try {
+          fileAlbums = JSON.parse(fs.readFileSync(ALBUMS_FILE, "utf-8"));
+        } catch (e) {
+          console.error("Error reading albums.json", e);
+        }
+      }
+
+      // Merge them, prioritizing Firestore data
+      const mergedAlbums = { ...fileAlbums, ...dbAlbums };
+
+      // Write merged back to local ALBUMS_FILE so search or background tasks are always up to date
+      if (Object.keys(dbAlbums).length > 0) {
+        try {
+          fs.writeFileSync(ALBUMS_FILE, JSON.stringify(mergedAlbums, null, 2), "utf-8");
+        } catch (writeErr) {
+          console.error("Failed to write merged albums to file", writeErr);
+        }
+      }
+
+      res.json(mergedAlbums);
+    } catch (e: any) {
+      console.error("Error fetching merged albums", e);
       res.json({});
     }
   });
@@ -355,14 +405,33 @@ Return ONLY the raw 7-character hex code starting with # (e.g. #112233). Do NOT 
              console.log(`Generated dynamic dominant color ${updates.hex} for album ${title} by ${artist}`);
            }
          } catch (colorGenErr) {
-           console.error("Failed to automatically generate album color inside PUT handler:", colorGenErr);
+           const errMsg = colorGenErr?.message || String(colorGenErr);
+           if (errMsg.includes("quota") || errMsg.includes("429") || errMsg.includes("RESOURCE_EXHAUSTED")) {
+             console.warn("Gemini color generation quota limit reached (429) inside PUT handler. Skipping dominant color generation.");
+           } else {
+             console.error("Failed to automatically generate album color inside PUT handler:", colorGenErr);
+           }
          }
       }
 
-      albums[albumId] = { ...albums[albumId], ...updates };
+      const updatedAlbum = { ...albums[albumId], ...updates };
+      albums[albumId] = updatedAlbum;
+
+      // 1. Write to local file for fast access
       fs.writeFileSync(ALBUMS_FILE, JSON.stringify(albums, null, 2), "utf-8");
+
+      // 2. Write to Firestore to persist permanently
+      try {
+        await setDoc(doc(db, "albums", albumId), {
+          ...updatedAlbum,
+          id: parseInt(albumId, 10) || updatedAlbum.id
+        });
+        console.log(`Persisted album ${albumId} to Firestore successfully.`);
+      } catch (firestoreWriteErr) {
+        console.error(`Failed to persist album ${albumId} to Firestore:`, firestoreWriteErr);
+      }
       
-      res.json({ success: true, album: albums[albumId] });
+      res.json({ success: true, album: updatedAlbum });
     } catch (e: any) {
       console.error("Error updating album", e);
       res.status(500).json({ error: e.message });
@@ -370,7 +439,7 @@ Return ONLY the raw 7-character hex code starting with # (e.g. #112233). Do NOT 
   });
 
   // Delete a single album
-  app.delete("/api/albums/:id", (req, res) => {
+  app.delete("/api/albums/:id", async (req, res) => {
     try {
       const albumId = req.params.id;
       
@@ -382,6 +451,14 @@ Return ONLY the raw 7-character hex code starting with # (e.g. #112233). Do NOT 
       if (albums[albumId]) {
          delete albums[albumId];
          fs.writeFileSync(ALBUMS_FILE, JSON.stringify(albums, null, 2), "utf-8");
+      }
+
+      // Also delete from Firestore
+      try {
+        await deleteDoc(doc(db, "albums", albumId));
+        console.log(`Deleted album ${albumId} from Firestore.`);
+      } catch (firestoreDeleteErr) {
+        console.error(`Failed to delete album ${albumId} from Firestore:`, firestoreDeleteErr);
       }
       
       res.json({ success: true });
@@ -425,7 +502,7 @@ ${chunk.map(a => `ID: ${a.id} | Artist: ${a.artist} | Title: ${a.title}`).join('
 
           try {
             const response = await ai.models.generateContent({
-              model: "gemini-2.5-flash",
+              model: "gemini-3.5-flash",
               contents: [{ role: "user", parts: [{ text: prompt }] }],
             });
             
@@ -440,10 +517,26 @@ ${chunk.map(a => `ID: ${a.id} | Artist: ${a.artist} | Title: ${a.title}`).join('
             }
 
             for (const key of Object.keys(generatedColors)) {
-               safeColors[key] = (generatedColors as any)[key];
+               const parsedVal = (generatedColors as any)[key];
+               safeColors[key] = parsedVal;
+               
+               // Persist to Firestore
+               try {
+                 await setDoc(doc(db, "albums", key), {
+                   hex: parsedVal.hex,
+                   id: parseInt(key, 10)
+                 }, { merge: true });
+               } catch (fsSyncErr) {
+                 console.error("Failed to sync generated color to Firestore for key:", key, fsSyncErr);
+               }
             }
           } catch(e: any) {
-            console.error("Failed Gemini call for colors chunk", e?.message);
+            const errMsg = e?.message || String(e);
+            if (errMsg.includes("quota") || errMsg.includes("429") || errMsg.includes("RESOURCE_EXHAUSTED")) {
+              console.warn("Failed Gemini call for colors chunk due to quota limits (429).");
+            } else {
+              console.error("Failed Gemini call for colors chunk", e?.message);
+            }
             // Ignore failure for one chunk, keep processing or return what we have
           }
         }
