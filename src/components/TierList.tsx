@@ -178,8 +178,8 @@ function MetroTile({
   const currentPalette = hexColor ? { bg: hexColor, darkBg: hexColor, text: "text-white" } : { bg: theme.accent, darkBg: theme.accent, text: "text-white" };
 
   let dimensionClasses = size === "large" 
-    ? "w-[240px] h-[240px] md:w-[320px] md:h-[320px] xl:w-[380px] xl:h-[380px]" 
-    : "w-[115px] h-[115px] md:w-[150px] md:h-[150px] xl:w-[180px] xl:h-[180px]";
+    ? "w-[240px] h-[240px] md:w-[500px] md:h-[500px] xl:w-[580px] xl:h-[580px]" 
+    : "w-[115px] h-[115px] md:w-[240px] md:h-[240px] xl:w-[280px] xl:h-[280px]";
 
   const flipActive = isHovered || isLiveFlipped;
 
@@ -535,9 +535,6 @@ export function TierList({
           <h1 className="text-2xl font-sans font-black text-white tracking-tighter leading-none">
             BẢNG PHÂN HẠNG METRO
           </h1>
-          <span className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-widest pl-1.5 border-l border-white/10">
-            V8.5 PRO
-          </span>
         </div>
 
         {/* Vertical Tiers Feed */}
@@ -694,9 +691,9 @@ export function TierList({
               </div>
 
               {/* Album tiles flow area - Anchored at the bottom with fixed-aligned dimensions */}
-              <div className="flex-none h-[240px] md:h-[320px] xl:h-[380px] flex flex-row items-center gap-2.5 md:gap-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
+              <div className="flex-none h-[240px] md:h-[500px] xl:h-[580px] flex flex-row items-center gap-2.5 md:gap-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
                 {cols.length === 0 ? (
-                  <div className="w-[150px] md:w-[320px] xl:w-[380px] h-[240px] md:h-[320px] xl:h-[380px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
+                  <div className="w-[150px] md:w-[500px] xl:w-[580px] h-[240px] md:h-[500px] xl:h-[580px] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />
                     <p className="text-[9px] text-slate-300 font-mono">Trống bậc</p>
                   </div>
@@ -752,10 +749,10 @@ export function TierList({
                             <motion.div
                               id="expanded-album-panel"
                               initial={{ width: 0, opacity: 0, scale: 0.95 }}
-                              animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 700 : 780, opacity: 1, scale: 1 }}
+                              animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 800 : 900, opacity: 1, scale: 1 }}
                               exit={{ width: 0, opacity: 0, scale: 0.95 }}
                               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                              className={`h-[240px] md:h-[320px] xl:h-[380px] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
+                              className={`h-[240px] md:h-[500px] xl:h-[580px] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
                               style={{ backgroundColor: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover & changer trigger & actions */}
