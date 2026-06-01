@@ -414,43 +414,62 @@ export function TierList({
     };
   }, []);
 
-  // Fetch albums covers gracefully
+  const coversRef = useRef(covers);
   useEffect(() => {
-    const loadCovers = async () => {
-      const newCovers: Record<string, string> = { ...covers };
-      let updated = false;
+    coversRef.current = covers;
+  }, [covers]);
 
-      for (const tier of tiers) {
-        for (const album of tier.albums) {
+  // Fetch albums covers gracefully and in parallel
+  useEffect(() => {
+    let active = true;
+
+    const loadCovers = async () => {
+      const albumsToFetch: Array<{ id: number; artist: string; title: string }> = [];
+      
+      tiers.forEach(tier => {
+        tier.albums.forEach(album => {
           const key = `${album.id}`;
           if (album.coverUrl) {
-            if (newCovers[key] !== album.coverUrl) {
-              newCovers[key] = album.coverUrl;
-              updated = true;
+            if (coversRef.current[key] !== album.coverUrl) {
+              setCovers(prev => ({ ...prev, [key]: album.coverUrl! }));
             }
-            continue;
+          } else if (!coversRef.current[key]) {
+            albumsToFetch.push({ id: album.id, artist: album.artist, title: album.title });
           }
+        });
+      });
 
-          if (!newCovers[key]) {
-            const url = await fetchAlbumCover(album.artist, album.title);
-            if (url) {
-              newCovers[key] = url;
-              updated = true;
-              if (onAutoSaveCover) {
-                onAutoSaveCover(album.id, url);
-              }
+      if (albumsToFetch.length === 0) return;
+
+      // Parallelized background fetching
+      albumsToFetch.forEach(async (album) => {
+        try {
+          const url = await fetchAlbumCover(album.artist, album.title);
+          if (url && active) {
+            setCovers(prev => {
+              if (prev[`${album.id}`] === url) return prev;
+              return {
+                ...prev,
+                [`${album.id}`]: url
+              };
+            });
+            if (onAutoSaveCover) {
+              onAutoSaveCover(album.id, url);
             }
           }
+        } catch (e) {
+          console.error("Failed to load cover in background for:", album.title, e);
         }
-      }
-      if (updated) {
-        setCovers(newCovers);
-      }
+      });
     };
 
     if (tiers.length > 0) {
       loadCovers();
     }
+
+    return () => {
+      active = false;
+    };
   }, [tiers]);
 
   const cleanTierName = (name: string) => {

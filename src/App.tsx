@@ -90,9 +90,38 @@ export default function App() {
     try {
       setLoadingCandidates(true);
       setCoverSuccessMsg("");
-      const res = await fetch(`/api/cover-candidates?q=${encodeURIComponent(coverSearchQuery.trim())}`);
-      const data = await res.json();
-      setCandidates(data.candidates || []);
+      let fetchedCandidates: any[] = [];
+      try {
+        const res = await fetch(`/api/cover-candidates?q=${encodeURIComponent(coverSearchQuery.trim())}`);
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          const data = await res.json();
+          fetchedCandidates = data.candidates || [];
+        } else {
+          throw new Error("Server cover-candidates API not available or did not return JSON");
+        }
+      } catch (serverErr) {
+        console.warn("Server API for candidates failed, falling back to direct client-side iTunes search:", serverErr);
+        const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(coverSearchQuery.trim())}&media=music&entity=album&limit=10`;
+        const response = await fetch(itunesUrl);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.results && data.results.length > 0) {
+            fetchedCandidates = data.results.map((item: any) => {
+              const artUrl = item.artworkUrl100;
+              const highRes = artUrl 
+                ? artUrl.replace(/100x100(bb)?\.jpg$/, "600x600bb.jpg").replace(/100x100/, "600x600")
+                : "";
+              return {
+                coverUrl: highRes,
+                title: item.collectionName || "",
+                artist: item.artistName || "",
+                source: "iTunes (Direct)"
+              };
+            }).filter((item: any) => !!item.coverUrl);
+          }
+        }
+      }
+      setCandidates(fetchedCandidates);
     } catch (e) {
       console.error("Error fetching cover candidates:", e);
     } finally {

@@ -17,23 +17,52 @@ function setCache(cache: Record<string, string>) {
 export async function fetchAlbumCover(artist: string, title: string): Promise<string | undefined> {
   const query = `${artist || ""} ${title || ""}`.toLowerCase().trim();
   const cache = getCache();
-  if (cache[query]) {
-    return cache[query];
+  
+  if (cache[query] !== undefined) {
+    return cache[query] === "FAILED" ? undefined : cache[query];
   }
 
+  // 1. Try backend server proxy /api/cover first
   try {
     const url = `/api/cover?q=${encodeURIComponent(query)}`;
     const res = await fetch(url);
-    const data = await res.json();
-    
-    if (data.coverUrl) {
-      cache[query] = data.coverUrl;
-      setCache(cache);
-      return data.coverUrl;
+    if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+      const data = await res.json();
+      if (data && data.coverUrl) {
+        cache[query] = data.coverUrl;
+        setCache(cache);
+        return data.coverUrl;
+      }
     }
   } catch (err) {
-    console.error("Failed to fetch album cover:", err);
+    console.warn("Server API /api/cover failed, trying client iTunes fallback:", err);
   }
+
+  // 2. Direct Client-side Fallback to CORS-enabled iTunes Search API
+  try {
+    const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=album&limit=1`;
+    const response = await fetch(itunesUrl);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.results && data.results.length > 0) {
+        const artworkUrl = data.results[0].artworkUrl100;
+        if (artworkUrl) {
+          const highResUrl = artworkUrl
+            .replace(/100x100(bb)?\.jpg$/, "600x600bb.jpg")
+            .replace(/100x100/, "600x600");
+          cache[query] = highResUrl;
+          setCache(cache);
+          return highResUrl;
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Direct client-side iTunes fallback failed:", err);
+  }
+
+  // Cache failure to avoid repeated requests in this session/render cycle
+  cache[query] = "FAILED";
+  setCache(cache);
   return undefined;
 }
 
