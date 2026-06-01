@@ -5,6 +5,7 @@ import { ChatSidebar } from "./components/ChatSidebar";
 import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Music, Activity, Disc, BarChart2, MessageSquare, Plus, X, Menu, Settings, Users, Laptop } from "lucide-react";
+import albumsData from "./albums.json";
 
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
@@ -158,6 +159,51 @@ export default function App() {
     }
   };
 
+  const applyAlbumsState = (data: Record<string, any>) => {
+    let allInitialAlbums = INITIAL_TIERS.flatMap(t => t.albums);
+    
+    const mergedAlbumsMap = new Map<number, Album>();
+    
+    allInitialAlbums.forEach(initial => {
+       mergedAlbumsMap.set(initial.id, {
+         ...initial,
+         ...(data[String(initial.id)] || {})
+       });
+    });
+    
+    Object.keys(data).forEach(key => {
+       const id = parseInt(key, 10);
+       if (!mergedAlbumsMap.has(id)) {
+          if (data[key].title && data[key].artist) {
+             mergedAlbumsMap.set(id, {
+               ...data[key],
+               id
+             });
+          }
+       }
+    });
+    
+    const albumList = Array.from(mergedAlbumsMap.values());
+    albumList.sort((a,b) => (a.rank || 100) - (b.rank || 100));
+
+    const updatedTiers = INITIAL_TIERS.map(tier => ({
+      ...tier,
+      albums: [] as Album[]
+    }));
+    
+    albumList.forEach(album => {
+      const rank = album.rank || 100;
+      if (rank <= 9) updatedTiers[0].albums.push(album);
+      else if (rank <= 24) updatedTiers[1].albums.push(album);
+      else if (rank <= 56) updatedTiers[2].albums.push(album);
+      else if (rank <= 89) updatedTiers[3].albums.push(album);
+      else updatedTiers[4].albums.push(album);
+    });
+
+    setTiers(updatedTiers);
+    setAlbumColors(data);
+  };
+
   const fetchAlbumsData = () => {
     fetch("/api/albums")
       .then(async res => {
@@ -171,59 +217,12 @@ export default function App() {
         return res.json();
       })
       .then((data: Record<string, any>) => {
-        let allInitialAlbums = INITIAL_TIERS.flatMap(t => t.albums);
-        
-        const mergedAlbumsMap = new Map<number, Album>();
-        
-        allInitialAlbums.forEach(initial => {
-           mergedAlbumsMap.set(initial.id, {
-             ...initial,
-             ...(data[String(initial.id)] || {})
-           });
-        });
-        
-        Object.keys(data).forEach(key => {
-           const id = parseInt(key, 10);
-           if (!mergedAlbumsMap.has(id)) {
-              if (data[key].title && data[key].artist) {
-                 mergedAlbumsMap.set(id, {
-                   ...data[key],
-                   id
-                 });
-              }
-           }
-        });
-        
-        const albumList = Array.from(mergedAlbumsMap.values());
-        albumList.sort((a,b) => (a.rank || 100) - (b.rank || 100));
-
-        const updatedTiers = INITIAL_TIERS.map(tier => ({
-          ...tier,
-          albums: [] as Album[]
-        }));
-
-        // Bậc 1: <= 9
-        // Bậc 2: <= 24
-        // Bậc 3: <= 56
-        // Bậc 4: <= 89
-        // Bậc 5: > 89
-        
-        albumList.forEach(album => {
-          const rank = album.rank || 100;
-          if (rank <= 9) updatedTiers[0].albums.push(album);
-          else if (rank <= 24) updatedTiers[1].albums.push(album);
-          else if (rank <= 56) updatedTiers[2].albums.push(album);
-          else if (rank <= 89) updatedTiers[3].albums.push(album);
-          else updatedTiers[4].albums.push(album);
-        });
-
-        setTiers(updatedTiers);
-        setAlbumColors(data);
+        applyAlbumsState(data);
         setLoading(false);
       })
       .catch(err => {
-        console.warn("Failed to fetch albums from server, falling back to static INITIAL_TIERS:", err);
-        setTiers(INITIAL_TIERS);
+        console.warn("Failed to fetch albums from server, falling back to static albums.json data:", err);
+        applyAlbumsState(albumsData);
         setLoading(false);
       });
   };
