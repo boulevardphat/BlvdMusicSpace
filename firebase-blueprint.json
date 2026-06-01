@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "Tier": {
+      "title": "Tier",
+      "description": "A rank tier in the album ranking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "albums": {
+          "type": "array"
+        },
+        "index": { "type": "integer" }
+      },
+      "required": ["id", "name", "description", "albums"]
+    },
+    "Chat": {
+      "title": "Chat",
+      "description": "A chat message",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "model", "client"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "content"]
+    }
+  },
+  "firestore": {
+    "tiers/{tierId}": {
+      "schema": "Tier",
+      "description": "A rank tier containing album objects"
+    },
+    "chats/{chatId}": {
+      "schema": "Chat",
+      "description": "A collection of user-model chat messages for assistant curator chat"
+    }
+  }
+}

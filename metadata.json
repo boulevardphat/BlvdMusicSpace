@@ -1,0 +1,8 @@
+{
+  "name": "Pop Curator Chatbot",
+  "description": "A glassmorphism-styled music curator chatbot displaying a real-time absolute ranking tier list.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
