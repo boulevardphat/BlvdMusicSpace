@@ -1,1034 +1,1159 @@
 {
-  "1": {
-    "rank": 1,
-    "hex": "#1a2530",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/gMnF9rP4/bjork-vespertine.png",
-    "id": 1,
-    "title": "Vespertine",
-    "artist": "Björk",
-    "profDesc": "Một kiệt tác dịu dàng và nội tâm, nơi Björk dệt nên giấc mơ điện tử vi tế từ những âm thanh micro-beat và dàn dây lộng lẫy để tôn vinh sự thiêng liêng của tình yêu."
-  },
-  "2": {
-    "rank": 2,
-    "note": "",
-    "hex": "#120521",
-    "coverUrl": "https://i.ibb.co/7JSWMgCQ/kylie-minogue-impossible-princess-deluxe-edition.webp",
-    "id": 2,
-    "title": "Impossible Princess (Deluxe Edition)",
-    "artist": "Kylie Minogue",
-    "profDesc": "Trải nghiệm nghệ thuật mang tính cá nhân và táo bạo nhất của Kylie, thử nghiệm thành công với trip-hop, electronica và indie-pop để phơi bày những lát cắt nội tâm sâu sắc nhất."
-  },
-  "3": {
-    "coverUrl": "https://i.ibb.co/kVMgMWqT/madonna-confessions-on-a-dance-floor.png",
-    "hex": "#4a1936",
-    "note": "",
-    "rank": 3,
-    "artist": "Madonna",
-    "title": "Confessions on a Dance Floor",
-    "id": 3,
-    "profDesc": "Một thánh đường disco-house liền mạch tuyệt vời, đỉnh cao sáng tạo của thế kỷ XXI nơi Madonna biến sàn khiêu vũ thành không gian cứu rỗi tâm hồn."
-  },
-  "4": {
-    "coverUrl": "https://i.ibb.co/C325GfvS/charli-xcx-brat.webp",
-    "hex": "#2e4513",
-    "note": "",
-    "rank": 4,
-    "artist": "Charli xcx",
-    "title": "BRAT",
-    "id": 4,
-    "profDesc": "Tuyên ngôn pop thô ráp, hỗn loạn và chân thật đến tột cùng của thế kỷ mới; di sản của Charli xcx trong việc giải cấu trúc hyperpop và định hình lại văn hóa đại chúng."
-  },
-  "5": {
-    "coverUrl": "https://i.ibb.co/67D4nQZ6/lana-del-rey-did-you-know-that-theres-a-tunnel-under-ocean-blvd.webp",
-    "hex": "#2b2a28",
-    "note": "",
-    "rank": 5,
-    "artist": "Lana Del Rey",
-    "title": "Did you know that there's a tunnel under Ocean Blvd",
-    "id": 5,
-    "profDesc": "Một thiên tiểu thuyết âm nhạc đậm chất tự truyện đầy chất thơ của Lana Del Rey, đào sâu vào lịch sử gia đình, ký ức cô quạnh và những khát khao hiện sinh trong trẻo."
-  },
-  "6": {
-    "id": 6,
-    "title": "Ray of Light",
-    "artist": "Madonna",
-    "rank": 6,
-    "note": "",
-    "hex": "#14314c",
-    "coverUrl": "https://i.ibb.co/QvLMqbxZ/madonna-ray-of-light.png",
-    "profDesc": "Bước chuyển mình vĩ đại đưa Madonna chạm tới đỉnh cao tâm linh thông qua sự kết hợp xuất thần của đạo Phật, Kabbalah, nhạc electronica u tối và ambient trip-hop."
-  },
-  "7": {
-    "rank": 7,
-    "note": "",
-    "hex": "#1a1a1a",
-    "coverUrl": "https://i.ibb.co/zWQC8b7F/lorde-pure-heroine.webp",
-    "id": 7,
-    "title": "Pure Heroine",
-    "artist": "Lorde",
-    "profDesc": "Tuyệt tác tối giản nắm bắt trọn vẹn sự thờ ơ, nỗi cô đơn u uất và khao khát khẳng định bản thân của tuổi vị thành niên, tái định hình cấu trúc âm nhạc pop hiện đại."
-  },
-  "8": {
-    "artist": "tlinh",
-    "title": "ái",
-    "id": 8,
-    "coverUrl": "https://i.ibb.co/4gTmj2by/tlinh-ai.png",
-    "note": "",
-    "hex": "#401c27",
-    "rank": 8,
-    "profDesc": "Một dấu mốc vàng son của R&B/Pop Việt Nam, nơi tlinh phô diễn tư duy giai điệu gợi cảm đầy nữ tính và góc nhìn trưởng thành mãnh liệt về bản chất của tình yêu."
-  },
-  "9": {
-    "coverUrl": "https://i.ibb.co/qLLk4Qw8/lana-del-rey-norman-fucking-rockwell.webp",
-    "rank": 9,
-    "hex": "#273040",
-    "note": "",
-    "artist": "Lana Del Rey",
-    "id": 9,
-    "title": "Norman Fucking Rockwell!",
-    "profDesc": "Đỉnh cao sự nghiệp chói lịu của Lana Del Rey, một bản cáo chung tuyệt đẹp dành cho giấc mơ Mỹ được bao bọc bởi những phím đàn piano cổ điển và những câu ca dao thời thượng."
-  },
-  "10": {
-    "id": 10,
-    "title": "GIỮA MỘT VẠN NGƯỜI",
-    "artist": "Phùng Khánh Linh",
-    "rank": 10,
-    "hex": "#253327",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/Dgj6jvVG/phung-khanh-linh-giua-mot-van-nguoi.png",
-    "profDesc": "Một kỳ quan City Pop Việt hóa chuẩn mực, khẳng định tài năng viết lách đỉnh cao và giọng ca biến ảo của Phùng Khánh Linh lồng lộng trong những nhịp đập lung linh rực rỡ."
-  },
-  "11": {
-    "hex": "#272a33",
-    "note": "",
-    "rank": 11,
-    "coverUrl": "https://i.ibb.co/JRLLX12L/madonna-erotica-pa-version.png",
-    "title": "Erotica (PA Version)",
-    "id": 11,
-    "artist": "Madonna",
-    "profDesc": "Tác phẩm mang tính cách mạng bộc trực nhất về tình dục và tính nữ, thách thức mọi tabu xã hội bằng những nhịp điệu đen tối, gai góc của jazz-house và trip-hop."
-  },
-  "12": {
-    "coverUrl": "https://i.ibb.co/zhHkF3Dt/kesha-gag-order.webp",
-    "rank": 12,
-    "hex": "#2b2b2b",
-    "note": "",
-    "artist": "Kesha",
-    "id": 12,
-    "title": "Gag Order",
-    "profDesc": "Sự thăng hoa tột bậc từ nỗi đau tăm tối; album art-pop giàu chiều sâu giúp Kesha rũ bỏ quá khứ để tìm lại tiếng nói chân thực thông qua những thanh âm acoustic mộc mạc."
-  },
-  "14": {
-    "artist": "FKA twigs",
-    "id": 14,
-    "title": "EUSEXUA",
-    "coverUrl": "https://i.ibb.co/bj4MBgC0/fka-twigs-eusexua.png",
-    "rank": 13,
-    "note": "",
-    "hex": "#302621",
-    "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn."
-  },
-  "15": {
-    "title": "EUSEXUA Afterglow",
-    "id": 15,
-    "artist": "FKA twigs",
-    "note": "",
-    "hex": "#2a1c22",
-    "rank": 14,
-    "coverUrl": "https://i.ibb.co/HLgNkRk0/fka-twigs-eusexua-afterglow.png",
-    "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn."
-  },
-  "16": {
-    "coverUrl": "https://i.ibb.co/gLgwPjcf/kylie-minogue-fever.png",
-    "rank": 15,
-    "note": "",
-    "hex": "#e0ebd3",
-    "artist": "Kylie Minogue",
-    "id": 16,
-    "title": "Fever",
-    "profDesc": "Đỉnh cao tinh hoa của Dance-Pop toàn cầu, một cỗ máy tạo hit không tì vết đầy sang trọng và quyến rũ vượt thời gian."
-  },
-  "17": {
-    "id": 17,
-    "title": "Light Years",
-    "artist": "Kylie Minogue",
-    "rank": 16,
-    "hex": "#182a4d",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/15gxDRp/kylie-minogue-light-years.png"
-  },
-  "18": {
-    "title": "Midnight Sun: Girls Trip",
-    "id": 18,
-    "artist": "Zara Larsson",
-    "hex": "#3a2a30",
-    "note": "",
-    "rank": 17,
-    "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png"
-  },
-  "19": {
-    "note": "",
-    "hex": "#362734",
-    "rank": 18,
-    "coverUrl": "https://i.ibb.co/B5prKHjB/miley-cyrus-something-beautiful.png",
-    "title": "Something Beautiful",
-    "id": 19,
-    "artist": "Miley Cyrus"
-  },
-  "20": {
-    "id": 20,
-    "title": "Virgin",
-    "artist": "Lorde",
-    "rank": 19,
-    "hex": "#282a32",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/sdmXtQfL/lorde-virgin.png"
-  },
-  "21": {
-    "coverUrl": "https://i.ibb.co/x9rfH1v/obito-danh-doi.png",
-    "rank": 20,
-    "hex": "#342217",
-    "note": "",
-    "artist": "Obito",
-    "id": 21,
-    "title": "Đánh Đổi",
-    "profDesc": "Tác phẩm Hip-hop tự sự gai góc và chân thực bậc nhất của âm nhạc Việt, kể lại hành trình trưởng thành ngột ngạt cùng những hy sinh trong cuộc chiến danh vọng."
-  },
-  "22": {
-    "note": "",
-    "hex": "#241935",
-    "rank": 21,
-    "coverUrl": "https://i.ibb.co/B5DPQpM4/wren-evans-loi-choi-the-neo-pop-punk.png",
-    "title": "LOI CHOI: The Neo Pop Punk",
-    "id": 22,
-    "artist": "Wren Evans",
-    "profDesc": "Cú hích ngông cuồng làm đảo lộn sân chơi Việt Pop, nơi Wren Evans tự do pha trộn disco, punk, R&B thành một dòng chảy năng lượng trẻ hóa rực lửa."
-  },
-  "23": {
-    "artist": "Addison Rae",
-    "title": "Addison",
-    "id": 23,
-    "coverUrl": "https://i.ibb.co/bjFFk2yM/addison-rae-addison.jpg",
-    "hex": "#182736",
-    "note": "",
-    "rank": 22
-  },
-  "24": {
-    "artist": "Björk",
-    "id": 24,
-    "title": "Vulnicura",
-    "coverUrl": "https://i.ibb.co/nM63hJC4/bjork-vulnicura.png",
-    "rank": 23,
-    "note": "",
-    "hex": "#2f3613"
-  },
-  "25": {
-    "coverUrl": "https://i.ibb.co/60sYzJ1B/pinkpantheress-fancy-that.png",
-    "rank": 25,
-    "hex": "#1a2c3a",
-    "note": "",
-    "artist": "PinkPantheress",
-    "id": 25,
-    "title": "Fancy That"
-  },
-  "26": {
-    "id": 26,
-    "title": "NỔ",
-    "artist": "Wren Evans",
-    "rank": 26,
-    "note": "",
-    "hex": "#401313",
-    "coverUrl": "https://i.ibb.co/ynPzd3Wx/wren-evans-no.png"
-  },
-  "27": {
-    "rank": 27,
-    "note": "",
-    "hex": "#402613",
-    "coverUrl": "https://i.ibb.co/YTyT0nh8/bjork-biophilia-deluxe-edition.png",
-    "id": 27,
-    "title": "Biophilia (Deluxe Edition)",
-    "artist": "Björk"
-  },
-  "28": {
-    "artist": "Björk",
-    "id": 28,
-    "title": "Volta",
-    "coverUrl": "https://i.ibb.co/k6HM7f8b/bjork-volta.png",
-    "rank": 28,
-    "hex": "#3d1326",
-    "note": ""
-  },
-  "29": {
-    "artist": "C418",
-    "title": "Minecraft - Volume Alpha",
-    "id": 29,
-    "coverUrl": "https://i.ibb.co/qFCXr1Tq/c418-minecraft-volume-alpha.png",
-    "note": "",
-    "hex": "#233321",
-    "rank": 29
-  },
-  "30": {
-    "hex": "#332121",
-    "note": "",
-    "rank": 30,
-    "coverUrl": "https://i.ibb.co/yc0n3NYK/c418-minecraft-volume-beta.jpg",
-    "title": "Minecraft - Volume Beta",
-    "id": 30,
-    "artist": "C418"
-  },
-  "31": {
-    "coverUrl": "https://i.ibb.co/ZRBS614R/tlinh-flvr.png",
-    "rank": 31,
-    "hex": "#181a33",
-    "note": "",
-    "artist": "tlinh",
-    "id": 31,
-    "title": "FLVR"
-  },
-  "32": {
-    "coverUrl": "https://i.ibb.co/5Xq3LNCb/bich-phuong-tam-trang-tan-hoi-cham-mot-chut.png",
-    "note": "",
-    "hex": "#3d2b33",
-    "rank": 32,
-    "artist": "Bích Phương",
-    "title": "tâm trạng tan hơi chậm một chút",
-    "id": 32
-  },
-  "33": {
-    "artist": "cupcakKe",
-    "title": "Dauntless Manifesto",
-    "id": 33,
-    "coverUrl": "https://i.ibb.co/QvmBqFks/cupcakke-dauntless-manifesto.png",
-    "note": "",
-    "hex": "#19363d",
-    "rank": 33
-  },
-  "34": {
-    "coverUrl": "https://i.ibb.co/mrFD3v2C/kylie-minogue-body-language.png",
-    "note": "",
-    "hex": "#2b3d36",
-    "rank": 34,
-    "artist": "Kylie Minogue",
-    "title": "Body Language",
-    "id": 34
-  },
-  "35": {
-    "id": 35,
-    "title": "Kylie Minogue (1994)",
-    "artist": "Kylie Minogue",
-    "rank": 94,
-    "hex": "#3b3d30",
-    "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
-    "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn."
-  },
-  "36": {
-    "coverUrl": "https://i.ibb.co/tpHyPtGz/billie-eilish-hit-me-hard-and-soft.png",
-    "rank": 35,
-    "hex": "#193b2a",
-    "note": "",
-    "artist": "Billie Eilish",
-    "id": 36,
-    "title": "HIT ME HARD AND SOFT",
-    "profDesc": "Sự phát triển vượt bậc của chị em nhà Eilish, bẻ gãy mọi quy chuẩn cấu trúc bài hát thông thường bằng sự đối nghịch hoàn hảo giữa lời thì thầm mộng mị và những nhịp bass bùng nổ."
-  },
-  "37": {
-    "artist": "Beyoncé",
-    "id": 37,
-    "title": "RENAISSANCE",
-    "coverUrl": "https://i.ibb.co/BHTRcXrW/beyonce-renaissance.png",
-    "rank": 36,
-    "note": "",
-    "hex": "#1a1a1a"
-  },
-  "38": {
-    "artist": "Madonna",
-    "id": 38,
-    "title": "Madame X (International Deluxe)",
-    "coverUrl": "https://i.ibb.co/tp5TDN99/madonna-madame-x-deluxe.png",
-    "rank": 37,
-    "note": "",
-    "hex": "#2a1f26"
-  },
-  "39": {
-    "coverUrl": "https://i.ibb.co/RpyvH3Lp/madonna-american-life.png",
-    "rank": 38,
-    "hex": "#11261d",
-    "note": "",
-    "artist": "Madonna",
-    "id": 39,
-    "title": "American Life"
-  },
-  "40": {
-    "artist": "Phương Mỹ Chi",
-    "title": "Vũ Trụ Cò Bay (School Tour 2024 Version)",
-    "id": 40,
-    "coverUrl": "https://i.ibb.co/BHvpbfGT/phuong-my-chi-vu-tru-co-bay-school-tour-2024-version.png",
-    "hex": "#1b332b",
-    "note": "",
-    "rank": 39
-  },
-  "41": {
-    "coverUrl": "https://i.ibb.co/QFXJyG7k/rose-gray-louder-please.png",
-    "note": "",
-    "hex": "#301d2c",
-    "rank": 40,
-    "artist": "Rose Gray",
-    "title": "Louder, Please",
-    "id": 41
-  },
-  "42": {
-    "note": "",
-    "hex": "#302613",
-    "rank": 41,
-    "coverUrl": "https://i.ibb.co/PGJvDBt9/lana-del-rey-born-to-die-paradise-edition-special-version.jpg",
-    "title": "Born To Die - The Paradise Edition",
-    "id": 42,
-    "artist": "Lana Del Rey"
-  },
-  "43": {
-    "artist": "Jessie Ware",
-    "id": 43,
-    "title": "What's Your Pleasure?",
-    "coverUrl": "https://i.ibb.co/JwSyMtgS/jessie-ware-whats-your-pleasure.webp",
-    "rank": 42,
-    "hex": "#2d1624",
-    "note": ""
-  },
-  "44": {
-    "coverUrl": "https://i.ibb.co/8gTbJhRY/madonna-bedtime-stories.png",
-    "hex": "#3d3639",
-    "note": "",
-    "rank": 43,
-    "artist": "Madonna",
-    "title": "Bedtime Stories",
-    "id": 44
-  },
-  "45": {
-    "artist": "Madonna",
-    "title": "Music",
-    "id": 45,
-    "coverUrl": "https://i.ibb.co/ZRTDJFnZ/madonna-music.png",
-    "hex": "#1f1d33",
-    "note": "",
-    "rank": 44
-  },
-  "46": {
-    "hex": "#102326",
-    "note": "",
-    "rank": 45,
-    "coverUrl": "https://i.ibb.co/4R0yFnH3/the-thien-tran-the.png",
-    "title": "Trần Thế",
-    "id": 46,
-    "artist": "Thể Thiên"
-  },
-  "47": {
-    "coverUrl": "https://i.ibb.co/qLrc0DmF/lana-del-rey-blue-banisters.webp",
-    "rank": 46,
-    "hex": "#23260c",
-    "note": "",
-    "artist": "Lana Del Rey",
-    "id": 47,
-    "title": "Blue Banisters"
-  },
-  "48": {
-    "artist": "Madonna",
-    "title": "Like a Prayer",
-    "id": 48,
-    "coverUrl": "https://i.ibb.co/pB2KF0rN/madonna-like-a-prayer.png",
-    "hex": "#331826",
-    "note": "",
-    "rank": 47
-  },
-  "49": {
-    "rank": 48,
-    "hex": "#111426",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/ym74cCbn/tate-mcrae-so-close-to-what.png",
-    "id": 49,
-    "title": "So Close To What",
-    "artist": "Tate McRae"
-  },
-  "50": {
-    "artist": "Lady Gaga",
-    "title": "The Fame Monster (Deluxe Edition)",
-    "id": 50,
-    "coverUrl": "https://i.ibb.co/4Rvd0xmM/lady-gaga-the-fame-monster-deluxe-edition.png",
-    "note": "",
-    "hex": "#262426",
-    "rank": 49
-  },
-  "51": {
-    "title": "evermore (deluxe version)",
-    "id": 51,
-    "artist": "Taylor Swift",
-    "note": "",
-    "hex": "#2e2e2e",
-    "rank": 50,
-    "coverUrl": "https://i.ibb.co/CpFJ6zZf/taylor-swift-evermore-deluxe-version.png"
-  },
-  "52": {
-    "coverUrl": "https://i.ibb.co/F4MdNNNR/bjork-homogenic.webp",
-    "note": "",
-    "hex": "#112e20",
-    "rank": 51,
-    "artist": "Björk",
-    "title": "Homogenic",
-    "id": 52
-  },
-  "53": {
-    "coverUrl": "https://i.ibb.co/0jHSHXj9/imogen-heap-speak-for-yourself.png",
-    "rank": 52,
-    "hex": "#2a222f",
-    "note": "",
-    "artist": "Imogen Heap",
-    "id": 53,
-    "title": "Speak for Yourself"
-  },
-  "54": {
-    "artist": "Ms. Lauryn Hill",
-    "id": 54,
-    "title": "The Miseducation of Lauryn Hill",
-    "coverUrl": "https://i.ibb.co/nMN0X2Ck/ms-lauryn-hill-the-miseducation-of-lauryn-hill.png",
-    "rank": 53,
-    "hex": "#212b1d",
-    "note": ""
-  },
-  "55": {
-    "artist": "Billie Eilish",
-    "id": 55,
-    "title": "Happier Than Ever",
-    "coverUrl": "https://i.ibb.co/VyZM7FC/billie-eilish-happier-than-ever.png",
-    "rank": 54,
-    "note": "",
-    "hex": "#372e29"
-  },
-  "56": {
-    "artist": "Nelly Furtado",
-    "id": 56,
-    "title": "Loose",
-    "coverUrl": "https://i.ibb.co/svz8TL5f/nelly-furtado-loose.png",
-    "rank": 55,
-    "hex": "#2b1a13",
-    "note": ""
-  },
-  "57": {
-    "artist": "Taylor Swift",
-    "id": 57,
-    "title": "1989 (Taylor's Version)",
-    "coverUrl": "https://i.ibb.co/7NS63yfh/taylor-swift-1989-taylors-version.png",
-    "rank": 57,
-    "hex": "#123c4a",
-    "note": ""
-  },
-  "58": {
-    "artist": "Billie Eilish",
-    "id": 58,
-    "title": "dont smile at me",
-    "coverUrl": "https://i.ibb.co/XZhcF1Xz/billie-eilish-dont-smile-at-me.png",
-    "rank": 58,
-    "note": "",
-    "hex": "#401010"
-  },
-  "59": {
-    "coverUrl": "https://i.ibb.co/ycpRbbXn/lady-gaga-mayhem.png",
-    "rank": 59,
-    "hex": "#2f1140",
-    "note": "",
-    "artist": "Lady Gaga",
-    "id": 59,
-    "title": "MAYHEM"
-  },
-  "60": {
-    "hex": "#131640",
-    "note": "",
-    "rank": 60,
-    "coverUrl": "https://i.ibb.co/yn0LxRkZ/lorde-melodrama.png",
-    "title": "Melodrama",
-    "id": 60,
-    "artist": "Lorde"
-  },
-  "61": {
-    "title": "The Rise and Fall of a Midwest Princess",
-    "id": 61,
-    "artist": "Chappell Roan",
-    "hex": "#40132f",
-    "note": "",
-    "rank": 61,
-    "coverUrl": "https://i.ibb.co/LXPCWz3G/chappell-roan-the-rise-and-fall-of-a-midwest-princess.png"
-  },
-  "62": {
-    "rank": 62,
-    "hex": "#36161c",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/nNv4h9R8/caroline-polachek-desire-i-want-to-turn-into-you-everasking-edition.png",
-    "id": 62,
-    "title": "Desire, I Want To Turn Into You: Everasking Edition",
-    "artist": "Caroline Polachek"
-  },
-  "63": {
-    "artist": "St. Vincent",
-    "id": 63,
-    "title": "MASSEDUCTION",
-    "coverUrl": "https://i.ibb.co/tp01422K/st-vincent-masseduction.png",
-    "rank": 63,
-    "hex": "#36112d",
-    "note": ""
-  },
-  "64": {
-    "artist": "Olivia Rodrigo",
-    "id": 64,
-    "title": "GUTS (spilled)",
-    "coverUrl": "https://i.ibb.co/4vCwSf2/olivia-rodrigo-guts-spilled.png",
-    "rank": 64,
-    "note": "",
-    "hex": "#241030"
-  },
-  "65": {
-    "id": 65,
-    "title": "SOUR",
-    "artist": "Olivia Rodrigo",
-    "rank": 65,
-    "hex": "#221338",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/gMYJ8LLZ/olivia-rodrigo-sour.png"
-  },
-  "66": {
-    "artist": "Orange",
-    "id": 66,
-    "title": "CAM'ON",
-    "coverUrl": "https://i.ibb.co/V0RhmbQt/orange-camon.png",
-    "rank": 66,
-    "hex": "#402010",
-    "note": ""
-  },
-  "70": {
-    "id": 70,
-    "title": "SOUND MUSEUM",
-    "artist": "TOWA TEI",
-    "rank": 67,
-    "hex": "#2b3b28",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/vvTmSjm4/towa-tei-sound-museum.png"
-  },
-  "71": {
-    "rank": 68,
-    "hex": "#3d192c",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/VWkPYQSg/cupcakke-cum-cake.png",
-    "id": 71,
-    "title": "Cum Cake",
-    "artist": "cupcakKe"
-  },
-  "72": {
-    "coverUrl": "https://i.ibb.co/DH4Npgfy/cupcakke-std.jpg",
-    "hex": "#183820",
-    "note": "",
-    "rank": 69,
-    "artist": "cupcakKe",
-    "title": "S.T.D",
-    "id": 72
-  },
-  "73": {
-    "note": "",
-    "hex": "#362016",
-    "rank": 70,
-    "coverUrl": "https://i.ibb.co/xK7vX0nk/cupcakke-the-bakkery.png",
-    "title": "The BakKery",
-    "id": 73,
-    "artist": "cupcakKe"
-  },
-  "74": {
-    "artist": "Cardi B",
-    "title": "AM I THE DRAMA?",
-    "id": 74,
-    "coverUrl": "https://i.ibb.co/S4z6WKfS/cardi-b-am-i-the-drama.png",
-    "note": "",
-    "hex": "#38192a",
-    "rank": 71
-  },
-  "75": {
-    "note": "",
-    "hex": "#202a36",
-    "rank": 72,
-    "coverUrl": "https://i.ibb.co/1YjsDFhn/low-g-l2k.png",
-    "title": "L2K",
-    "id": 75,
-    "artist": "Low G"
-  },
-  "76": {
-    "title": "PILLZCASSO",
-    "id": 76,
-    "artist": "2Pillz",
-    "hex": "#132b1d",
-    "note": "",
-    "rank": 73,
-    "coverUrl": "https://i.ibb.co/7N6P9YZf/2pillz-pillzcasso.png"
-  },
-  "77": {
-    "id": 77,
-    "title": "Breath From Another",
-    "artist": "Esthero",
-    "rank": 74,
-    "note": "",
-    "hex": "#32111f",
-    "coverUrl": "https://i.ibb.co/v6nBj9dJ/esthero-breath-from-another.png"
-  },
-  "78": {
-    "id": 78,
-    "title": "reputation",
-    "artist": "Taylor Swift",
-    "rank": 75,
-    "hex": "#1a1a1a",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/Nd7kJddb/taylor-swift-reputation.png"
-  },
-  "79": {
-    "id": 79,
-    "title": "IGOR",
-    "artist": "Tyler, The Creator",
-    "rank": 76,
-    "hex": "#3b222d",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/Ps5K3ppC/tyler-the-creator-igor.jpg"
-  },
-  "80": {
-    "artist": "The Weeknd",
-    "id": 80,
-    "title": "Starboy (Deluxe)",
-    "coverUrl": "https://i.ibb.co/vvfZ9J6C/the-weeknd-starboy-deluxe.png",
-    "rank": 77,
-    "hex": "#1a2133",
-    "note": ""
-  },
-  "81": {
-    "artist": "Charli xcx",
-    "title": "CRASH (Deluxe)",
-    "id": 81,
-    "coverUrl": "https://i.ibb.co/4RBBJRMQ/charli-xcx-crash-deluxe.jpg",
-    "note": "",
-    "hex": "#28171f",
-    "rank": 78
-  },
-  "82": {
-    "note": "",
-    "hex": "#2d2421",
-    "rank": 79,
-    "coverUrl": "https://i.ibb.co/HDm6wY9s/fka-twigs-magdalene.png",
-    "title": "MAGDALENE",
-    "id": 82,
-    "artist": "FKA twigs"
-  },
-  "83": {
-    "coverUrl": "https://i.ibb.co/QvqRhG2z/hoang-thuy-linh-link.png",
-    "rank": 80,
-    "hex": "#2e1d3d",
-    "note": "",
-    "artist": "Hoàng Thùy Linh",
-    "id": 83,
-    "title": "LINK"
-  },
-  "84": {
-    "artist": "Madonna",
-    "id": 84,
-    "title": "Rebel Heart (Deluxe)",
-    "coverUrl": "https://i.ibb.co/F21Bwrp/madonna-rebel-heart-deluxe.png",
-    "rank": 81,
-    "note": "",
-    "hex": "#2c1719"
-  },
-  "85": {
-    "hex": "#112638",
-    "note": "",
-    "rank": 82,
-    "coverUrl": "https://i.ibb.co/tpV0DB1X/camila-cabello-cxoxo.png",
-    "title": "C,XOXO",
-    "id": 85,
-    "artist": "Camila Cabello"
-  },
-  "86": {
-    "id": 86,
-    "title": "THAT'S SHOWBIZ BABY!",
-    "artist": "JADE",
-    "rank": 83,
-    "hex": "#262c3d",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/fYZrQ2q9/jade-thats-showbiz-baby.png"
-  },
-  "87": {
-    "rank": 84,
-    "hex": "#3b211f",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/67CHkmw4/adela-the-provocateur.png",
-    "id": 87,
-    "title": "The Provocateur",
-    "artist": "ADÉLA"
-  },
-  "88": {
-    "artist": "ROSALÍA",
-    "id": 88,
-    "title": "LUX (Complete Works)",
-    "coverUrl": "https://i.ibb.co/GvG32QDs/rosalia-lux-complete-works.png",
-    "rank": 85,
-    "hex": "#2e212f",
-    "note": ""
-  },
-  "89": {
-    "title": "West End Girl",
-    "id": 89,
-    "artist": "Lily Allen",
-    "hex": "#1c3b28",
-    "note": "",
-    "rank": 86,
-    "coverUrl": "https://i.ibb.co/fYKCLW01/lily-allen-west-end-girl.png"
-  },
-  "90": {
-    "coverUrl": "https://i.ibb.co/m5rqznM3/kylie-minogue-tension-ii.png",
-    "hex": "#2b1022",
-    "note": "",
-    "rank": 90,
-    "artist": "Kylie Minogue",
-    "title": "Tension II",
-    "id": 90
-  },
-  "91": {
-    "artist": "Kylie Minogue",
-    "title": "Aphrodite",
-    "id": 91,
-    "coverUrl": "https://i.ibb.co/60s6HYC9/kylie-minogue-aphrodite.png",
-    "hex": "#162842",
-    "note": "",
-    "rank": 25
-  },
-  "92": {
-    "coverUrl": "https://i.ibb.co/whY9tQgj/ariana-grande-dangerous-woman.jpg",
-    "rank": 57,
-    "hex": "#1f1f1f",
-    "note": "",
-    "artist": "Ariana Grande",
-    "id": 92,
-    "title": "Dangerous Woman"
-  },
-  "93": {
-    "id": 93,
-    "title": "eternal sunshine deluxe: brighter days ahead",
-    "artist": "Ariana Grande",
-    "rank": 91,
-    "hex": "#382329",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/4c6G5vz/ariana-grande-eternal-sunshine-deluxe-brighter-days-ahead.png"
-  },
-  "94": {
-    "coverUrl": "https://i.ibb.co/6RL0H3z7/charli-xcx-true-romance.png",
-    "note": "",
-    "hex": "#2b192c",
-    "rank": 92,
-    "artist": "Charli xcx",
-    "title": "True Romance",
-    "id": 94
-  },
-  "95": {
-    "artist": "Charli xcx",
-    "id": 95,
-    "title": "SUCKER",
-    "coverUrl": "https://i.ibb.co/5hGfpbjv/charli-xcx-sucker.png",
-    "rank": 93,
-    "note": "",
-    "hex": "#331627"
-  },
-  "96": {
-    "title": "Honeymoon",
-    "id": 96,
-    "artist": "Lana Del Rey",
-    "note": "",
-    "hex": "#382419",
-    "rank": 94,
-    "coverUrl": "https://i.ibb.co/C3G3kZkB/lana-del-rey-honeymoon.webp"
-  },
-  "97": {
-    "coverUrl": "https://i.ibb.co/1JzHvz72/lana-del-rey-chemtrails-over-the-country-club.webp",
-    "rank": 95,
-    "hex": "#1e2b26",
-    "note": "",
-    "artist": "Lana Del Rey",
-    "id": 97,
-    "title": "Chemtrails Over The Country Club"
-  },
-  "98": {
-    "id": 98,
-    "title": "folklore (deluxe version)",
-    "artist": "Taylor Swift",
-    "rank": 96,
-    "hex": "#1f221e",
-    "note": "",
-    "coverUrl": "https://i.ibb.co/jP5Y33rp/taylor-swift-folklore-deluxe-version.png"
-  },
-  "100": {
-    "rank": 97,
-    "note": "",
-    "hex": "#332230",
-    "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
-    "id": 100,
-    "title": "OIL OF EVERY PEARL'S UN-INSIDES NON-STOP REMIX ALBUM",
-    "artist": "SOPHIE",
-    "profDesc": "Một kỳ quan hyperpop cấp tiến mở đường cho tương lai, thách thức các khái niệm giới tính và căn sắc thông qua những kết cấu âm thanh tổng hợp siêu việt."
-  },
-  "101": {
-    "rank": 56,
-    "artist": "Kylie Minogue",
-    "title": "Kylie Minogue",
-    "id": 101,
-    "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
-    "profDesc": "A sophisticated transition into indie-pop and trip-hop elements, showcasing Kylie's artistic rebirth away from her bubblegum roots."
-  },
-  "102": {
-    "artist": "Robyn",
-    "title": "Honey",
-    "id": 102,
-    "rank": 24,
-    "coverUrl": "https://i.ibb.co/LXYdgFsh/robyn-honey.webp",
-    "profDesc": "A masterclass in warm, sensual club-pop that trades explosive anthems for a deeper, pulsating house music intimacy."
-  },
-  "103": {
-    "artist": "Hoàng Thùy Linh",
-    "title": "Hoàng",
-    "id": 103,
-    "rank": 26,
-    "coverUrl": "https://i.ibb.co/tpP4cjhP/hoang-thuy-linh-hoang.png",
-    "profDesc": "The definitive modern V-Pop blueprint that seamlessly bridges Northern Vietnamese folklore with hyper-infectious synth-pop and future bass production."
-  },
-  "104": {
-    "artist": "Aphex Twin",
-    "title": "Selected Ambient Works 85-92",
-    "id": 104,
-    "rank": 58,
-    "coverUrl": "https://i.ibb.co/Z6j7WM98/aphex-twin-selected-ambient-works-85-92.png",
-    "profDesc": "The foundational scripture of ambient techno and IDM, crafting lush, timeless electronic soundscapes from the bedroom of a genius."
-  },
-  "105": {
-    "rank": 59,
-    "id": 105,
-    "title": "Lemonade",
-    "artist": "Beyoncé",
-    "coverUrl": "https://i.ibb.co/gMxydvDg/beyonce-lemonade.png",
-    "profDesc": "A monolithic cultural statement that masterfully blends blues, rock, hip-hop, and avant-pop into an intense narrative of betrayal and black womanhood."
-  },
-  "106": {
-    "artist": "Thắng",
-    "title": "Cái Đầu Tiên",
-    "id": 106,
-    "rank": 60,
-    "coverUrl": "https://i.ibb.co/WWVrfSB5/thang-cai-dau-tien.png",
-    "profDesc": "A whimsical, beautifully unpredictable solo debut that captures the romantic, slightly cynical essence of Vietnamese indie-pop-rock royalty."
-  },
-  "107": {
-    "rank": 61,
-    "title": "ả",
-    "id": 107,
-    "artist": "marzuz",
-    "coverUrl": "https://i.ibb.co/4nCRP3yL/marzuz-a.png",
-    "profDesc": "An ethereal, dark R&B/Alternative odyssey showcasing marzuz's ghostly vocals draped in Onionn's pristine, minimal electronic textures."
-  },
-  "108": {
-    "artist": "Charli xcx",
-    "title": "how i'm feeling now",
-    "id": 108,
-    "rank": 87,
-    "coverUrl": "https://i.ibb.co/hxYyXKPg/charli-xcx-how-im-feeling-now.png",
-    "profDesc": "A raw, claustrophobic masterpiece of pandemic-era DIY hyperpop that transforms isolation and anxiety into abrasive, beautiful club bangers."
-  },
-  "109": {
-    "artist": "Shawn Mendes",
-    "title": "Handwritten",
-    "id": 109,
-    "rank": 98,
-    "coverUrl": "https://i.ibb.co/KcG5Zssn/shawn-mendes-handwritten-deluxe.png",
-    "profDesc": "Plain, predictable acoustic teenage pop that offers little to no artistic risk or structural interest."
-  },
-  "110": {
-    "rank": 99,
-    "artist": "Shawn Mendes",
-    "id": 110,
-    "title": "Illuminate",
-    "coverUrl": "https://i.ibb.co/rKdLyLDM/shawn-mendes-illuminate-deluxe.png",
-    "profDesc": "Standard radio-friendly guitar pop that is entirely harmless but ultimately devoid of sonic edge."
-  },
-  "111": {
-    "rank": 100,
-    "id": 111,
-    "title": "Shawn Mendes",
-    "artist": "Shawn Mendes",
-    "coverUrl": "https://i.ibb.co/jPNW61PV/shawn-mendes-shawn-mendes-deluxe.webp",
-    "profDesc": "Slightly more mature but still firmly locked within the boundaries of safe, mass-marketed singer-songwriter formulas."
-  },
-  "112": {
-    "title": "Cry Baby",
-    "id": 112,
-    "artist": "Melanie Martinez",
-    "rank": 101,
-    "coverUrl": "https://i.ibb.co/bgSCg14N/melanie-martinez-cry-baby-deluxe-edition.png",
-    "profDesc": "An over-stylized, highly literal nursery-rhyme goth-pop concept that feels more exhausting than genuinely subversive."
-  },
-  "113": {
-    "id": 113,
-    "title": "K-12",
-    "artist": "Melanie Martinez",
-    "rank": 102,
-    "coverUrl": "https://i.ibb.co/bgL9HRVw/melanie-martinez-k-12-after-school-deluxe-edition.png",
-    "profDesc": "A bloated cinematic pop project that repeats the same metaphorical tropes without offering any real sonic evolution."
-  },
-  "114": {
-    "id": 114,
-    "title": "Midnight Sun: Girls Trip",
-    "artist": "Zara Larsson",
-    "rank": 19,
-    "hex": "#2a3d4f",
-    "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png",
-    "profDesc": "Bản phối khí giòn giã tràn ngập tiếng Bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn."
-  },
-  "115": {
-    "id": 115,
-    "title": "Brat and it's completely different but also still brat",
-    "artist": "Charli xcx",
-    "rank": 5,
-    "hex": "#424d21",
-    "coverUrl": "https://i.ibb.co/WWq80vNd/charli-xcx-brat-and-its-completely-different-but-also-still-brat.png",
-    "profDesc": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ."
-  },
-  "116": {
-    "id": 116,
-    "title": "OIL OF EVERY PEARL'S UN-INSIDES Non-Stop Remix Album",
-    "artist": "SOPHIE",
-    "rank": 100,
-    "hex": "#251221",
-    "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
-    "profDesc": "Một làn sóng Remix vũ bão giã liên tục không ngừng nghỉ dồn dập quấn chặt lấy giác quan trong một lễ hội âm thanh hoang lạc kỳ lạ."
-  },
-  "117": {
-    "id": 117,
-    "title": "Tension II",
-    "artist": "Kylie Minogue",
-    "rank": 90,
-    "hex": "#2b1022",
-    "coverUrl": "https://i.ibb.co/m5rqznM3/kylie-minogue-tension-ii.png",
-    "profDesc": "Hành trình thám hiểm sâu hơn vào bóng đêm sàn nhảy với những nốt Techno dồn dập say mê nghẹt thở."
-  },
-  "118": {
-    "id": 118,
-    "title": "The Fame",
-    "artist": "Lady Gaga",
-    "rank": 51,
-    "hex": "#262b3a",
-    "coverUrl": "https://i.ibb.co/23WWfqtm/lady-gaga-the-fame.png",
-    "profDesc": "Cỗ máy Electro-Pop chói lòa kiêu hãnh phô trương cơn thèm khát danh vọng, bước đệm vĩ đại biến Stefani Germanotta thành một huyền thoại sống."
-  },
-  "214": {
-    "id": 214,
-    "artist": "Ninajirachi",
-    "title": "I Love My Computer",
-    "note": "",
-    "rank": 11,
-    "coverUrl": "https://i.ibb.co/HD90FJ2V/ninajirachi-i-love-my-computer.png",
-    "hex": "#222222"
-  }
+  "tiers": [
+    {
+      "id": "t1",
+      "name": "BẬC 1",
+      "description": "Vùng cấm địa. Những album định hình bản sắc và tâm hồn.",
+      "albums": [
+        {
+          "id": 1,
+          "artist": "Björk",
+          "title": "Vespertine",
+          "coverUrl": "https://i.ibb.co/gMnF9rP4/bjork-vespertine.png",
+          "hex": "#1a2530",
+          "rank": 1,
+          "profDesc": "Một kiệt tác dịu dàng và nội tâm, nơi Björk dệt nên giấc mơ điện tử vi tế từ những âm thanh micro-beat và dàn dây lộng lẫy để tôn vinh sự thiêng liêng của tình yêu.",
+          "persDesc": ""
+        },
+        {
+          "id": 2,
+          "artist": "Kylie Minogue",
+          "title": "Impossible Princess (Deluxe Edition)",
+          "coverUrl": "https://i.ibb.co/7JSWMgCQ/kylie-minogue-impossible-princess-deluxe-edition.webp",
+          "hex": "#120521",
+          "rank": 2,
+          "profDesc": "Trải nghiệm nghệ thuật mang tính cá nhân và táo bạo nhất của Kylie, thử nghiệm thành công với trip-hop, electronica và indie-pop để phơi bày những lát cắt nội tâm sâu sắc nhất.",
+          "persDesc": ""
+        },
+        {
+          "id": 3,
+          "artist": "Madonna",
+          "title": "Confessions on a Dance Floor",
+          "coverUrl": "https://i.ibb.co/kVMgMWqT/madonna-confessions-on-a-dance-floor.png",
+          "hex": "#4a1936",
+          "rank": 3,
+          "profDesc": "Một thánh đường disco-house liền mạch tuyệt vời, đỉnh cao sáng tạo của thế kỷ XXI nơi Madonna biến sàn khiêu vũ thành không gian cứu rỗi tâm hồn.",
+          "persDesc": ""
+        },
+        {
+          "id": 4,
+          "artist": "Charli xcx",
+          "title": "BRAT",
+          "coverUrl": "https://i.ibb.co/C325GfvS/charli-xcx-brat.webp",
+          "hex": "#2e4513",
+          "rank": 4,
+          "profDesc": "Tuyên ngôn pop thô ráp, hỗn loạn và chân thật đến tột cùng của thế kỷ mới; di sản của Charli xcx trong việc giải cấu trúc hyperpop và định hình lại văn hóa đại chúng.",
+          "persDesc": ""
+        },
+        {
+          "id": 5,
+          "artist": "Lana Del Rey",
+          "title": "Did you know that there's a tunnel under Ocean Blvd",
+          "coverUrl": "https://i.ibb.co/67D4nQZ6/lana-del-rey-did-you-know-that-theres-a-tunnel-under-ocean-blvd.webp",
+          "hex": "#2b2a28",
+          "rank": 5,
+          "profDesc": "Một thiên tiểu thuyết âm nhạc đậm chất tự truyện đầy chất thơ của Lana Del Rey, đào sâu vào lịch sử gia đình, ký ức cô quạnh và những khát khao hiện sinh trong trẻo.",
+          "persDesc": ""
+        },
+        {
+          "id": 6,
+          "artist": "Madonna",
+          "title": "Ray of Light",
+          "coverUrl": "https://i.ibb.co/QvLMqbxZ/madonna-ray-of-light.png",
+          "hex": "#14314c",
+          "rank": 6,
+          "profDesc": "Bước chuyển mình vĩ đại đưa Madonna chạm tới đỉnh cao tâm linh thông qua sự kết hợp xuất thần của đạo Phật, Kabbalah, nhạc electronica u tối và ambient trip-hop.",
+          "persDesc": ""
+        },
+        {
+          "id": 7,
+          "artist": "Lorde",
+          "title": "Pure Heroine",
+          "coverUrl": "https://i.ibb.co/zWQC8b7F/lorde-pure-heroine.webp",
+          "hex": "#1a1a1a",
+          "rank": 7,
+          "profDesc": "Tuyệt tác tối giản nắm bắt trọn vẹn sự thờ ơ, nỗi cô đơn u uất và khao khát khẳng định bản thân của tuổi vị thành niên, tái định hình cấu trúc âm nhạc pop hiện đại.",
+          "persDesc": ""
+        },
+        {
+          "id": 8,
+          "artist": "tlinh",
+          "title": "ái",
+          "coverUrl": "https://i.ibb.co/4gTmj2by/tlinh-ai.png",
+          "hex": "#401c27",
+          "rank": 8,
+          "profDesc": "Một dấu mốc vàng son của R&B/Pop Việt Nam, nơi tlinh phô diễn tư duy giai điệu gợi cảm đầy nữ tính và góc nhìn trưởng thành mãnh liệt về bản chất của tình yêu.",
+          "persDesc": ""
+        },
+        {
+          "id": 9,
+          "artist": "Lana Del Rey",
+          "title": "Norman Fucking Rockwell!",
+          "coverUrl": "https://i.ibb.co/qLLk4Qw8/lana-del-rey-norman-fucking-rockwell.webp",
+          "hex": "#273040",
+          "rank": 9,
+          "profDesc": "Đỉnh cao sự nghiệp chói lịu của Lana Del Rey, một bản cáo chung tuyệt đẹp dành cho giấc mơ Mỹ được bao bọc bởi những phím đàn piano cổ điển và những câu ca dao thời thượng.",
+          "persDesc": ""
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "name": "BẬC 2",
+      "description": "Nơi hội tụ của cảm xúc cực đoan, khái niệm đỉnh cao và sự táo bạo.",
+      "albums": [
+        {
+          "id": 24,
+          "artist": "Björk",
+          "title": "Vulnicura",
+          "coverUrl": "https://i.ibb.co/nM63hJC4/bjork-vulnicura.png",
+          "hex": "#2f3613",
+          "rank": 23,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 214,
+          "artist": "Ninajirachi",
+          "title": "I Love My Computer",
+          "coverUrl": "https://i.ibb.co/HD90FJ2V/ninajirachi-i-love-my-computer.png",
+          "hex": "#222222",
+          "rank": 11,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 10,
+          "artist": "Phùng Khánh Linh",
+          "title": "GIỮA MỘT VẠN NGƯỜI",
+          "coverUrl": "https://i.ibb.co/Dgj6jvVG/phung-khanh-linh-giua-mot-van-nguoi.png",
+          "hex": "#253327",
+          "rank": 10,
+          "profDesc": "Một kỳ quan City Pop Việt hóa chuẩn mực, khẳng định tài năng viết lách đỉnh cao và giọng ca biến ảo của Phùng Khánh Linh lồng lộng trong những nhịp đập lung linh rực rỡ.",
+          "persDesc": ""
+        },
+        {
+          "id": 11,
+          "artist": "Madonna",
+          "title": "Erotica (PA Version)",
+          "coverUrl": "https://i.ibb.co/JRLLX12L/madonna-erotica-pa-version.png",
+          "hex": "#272a33",
+          "rank": 11,
+          "profDesc": "Tác phẩm mang tính cách mạng bộc trực nhất về tình dục và tính nữ, thách thức mọi tabu xã hội bằng những nhịp điệu đen tối, gai góc của jazz-house và trip-hop.",
+          "persDesc": ""
+        },
+        {
+          "id": 12,
+          "artist": "Kesha",
+          "title": "Gag Order",
+          "coverUrl": "https://i.ibb.co/zhHkF3Dt/kesha-gag-order.webp",
+          "hex": "#2b2b2b",
+          "rank": 12,
+          "profDesc": "Sự thăng hoa tột bậc từ nỗi đau tăm tối; album art-pop giàu chiều sâu giúp Kesha rũ bỏ quá khứ để tìm lại tiếng nói chân thực thông qua những thanh âm acoustic mộc mạc.",
+          "persDesc": ""
+        },
+        {
+          "id": 14,
+          "artist": "FKA twigs",
+          "title": "EUSEXUA",
+          "coverUrl": "https://i.ibb.co/bj4MBgC0/fka-twigs-eusexua.png",
+          "hex": "#302621",
+          "rank": 13,
+          "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn.",
+          "persDesc": ""
+        },
+        {
+          "id": 15,
+          "artist": "FKA twigs",
+          "title": "EUSEXUA Afterglow",
+          "coverUrl": "https://i.ibb.co/HLgNkRk0/fka-twigs-eusexua-afterglow.png",
+          "hex": "#2a1c22",
+          "rank": 14,
+          "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn.",
+          "persDesc": ""
+        },
+        {
+          "id": 16,
+          "artist": "Kylie Minogue",
+          "title": "Fever",
+          "coverUrl": "https://i.ibb.co/gLgwPjcf/kylie-minogue-fever.png",
+          "hex": "#e0ebd3",
+          "rank": 15,
+          "profDesc": "Đỉnh cao tinh hoa của Dance-Pop toàn cầu, một cỗ máy tạo hit không tì vết đầy sang trọng và quyến rũ vượt thời gian.",
+          "persDesc": ""
+        },
+        {
+          "id": 17,
+          "artist": "Kylie Minogue",
+          "title": "Light Years",
+          "coverUrl": "https://i.ibb.co/15gxDRp/kylie-minogue-light-years.png",
+          "hex": "#182a4d",
+          "rank": 16,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 18,
+          "artist": "Zara Larsson",
+          "title": "Midnight Sun: Girls Trip",
+          "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png",
+          "hex": "#3a2a30",
+          "rank": 17,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 19,
+          "artist": "Miley Cyrus",
+          "title": "Something Beautiful",
+          "coverUrl": "https://i.ibb.co/B5prKHjB/miley-cyrus-something-beautiful.png",
+          "hex": "#362734",
+          "rank": 18,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 20,
+          "artist": "Lorde",
+          "title": "Virgin",
+          "coverUrl": "https://i.ibb.co/sdmXtQfL/lorde-virgin.png",
+          "hex": "#282a32",
+          "rank": 19,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 21,
+          "artist": "Obito",
+          "title": "Đánh Đổi",
+          "coverUrl": "https://i.ibb.co/x9rfH1v/obito-danh-doi.png",
+          "hex": "#342217",
+          "rank": 20,
+          "profDesc": "Tác phẩm Hip-hop tự sự gai góc và chân thực bậc nhất của âm nhạc Việt, kể lại hành trình trưởng thành ngột ngạt cùng những hy sinh trong cuộc chiến danh vọng.",
+          "persDesc": ""
+        },
+        {
+          "id": 22,
+          "artist": "Wren Evans",
+          "title": "LOI CHOI: The Neo Pop Punk",
+          "coverUrl": "https://i.ibb.co/B5DPQpM4/wren-evans-loi-choi-the-neo-pop-punk.png",
+          "hex": "#241935",
+          "rank": 21,
+          "profDesc": "Cú hích ngông cuồng làm đảo lộn sân chơi Việt Pop, nơi Wren Evans tự do pha trộn disco, punk, R&B thành một dòng chảy năng lượng trẻ hóa rực lửa.",
+          "persDesc": ""
+        },
+        {
+          "id": 23,
+          "artist": "Addison Rae",
+          "title": "Addison",
+          "coverUrl": "https://i.ibb.co/bjFFk2yM/addison-rae-addison.jpg",
+          "hex": "#182736",
+          "rank": 22,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 25,
+          "artist": "PinkPantheress",
+          "title": "Fancy That",
+          "coverUrl": "https://i.ibb.co/60sYzJ1B/pinkpantheress-fancy-that.png",
+          "hex": "#1a2c3a",
+          "rank": 25,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 88,
+          "artist": "ROSALÍA",
+          "title": "LUX (Complete Works)",
+          "coverUrl": "https://i.ibb.co/GvG32QDs/rosalia-lux-complete-works.png",
+          "hex": "#2e212f",
+          "rank": 85,
+          "profDesc": "",
+          "persDesc": ""
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "name": "BẬC 3",
+      "description": "Sự cân bằng giữa nhịp điệu, Pop năng lượng và Nghệ thuật.",
+      "albums": [
+        {
+          "id": 89,
+          "artist": "Lily Allen",
+          "title": "West End Girl",
+          "coverUrl": "https://i.ibb.co/fYKCLW01/lily-allen-west-end-girl.png",
+          "hex": "#1c3b28",
+          "rank": 86,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 26,
+          "artist": "Wren Evans",
+          "title": "NỔ",
+          "coverUrl": "https://i.ibb.co/ynPzd3Wx/wren-evans-no.png",
+          "hex": "#401313",
+          "rank": 26,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 27,
+          "artist": "Björk",
+          "title": "Biophilia (Deluxe Edition)",
+          "coverUrl": "https://i.ibb.co/YTyT0nh8/bjork-biophilia-deluxe-edition.png",
+          "hex": "#402613",
+          "rank": 27,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 28,
+          "artist": "Björk",
+          "title": "Volta",
+          "coverUrl": "https://i.ibb.co/k6HM7f8b/bjork-volta.png",
+          "hex": "#3d1326",
+          "rank": 28,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 29,
+          "artist": "C418",
+          "title": "Minecraft - Volume Alpha",
+          "coverUrl": "https://i.ibb.co/qFCXr1Tq/c418-minecraft-volume-alpha.png",
+          "hex": "#233321",
+          "rank": 29,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 30,
+          "artist": "C418",
+          "title": "Minecraft - Volume Beta",
+          "coverUrl": "https://i.ibb.co/yc0n3NYK/c418-minecraft-volume-beta.jpg",
+          "hex": "#332121",
+          "rank": 30,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 31,
+          "artist": "tlinh",
+          "title": "FLVR",
+          "coverUrl": "https://i.ibb.co/ZRBS614R/tlinh-flvr.png",
+          "hex": "#181a33",
+          "rank": 31,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 32,
+          "artist": "Bích Phương",
+          "title": "tâm trạng tan hơi chậm một chút",
+          "coverUrl": "https://i.ibb.co/5Xq3LNCb/bich-phuong-tam-trang-tan-hoi-cham-mot-chut.png",
+          "hex": "#3d2b33",
+          "rank": 32,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 33,
+          "artist": "cupcakKe",
+          "title": "Dauntless Manifesto",
+          "coverUrl": "https://i.ibb.co/QvmBqFks/cupcakke-dauntless-manifesto.png",
+          "hex": "#19363d",
+          "rank": 33,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 34,
+          "artist": "Kylie Minogue",
+          "title": "Body Language",
+          "coverUrl": "https://i.ibb.co/mrFD3v2C/kylie-minogue-body-language.png",
+          "hex": "#2b3d36",
+          "rank": 34,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 35,
+          "artist": "Kylie Minogue",
+          "title": "Kylie Minogue (1994)",
+          "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
+          "hex": "#3b3d30",
+          "rank": 94,
+          "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn.",
+          "persDesc": ""
+        },
+        {
+          "id": 36,
+          "artist": "Billie Eilish",
+          "title": "HIT ME HARD AND SOFT",
+          "coverUrl": "https://i.ibb.co/tpHyPtGz/billie-eilish-hit-me-hard-and-soft.png",
+          "hex": "#193b2a",
+          "rank": 35,
+          "profDesc": "Sự phát triển vượt bậc của chị em nhà Eilish, bẻ gãy mọi quy chuẩn cấu trúc bài hát thông thường bằng sự đối nghịch hoàn hảo giữa lời thì thầm mộng mị và những nhịp bass bùng nổ.",
+          "persDesc": ""
+        },
+        {
+          "id": 37,
+          "artist": "Beyoncé",
+          "title": "RENAISSANCE",
+          "coverUrl": "https://i.ibb.co/BHTRcXrW/beyonce-renaissance.png",
+          "hex": "#1a1a1a",
+          "rank": 36,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 38,
+          "artist": "Madonna",
+          "title": "Madame X (International Deluxe)",
+          "coverUrl": "https://i.ibb.co/tp5TDN99/madonna-madame-x-deluxe.png",
+          "hex": "#2a1f26",
+          "rank": 37,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 39,
+          "artist": "Madonna",
+          "title": "American Life",
+          "coverUrl": "https://i.ibb.co/RpyvH3Lp/madonna-american-life.png",
+          "hex": "#11261d",
+          "rank": 38,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 40,
+          "artist": "Phương Mỹ Chi",
+          "title": "Vũ Trụ Cò Bay (School Tour 2024 Version)",
+          "coverUrl": "https://i.ibb.co/BHvpbfGT/phuong-my-chi-vu-tru-co-bay-school-tour-2024-version.png",
+          "hex": "#1b332b",
+          "rank": 39,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 41,
+          "artist": "Rose Gray",
+          "title": "Louder, Please",
+          "coverUrl": "https://i.ibb.co/QFXJyG7k/rose-gray-louder-please.png",
+          "hex": "#301d2c",
+          "rank": 40,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 42,
+          "artist": "Lana Del Rey",
+          "title": "Born To Die - The Paradise Edition",
+          "coverUrl": "https://i.ibb.co/PGJvDBt9/lana-del-rey-born-to-die-paradise-edition-special-version.jpg",
+          "hex": "#302613",
+          "rank": 41,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 43,
+          "artist": "Jessie Ware",
+          "title": "What's Your Pleasure?",
+          "coverUrl": "https://i.ibb.co/JwSyMtgS/jessie-ware-whats-your-pleasure.webp",
+          "hex": "#2d1624",
+          "rank": 42,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 44,
+          "artist": "Madonna",
+          "title": "Bedtime Stories",
+          "coverUrl": "https://i.ibb.co/8gTbJhRY/madonna-bedtime-stories.png",
+          "hex": "#3d3639",
+          "rank": 43,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 45,
+          "artist": "Madonna",
+          "title": "Music",
+          "coverUrl": "https://i.ibb.co/ZRTDJFnZ/madonna-music.png",
+          "hex": "#1f1d33",
+          "rank": 44,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 46,
+          "artist": "Thể Thiên",
+          "title": "Trần Thế",
+          "coverUrl": "https://i.ibb.co/4R0yFnH3/the-thien-tran-the.png",
+          "hex": "#102326",
+          "rank": 45,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 47,
+          "artist": "Lana Del Rey",
+          "title": "Blue Banisters",
+          "coverUrl": "https://i.ibb.co/qLrc0DmF/lana-del-rey-blue-banisters.webp",
+          "hex": "#23260c",
+          "rank": 46,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 48,
+          "artist": "Madonna",
+          "title": "Like a Prayer",
+          "coverUrl": "https://i.ibb.co/pB2KF0rN/madonna-like-a-prayer.png",
+          "hex": "#331826",
+          "rank": 47,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 49,
+          "artist": "Tate McRae",
+          "title": "So Close To What",
+          "coverUrl": "https://i.ibb.co/ym74cCbn/tate-mcrae-so-close-to-what.png",
+          "hex": "#111426",
+          "rank": 48,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 50,
+          "artist": "Lady Gaga",
+          "title": "The Fame Monster (Deluxe Edition)",
+          "coverUrl": "https://i.ibb.co/4Rvd0xmM/lady-gaga-the-fame-monster-deluxe-edition.png",
+          "hex": "#262426",
+          "rank": 49,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 51,
+          "artist": "Taylor Swift",
+          "title": "evermore (deluxe version)",
+          "coverUrl": "https://i.ibb.co/CpFJ6zZf/taylor-swift-evermore-deluxe-version.png",
+          "hex": "#2e2e2e",
+          "rank": 50,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 52,
+          "artist": "Björk",
+          "title": "Homogenic",
+          "coverUrl": "https://i.ibb.co/F4MdNNNR/bjork-homogenic.webp",
+          "hex": "#112e20",
+          "rank": 51,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 53,
+          "artist": "Imogen Heap",
+          "title": "Speak for Yourself",
+          "coverUrl": "https://i.ibb.co/0jHSHXj9/imogen-heap-speak-for-yourself.png",
+          "hex": "#2a222f",
+          "rank": 52,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 54,
+          "artist": "Ms. Lauryn Hill",
+          "title": "The Miseducation of Lauryn Hill",
+          "coverUrl": "https://i.ibb.co/nMN0X2Ck/ms-lauryn-hill-the-miseducation-of-lauryn-hill.png",
+          "hex": "#212b1d",
+          "rank": 53,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 55,
+          "artist": "Billie Eilish",
+          "title": "Happier Than Ever",
+          "coverUrl": "https://i.ibb.co/VyZM7FC/billie-eilish-happier-than-ever.png",
+          "hex": "#372e29",
+          "rank": 54,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 56,
+          "artist": "Nelly Furtado",
+          "title": "Loose",
+          "coverUrl": "https://i.ibb.co/svz8TL5f/nelly-furtado-loose.png",
+          "hex": "#2b1a13",
+          "rank": 55,
+          "profDesc": "",
+          "persDesc": ""
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "name": "BẬC 4",
+      "description": "Những lựa chọn chất lượng đại diện cho cá tính và các bản Pop Hits.",
+      "albums": [
+        {
+          "id": 86,
+          "artist": "JADE",
+          "title": "THAT'S SHOWBIZ BABY!",
+          "coverUrl": "https://i.ibb.co/fYZrQ2q9/jade-thats-showbiz-baby.png",
+          "hex": "#262c3d",
+          "rank": 83,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 87,
+          "artist": "ADÉLA",
+          "title": "The Provocateur",
+          "coverUrl": "https://i.ibb.co/67CHkmw4/adela-the-provocateur.png",
+          "hex": "#3b211f",
+          "rank": 84,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 57,
+          "artist": "Taylor Swift",
+          "title": "1989 (Taylor's Version)",
+          "coverUrl": "https://i.ibb.co/7NS63yfh/taylor-swift-1989-taylors-version.png",
+          "hex": "#123c4a",
+          "rank": 57,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 58,
+          "artist": "Billie Eilish",
+          "title": "dont smile at me",
+          "coverUrl": "https://i.ibb.co/XZhcF1Xz/billie-eilish-dont-smile-at-me.png",
+          "hex": "#401010",
+          "rank": 58,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 59,
+          "artist": "Lady Gaga",
+          "title": "MAYHEM",
+          "coverUrl": "https://i.ibb.co/ycpRbbXn/lady-gaga-mayhem.png",
+          "hex": "#2f1140",
+          "rank": 59,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 60,
+          "artist": "Lorde",
+          "title": "Melodrama",
+          "coverUrl": "https://i.ibb.co/yn0LxRkZ/lorde-melodrama.png",
+          "hex": "#131640",
+          "rank": 60,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 61,
+          "artist": "Chappell Roan",
+          "title": "The Rise and Fall of a Midwest Princess",
+          "coverUrl": "https://i.ibb.co/LXPCWz3G/chappell-roan-the-rise-and-fall-of-a-midwest-princess.png",
+          "hex": "#40132f",
+          "rank": 61,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 62,
+          "artist": "Caroline Polachek",
+          "title": "Desire, I Want To Turn Into You: Everasking Edition",
+          "coverUrl": "https://i.ibb.co/nNv4h9R8/caroline-polachek-desire-i-want-to-turn-into-you-everasking-edition.png",
+          "hex": "#36161c",
+          "rank": 62,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 63,
+          "artist": "St. Vincent",
+          "title": "MASSEDUCTION",
+          "coverUrl": "https://i.ibb.co/tp01422K/st-vincent-masseduction.png",
+          "hex": "#36112d",
+          "rank": 63,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 64,
+          "artist": "Olivia Rodrigo",
+          "title": "GUTS (spilled)",
+          "coverUrl": "https://i.ibb.co/4vCwSf2/olivia-rodrigo-guts-spilled.png",
+          "hex": "#241030",
+          "rank": 64,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 65,
+          "artist": "Olivia Rodrigo",
+          "title": "SOUR",
+          "coverUrl": "https://i.ibb.co/gMYJ8LLZ/olivia-rodrigo-sour.png",
+          "hex": "#221338",
+          "rank": 65,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 66,
+          "artist": "Orange",
+          "title": "CAM'ON",
+          "coverUrl": "https://i.ibb.co/V0RhmbQt/orange-camon.png",
+          "hex": "#402010",
+          "rank": 66,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 70,
+          "artist": "TOWA TEI",
+          "title": "SOUND MUSEUM",
+          "coverUrl": "https://i.ibb.co/vvTmSjm4/towa-tei-sound-museum.png",
+          "hex": "#2b3b28",
+          "rank": 67,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 71,
+          "artist": "cupcakKe",
+          "title": "Cum Cake",
+          "coverUrl": "https://i.ibb.co/VWkPYQSg/cupcakke-cum-cake.png",
+          "hex": "#3d192c",
+          "rank": 68,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 72,
+          "artist": "cupcakKe",
+          "title": "S.T.D",
+          "coverUrl": "https://i.ibb.co/DH4Npgfy/cupcakke-std.jpg",
+          "hex": "#183820",
+          "rank": 69,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 73,
+          "artist": "cupcakKe",
+          "title": "The BakKery",
+          "coverUrl": "https://i.ibb.co/xK7vX0nk/cupcakke-the-bakkery.png",
+          "hex": "#362016",
+          "rank": 70,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 74,
+          "artist": "Cardi B",
+          "title": "AM I THE DRAMA?",
+          "coverUrl": "https://i.ibb.co/S4z6WKfS/cardi-b-am-i-the-drama.png",
+          "hex": "#38192a",
+          "rank": 71,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 75,
+          "artist": "Low G",
+          "title": "L2K",
+          "coverUrl": "https://i.ibb.co/1YjsDFhn/low-g-l2k.png",
+          "hex": "#202a36",
+          "rank": 72,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 76,
+          "artist": "2Pillz",
+          "title": "PILLZCASSO",
+          "coverUrl": "https://i.ibb.co/7N6P9YZf/2pillz-pillzcasso.png",
+          "hex": "#132b1d",
+          "rank": 73,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 77,
+          "artist": "Esthero",
+          "title": "Breath From Another",
+          "coverUrl": "https://i.ibb.co/v6nBj9dJ/esthero-breath-from-another.png",
+          "hex": "#32111f",
+          "rank": 74,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 78,
+          "artist": "Taylor Swift",
+          "title": "reputation",
+          "coverUrl": "https://i.ibb.co/Nd7kJddb/taylor-swift-reputation.png",
+          "hex": "#1a1a1a",
+          "rank": 75,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 79,
+          "artist": "Tyler, The Creator",
+          "title": "IGOR",
+          "coverUrl": "https://i.ibb.co/Ps5K3ppC/tyler-the-creator-igor.jpg",
+          "hex": "#3b222d",
+          "rank": 76,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 80,
+          "artist": "The Weeknd",
+          "title": "Starboy (Deluxe)",
+          "coverUrl": "https://i.ibb.co/vvfZ9J6C/the-weeknd-starboy-deluxe.png",
+          "hex": "#1a2133",
+          "rank": 77,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 81,
+          "artist": "Charli xcx",
+          "title": "CRASH (Deluxe)",
+          "coverUrl": "https://i.ibb.co/4RBBJRMQ/charli-xcx-crash-deluxe.jpg",
+          "hex": "#28171f",
+          "rank": 78,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 82,
+          "artist": "FKA twigs",
+          "title": "MAGDALENE",
+          "coverUrl": "https://i.ibb.co/HDm6wY9s/fka-twigs-magdalene.png",
+          "hex": "#2d2421",
+          "rank": 79,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 83,
+          "artist": "Hoàng Thùy Linh",
+          "title": "LINK",
+          "coverUrl": "https://i.ibb.co/QvqRhG2z/hoang-thuy-linh-link.png",
+          "hex": "#2e1d3d",
+          "rank": 80,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 84,
+          "artist": "Madonna",
+          "title": "Rebel Heart (Deluxe)",
+          "coverUrl": "https://i.ibb.co/F21Bwrp/madonna-rebel-heart-deluxe.png",
+          "hex": "#2c1719",
+          "rank": 81,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 85,
+          "artist": "Camila Cabello",
+          "title": "C,XOXO",
+          "coverUrl": "https://i.ibb.co/tpV0DB1X/camila-cabello-cxoxo.png",
+          "hex": "#112638",
+          "rank": 82,
+          "profDesc": "",
+          "persDesc": ""
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "name": "BẬC 5",
+      "description": "Những tác phẩm hoàn thiện thư viện của bạn.",
+      "albums": [
+        {
+          "id": 115,
+          "artist": "Charli xcx",
+          "title": "Brat and it's completely different but also still brat",
+          "coverUrl": "https://i.ibb.co/WWq80vNd/charli-xcx-brat-and-its-completely-different-but-also-still-brat.png",
+          "hex": "#424d21",
+          "rank": 5,
+          "profDesc": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ.",
+          "persDesc": ""
+        },
+        {
+          "id": 114,
+          "artist": "Zara Larsson",
+          "title": "Midnight Sun: Girls Trip",
+          "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png",
+          "hex": "#2a3d4f",
+          "rank": 19,
+          "profDesc": "Bản phối khí giòn giã tràn ngập tiếng Bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn.",
+          "persDesc": ""
+        },
+        {
+          "id": 102,
+          "artist": "Robyn",
+          "title": "Honey",
+          "coverUrl": "https://i.ibb.co/LXYdgFsh/robyn-honey.webp",
+          "hex": "",
+          "rank": 24,
+          "profDesc": "A masterclass in warm, sensual club-pop that trades explosive anthems for a deeper, pulsating house music intimacy.",
+          "persDesc": ""
+        },
+        {
+          "id": 91,
+          "artist": "Kylie Minogue",
+          "title": "Aphrodite",
+          "coverUrl": "https://i.ibb.co/60s6HYC9/kylie-minogue-aphrodite.png",
+          "hex": "#162842",
+          "rank": 25,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 103,
+          "artist": "Hoàng Thùy Linh",
+          "title": "Hoàng",
+          "coverUrl": "https://i.ibb.co/tpP4cjhP/hoang-thuy-linh-hoang.png",
+          "hex": "",
+          "rank": 26,
+          "profDesc": "The definitive modern V-Pop blueprint that seamlessly bridges Northern Vietnamese folklore with hyper-infectious synth-pop and future bass production.",
+          "persDesc": ""
+        },
+        {
+          "id": 50,
+          "artist": "Lady Gaga",
+          "title": "The Fame Monster (Deluxe Edition)",
+          "coverUrl": "https://i.ibb.co/4Rvd0xmM/lady-gaga-the-fame-monster-deluxe-edition.png",
+          "hex": "#262426",
+          "rank": 49,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 35,
+          "artist": "Kylie Minogue",
+          "title": "Kylie Minogue (1994)",
+          "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
+          "hex": "#3b3d30",
+          "rank": 94,
+          "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn.",
+          "persDesc": ""
+        },
+        {
+          "id": 92,
+          "artist": "Ariana Grande",
+          "title": "Dangerous Woman",
+          "coverUrl": "https://i.ibb.co/whY9tQgj/ariana-grande-dangerous-woman.jpg",
+          "hex": "#1f1f1f",
+          "rank": 57,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 104,
+          "artist": "Aphex Twin",
+          "title": "Selected Ambient Works 85-92",
+          "coverUrl": "https://i.ibb.co/Z6j7WM98/aphex-twin-selected-ambient-works-85-92.png",
+          "hex": "",
+          "rank": 58,
+          "profDesc": "The foundational scripture of ambient techno and IDM, crafting lush, timeless electronic soundscapes from the bedroom of a genius.",
+          "persDesc": ""
+        },
+        {
+          "id": 105,
+          "artist": "Beyoncé",
+          "title": "Lemonade",
+          "coverUrl": "https://i.ibb.co/gMxydvDg/beyonce-lemonade.png",
+          "hex": "",
+          "rank": 59,
+          "profDesc": "A monolithic cultural statement that masterfully blends blues, rock, hip-hop, and avant-pop into an intense narrative of betrayal and black womanhood.",
+          "persDesc": ""
+        },
+        {
+          "id": 106,
+          "artist": "Thắng",
+          "title": "Cái Đầu Tiên",
+          "coverUrl": "https://i.ibb.co/WWVrfSB5/thang-cai-dau-tien.png",
+          "hex": "",
+          "rank": 60,
+          "profDesc": "A whimsical, beautifully unpredictable solo debut that captures the romantic, slightly cynical essence of Vietnamese indie-pop-rock royalty.",
+          "persDesc": ""
+        },
+        {
+          "id": 107,
+          "artist": "marzuz",
+          "title": "ả",
+          "coverUrl": "https://i.ibb.co/4nCRP3yL/marzuz-a.png",
+          "hex": "",
+          "rank": 61,
+          "profDesc": "An ethereal, dark R&B/Alternative odyssey showcasing marzuz's ghostly vocals draped in Onionn's pristine, minimal electronic textures.",
+          "persDesc": ""
+        },
+        {
+          "id": 108,
+          "artist": "Charli xcx",
+          "title": "how i'm feeling now",
+          "coverUrl": "https://i.ibb.co/hxYyXKPg/charli-xcx-how-im-feeling-now.png",
+          "hex": "",
+          "rank": 87,
+          "profDesc": "A raw, claustrophobic masterpiece of pandemic-era DIY hyperpop that transforms isolation and anxiety into abrasive, beautiful club bangers.",
+          "persDesc": ""
+        },
+        {
+          "id": 90,
+          "artist": "Kylie Minogue",
+          "title": "Tension II",
+          "coverUrl": "https://i.ibb.co/m5rqznM3/kylie-minogue-tension-ii.png",
+          "hex": "#2b1022",
+          "rank": 90,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 93,
+          "artist": "Ariana Grande",
+          "title": "eternal sunshine deluxe: brighter days ahead",
+          "coverUrl": "https://i.ibb.co/4c6G5vz/ariana-grande-eternal-sunshine-deluxe-brighter-days-ahead.png",
+          "hex": "#382329",
+          "rank": 91,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 94,
+          "artist": "Charli xcx",
+          "title": "True Romance",
+          "coverUrl": "https://i.ibb.co/6RL0H3z7/charli-xcx-true-romance.png",
+          "hex": "#2b192c",
+          "rank": 92,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 95,
+          "artist": "Charli xcx",
+          "title": "SUCKER",
+          "coverUrl": "https://i.ibb.co/5hGfpbjv/charli-xcx-sucker.png",
+          "hex": "#331627",
+          "rank": 93,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 96,
+          "artist": "Lana Del Rey",
+          "title": "Honeymoon",
+          "coverUrl": "https://i.ibb.co/C3G3kZkB/lana-del-rey-honeymoon.webp",
+          "hex": "#382419",
+          "rank": 94,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 97,
+          "artist": "Lana Del Rey",
+          "title": "Chemtrails Over The Country Club",
+          "coverUrl": "https://i.ibb.co/1JzHvz72/lana-del-rey-chemtrails-over-the-country-club.webp",
+          "hex": "#1e2b26",
+          "rank": 95,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 98,
+          "artist": "Taylor Swift",
+          "title": "folklore (deluxe version)",
+          "coverUrl": "https://i.ibb.co/jP5Y33rp/taylor-swift-folklore-deluxe-version.png",
+          "hex": "#1f221e",
+          "rank": 96,
+          "profDesc": "",
+          "persDesc": ""
+        },
+        {
+          "id": 100,
+          "artist": "SOPHIE",
+          "title": "OIL OF EVERY PEARL'S UN-INSIDES NON-STOP REMIX ALBUM",
+          "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
+          "hex": "#332230",
+          "rank": 97,
+          "profDesc": "Một kỳ quan hyperpop cấp tiến mở đường cho tương lai, thách thức các khái niệm giới tính và căn sắc thông qua những kết cấu âm thanh tổng hợp siêu việt.",
+          "persDesc": ""
+        },
+        {
+          "id": 109,
+          "artist": "Shawn Mendes",
+          "title": "Handwritten",
+          "coverUrl": "https://i.ibb.co/KcG5Zssn/shawn-mendes-handwritten-deluxe.png",
+          "hex": "",
+          "rank": 98,
+          "profDesc": "Plain, predictable acoustic teenage pop that offers little to no artistic risk or structural interest.",
+          "persDesc": ""
+        },
+        {
+          "id": 110,
+          "artist": "Shawn Mendes",
+          "title": "Illuminate",
+          "coverUrl": "https://i.ibb.co/rKdLyLDM/shawn-mendes-illuminate-deluxe.png",
+          "hex": "",
+          "rank": 99,
+          "profDesc": "Standard radio-friendly guitar pop that is entirely harmless but ultimately devoid of sonic edge.",
+          "persDesc": ""
+        },
+        {
+          "id": 111,
+          "artist": "Shawn Mendes",
+          "title": "Shawn Mendes",
+          "coverUrl": "https://i.ibb.co/jPNW61PV/shawn-mendes-shawn-mendes-deluxe.webp",
+          "hex": "",
+          "rank": 100,
+          "profDesc": "Slightly more mature but still firmly locked within the boundaries of safe, mass-marketed singer-songwriter formulas.",
+          "persDesc": ""
+        },
+        {
+          "id": 112,
+          "artist": "Melanie Martinez",
+          "title": "Cry Baby",
+          "coverUrl": "https://i.ibb.co/bgSCg14N/melanie-martinez-cry-baby-deluxe-edition.png",
+          "hex": "",
+          "rank": 101,
+          "profDesc": "An over-stylized, highly literal nursery-rhyme goth-pop concept that feels more exhausting than genuinely subversive.",
+          "persDesc": ""
+        },
+        {
+          "id": 113,
+          "artist": "Melanie Martinez",
+          "title": "K-12",
+          "coverUrl": "https://i.ibb.co/bgL9HRVw/melanie-martinez-k-12-after-school-deluxe-edition.png",
+          "hex": "",
+          "rank": 102,
+          "profDesc": "A bloated cinematic pop project that repeats the same metaphorical tropes without offering any real sonic evolution.",
+          "persDesc": ""
+        }
+      ]
+    }
+  ]
 }

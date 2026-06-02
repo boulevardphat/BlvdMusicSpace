@@ -28,53 +28,23 @@ export default function App() {
     }
   }, []);
 
-  const applyAlbumsState = (data: Record<string, any>) => {
-    let allInitialAlbums = INITIAL_TIERS.flatMap(t => t.albums);
-    
-    const mergedAlbumsMap = new Map<number, Album>();
-    
-    allInitialAlbums.forEach(initial => {
-       mergedAlbumsMap.set(initial.id, {
-         ...initial,
-         ...(data[String(initial.id)] || {})
-       });
-    });
-    
-    Object.keys(data).forEach(key => {
-       const id = parseInt(key, 10);
-       if (!mergedAlbumsMap.has(id)) {
-          if (data[key].title && data[key].artist) {
-             mergedAlbumsMap.set(id, {
-               ...data[key],
-               id
-             });
-          }
-       }
-    });
-    
-    const albumList = Array.from(mergedAlbumsMap.values());
-    albumList.sort((a,b) => (a.rank || 100) - (b.rank || 100));
+  const applyAlbumsState = () => {
+    const loadedTiers = albumsData.tiers || [];
+    setTiers(loadedTiers);
 
-    const updatedTiers = INITIAL_TIERS.map(tier => ({
-      ...tier,
-      albums: [] as Album[]
-    }));
-    
-    albumList.forEach(album => {
-      const rank = album.rank || 100;
-      if (rank <= 9) updatedTiers[0].albums.push(album);
-      else if (rank <= 24) updatedTiers[1].albums.push(album);
-      else if (rank <= 56) updatedTiers[2].albums.push(album);
-      else if (rank <= 89) updatedTiers[3].albums.push(album);
-      else updatedTiers[4].albums.push(album);
+    const colors: Record<string, any> = {};
+    loadedTiers.forEach(tier => {
+      tier.albums.forEach(album => {
+        if (album.hex) {
+          colors[String(album.id)] = { hex: album.hex };
+        }
+      });
     });
-
-    setTiers(updatedTiers);
-    setAlbumColors(data);
+    setAlbumColors(colors);
   };
 
   useEffect(() => {
-    applyAlbumsState(albumsData);
+    applyAlbumsState();
     setLoading(false);
   }, []);
 

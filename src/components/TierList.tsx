@@ -545,7 +545,7 @@ export function TierList({
                             
                             {/* Short preview snippet of the profDesc if exists */}
                             {album.profDesc && (
-                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-1 mt-1 border-l border-white/20 pl-2">
+                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-2 mt-1.5 border-l border-white/20 pl-2">
                                 "{album.profDesc}"
                               </p>
                             )}
