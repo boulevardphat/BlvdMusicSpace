@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Tier, Album } from "../data";
-import { getImgbbCoverUrl, getAlbumCriticReview } from "../utils";
+import { getImgbbCoverUrl } from "../utils";
 import { motion, AnimatePresence } from "motion/react";
 import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight, Pencil } from "lucide-react";
 
@@ -155,7 +155,6 @@ interface MetroTileProps {
   isAlbumSelected: boolean;
   covers: Record<string, string>;
   onAlbumClick: any;
-  getAlbumCriticReview: any;
   isLiveFlipped?: boolean;
   hexColor?: string;
 }
@@ -168,7 +167,6 @@ function MetroTile({
   isAlbumSelected,
   covers,
   onAlbumClick,
-  getAlbumCriticReview,
   isLiveFlipped,
   hexColor
 }: MetroTileProps) {
@@ -262,7 +260,7 @@ function MetroTile({
             {size === "large" && (
               <div className="hidden md:block flex-grow overflow-y-auto mt-2 pt-2 border-t border-white/20 select-text custom-scrollbar">
                 <p className="text-[12px] md:text-[13px] leading-relaxed italic text-white/95 font-medium font-sans">
-                  "{album.note || getAlbumCriticReview(album.artist, album.title, album.id)}"
+                  "{album.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
                 </p>
               </div>
             )}
@@ -545,10 +543,10 @@ export function TierList({
                               {album.artist}
                             </p>
                             
-                            {/* Short preview snippet of the note if exists */}
-                            {album.note && (
+                            {/* Short preview snippet of the profDesc if exists */}
+                            {album.profDesc && (
                               <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-1 mt-1 border-l border-white/20 pl-2">
-                                "{album.note}"
+                                "{album.profDesc}"
                               </p>
                             )}
                           </div>
@@ -643,7 +641,6 @@ export function TierList({
                                 isAlbumSelected={selectedAlbum && selectedAlbum.id === col.albums[0].id}
                                 covers={covers}
                                 onAlbumClick={handleMetroTileClick}
-                                getAlbumCriticReview={getAlbumCriticReview}
                                 isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
                                 hexColor={albumColors[col.albums[0].id]?.hex}
                               />
@@ -662,7 +659,6 @@ export function TierList({
                                   isAlbumSelected={selectedAlbum && selectedAlbum.id === album.id}
                                   covers={covers}
                                   onAlbumClick={handleMetroTileClick}
-                                  getAlbumCriticReview={getAlbumCriticReview}
                                   isLiveFlipped={liveFlippedIds.includes(album.id)}
                                   hexColor={albumColors[album.id]?.hex}
                                 />
@@ -727,7 +723,7 @@ export function TierList({
                                         THẨM ĐỊNH CHUYÊN MÔN
                                       </span>
                                       <p className="text-[10.5px] md:text-[14px] leading-relaxed italic font-semibold font-sans drop-shadow-sm text-white">
-                                        "{selectedAlbum.profDesc || selectedAlbum.note || getAlbumCriticReview(selectedAlbum.artist, selectedAlbum.title, selectedAlbum.id)}"
+                                        "{selectedAlbum.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
                                       </p>
                                     </div>
                                     

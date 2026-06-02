@@ -6,7 +6,8 @@
     "coverUrl": "https://i.ibb.co/gMnF9rP4/bjork-vespertine.png",
     "id": 1,
     "title": "Vespertine",
-    "artist": "Björk"
+    "artist": "Björk",
+    "profDesc": "Một kiệt tác dịu dàng và nội tâm, nơi Björk dệt nên giấc mơ điện tử vi tế từ những âm thanh micro-beat và dàn dây lộng lẫy để tôn vinh sự thiêng liêng của tình yêu."
   },
   "2": {
     "rank": 2,
@@ -15,7 +16,8 @@
     "coverUrl": "https://i.ibb.co/7JSWMgCQ/kylie-minogue-impossible-princess-deluxe-edition.webp",
     "id": 2,
     "title": "Impossible Princess (Deluxe Edition)",
-    "artist": "Kylie Minogue"
+    "artist": "Kylie Minogue",
+    "profDesc": "Trải nghiệm nghệ thuật mang tính cá nhân và táo bạo nhất của Kylie, thử nghiệm thành công với trip-hop, electronica và indie-pop để phơi bày những lát cắt nội tâm sâu sắc nhất."
   },
   "3": {
     "coverUrl": "https://i.ibb.co/kVMgMWqT/madonna-confessions-on-a-dance-floor.png",
@@ -24,7 +26,8 @@
     "rank": 3,
     "artist": "Madonna",
     "title": "Confessions on a Dance Floor",
-    "id": 3
+    "id": 3,
+    "profDesc": "Một thánh đường disco-house liền mạch tuyệt vời, đỉnh cao sáng tạo của thế kỷ XXI nơi Madonna biến sàn khiêu vũ thành không gian cứu rỗi tâm hồn."
   },
   "4": {
     "coverUrl": "https://i.ibb.co/C325GfvS/charli-xcx-brat.webp",
@@ -33,7 +36,8 @@
     "rank": 4,
     "artist": "Charli xcx",
     "title": "BRAT",
-    "id": 4
+    "id": 4,
+    "profDesc": "Tuyên ngôn pop thô ráp, hỗn loạn và chân thật đến tột cùng của thế kỷ mới; di sản của Charli xcx trong việc giải cấu trúc hyperpop và định hình lại văn hóa đại chúng."
   },
   "5": {
     "coverUrl": "https://i.ibb.co/67D4nQZ6/lana-del-rey-did-you-know-that-theres-a-tunnel-under-ocean-blvd.webp",
@@ -42,7 +46,8 @@
     "rank": 5,
     "artist": "Lana Del Rey",
     "title": "Did you know that there's a tunnel under Ocean Blvd",
-    "id": 5
+    "id": 5,
+    "profDesc": "Một thiên tiểu thuyết âm nhạc đậm chất tự truyện đầy chất thơ của Lana Del Rey, đào sâu vào lịch sử gia đình, ký ức cô quạnh và những khát khao hiện sinh trong trẻo."
   },
   "6": {
     "id": 6,
@@ -51,7 +56,8 @@
     "rank": 6,
     "note": "",
     "hex": "#14314c",
-    "coverUrl": "https://i.ibb.co/QvLMqbxZ/madonna-ray-of-light.png"
+    "coverUrl": "https://i.ibb.co/QvLMqbxZ/madonna-ray-of-light.png",
+    "profDesc": "Bước chuyển mình vĩ đại đưa Madonna chạm tới đỉnh cao tâm linh thông qua sự kết hợp xuất thần của đạo Phật, Kabbalah, nhạc electronica u tối và ambient trip-hop."
   },
   "7": {
     "rank": 7,
@@ -60,7 +66,8 @@
     "coverUrl": "https://i.ibb.co/zWQC8b7F/lorde-pure-heroine.webp",
     "id": 7,
     "title": "Pure Heroine",
-    "artist": "Lorde"
+    "artist": "Lorde",
+    "profDesc": "Tuyệt tác tối giản nắm bắt trọn vẹn sự thờ ơ, nỗi cô đơn u uất và khao khát khẳng định bản thân của tuổi vị thành niên, tái định hình cấu trúc âm nhạc pop hiện đại."
   },
   "8": {
     "artist": "tlinh",
@@ -69,7 +76,8 @@
     "coverUrl": "https://i.ibb.co/4gTmj2by/tlinh-ai.png",
     "note": "",
     "hex": "#401c27",
-    "rank": 8
+    "rank": 8,
+    "profDesc": "Một dấu mốc vàng son của R&B/Pop Việt Nam, nơi tlinh phô diễn tư duy giai điệu gợi cảm đầy nữ tính và góc nhìn trưởng thành mãnh liệt về bản chất của tình yêu."
   },
   "9": {
     "coverUrl": "https://i.ibb.co/qLLk4Qw8/lana-del-rey-norman-fucking-rockwell.webp",
@@ -78,7 +86,8 @@
     "note": "",
     "artist": "Lana Del Rey",
     "id": 9,
-    "title": "Norman Fucking Rockwell!"
+    "title": "Norman Fucking Rockwell!",
+    "profDesc": "Đỉnh cao sự nghiệp chói lịu của Lana Del Rey, một bản cáo chung tuyệt đẹp dành cho giấc mơ Mỹ được bao bọc bởi những phím đàn piano cổ điển và những câu ca dao thời thượng."
   },
   "10": {
     "id": 10,
@@ -87,7 +96,8 @@
     "rank": 10,
     "hex": "#253327",
     "note": "",
-    "coverUrl": "https://i.ibb.co/Dgj6jvVG/phung-khanh-linh-giua-mot-van-nguoi.png"
+    "coverUrl": "https://i.ibb.co/Dgj6jvVG/phung-khanh-linh-giua-mot-van-nguoi.png",
+    "profDesc": "Một kỳ quan City Pop Việt hóa chuẩn mực, khẳng định tài năng viết lách đỉnh cao và giọng ca biến ảo của Phùng Khánh Linh lồng lộng trong những nhịp đập lung linh rực rỡ."
   },
   "11": {
     "hex": "#272a33",
@@ -96,7 +106,8 @@
     "coverUrl": "https://i.ibb.co/JRLLX12L/madonna-erotica-pa-version.png",
     "title": "Erotica (PA Version)",
     "id": 11,
-    "artist": "Madonna"
+    "artist": "Madonna",
+    "profDesc": "Tác phẩm mang tính cách mạng bộc trực nhất về tình dục và tính nữ, thách thức mọi tabu xã hội bằng những nhịp điệu đen tối, gai góc của jazz-house và trip-hop."
   },
   "12": {
     "coverUrl": "https://i.ibb.co/zhHkF3Dt/kesha-gag-order.webp",
@@ -105,7 +116,8 @@
     "note": "",
     "artist": "Kesha",
     "id": 12,
-    "title": "Gag Order"
+    "title": "Gag Order",
+    "profDesc": "Sự thăng hoa tột bậc từ nỗi đau tăm tối; album art-pop giàu chiều sâu giúp Kesha rũ bỏ quá khứ để tìm lại tiếng nói chân thực thông qua những thanh âm acoustic mộc mạc."
   },
   "14": {
     "artist": "FKA twigs",
@@ -114,7 +126,8 @@
     "coverUrl": "https://i.ibb.co/bj4MBgC0/fka-twigs-eusexua.png",
     "rank": 13,
     "note": "",
-    "hex": "#302621"
+    "hex": "#302621",
+    "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn."
   },
   "15": {
     "title": "EUSEXUA Afterglow",
@@ -123,7 +136,8 @@
     "note": "",
     "hex": "#2a1c22",
     "rank": 14,
-    "coverUrl": "https://i.ibb.co/HLgNkRk0/fka-twigs-eusexua-afterglow.png"
+    "coverUrl": "https://i.ibb.co/HLgNkRk0/fka-twigs-eusexua-afterglow.png",
+    "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn."
   },
   "16": {
     "coverUrl": "https://i.ibb.co/gLgwPjcf/kylie-minogue-fever.png",
@@ -132,7 +146,8 @@
     "hex": "#e0ebd3",
     "artist": "Kylie Minogue",
     "id": 16,
-    "title": "Fever"
+    "title": "Fever",
+    "profDesc": "Đỉnh cao tinh hoa của Dance-Pop toàn cầu, một cỗ máy tạo hit không tì vết đầy sang trọng và quyến rũ vượt thời gian."
   },
   "17": {
     "id": 17,
@@ -177,7 +192,8 @@
     "note": "",
     "artist": "Obito",
     "id": 21,
-    "title": "Đánh Đổi"
+    "title": "Đánh Đổi",
+    "profDesc": "Tác phẩm Hip-hop tự sự gai góc và chân thực bậc nhất của âm nhạc Việt, kể lại hành trình trưởng thành ngột ngạt cùng những hy sinh trong cuộc chiến danh vọng."
   },
   "22": {
     "note": "",
@@ -186,7 +202,8 @@
     "coverUrl": "https://i.ibb.co/B5DPQpM4/wren-evans-loi-choi-the-neo-pop-punk.png",
     "title": "LOI CHOI: The Neo Pop Punk",
     "id": 22,
-    "artist": "Wren Evans"
+    "artist": "Wren Evans",
+    "profDesc": "Cú hích ngông cuồng làm đảo lộn sân chơi Việt Pop, nơi Wren Evans tự do pha trộn disco, punk, R&B thành một dòng chảy năng lượng trẻ hóa rực lửa."
   },
   "23": {
     "artist": "Addison Rae",
@@ -303,7 +320,6 @@
     "rank": 94,
     "hex": "#3b3d30",
     "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
-    "note": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn.",
     "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn."
   },
   "36": {
@@ -313,7 +329,8 @@
     "note": "",
     "artist": "Billie Eilish",
     "id": 36,
-    "title": "HIT ME HARD AND SOFT"
+    "title": "HIT ME HARD AND SOFT",
+    "profDesc": "Sự phát triển vượt bậc của chị em nhà Eilish, bẻ gãy mọi quy chuẩn cấu trúc bài hát thông thường bằng sự đối nghịch hoàn hảo giữa lời thì thầm mộng mị và những nhịp bass bùng nổ."
   },
   "37": {
     "artist": "Beyoncé",
@@ -853,111 +870,112 @@
     "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
     "id": 100,
     "title": "OIL OF EVERY PEARL'S UN-INSIDES NON-STOP REMIX ALBUM",
-    "artist": "SOPHIE"
+    "artist": "SOPHIE",
+    "profDesc": "Một kỳ quan hyperpop cấp tiến mở đường cho tương lai, thách thức các khái niệm giới tính và căn sắc thông qua những kết cấu âm thanh tổng hợp siêu việt."
   },
   "101": {
-    "note": "A sophisticated transition into indie-pop and trip-hop elements, showcasing Kylie's artistic rebirth away from her bubblegum roots.",
     "rank": 56,
     "artist": "Kylie Minogue",
     "title": "Kylie Minogue",
     "id": 101,
-    "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg"
+    "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
+    "profDesc": "A sophisticated transition into indie-pop and trip-hop elements, showcasing Kylie's artistic rebirth away from her bubblegum roots."
   },
   "102": {
     "artist": "Robyn",
     "title": "Honey",
     "id": 102,
-    "note": "A masterclass in warm, sensual club-pop that trades explosive anthems for a deeper, pulsating house music intimacy.",
     "rank": 24,
-    "coverUrl": "https://i.ibb.co/LXYdgFsh/robyn-honey.webp"
+    "coverUrl": "https://i.ibb.co/LXYdgFsh/robyn-honey.webp",
+    "profDesc": "A masterclass in warm, sensual club-pop that trades explosive anthems for a deeper, pulsating house music intimacy."
   },
   "103": {
     "artist": "Hoàng Thùy Linh",
     "title": "Hoàng",
     "id": 103,
-    "note": "The definitive modern V-Pop blueprint that seamlessly bridges Northern Vietnamese folklore with hyper-infectious synth-pop and future bass production.",
     "rank": 26,
-    "coverUrl": "https://i.ibb.co/tpP4cjhP/hoang-thuy-linh-hoang.png"
+    "coverUrl": "https://i.ibb.co/tpP4cjhP/hoang-thuy-linh-hoang.png",
+    "profDesc": "The definitive modern V-Pop blueprint that seamlessly bridges Northern Vietnamese folklore with hyper-infectious synth-pop and future bass production."
   },
   "104": {
     "artist": "Aphex Twin",
     "title": "Selected Ambient Works 85-92",
     "id": 104,
-    "note": "The foundational scripture of ambient techno and IDM, crafting lush, timeless electronic soundscapes from the bedroom of a genius.",
     "rank": 58,
-    "coverUrl": "https://i.ibb.co/Z6j7WM98/aphex-twin-selected-ambient-works-85-92.png"
+    "coverUrl": "https://i.ibb.co/Z6j7WM98/aphex-twin-selected-ambient-works-85-92.png",
+    "profDesc": "The foundational scripture of ambient techno and IDM, crafting lush, timeless electronic soundscapes from the bedroom of a genius."
   },
   "105": {
     "rank": 59,
-    "note": "A monolithic cultural statement that masterfully blends blues, rock, hip-hop, and avant-pop into an intense narrative of betrayal and black womanhood.",
     "id": 105,
     "title": "Lemonade",
     "artist": "Beyoncé",
-    "coverUrl": "https://i.ibb.co/gMxydvDg/beyonce-lemonade.png"
+    "coverUrl": "https://i.ibb.co/gMxydvDg/beyonce-lemonade.png",
+    "profDesc": "A monolithic cultural statement that masterfully blends blues, rock, hip-hop, and avant-pop into an intense narrative of betrayal and black womanhood."
   },
   "106": {
     "artist": "Thắng",
     "title": "Cái Đầu Tiên",
     "id": 106,
-    "note": "A whimsical, beautifully unpredictable solo debut that captures the romantic, slightly cynical essence of Vietnamese indie-pop-rock royalty.",
     "rank": 60,
-    "coverUrl": "https://i.ibb.co/WWVrfSB5/thang-cai-dau-tien.png"
+    "coverUrl": "https://i.ibb.co/WWVrfSB5/thang-cai-dau-tien.png",
+    "profDesc": "A whimsical, beautifully unpredictable solo debut that captures the romantic, slightly cynical essence of Vietnamese indie-pop-rock royalty."
   },
   "107": {
-    "note": "An ethereal, dark R&B/Alternative odyssey showcasing marzuz's ghostly vocals draped in Onionn's pristine, minimal electronic textures.",
     "rank": 61,
     "title": "ả",
     "id": 107,
     "artist": "marzuz",
-    "coverUrl": "https://i.ibb.co/4nCRP3yL/marzuz-a.png"
+    "coverUrl": "https://i.ibb.co/4nCRP3yL/marzuz-a.png",
+    "profDesc": "An ethereal, dark R&B/Alternative odyssey showcasing marzuz's ghostly vocals draped in Onionn's pristine, minimal electronic textures."
   },
   "108": {
     "artist": "Charli xcx",
     "title": "how i'm feeling now",
     "id": 108,
-    "note": "A raw, claustrophobic masterpiece of pandemic-era DIY hyperpop that transforms isolation and anxiety into abrasive, beautiful club bangers.",
     "rank": 87,
-    "coverUrl": "https://i.ibb.co/hxYyXKPg/charli-xcx-how-im-feeling-now.png"
+    "coverUrl": "https://i.ibb.co/hxYyXKPg/charli-xcx-how-im-feeling-now.png",
+    "profDesc": "A raw, claustrophobic masterpiece of pandemic-era DIY hyperpop that transforms isolation and anxiety into abrasive, beautiful club bangers."
   },
   "109": {
     "artist": "Shawn Mendes",
     "title": "Handwritten",
     "id": 109,
-    "note": "Plain, predictable acoustic teenage pop that offers little to no artistic risk or structural interest.",
     "rank": 98,
-    "coverUrl": "https://i.ibb.co/KcG5Zssn/shawn-mendes-handwritten-deluxe.png"
+    "coverUrl": "https://i.ibb.co/KcG5Zssn/shawn-mendes-handwritten-deluxe.png",
+    "profDesc": "Plain, predictable acoustic teenage pop that offers little to no artistic risk or structural interest."
   },
   "110": {
     "rank": 99,
-    "note": "Standard radio-friendly guitar pop that is entirely harmless but ultimately devoid of sonic edge.",
     "artist": "Shawn Mendes",
     "id": 110,
     "title": "Illuminate",
-    "coverUrl": "https://i.ibb.co/rKdLyLDM/shawn-mendes-illuminate-deluxe.png"
+    "coverUrl": "https://i.ibb.co/rKdLyLDM/shawn-mendes-illuminate-deluxe.png",
+    "profDesc": "Standard radio-friendly guitar pop that is entirely harmless but ultimately devoid of sonic edge."
   },
   "111": {
     "rank": 100,
-    "note": "Slightly more mature but still firmly locked within the boundaries of safe, mass-marketed singer-songwriter formulas.",
     "id": 111,
     "title": "Shawn Mendes",
     "artist": "Shawn Mendes",
-    "coverUrl": "https://i.ibb.co/jPNW61PV/shawn-mendes-shawn-mendes-deluxe.webp"
+    "coverUrl": "https://i.ibb.co/jPNW61PV/shawn-mendes-shawn-mendes-deluxe.webp",
+    "profDesc": "Slightly more mature but still firmly locked within the boundaries of safe, mass-marketed singer-songwriter formulas."
   },
   "112": {
     "title": "Cry Baby",
     "id": 112,
     "artist": "Melanie Martinez",
-    "note": "An over-stylized, highly literal nursery-rhyme goth-pop concept that feels more exhausting than genuinely subversive.",
     "rank": 101,
-    "coverUrl": "https://i.ibb.co/bgSCg14N/melanie-martinez-cry-baby-deluxe-edition.png"
+    "coverUrl": "https://i.ibb.co/bgSCg14N/melanie-martinez-cry-baby-deluxe-edition.png",
+    "profDesc": "An over-stylized, highly literal nursery-rhyme goth-pop concept that feels more exhausting than genuinely subversive."
   },
   "113": {
     "id": 113,
     "title": "K-12",
     "artist": "Melanie Martinez",
     "rank": 102,
-    "note": "A bloated cinematic pop project that repeats the same metaphorical tropes without offering any real sonic evolution.",
-    "coverUrl": "https://i.ibb.co/bgL9HRVw/melanie-martinez-k-12-after-school-deluxe-edition.png"
+    "coverUrl": "https://i.ibb.co/bgL9HRVw/melanie-martinez-k-12-after-school-deluxe-edition.png",
+    "profDesc": "A bloated cinematic pop project that repeats the same metaphorical tropes without offering any real sonic evolution."
   },
   "114": {
     "id": 114,
@@ -966,7 +984,6 @@
     "rank": 19,
     "hex": "#2a3d4f",
     "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png",
-    "note": "Bản phối khí giòn giã tràn ngập tiếng Bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn.",
     "profDesc": "Bản phối khí giòn giã tràn ngập tiếng Bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn."
   },
   "115": {
@@ -976,7 +993,6 @@
     "rank": 5,
     "hex": "#424d21",
     "coverUrl": "https://i.ibb.co/WWq80vNd/charli-xcx-brat-and-its-completely-different-but-also-still-brat.png",
-    "note": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ.",
     "profDesc": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ."
   },
   "116": {
@@ -986,7 +1002,6 @@
     "rank": 100,
     "hex": "#251221",
     "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
-    "note": "Một làn sóng Remix vũ bão giã liên tục không ngừng nghỉ dồn dập quấn chặt lấy giác quan trong một lễ hội âm thanh hoang lạc kỳ lạ.",
     "profDesc": "Một làn sóng Remix vũ bão giã liên tục không ngừng nghỉ dồn dập quấn chặt lấy giác quan trong một lễ hội âm thanh hoang lạc kỳ lạ."
   },
   "117": {
@@ -996,7 +1011,6 @@
     "rank": 90,
     "hex": "#2b1022",
     "coverUrl": "https://i.ibb.co/m5rqznM3/kylie-minogue-tension-ii.png",
-    "note": "Hành trình thám hiểm sâu hơn vào bóng đêm sàn nhảy với những nốt Techno dồn dập say mê nghẹt thở.",
     "profDesc": "Hành trình thám hiểm sâu hơn vào bóng đêm sàn nhảy với những nốt Techno dồn dập say mê nghẹt thở."
   },
   "118": {
@@ -1006,7 +1020,6 @@
     "rank": 51,
     "hex": "#262b3a",
     "coverUrl": "https://i.ibb.co/23WWfqtm/lady-gaga-the-fame.png",
-    "note": "Cỗ máy Electro-Pop chói lòa kiêu hãnh phô trương cơn thèm khát danh vọng, bước đệm vĩ đại biến Stefani Germanotta thành một huyền thoại sống.",
     "profDesc": "Cỗ máy Electro-Pop chói lòa kiêu hãnh phô trương cơn thèm khát danh vọng, bước đệm vĩ đại biến Stefani Germanotta thành một huyền thoại sống."
   },
   "214": {

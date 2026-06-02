@@ -163,9 +163,21 @@ export default function App() {
                   <p className="text-xs text-blue-600 font-mono tracking-widest uppercase font-black mt-1">{selectedAlbum.artist}</p>
                 </div>
 
-                <div className="bg-slate-50 p-4 border-l-[3px] border-slate-900 text-left text-sm leading-relaxed font-sans text-slate-700 italic select-text">
-                  "{selectedAlbum.note || `Đánh giá đang cập nhật...`}"
+                <div className="flex flex-col gap-3">
+                  <div className="bg-slate-50 p-3 pb-2 border-l-[3px] border-slate-900 text-left">
+                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Thẩm định chuyên gia</span>
+                    <p className="text-[12px] leading-relaxed font-sans text-slate-700 italic select-text">
+                      "{selectedAlbum.profDesc || `Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình.`}"
+                    </p>
+                  </div>
+                  <div className="bg-slate-50 p-3 pb-2 border-l-[3px] border-blue-500 text-left">
+                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Miêu tả cá nhân</span>
+                    <p className="text-[12px] leading-relaxed font-sans text-slate-700 select-text">
+                      {selectedAlbum.persDesc || `Chưa có miêu tả cá nhân (sửa qua albums.json).`}
+                    </p>
+                  </div>
                 </div>
+
               </div>
 
               <div className="mt-5 pt-3 border-t border-slate-200 flex justify-end">
