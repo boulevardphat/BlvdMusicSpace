@@ -210,12 +210,18 @@ function MetroTile({
         {/* FRONT FACE */}
         <div className="absolute inset-0 w-full h-full backface-hidden bg-slate-900 relative overflow-hidden flex items-center justify-center">
           {mCover ? (
-            <img
-              src={mCover}
-              alt={album.title}
-              className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105"
-              referrerPolicy="no-referrer"
-            />
+            <>
+              <img
+                src={mCover}
+                alt={album.title}
+                className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              {/* Rank bottom-left badge */}
+              <div className="absolute bottom-1 left-1 md:bottom-2 md:left-2 bg-black/85 text-white font-mono font-black text-[9px] md:text-[11px] leading-none px-1.5 py-0.5 md:px-2 md:py-1 pointer-events-none select-none z-10 border border-white/10">
+                #{album.globalRank}
+              </div>
+            </>
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-450 uppercase font-mono font-bold">
               <DiscoverPulse />
@@ -545,7 +551,7 @@ export function TierList({
                             
                             {/* Short preview snippet of the profDesc if exists */}
                             {album.profDesc && (
-                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-2 mt-1.5 border-l border-white/20 pl-2">
+                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-1 mt-1.5 border-l border-white/20 pl-2">
                                 "{album.profDesc}"
                               </p>
                             )}
