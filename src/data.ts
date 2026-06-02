@@ -29,21 +29,28 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 2, artist: "Kylie Minogue", title: "Impossible Princess" },
       { id: 3, artist: "Madonna", title: "Confessions on a Dance Floor" },
       { id: 4, artist: "Charli xcx", title: "BRAT" },
-      { id: 5, artist: "Lana Del Rey", title: "Did you know that there's a tunnel under Ocean Blvd" },
+      {
+        id: 5,
+        artist: "Lana Del Rey",
+        title: "Did you know that there's a tunnel under Ocean Blvd",
+      },
       { id: 6, artist: "Madonna", title: "Ray of Light" },
       { id: 7, artist: "Lorde", title: "Pure Heroine" },
       { id: 8, artist: "tlinh", title: "ái" },
-      { id: 9, artist: "Lana Del Rey", title: "Norman Fucking Rockwell!" }
-    ]
+      { id: 9, artist: "Lana Del Rey", title: "Norman Fucking Rockwell!" },
+    ],
   },
   {
     id: "t2",
     name: "BẬC 2",
-    description: "Nơi hội tụ của cảm xúc cực đoan, khái niệm đỉnh cao và sự táo bạo.",
+    description:
+      "Nơi hội tụ của cảm xúc cực đoan, khái niệm đỉnh cao và sự táo bạo.",
     albums: [
+      { id: 24, artist: "Björk", title: "Vulnicura" },
+      { id: 214, artist: "Ninajirachi", title: "I Love My Computer" },
       { id: 10, artist: "Phùng Khánh Linh", title: "GIỮA MỘT VẠN NGƯỜI" },
       { id: 11, artist: "Madonna", title: "Erotica (PA Version)" },
-      { id: 12, artist: "Kesha", title: "Gag Order" },
+      { id: 12, artist: "Kesha", title: "Gag Order / Eat The Acid" },
       { id: 14, artist: "FKA twigs", title: "EUSEXUA" },
       { id: 15, artist: "FKA twigs", title: "EUSEXUA Afterglow" },
       { id: 16, artist: "Kylie Minogue", title: "Fever" },
@@ -54,22 +61,27 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 21, artist: "Obito", title: "Đánh Đổi" },
       { id: 22, artist: "Wren Evans", title: "LOI CHOI: The Neo Pop Punk" },
       { id: 23, artist: "Addison Rae", title: "Addison" },
-      { id: 24, artist: "Björk", title: "Vulnicura" }
-    ]
+      { id: 25, artist: "PinkPantheress", title: "Fancy That" },
+      { id: 88, artist: "ROSALÍA", title: "LUX" },
+    ],
   },
   {
     id: "t3",
     name: "BẬC 3",
     description: "Sự cân bằng giữa nhịp điệu, Pop năng lượng và Nghệ thuật.",
     albums: [
-      { id: 25, artist: "PinkPantheress", title: "Fancy That" },
+      { id: 89, artist: "Lily Allen", title: "West End Girl" },
       { id: 26, artist: "Wren Evans", title: "NỔ" },
       { id: 27, artist: "Björk", title: "Biophilia" },
       { id: 28, artist: "Björk", title: "Volta" },
       { id: 29, artist: "C418", title: "Minecraft - Volume Alpha" },
       { id: 30, artist: "C418", title: "Minecraft - Volume Beta" },
       { id: 31, artist: "tlinh", title: "FLVR" },
-      { id: 32, artist: "Bích Phương", title: "tâm trạng tan hơi chậm một chút" },
+      {
+        id: 32,
+        artist: "Bích Phương",
+        title: "tâm trạng tan hơi chậm một chút",
+      },
       { id: 33, artist: "cupcakKe", title: "Dauntless Manifesto" },
       { id: 34, artist: "Kylie Minogue", title: "Body Language" },
       { id: 35, artist: "Kylie Minogue", title: "Kylie Minogue (1994)" },
@@ -79,7 +91,11 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 39, artist: "Madonna", title: "American Life" },
       { id: 40, artist: "Phương Mỹ Chi", title: "Vũ Trụ Cò Bay" },
       { id: 41, artist: "Rose Gray", title: "Louder, Please" },
-      { id: 42, artist: "Lana Del Rey", title: "Born To Die - The Paradise Edition" },
+      {
+        id: 42,
+        artist: "Lana Del Rey",
+        title: "Born To Die - The Paradise Edition",
+      },
       { id: 43, artist: "Jessie Ware", title: "What's Your Pleasure?" },
       { id: 44, artist: "Madonna", title: "Bedtime Stories" },
       { id: 45, artist: "Madonna", title: "Music" },
@@ -87,26 +103,45 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 47, artist: "Lana Del Rey", title: "Blue Banisters" },
       { id: 48, artist: "Madonna", title: "Like a Prayer" },
       { id: 49, artist: "Tate McRae", title: "So Close To What" },
-      { id: 50, artist: "Lady Gaga", title: "The Fame Monster" },
-      { id: 51, artist: "Taylor Swift", title: "evermore" },
+      {
+        id: 50,
+        artist: "Lady Gaga",
+        title: "The Fame Monster (Deluxe Edition)",
+      },
+      { id: 51, artist: "Taylor Swift", title: "evermore (deluxe version)" },
       { id: 52, artist: "Björk", title: "Homogenic" },
       { id: 53, artist: "Imogen Heap", title: "Speak for Yourself" },
-      { id: 54, artist: "Ms. Lauryn Hill", title: "The Miseducation of Lauryn Hill" },
+      {
+        id: 54,
+        artist: "Ms. Lauryn Hill",
+        title: "The Miseducation of Lauryn Hill",
+      },
       { id: 55, artist: "Billie Eilish", title: "Happier Than Ever" },
-      { id: 56, artist: "Nelly Furtado", title: "Loose" }
-    ]
+      { id: 56, artist: "Nelly Furtado", title: "Loose" },
+    ],
   },
   {
     id: "t4",
     name: "BẬC 4",
-    description: "Những lựa chọn chất lượng đại diện cho cá tính và các bản Pop Hits.",
+    description:
+      "Những lựa chọn chất lượng đại diện cho cá tính và các bản Pop Hits.",
     albums: [
+      { id: 86, artist: "JADE", title: "THAT'S SHOWBIZ BABY!" },
+      { id: 87, artist: "ADÉLA", title: "The Provocateur" },
       { id: 57, artist: "Taylor Swift", title: "1989 (Taylor's Version)" },
       { id: 58, artist: "Billie Eilish", title: "dont smile at me" },
       { id: 59, artist: "Lady Gaga", title: "MAYHEM" },
       { id: 60, artist: "Lorde", title: "Melodrama" },
-      { id: 61, artist: "Chappell Roan", title: "The Rise and Fall of a Midwest Princess" },
-      { id: 62, artist: "Caroline Polachek", title: "Desire, I Want To Turn Into You" },
+      {
+        id: 61,
+        artist: "Chappell Roan",
+        title: "The Rise and Fall of a Midwest Princess",
+      },
+      {
+        id: 62,
+        artist: "Caroline Polachek",
+        title: "Desire, I Want To Turn Into You",
+      },
       { id: 63, artist: "St. Vincent", title: "MASSEDUCTION" },
       { id: 64, artist: "Olivia Rodrigo", title: "GUTS (spilled)" },
       { id: 65, artist: "Olivia Rodrigo", title: "SOUR" },
@@ -121,39 +156,77 @@ export const INITIAL_TIERS: Tier[] = [
       { id: 77, artist: "Esthero", title: "Breath From Another" },
       { id: 78, artist: "Taylor Swift", title: "reputation" },
       { id: 79, artist: "Tyler, The Creator", title: "IGOR" },
-      { id: 80, artist: "The Weeknd", title: "Starboy" },
+      { id: 80, artist: "The Weeknd", title: "Starboy (Deluxe)" },
       { id: 81, artist: "Charli xcx", title: "CRASH (Deluxe)" },
       { id: 82, artist: "FKA twigs", title: "MAGDALENE" },
       { id: 83, artist: "Hoàng Thùy Linh", title: "LINK" },
-      { id: 84, artist: "Madonna", title: "Rebel Heart" },
+      { id: 84, artist: "Madonna", title: "Rebel Heart (Deluxe)" },
       { id: 85, artist: "Camila Cabello", title: "C,XOXO" },
-      { id: 86, artist: "JADE", title: "THAT'S SHOWBIZ BABY!" },
-      { id: 87, artist: "ADÉLA", title: "The Provocateur" },
-      { id: 88, artist: "ROSALÍA", title: "LUX" },
-      { id: 89, artist: "Lily Allen", title: "West End Girl" }
-    ]
+    ],
   },
   {
     id: "t5",
     name: "BẬC 5",
     description: "Những tác phẩm hoàn thiện thư viện của bạn.",
     albums: [
-      { id: 90, artist: "Kylie Minogue", title: "Tension" },
+      {
+        id: 115,
+        artist: "Charli xcx",
+        title: "Brat and it's completely different but also still brat",
+      },
+      { id: 114, artist: "Zara Larsson", title: "Midnight Sun: Girls Trip" },
+      { id: 102, artist: "Robyn", title: "Honey" },
       { id: 91, artist: "Kylie Minogue", title: "Aphrodite" },
+      { id: 103, artist: "Hoàng Thùy Linh", title: "Hoàng" },
+      { id: 50, artist: "Lady Gaga", title: "The Fame" },
+      { id: 35, artist: "Kylie Minogue", title: "Kylie Minogue" },
       { id: 92, artist: "Ariana Grande", title: "Dangerous Woman" },
-      { id: 93, artist: "Ariana Grande", title: "eternal sunshine" },
+      { id: 104, artist: "Aphex Twin", title: "Selected Ambient Works 85-92" },
+      { id: 105, artist: "Beyoncé", title: "Lemonade" },
+      { id: 106, artist: "Thắng", title: "Cái Đầu Tiên" },
+      { id: 107, artist: "marzuz", title: "ả" },
+      { id: 108, artist: "Charli xcx", title: "how i'm feeling now" },
+      { id: 90, artist: "Kylie Minogue", title: "Tension II" },
+      { id: 90, artist: "Kylie Minogue", title: "Tension II" },
+      {
+        id: 93,
+        artist: "Ariana Grande",
+        title: "eternal sunshine deluxe: brighter days ahead",
+      },
       { id: 94, artist: "Charli xcx", title: "True Romance" },
       { id: 95, artist: "Charli xcx", title: "SUCKER" },
       { id: 96, artist: "Lana Del Rey", title: "Honeymoon" },
-      { id: 97, artist: "Lana Del Rey", title: "Chemtrails" },
+      {
+        id: 97,
+        artist: "Lana Del Rey",
+        title: "Chemtrails Over The Country Club",
+      },
       { id: 98, artist: "Taylor Swift", title: "folklore (deluxe version)" },
-      { id: 100, artist: "SOPHIE", title: "OIL OF EVERY PEARL'S UN-INSIDES" }
-    ]
-  }
+      {
+        id: 100,
+        artist: "SOPHIE",
+        title: "OIL OF EVERY PEARL'S UN-INSIDES NON-STOP REMIX ALBUM",
+      },
+      { id: 109, artist: "Shawn Mendes", title: "Handwritten" },
+      { id: 110, artist: "Shawn Mendes", title: "Illuminate" },
+      { id: 111, artist: "Shawn Mendes", title: "Shawn Mendes" },
+      {
+        id: 100,
+        artist: "SOPHIE",
+        title: "OIL OF EVERY PEARL'S UN-INSIDES Non-Stop Remix Album",
+      },
+      { id: 112, artist: "Melanie Martinez", title: "Cry Baby" },
+      { id: 113, artist: "Melanie Martinez", title: "K-12" },
+    ],
+  },
 ];
 
 export const formatRankingForPrompt = (tiers: Tier[] = INITIAL_TIERS) => {
-  return tiers.map(t => 
-    `\n${t.name}\n` + t.albums.map(a => `${a.id}. ${a.artist} - ${a.title}`).join('\n')
-  ).join('\n');
+  return tiers
+    .map(
+      (t) =>
+        `\n${t.name}\n` +
+        t.albums.map((a) => `${a.id}. ${a.artist} - ${a.title}`).join("\n"),
+    )
+    .join("\n");
 };

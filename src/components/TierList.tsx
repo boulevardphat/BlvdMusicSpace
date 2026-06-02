@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Tier, Album } from "../data";
 import { getImgbbCoverUrl, getAlbumCriticReview } from "../utils";
 import { motion, AnimatePresence } from "motion/react";
-import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight } from "lucide-react";
+import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight, Pencil } from "lucide-react";
 
 const TIER_ICONS: Record<string, any> = {
   "t1": Crown,
@@ -173,7 +173,7 @@ function MetroTile({
   hexColor
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const mCover = getImgbbCoverUrl(album.artist, album.title);
+  const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
   
   const currentPalette = hexColor ? { bg: hexColor, darkBg: hexColor, text: "text-white" } : { bg: theme.accent, darkBg: theme.accent, text: "text-white" };
 
@@ -186,8 +186,12 @@ function MetroTile({
   return (
     <div
       onClick={(e) => onAlbumClick(e, album, cleanedName, album.globalRank, mCover)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") setIsHovered(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") setIsHovered(false);
+      }}
       className={`${dimensionClasses} relative cursor-pointer perspective-1200 select-none shrink-0`}
     >
       <motion.div
@@ -282,8 +286,6 @@ export interface TierListProps {
   selectedAlbum: (Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null;
   setSelectedAlbum: React.Dispatch<React.SetStateAction<(Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null>>;
   onAlbumClick: (album: Album, tierName: string, rankNumber: number, coverUrl?: string) => void;
-  onResetTiers?: () => void;
-  handleDeleteAlbum: (albumId: number, tierId: string) => Promise<void>;
 }
 
 export function TierList({
@@ -291,9 +293,7 @@ export function TierList({
   tiers,
   selectedAlbum,
   setSelectedAlbum,
-  onAlbumClick,
-  onResetTiers,
-  handleDeleteAlbum
+  onAlbumClick
 }: TierListProps) {
   const [covers] = useState<Record<string, string>>({});
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -367,6 +367,7 @@ export function TierList({
 
   // Smooth Horizontal Trackpad Scrolling with Vertical Exclusions
   useEffect(() => {
+    if (isMobile) return;
     const container = scrollContainerRef.current;
     if (!container) return;
 
@@ -389,7 +390,13 @@ export function TierList({
         return; // do not hijack wheel
       }
 
-      if (e.deltaY !== 0 && e.deltaX === 0) {
+      // Trackpads sometimes emit small deltaX along with deltaY. 
+      // If deltaX is significant, it means the user is intentionally scrolling horizontally.
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        return; // Browser naturally handles horizontal scroll
+      }
+
+      if (e.deltaY !== 0) {
         container.scrollLeft += e.deltaY;
         e.preventDefault();
       }
@@ -399,7 +406,7 @@ export function TierList({
     return () => {
       container.removeEventListener("wheel", handleWheel);
     };
-  }, []);
+  }, [isMobile]);
 
   const cleanTierName = (name: string) => {
     return name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim();
@@ -499,7 +506,7 @@ export function TierList({
                     </div>
                   ) : (
                     tier.mappedAlbums.map((album) => {
-                      const mCover = getImgbbCoverUrl(album.artist, album.title);
+                      const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
                       const isSelected = selectedAlbum && selectedAlbum.id === album.id;
                       
                       return (
@@ -676,31 +683,20 @@ export function TierList({
                               className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
                               style={{ backgroundColor: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
                             >
-                              {/* Left Block: cover & changer trigger & actions */}
-                              <div className="w-[90px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5">
-                                <div className="flex flex-col">
-                                  <div className="w-full aspect-square border border-white/20 bg-slate-900 flex items-center justify-center overflow-hidden shadow-md relative group">
-                                    {selectedAlbum.coverUrl ? (
-                                      <img
-                                        src={selectedAlbum.coverUrl}
-                                        alt={selectedAlbum.title}
-                                        className="w-full h-full object-cover animate-fade-in group-hover:scale-105 transition-transform duration-500"
-                                        referrerPolicy="no-referrer"
-                                      />
-                                    ) : (
-                                      <Music className="w-7 h-7 text-slate-600" />
-                                    )}
-                                  </div>
+                              {/* Left Block: cover */}
+                              <div className="w-[90px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5">
+                                <div className="w-full aspect-square border border-white/20 bg-slate-900 flex items-center justify-center overflow-hidden shadow-md relative group">
+                                  {selectedAlbum.coverUrl ? (
+                                    <img
+                                      src={selectedAlbum.coverUrl}
+                                      alt={selectedAlbum.title}
+                                      className="w-full h-full object-cover animate-fade-in transition-transform duration-500"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                  ) : (
+                                    <Music className="w-7 h-7 text-slate-600" />
+                                  )}
                                 </div>
-
-                                <button
-                                  onClick={() => handleDeleteAlbum(selectedAlbum.id, tier.id)}
-                                  className="w-full py-2 border border-red-500/30 bg-red-950/30 text-red-400 hover:bg-red-600 hover:text-white transition-all font-mono font-bold text-[8px] md:text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 rounded-none"
-                                >
-                                  <Trash2 className="w-3.5 h-3.5" />
-                                  <span className="hidden md:inline">Xóa khỏi làn</span>
-                                  <span className="inline md:hidden">Bỏ xóa</span>
-                                </button>
                               </div>
 
                               {/* Right Block: Content Details */}
@@ -741,57 +737,11 @@ export function TierList({
                                           MIÊU TẢ CÁ NHÂN
                                         </span>
                                       </div>
-                                      {selectedAlbum.isEditingPersDesc ? (
-                                        <div className="flex flex-col gap-2">
-                                          <textarea 
-                                            autoFocus
-                                            className="w-full bg-black/40 border border-white/20 text-white p-2 text-[10.5px] md:text-[13px] font-sans rounded-none focus:outline-none focus:border-white/50 resize-y min-h-[60px]"
-                                            defaultValue={selectedAlbum.persDesc || ''}
-                                            onKeyDown={(e) => {
-                                              if (e.key === 'Enter' && !e.shiftKey) {
-                                                e.preventDefault();
-                                                const val = e.currentTarget.value.trim();
-                                                if (val !== selectedAlbum.persDesc) {
-                                                  fetch(`/api/albums/${selectedAlbum.id}`, {
-                                                    method: 'PUT',
-                                                    headers: { 'Content-Type': 'application/json' },
-                                                    body: JSON.stringify({ persDesc: val })
-                                                  }).then(() => {
-                                                    window.dispatchEvent(new CustomEvent('albumUpdated'));
-                                                  });
-                                                }
-                                                setSelectedAlbum({ ...selectedAlbum, persDesc: val, isEditingPersDesc: false } as any);
-                                              }
-                                            }}
-                                            onBlur={(e) => {
-                                              const val = e.target.value.trim();
-                                              if (val !== selectedAlbum.persDesc) {
-                                                fetch(`/api/albums/${selectedAlbum.id}`, {
-                                                  method: 'PUT',
-                                                  headers: { 'Content-Type': 'application/json' },
-                                                  body: JSON.stringify({ persDesc: val })
-                                                }).then(() => {
-                                                  window.dispatchEvent(new CustomEvent('albumUpdated'));
-                                                });
-                                              }
-                                              setSelectedAlbum({ ...selectedAlbum, persDesc: val, isEditingPersDesc: false } as any);
-                                            }}
-                                            placeholder="Ghi chú đánh giá của bạn về album..."
-                                          />
-                                          <span className="text-[8px] text-white/30 font-mono text-right">Nhấn Enter để lưu</span>
-                                        </div>
-                                      ) : (
-                                        <div 
-                                          className="cursor-pointer group-hover/pers:bg-white/5 p-1 -ml-1 transition-colors rounded-sm"
-                                          onClick={() => {
-                                            setSelectedAlbum({ ...selectedAlbum, isEditingPersDesc: true } as any);
-                                          }}
-                                        >
-                                          <p className="text-[10.5px] md:text-[14px] leading-relaxed font-sans text-slate-300">
-                                            {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có miêu tả cá nhân. Nhấn để thêm...</span>}
-                                          </p>
-                                        </div>
-                                      )}
+                                      <div className="p-1 -ml-1 transition-colors rounded-sm">
+                                        <p className="text-[10.5px] md:text-[14px] leading-relaxed font-sans text-slate-300">
+                                          {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có miêu tả cá nhân (sửa qua albums.json).</span>}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
 

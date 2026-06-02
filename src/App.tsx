@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { INITIAL_TIERS, Tier, Album } from "./data";
 import { TierList } from "./components/TierList";
-import { ChatSidebar } from "./components/ChatSidebar";
 import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Music, Activity, Disc, BarChart2, MessageSquare, Plus, X, Menu, Settings, Users, Laptop } from "lucide-react";
+import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl } from "./utils";
 
@@ -14,17 +13,9 @@ export default function App() {
   // TasteProfile and DNA tabs are removed to keep the interface pristine and single-purpose
   const activeTab = "ranking";
   
-  // Mobile layout state
-  const [mobileSubView, setMobileSubView] = useState<"chat" | "ranking">("ranking");
-  
   // Selected Album detailing state (held globally for synchronization)
   const [selectedAlbum, setSelectedAlbum] = useState<(Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null>(null);
 
-  // Stateful minimized Sidebar on desktop
-  const [isChatMinimized, setIsChatMinimized] = useState(true);
-  const [isChatFloatingOpen, setIsChatFloatingOpen] = useState(false);
-  const [chatSidebarWidth, setChatSidebarWidth] = useState(380);
-  const [isDragging, setIsDragging] = useState(false);
   const [albumColors, setAlbumColors] = useState<Record<string, any>>({});
   const [showMobileWarning, setShowMobileWarning] = useState(false);
 
@@ -36,42 +27,6 @@ export default function App() {
       setShowMobileWarning(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (!isDragging) return;
-    const handleMouseMove = (e: MouseEvent) => {
-      // Boundaries for chat
-      if (e.clientX >= 250 && e.clientX <= 800) {
-        setChatSidebarWidth(e.clientX);
-      }
-    };
-    const handleMouseUp = () => setIsDragging(false);
-    
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDragging]);
-
-  const handleDeleteAlbumRow = async (albumId: number, tierId: string) => {
-    if (window.confirm("Bạn có chắc chắn muốn xóa album này khỏi bảng xếp hạng không?")) {
-      try {
-        await fetch(`/api/albums/${albumId}`, { method: 'DELETE' });
-        fetchAlbumsData();
-        setSelectedAlbum(null);
-      } catch(e) {
-        console.error(e);
-      }
-    }
-  };
-
-  const handleResetTiers = async () => {
-    if (window.confirm("Vì dữ liệu được lưu trong albums.json, bạn hãy mở file JSON để khôi phục thủ công nhé.")) {
-      // noop
-    }
-  };
 
   const applyAlbumsState = (data: Record<string, any>) => {
     let allInitialAlbums = INITIAL_TIERS.flatMap(t => t.albums);
@@ -118,85 +73,17 @@ export default function App() {
     setAlbumColors(data);
   };
 
-  const fetchAlbumsData = () => {
-    fetch("/api/albums")
-      .then(async res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Response is not JSON");
-        }
-        return res.json();
-      })
-      .then((data: Record<string, any>) => {
-        applyAlbumsState(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.warn("Failed to fetch albums from server, falling back to static albums.json data:", err);
-        applyAlbumsState(albumsData);
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
-    fetchAlbumsData();
-    const handleUpdate = () => fetchAlbumsData();
-    window.addEventListener('albumUpdated', handleUpdate);
-    return () => window.removeEventListener('albumUpdated', handleUpdate);
+    applyAlbumsState(albumsData);
+    setLoading(false);
   }, []);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden font-sans relative rounded-none border-0">
+    <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden">
 
-      {/* 2. Main Content Split Panel with Restored Chat Sidebar and Seamless Grid Viewport */}
+      {/* 2. Main content area with pristine TierList viewport */}
       <div className="flex-1 flex flex-row h-full overflow-hidden relative rounded-none">
-        
-        {/* DESKTOP SIDEBAR LOGIC WITH SHARP ANIMATED WIDTH & CENTERED SEAM DIVIDER */}
-        {activeTab === "ranking" && (
-          <>
-            <motion.div 
-              animate={{ 
-                width: isChatMinimized ? 0 : chatSidebarWidth,
-                minWidth: isChatMinimized ? 0 : chatSidebarWidth,
-                opacity: isChatMinimized ? 0 : 1
-              }}
-              transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              className="hidden md:flex flex-col h-full overflow-hidden bg-white relative border-r border-slate-900/10"
-            >
-              <ChatSidebar tiers={tiers} />
-            </motion.div>
-
-            {/* SEAM TOGGLE CONTROLLER RIGHT BETWEEN BOTH PANELS */}
-            <div 
-              className="hidden md:flex flex-none w-[4px] cursor-col-resize hover:bg-blue-500 active:bg-blue-600 bg-slate-900/15 transition-colors relative z-40 items-center justify-center"
-              onMouseDown={(e) => {
-                e.preventDefault();
-                setIsDragging(true);
-              }}
-            >
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsChatMinimized(!isChatMinimized);
-                }}
-                className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-10 bg-slate-950 hover:bg-blue-600 text-white flex items-center justify-center border border-slate-900 shadow-md transition-all cursor-pointer z-50 rounded-full transform active:scale-95"
-                title={isChatMinimized ? "Mở thảo luận" : "Thu gọn thảo luận"}
-              >
-                <span className="font-mono text-[9px] font-bold select-none leading-none">
-                  {isChatMinimized ? "»" : "«"}
-                </span>
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* 3. ROBUST METRO TILES VIEWPORTS CONTENT - Set edge-to-edge bg covering top-to-bottom of available space */}
         <div className="flex-grow overflow-hidden flex flex-col bg-[#0b0c0e] w-full">
-          
           <AnimatePresence mode="wait">
             {activeTab === "ranking" ? (
               <motion.div
@@ -206,58 +93,14 @@ export default function App() {
                 exit={{ opacity: 0 }}
                 className="w-full h-full flex flex-col overflow-hidden"
               >
-                {/* Mobile segmented toggle view switchers */}
-                <div className="md:hidden flex flex-none p-1 bg-slate-200 border-b border-slate-350 gap-1 z-30">
-                  <button
-                    type="button"
-                    onClick={() => setMobileSubView("chat")}
-                    className={`flex-1 py-1.5 text-xs font-sans font-black uppercase transition-all rounded-none ${
-                      mobileSubView === "chat" ? "bg-slate-950 text-white" : "text-slate-600 bg-white/40"
-                    }`}
-                  >
-                    Trò chuyện
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setMobileSubView("ranking")}
-                    className={`flex-1 py-1.5 text-xs font-sans font-black uppercase transition-all rounded-none ${
-                      mobileSubView === "ranking" ? "bg-slate-950 text-white" : "text-slate-650 bg-white/40"
-                    }`}
-                  >
-                    Bảng xếp hạng
-                  </button>
-                </div>
-
                 <div className="flex-grow min-h-0 overflow-hidden">
-                  {/* Desktop view */}
-                  <div className="hidden md:block h-full">
-                    <TierList 
-                      albumColors={albumColors}
-                      tiers={tiers}
-                      selectedAlbum={selectedAlbum}
-                      setSelectedAlbum={setSelectedAlbum}
-                      onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: getImgbbCoverUrl(album.artist, album.title) })} 
-                      onResetTiers={handleResetTiers}
-                      handleDeleteAlbum={handleDeleteAlbumRow}
-                    />
-                  </div>
-
-                  {/* Mobile view toggled */}
-                  <div className="block md:hidden h-full">
-                    {mobileSubView === "chat" ? (
-                      <ChatSidebar tiers={tiers} />
-                    ) : (
-                      <TierList 
-                        albumColors={albumColors}
-                        tiers={tiers}
-                        selectedAlbum={selectedAlbum}
-                        setSelectedAlbum={setSelectedAlbum}
-                        onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: getImgbbCoverUrl(album.artist, album.title) })} 
-                        onResetTiers={handleResetTiers}
-                        handleDeleteAlbum={handleDeleteAlbumRow}
-                      />
-                    )}
-                  </div>
+                  <TierList 
+                    albumColors={albumColors}
+                    tiers={tiers}
+                    selectedAlbum={selectedAlbum}
+                    setSelectedAlbum={setSelectedAlbum}
+                    onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title) })} 
+                  />
                 </div>
               </motion.div>
             ) : (
@@ -273,40 +116,6 @@ export default function App() {
             )}
           </AnimatePresence>
         </div>
-
-        {/* FLOATING POP OUT OVERLAY DRAWER - When chat is minimized but trồi ra (tab nổi đè lên, đóng x ẩn tiếp) */}
-        <AnimatePresence>
-          {isChatFloatingOpen && (
-            <>
-              {/* Back backdrop shade click to close overlay */}
-              <div 
-                onClick={() => setIsChatFloatingOpen(false)}
-                className="absolute inset-0 z-40 bg-black/25 backdrop-blur-xs cursor-default" 
-              />
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                className="absolute top-0 bottom-0 left-14 w-[380px] bg-white border-r-2 border-slate-950 z-50 flex flex-col shadow-2xl rounded-none"
-              >
-                <div className="p-3 bg-slate-950 text-white flex justify-between items-center px-4 shrink-0 rounded-none">
-                  <span className="text-[10px] font-mono font-black tracking-widest">DISCUSSION FLYOUT</span>
-                  <button 
-                    onClick={() => setIsChatFloatingOpen(false)}
-                    className="p-1 px-2.5 bg-white/10 hover:bg-white/20 text-white text-[9px] font-sans font-black uppercase tracking-wider rounded-none cursor-pointer"
-                  >
-                    ✖ ẨN CHAT
-                  </button>
-                </div>
-                <div className="flex-1 overflow-hidden">
-                  <ChatSidebar tiers={tiers} />
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-
       </div>
 
       {/* Responsive unified detail overlay solely active on Mobile portrait layout */}
@@ -359,18 +168,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-200 flex justify-between">
-                <button
-                  onClick={() => {
-                    const foundTier = tiers.find(t => t.albums.some(a => a.id === selectedAlbum.id));
-                    if (foundTier) {
-                      handleDeleteAlbumRow(selectedAlbum.id, foundTier.id);
-                    }
-                  }}
-                  className="px-3 py-1.5 bg-red-100 border border-red-300 text-red-600 font-bold font-sans text-[10px] uppercase cursor-pointer"
-                >
-                  Xóa Album
-                </button>
+              <div className="mt-5 pt-3 border-t border-slate-200 flex justify-end">
                 <button
                   onClick={() => setSelectedAlbum(null)}
                   className="px-4 py-1.5 bg-slate-900 text-white font-bold font-sans text-[10px] uppercase cursor-pointer"

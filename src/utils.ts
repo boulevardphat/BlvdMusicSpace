@@ -179,7 +179,6 @@ const CRITIC_REVIEWS: Record<string, string> = {
  */
 export function getAlbumCriticReview(artist: string, title: string, id?: number): string {
   const normTitle = (title || "").toLowerCase().trim();
-  const normArtist = (artist || "").toLowerCase().trim();
   
   // 1. Check if we have exact match in pre-curated map
   for (const [key, val] of Object.entries(CRITIC_REVIEWS)) {
@@ -188,22 +187,5 @@ export function getAlbumCriticReview(artist: string, title: string, id?: number)
     }
   }
 
-  // 2. Select elegant template deterministically based on hash of title + artist
-  const textSeed = `${artist} - ${title}`;
-  let hash = 0;
-  for (let i = 0; i < textSeed.length; i++) {
-    hash = (hash << 5) - hash + textSeed.charCodeAt(i);
-    hash |= 0; // Convert to 32bit integer
-  }
-  const index = Math.abs(hash) % 5;
-
-  const templates = [
-    `Một hành trình nghệ thuật đột phá, pha trộn hoàn hảo cấu trúc âm thanh hiện đại rực rỡ và những suy tư nội tâm thấu suốt của ${artist} qua ${title}.`,
-    `Tác phẩm tiêu biểu cho tinh thần tiên phong đầy nhạc tính, ${title} một lần nữa khẳng định di sản bền vững và sức biểu cảm phi thường của ${artist}.`,
-    `${title} mở ra một không gian âm nhạc tràn ngập cảm xúc, nơi ${artist} biểu đạt xuất sắc tầm nhìn nghệ thuật độc đáo và tư duy hòa âm thời thượng.`,
-    `Pha trộn tinh tế giữa sự mộc mạc đời thường và tư duy khái niệm đẳng cấp, tác phẩm ${title} của ${artist} xứng đáng là một điểm sáng chói lọi trong dòng chảy nghệ thuật đương đại.`,
-    `Sức hấp dẫn mãnh liệt từ ${title} đến từ những thử nghiệm âm thanh táo bạo và khả năng kết nối cảm xúc kỳ diệu của ${artist} với người nghe đại chúng.`
-  ];
-
-  return templates[index];
+  return "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình.";
 }
