@@ -10,7 +10,7 @@
           "artist": "Björk",
           "title": "Vespertine",
           "coverUrl": "https://i.ibb.co/gMnF9rP4/bjork-vespertine.png",
-          "hex": "#1a2530",
+          "hex": "#1c1e1f",
           "rank": 1,
           "profDesc": "Một kiệt tác dịu dàng và nội tâm, nơi Björk dệt nên giấc mơ điện tử vi tế từ những âm thanh micro-beat và dàn dây lộng lẫy để tôn vinh sự thiêng liêng của tình yêu.",
           "persDesc": ""
@@ -20,7 +20,7 @@
           "artist": "Kylie Minogue",
           "title": "Impossible Princess",
           "coverUrl": "https://i.ibb.co/7JSWMgCQ/kylie-minogue-impossible-princess-deluxe-edition.webp",
-          "hex": "#120521",
+          "hex": "#0b1a30",
           "rank": 2,
           "profDesc": "Trải nghiệm nghệ thuật mang tính cá nhân và táo bạo nhất của Kylie, thử nghiệm thành công với trip-hop, electronica và indie-pop để phơi bày những lát cắt nội tâm sâu sắc nhất.",
           "persDesc": ""
@@ -30,7 +30,7 @@
           "artist": "Madonna",
           "title": "Confessions on a Dance Floor",
           "coverUrl": "https://i.ibb.co/kVMgMWqT/madonna-confessions-on-a-dance-floor.png",
-          "hex": "#4a1936",
+          "hex": "#b51d65",
           "rank": 3,
           "profDesc": "Một thánh đường disco-house liền mạch tuyệt vời, đỉnh cao sáng tạo của thế kỷ XXI nơi Madonna biến sàn khiêu vũ thành không gian cứu rỗi tâm hồn.",
           "persDesc": ""
@@ -40,7 +40,7 @@
           "artist": "Charli xcx",
           "title": "BRAT",
           "coverUrl": "https://i.ibb.co/C325GfvS/charli-xcx-brat.webp",
-          "hex": "#2e4513",
+          "hex": "#8ace00",
           "rank": 4,
           "profDesc": "Tuyên ngôn pop thô ráp, hỗn loạn và chân thật đến tột cùng của thế kỷ mới; di sản của Charli xcx trong việc giải cấu trúc hyperpop và định hình lại văn hóa đại chúng.",
           "persDesc": ""
@@ -50,7 +50,7 @@
           "artist": "Lana Del Rey",
           "title": "Did you know that there's a tunnel under Ocean Blvd",
           "coverUrl": "https://i.ibb.co/67D4nQZ6/lana-del-rey-did-you-know-that-theres-a-tunnel-under-ocean-blvd.webp",
-          "hex": "#2b2a28",
+          "hex": "#1f1e1a",
           "rank": 5,
           "profDesc": "Một thiên tiểu thuyết âm nhạc đậm chất tự truyện đầy chất thơ của Lana Del Rey, đào sâu vào lịch sử gia đình, ký ức cô quạnh và những khát khao hiện sinh trong trẻo.",
           "persDesc": ""
@@ -60,7 +60,7 @@
           "artist": "Madonna",
           "title": "Ray of Light",
           "coverUrl": "https://i.ibb.co/QvLMqbxZ/madonna-ray-of-light.png",
-          "hex": "#14314c",
+          "hex": "#1ca2d9",
           "rank": 6,
           "profDesc": "Bước chuyển mình vĩ đại đưa Madonna chạm tới đỉnh cao tâm linh thông qua sự kết hợp xuất thần của đạo Phật, Kabbalah, nhạc electronica u tối và ambient trip-hop.",
           "persDesc": ""
@@ -70,7 +70,7 @@
           "artist": "Lorde",
           "title": "Pure Heroine",
           "coverUrl": "https://i.ibb.co/zWQC8b7F/lorde-pure-heroine.webp",
-          "hex": "#1a1a1a",
+          "hex": "#0a0a0a",
           "rank": 7,
           "profDesc": "Tuyệt tác tối giản nắm bắt trọn vẹn sự thờ ơ, nỗi cô đơn u uất và khao khát khẳng định bản thân của tuổi vị thành niên, tái định hình cấu trúc âm nhạc pop hiện đại.",
           "persDesc": ""
@@ -80,7 +80,7 @@
           "artist": "tlinh",
           "title": "ái",
           "coverUrl": "https://i.ibb.co/4gTmj2by/tlinh-ai.png",
-          "hex": "#401c27",
+          "hex": "#e86481",
           "rank": 8,
           "profDesc": "Một dấu mốc vàng son của R&B/Pop Việt Nam, nơi tlinh phô diễn tư duy giai điệu gợi cảm đầy nữ tính và góc nhìn trưởng thành mãnh liệt về bản chất của tình yêu.",
           "persDesc": ""
@@ -90,7 +90,7 @@
           "artist": "Lana Del Rey",
           "title": "Norman Fucking Rockwell!",
           "coverUrl": "https://i.ibb.co/qLLk4Qw8/lana-del-rey-norman-fucking-rockwell.webp",
-          "hex": "#273040",
+          "hex": "#3273a8",
           "rank": 9,
           "profDesc": "Đỉnh cao sự nghiệp chói lịu của Lana Del Rey, một bản cáo chung tuyệt đẹp dành cho giấc mơ Mỹ được bao bọc bởi những phím đàn piano cổ điển và những câu ca dao thời thượng.",
           "persDesc": ""
@@ -107,9 +107,9 @@
           "artist": "Robyn",
           "title": "Honey",
           "coverUrl": "https://i.ibb.co/LXYdgFsh/robyn-honey.webp",
-          "hex": "",
+          "hex": "#cf7c48",
           "rank": 10,
-          "profDesc": "Bài học kinh điển về thứ nhạc club-pop ấm áp và gợi cảm, đánh đổi những bản thánh ca bùng nổ để nhường chỗ cho sự lôi cuốn thầm kín của dòng nhạc house.",
+          "profDesc": "Bài học kinh điển về thứ nhạc club-pop ấm áp và gợi cảm, đánh đổi những bản thánh ca bùng nổ để nhường chỗ cho sự lôi cuốn thầm kín của dòng nhạc house. Sự tiết chế trong khâu sản xuất giúp Robyn khai thác trọn vẹn những rung cảm tinh tế và nỗi buồn lãng đãng trên sàn nhảy.",
           "persDesc": ""
         },
         {
@@ -117,9 +117,9 @@
           "artist": "Zara Larsson",
           "title": "Midnight Sun",
           "coverUrl": "https://i.ibb.co/tMT7H39D/zara-larsson-midnight-sun.png",
-          "hex": "#3a2a30",
+          "hex": "#db7c4a",
           "rank": 11,
-          "profDesc": "Một tuyệt tác dance-pop mang đậm hơi thở Scandinavia, lấp lánh sự lãng mạn của những đêm trắng mùa hè rực rỡ.",
+          "profDesc": "Một tuyệt tác dance-pop mang đậm hơi thở Scandinavia, lấp lánh sự lãng mạn của những đêm trắng mùa hè rực rỡ. Album là minh chứng cho khả năng xuất sắc trong việc hòa quyện những giai điệu pop khổng lồ với âm hưởng club-ready đầy lôi cuốn.",
           "persDesc": ""
         },
         {
@@ -127,9 +127,9 @@
           "artist": "FKA twigs",
           "title": "EUSEXUA",
           "coverUrl": "https://i.ibb.co/bj4MBgC0/fka-twigs-eusexua.png",
-          "hex": "#302621",
+          "hex": "#1a120f",
           "rank": 12,
-          "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn.",
+          "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn. Sự dịch chuyển từ nỗi đau sang niềm hoan lạc chứng tỏ một bước tiến dũng cảm trong hành trình nghệ thuật của cô.",
           "persDesc": ""
         },
         {
@@ -137,9 +137,9 @@
           "artist": "Phùng Khánh Linh",
           "title": "GIỮA MỘT VẠN NGƯỜI",
           "coverUrl": "https://i.ibb.co/Dgj6jvVG/phung-khanh-linh-giua-mot-van-nguoi.png",
-          "hex": "#253327",
+          "hex": "#0e2a40",
           "rank": 13,
-          "profDesc": "Một kỳ quan City Pop Việt hóa chuẩn mực, khẳng định tài năng viết lách đỉnh cao và giọng ca biến ảo của Phùng Khánh Linh lồng lộng trong những nhịp đập lung linh rực rỡ.",
+          "profDesc": "Một kỳ quan City Pop Việt hóa chuẩn mực, khẳng định tài năng viết lách đỉnh cao và giọng ca biến ảo của Phùng Khánh Linh lồng lộng trong những nhịp đập lung linh rực rỡ. Đây không chỉ là màn tái hiện hoài niệm mà còn là bước nhảy vọt đem âm thanh thập niên 80 tiệm cận với khán giả đương đại.",
           "persDesc": ""
         },
         {
@@ -147,9 +147,9 @@
           "artist": "Madonna",
           "title": "Erotica (PA Version)",
           "coverUrl": "https://i.ibb.co/JRLLX12L/madonna-erotica-pa-version.png",
-          "hex": "#272a33",
+          "hex": "#121e33",
           "rank": 14,
-          "profDesc": "Tác phẩm mang tính cách mạng bộc trực nhất về tình dục và tính nữ, thách thức mọi tabu xã hội bằng những nhịp điệu đen tối, gai góc của jazz-house và trip-hop.",
+          "profDesc": "Tác phẩm mang tính cách mạng bộc trực nhất về tình dục và tính nữ, thách thức mọi tabu xã hội bằng những nhịp điệu đen tối, gai góc của jazz-house và trip-hop. Bản ngã trần trụi và thông điệp giải phóng cá nhân biến Erotica thành một tượng đài đi trước thời đại, không ngần ngại đối mặt với định kiến.",
           "persDesc": ""
         },
         {
@@ -159,7 +159,7 @@
           "coverUrl": "https://i.ibb.co/HLgNkRk0/fka-twigs-eusexua-afterglow.png",
           "hex": "#2a1c22",
           "rank": 15,
-          "profDesc": "Một cuộc đại cách mạng về âm thanh nơi FKA twigs hòa quyện nhạc điện tử thể nghiệm với nhịp đập techno dồn dập, phác họa trạng thái thăng hoa tinh khiết nhất của thể xác và tâm hồn.",
+          "profDesc": "Bản mở rộng chìm đắm sâu hơn vào vũ trụ techno-pop, kéo dài dư âm của sự thăng hoa bằng những kết cấu âm thanh ảo diệu và nhịp điệu thôi miên. FKA twigs tái định nghĩa khái niệm 'afterparty' qua lăng kính nghệ thuật đầy chiêm nghiệm, biến những dư chấn cuối cùng thành cảm xúc tĩnh tại.",
           "persDesc": ""
         },
         {
@@ -167,9 +167,9 @@
           "artist": "Kesha",
           "title": "Gag Order",
           "coverUrl": "https://i.ibb.co/zhHkF3Dt/kesha-gag-order.webp",
-          "hex": "#2b2b2b",
+          "hex": "#5c564f",
           "rank": 16,
-          "profDesc": "Sự thăng hoa tột bậc từ nỗi đau tăm tối; album art-pop giàu chiều sâu giúp Kesha rũ bỏ quá khứ để tìm lại tiếng nói chân thực thông qua những thanh âm acoustic mộc mạc.",
+          "profDesc": "Sự thăng hoa tột bậc từ nỗi đau tăm tối; album art-pop giàu chiều sâu giúp Kesha rũ bỏ quá khứ để tìm lại tiếng nói chân thực thông qua những thanh âm acoustic mộc mạc và điện tử nhiễu loạn. Tác phẩm phơi bày một linh hồn vụn vỡ nhưng kiên cường trước nghịch cảnh bằng sự tự sự gai góc nhất.",
           "persDesc": ""
         },
         {
@@ -177,9 +177,9 @@
           "artist": "Kylie Minogue",
           "title": "Fever",
           "coverUrl": "https://i.ibb.co/gLgwPjcf/kylie-minogue-fever.png",
-          "hex": "#e0ebd3",
+          "hex": "#dcedeb",
           "rank": 17,
-          "profDesc": "Đỉnh cao tinh hoa của Dance-Pop toàn cầu, một cỗ máy tạo hit không tì vết đầy sang trọng và quyến rũ vượt thời gian.",
+          "profDesc": "Đỉnh cao tinh hoa của Dance-Pop toàn cầu, một cỗ máy tạo hit không tì vết đầy sang trọng và quyến rũ vượt thời gian. Những đường bass nu-disco sắc sảo và chất giọng nũng nịu đặc trưng đã biến Fever thành khuôn mẫu hoàn hảo không thể phá vỡ cho nhạc pop thế kỷ 21.",
           "persDesc": ""
         },
         {
@@ -187,9 +187,9 @@
           "artist": "FKA twigs",
           "title": "MAGDALENE",
           "coverUrl": "https://i.ibb.co/HDm6wY9s/fka-twigs-magdalene.png",
-          "hex": "#2d2421",
+          "hex": "#a83d25",
           "rank": 18,
-          "profDesc": "Kiệt tác art-pop thấm đẫm nỗi đau tôn giáo và xác thịt, với giọng hát thiên thần lơ lửng trên những cấu trúc điện tử vỡ vụn.",
+          "profDesc": "Kiệt tác art-pop thấm đẫm nỗi đau tôn giáo và xác thịt, với giọng hát thiên thần lơ lửng trên những cấu trúc điện tử vỡ vụn. Tác phẩm đào sâu vào nguyên mẫu Mary Magdalene để chữa lành những tổn thương nội tâm, thiết lập một chuẩn mực mới cho dòng nhạc pop thể nghiệm đương đại.",
           "persDesc": ""
         },
         {
@@ -199,7 +199,7 @@
           "coverUrl": "https://i.ibb.co/Fk3rSPr0/zara-larsson-midnight-sun-girls-trip.png",
           "hex": "#2a3d4f",
           "rank": 19,
-          "profDesc": "Bản phối khí giòn giã tràn ngập tiếng Bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn.",
+          "profDesc": "Bản phối khí giòn giã tràn ngập tiếng bass đầy năng lượng tiệc tùng của nhóm bạn, mở rộng thêm không gian âm thanh cho Midnight Sun bụi bặm hơn. Trải nghiệm thính giác được đẩy lên cực đại thông qua những giai điệu dancefloor bùng nổ, đánh thức khát khao tự do tuổi trẻ.",
           "persDesc": ""
         },
         {
@@ -207,9 +207,9 @@
           "artist": "Ninajirachi",
           "title": "I Love My Computer",
           "coverUrl": "https://i.ibb.co/HD90FJ2V/ninajirachi-i-love-my-computer.png",
-          "hex": "#222222",
+          "hex": "#a81dc2",
           "rank": 20,
-          "profDesc": "Một trải nghiệm hyperpop sôi động, mang đậm hơi thở của thời đại kỹ thuật số với những âm thanh giòn giã và chắp vá sắc sảo.",
+          "profDesc": "Một trải nghiệm hyperpop sôi động, mang đậm hơi thở của thời đại kỹ thuật số với những âm thanh giòn giã và chắp vá sắc sảo. Ninajirachi chứng minh tư duy đánh beat tương lai, nhào nặn những dải synth điên rồ thành một hành trình sonic sắc nét và khó quên.",
           "persDesc": ""
         },
         {
@@ -217,9 +217,9 @@
           "artist": "Björk",
           "title": "Vulnicura",
           "coverUrl": "https://i.ibb.co/nM63hJC4/bjork-vulnicura.png",
-          "hex": "#2f3613",
+          "hex": "#d4c117",
           "rank": 21,
-          "profDesc": "Bản hùng ca đầy đau đớn về sự đổ vỡ, nơi những dàn dây lộng lẫy hòa quyện cùng nhịp đập điện tử sắc lạnh để bóc trần vết thương lòng sâu hoắm.",
+          "profDesc": "Bản hùng ca đầy đau đớn về sự đổ vỡ, nơi những dàn dây lộng lẫy hòa quyện cùng nhịp đập điện tử sắc lạnh để bóc trần vết thương lòng sâu hoắm. Đây là một trong những tuyệt tác cá nhân, chân thực và giàu tính điện ảnh nhất trong toàn bộ di sản đồ sộ của Björk.",
           "persDesc": ""
         },
         {
@@ -227,9 +227,9 @@
           "artist": "Kylie Minogue",
           "title": "Light Years",
           "coverUrl": "https://i.ibb.co/15gxDRp/kylie-minogue-light-years.png",
-          "hex": "#182a4d",
+          "hex": "#257ec7",
           "rank": 22,
-          "profDesc": "Sự hồi sinh ngoạn mục của nữ hoàng nhạc pop nước Úc, đắm chìm trong ánh đèn rực rỡ của disco và camp để tạo nên một album thuần khiết sự vui tươi.",
+          "profDesc": "Sự hồi sinh ngoạn mục của nữ hoàng nhạc pop nước Úc, đắm chìm trong ánh đèn rực rỡ của disco và camp để tạo nên một album thuần khiết sự vui tươi. Tác phẩm đã đặt nền móng vững chắc cho kỷ nguyên hoàng kim tiếp theo của Kylie Minogue trên bản đồ âm nhạc thế giới.",
           "persDesc": ""
         },
         {
@@ -237,9 +237,9 @@
           "artist": "Charli xcx",
           "title": "Brat and it's completely different but also still brat",
           "coverUrl": "https://i.ibb.co/WWq80vNd/charli-xcx-brat-and-its-completely-different-but-also-still-brat.png",
-          "hex": "#424d21",
+          "hex": "#ffffff",
           "rank": 23,
-          "profDesc": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ.",
+          "profDesc": "Bản phối lại mang tính bứt phá vô tiền khoáng hậu, bóp méo và giải cấu trúc các club-bangers thô ráp để tạo ra một không gian hyperpop điên rồ đầy quyến rũ. Việc mở rộng ranh giới hợp tác đã biến kỷ nguyên Brat thành một trào lưu văn hóa tập thể không thể chối bỏ.",
           "persDesc": ""
         },
         {
@@ -249,7 +249,7 @@
           "coverUrl": "https://i.ibb.co/B5prKHjB/miley-cyrus-something-beautiful.png",
           "hex": "#362734",
           "rank": 24,
-          "profDesc": "Dự án thể nghiệm tham vọng lặn sâu vào nhạc rock và psychedelia, khai thác trọn vẹn chất giọng khàn nội lực và tâm hồn hoang dại của Miley.",
+          "profDesc": "Dự án thể nghiệm tham vọng lặn sâu vào nhạc rock và psychedelia, khai thác trọn vẹn chất giọng khàn nội lực và tâm hồn hoang dại của Miley. Lớp màn âm thanh gai góc tôn lên sự trưởng thành vượt bậc trong cách cô dẫn dắt câu chuyện âm nhạc và bảo vệ cái tôi cá nhân.",
           "persDesc": ""
         },
         {
@@ -259,7 +259,7 @@
           "coverUrl": "https://i.ibb.co/sdmXtQfL/lorde-virgin.png",
           "hex": "#282a32",
           "rank": 25,
-          "profDesc": "Tuyển tập những thanh âm nguyên sơ tăm tối, lột tả trọn vẹn sự bất an và góc nhìn hoài nghi độc đáo của một nghệ sĩ trẻ thiên tài.",
+          "profDesc": "Tuyển tập những thanh âm nguyên sơ tăm tối, lột tả trọn vẹn sự bất an và góc nhìn hoài nghi độc đáo của một nghệ sĩ trẻ thiên tài. Khả năng viết lời sắc lẹm, chua chát biến những khoảnh khắc cô độc thành những bản thánh ca bất hủ cho một thế hệ mới chông chênh.",
           "persDesc": ""
         },
         {
@@ -267,9 +267,9 @@
           "artist": "Obito",
           "title": "Đánh Đổi",
           "coverUrl": "https://i.ibb.co/x9rfH1v/obito-danh-doi.png",
-          "hex": "#342217",
+          "hex": "#3d3632",
           "rank": 26,
-          "profDesc": "Tác phẩm Hip-hop tự sự gai góc và chân thực bậc nhất của âm nhạc Việt, kể lại hành trình trưởng thành ngột ngạt cùng những hy sinh trong cuộc chiến danh vọng.",
+          "profDesc": "Tác phẩm Hip-hop tự sự gai góc và chân thực bậc nhất của âm nhạc Việt, kể lại hành trình trưởng thành ngột ngạt cùng những hy sinh trong cuộc chiến danh vọng. Kỹ thuật gieo vần sắc bén đi kèm beat nhạc nặng đô tạo nên một bản cáo trạng đầy sức nặng về cái giá của thành công.",
           "persDesc": ""
         },
         {
@@ -277,9 +277,9 @@
           "artist": "Wren Evans",
           "title": "LOI CHOI: The Neo Pop Punk",
           "coverUrl": "https://i.ibb.co/B5DPQpM4/wren-evans-loi-choi-the-neo-pop-punk.png",
-          "hex": "#241935",
+          "hex": "#e82a2a",
           "rank": 27,
-          "profDesc": "Cú hích ngông cuồng làm đảo lộn sân chơi Việt Pop, nơi Wren Evans tự do pha trộn disco, punk, R&B thành một dòng chảy năng lượng trẻ hóa rực lửa.",
+          "profDesc": "Cú hích ngông cuồng làm đảo lộn sân chơi Việt Pop, nơi Wren Evans tự do pha trộn disco, punk, R&B thành một dòng chảy năng lượng trẻ hóa rực lửa. Tính cá nhân hóa đậm nét cùng khả năng sáng tác trào phúng đã định hình một thế hệ nghệ sĩ Gen Z đầy tự tin và phá cách.",
           "persDesc": ""
         },
         {
@@ -289,7 +289,7 @@
           "coverUrl": "https://i.ibb.co/bjFFk2yM/addison-rae-addison.jpg",
           "hex": "#182736",
           "rank": 28,
-          "profDesc": "Bản tuyên ngôn pop bubblegum đầy kiêu hãnh, biến những giai điệu Y2K vô tri thành một trải nghiệm club ngọt ngào và cực kỳ bắt tai.",
+          "profDesc": "Bản tuyên ngôn pop bubblegum đầy kiêu hãnh, biến những giai điệu Y2K vô tri thành một trải nghiệm club ngọt ngào và cực kỳ bắt tai. Khả năng tái tạo năng lượng pop thuần túy giúp cô lột xác khỏi mác hiện tượng mạng để hiên ngang bước vào đường đua nghệ sĩ thực thụ.",
           "persDesc": ""
         },
         {
@@ -299,7 +299,7 @@
           "coverUrl": "https://i.ibb.co/60sYzJ1B/pinkpantheress-fancy-that.png",
           "hex": "#1a2c3a",
           "rank": 29,
-          "profDesc": "Bức tranh hoài niệm nhòa mờ ảo giác, dệt nên những tự sự u buồn trên nền nhịp đập drum 'n' bass và UK garage hối hả.",
+          "profDesc": "Bức tranh hoài niệm nhòa mờ ảo giác, dệt nên những tự sự u buồn trên nền nhịp đập drum 'n' bass và UK garage hối hả. Thời lượng bài hát ngắn gọn nhưng kết cấu vô cùng chặt chẽ đã định hình một luồng gió mới cho dòng chảy bedroom pop đương đại.",
           "persDesc": ""
         },
         {
@@ -307,9 +307,9 @@
           "artist": "ROSALÍA",
           "title": "LUX",
           "coverUrl": "https://i.ibb.co/491TMy5/rosalia-lux.webp",
-          "hex": "#2e212f",
+          "hex": "#851515",
           "rank": 30,
-          "profDesc": "Kỳ quan avant-pop đột phá, va chạm mạnh mẽ giữa di sản flamenco và kết cấu điện tử tương lai để tái định nghĩa âm nhạc Latin.",
+          "profDesc": "Kỳ quan avant-pop đột phá, va chạm mạnh mẽ giữa di sản flamenco truyền thống và kết cấu điện tử tương lai để tái định nghĩa hoàn toàn âm nhạc Latin. Tư duy hình ảnh đồng nhất cùng giọng ca ma mị đưa tác phẩm chạm đến đỉnh cao của nghệ thuật toàn cầu.",
           "persDesc": ""
         },
         {
@@ -319,7 +319,7 @@
           "coverUrl": "https://i.ibb.co/whY9tQgj/ariana-grande-dangerous-woman.jpg",
           "hex": "#1f1f1f",
           "rank": 31,
-          "profDesc": "Bước chuyển mình trưởng thành bùng nổ, kết hợp hoàn hảo giữa giọng hát R&B quyền lực, pop nhịp độ cao và sự quyến rũ chết người.",
+          "profDesc": "Bước chuyển mình trưởng thành bùng nổ, kết hợp hoàn hảo giữa giọng hát R&B quyền lực, nhạc pop nhịp độ cao và sự quyến rũ chết người. Sự đa dạng trong âm thanh từ house đến soul khẳng định vị thế một diva thế hệ mới thực thụ không thể chối cãi.",
           "persDesc": ""
         }
       ]
@@ -334,9 +334,9 @@
           "artist": "Hoàng Thùy Linh",
           "title": "Hoàng",
           "coverUrl": "https://i.ibb.co/tpP4cjhP/hoang-thuy-linh-hoang.png",
-          "hex": "",
+          "hex": "#d63a2b",
           "rank": 32,
-          "profDesc": "Bản thiết kế chuẩn mực của V-Pop hiện đại, làm cầu nối mượt mà giữa âm hưởng dân gian Bắc Bộ với synth-pop cực kỳ bắt tai và future bass.",
+          "profDesc": "Bản thiết kế chuẩn mực của V-Pop hiện đại, làm cầu nối mượt mà giữa âm hưởng dân gian Bắc Bộ với synth-pop cực kỳ bắt tai và future bass. Tư duy sản xuất táo bạo cùng concept đồng nhất đã đưa tác phẩm thành cột mốc lịch sử trong việc định hình bản sắc nhạc Việt đương đại.",
           "persDesc": ""
         },
         {
@@ -344,9 +344,9 @@
           "artist": "Kylie Minogue",
           "title": "Aphrodite",
           "coverUrl": "https://i.ibb.co/60s6HYC9/kylie-minogue-aphrodite.png",
-          "hex": "#162842",
+          "hex": "#1c3f7a",
           "rank": 33,
-          "profDesc": "Một chuyến du hành hoang lạc lên đỉnh Olympus của nhạc dance-pop, ngập tràn những bản hit hưng phấn không tì vết.",
+          "profDesc": "Một chuyến du hành hoang lạc lên đỉnh Olympus của nhạc dance-pop, ngập tràn những bản hit hưng phấn không tì vết. Nhịp đập euphoric rực rỡ và những đoạn điệp khúc huy hoàng đã tôn vinh vị thế nữ thần sàn nhảy vĩnh cửu của cô trong suốt nhiều thập kỷ.",
           "persDesc": ""
         },
         {
@@ -354,9 +354,9 @@
           "artist": "Kylie Minogue",
           "title": "Kylie Minogue (1994)",
           "coverUrl": "https://i.ibb.co/k6hNhsRt/kylie-minogue-kylie-minogue-special-edition.jpg",
-          "hex": "#3b3d30",
+          "hex": "#1c1b18",
           "rank": 34,
-          "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn.",
+          "profDesc": "Hành trình tìm lại bản sắc tuyệt đẹp pha trộn Euro-House thời thượng và các thử nghiệm Adult Contemporary chín chắn. Sự dũng cảm rũ bỏ hình tượng bubblegum vô tư giúp Kylie phô diễn một khía cạnh quyến rũ, tăm tối và đầy tính nghệ thuật.",
           "persDesc": ""
         },
         {
@@ -364,9 +364,9 @@
           "artist": "Lily Allen",
           "title": "West End Girl",
           "coverUrl": "https://i.ibb.co/fYKCLW01/lily-allen-west-end-girl.png",
-          "hex": "#1c3b28",
+          "hex": "#fa84a3",
           "rank": 35,
-          "profDesc": "Những lát cắt châm biếm sâu cay về cuộc sống thành thị nước Anh, được bọc trong lớp vỏ ska-pop và reggae tinh nghịch tưng tửng.",
+          "profDesc": "Những lát cắt châm biếm sâu cay về cuộc sống thành thị nước Anh, được bọc trong lớp vỏ ska-pop và reggae tinh nghịch tưng tửng. Sự kết hợp giữa ca từ trào phúng, chua chát và giai điệu vui tươi tạo nên nét quyến rũ độc đáo không thể trộn lẫn.",
           "persDesc": ""
         },
         {
@@ -374,9 +374,9 @@
           "artist": "Wren Evans",
           "title": "NỔ",
           "coverUrl": "https://i.ibb.co/ynPzd3Wx/wren-evans-no.png",
-          "hex": "#401313",
+          "hex": "#941818",
           "rank": 36,
-          "profDesc": "Cú rẽ nhánh bùng nổ đầy ngông cuồng, giải cấu trúc nhạc pop Việt bằng những âm thanh thể nghiệm và tư duy thẩm mỹ dị biệt.",
+          "profDesc": "Cú rẽ nhánh bùng nổ đầy ngông cuồng, giải cấu trúc nhạc pop Việt bằng những âm thanh thể nghiệm và tư duy thẩm mỹ dị biệt. Không ngại phá vỡ giới hạn an toàn, Wren Evans thiết lập một ngôn ngữ âm nhạc đầy khiêu khích và luôn tự làm mới mình.",
           "persDesc": ""
         },
         {
@@ -384,9 +384,9 @@
           "artist": "Björk",
           "title": "Biophilia",
           "coverUrl": "https://i.ibb.co/YTyT0nh8/bjork-biophilia-deluxe-edition.png",
-          "hex": "#402613",
+          "hex": "#2a3852",
           "rank": 37,
-          "profDesc": "Bản giao hưởng thiên hà mang tính cách mạng, hòa quyện công nghệ tương lai và hiện tượng tự nhiên thành một trải nghiệm nghệ thuật vĩ đại.",
+          "profDesc": "Bản giao hưởng thiên hà mang tính cách mạng, hòa quyện công nghệ tương lai và hiện tượng tự nhiên thành một trải nghiệm nghệ thuật vĩ đại. Tác phẩm đi xa hơn một album thông thường, trở thành một môn học về vũ trụ học và sự sống qua lăng kính âm thanh vi diệu.",
           "persDesc": ""
         },
         {
@@ -394,9 +394,9 @@
           "artist": "Björk",
           "title": "Volta",
           "coverUrl": "https://i.ibb.co/k6HM7f8b/bjork-volta.png",
-          "hex": "#3d1326",
+          "hex": "#d63838",
           "rank": 38,
-          "profDesc": "Một cuộc nổi loạn rực rỡ và trần trụi, sục sôi năng lượng tribal với những nhịp đập dồn dập và dàn kèn đồng hoang dã.",
+          "profDesc": "Một cuộc nổi loạn rực rỡ và trần trụi, sục sôi năng lượng tribal với những nhịp đập dồn dập và dàn kèn đồng hoang dã. Bước lùi tạm thời khỏi những cấu trúc vi mô để đắm mình vào thế giới bộ lạc mãnh liệt, phô bày thứ âm nhạc đầy tính bản năng.",
           "persDesc": ""
         },
         {
@@ -404,9 +404,9 @@
           "artist": "C418",
           "title": "Minecraft - Volume Alpha",
           "coverUrl": "https://i.ibb.co/qFCXr1Tq/c418-minecraft-volume-alpha.png",
-          "hex": "#233321",
+          "hex": "#54a840",
           "rank": 39,
-          "profDesc": "Thánh ca của sự tĩnh lặng và nỗi cô đơn vô hình, định hình ký ức của cả một thế hệ bằng thanh âm ambient mộc mạc nhất.",
+          "profDesc": "Thánh ca của sự tĩnh lặng và nỗi cô đơn vô hình, định hình ký ức của cả một thế hệ bằng thanh âm ambient mộc mạc nhất. Những nốt piano thưa thớt rơi vào khoảng không tạo nên một không gian thiền định mênh mông, vươn xa khỏi khuôn khổ nhạc nền trò chơi.",
           "persDesc": ""
         },
         {
@@ -414,9 +414,9 @@
           "artist": "C418",
           "title": "Minecraft - Volume Beta",
           "coverUrl": "https://i.ibb.co/yc0n3NYK/c418-minecraft-volume-beta.jpg",
-          "hex": "#332121",
+          "hex": "#782b42",
           "rank": 40,
-          "profDesc": "Sự mở rộng tối tăm và phức tạp hơn của thế giới khối vuông, dẫn dắt người nghe chìm sâu vào những ảo giác điện tử êm ái.",
+          "profDesc": "Sự mở rộng tối tăm và phức tạp hơn của thế giới khối vuông, dẫn dắt người nghe chìm sâu vào những ảo giác điện tử êm ái. Việc bổ sung của nhịp điệu lo-fi và kết cấu synth dày dặn biến tác phẩm thành một hành trình khám phá tâm lý đầy cuốn hút.",
           "persDesc": ""
         },
         {
@@ -424,9 +424,9 @@
           "artist": "tlinh",
           "title": "FLVR",
           "coverUrl": "https://i.ibb.co/ZRBS614R/tlinh-flvr.png",
-          "hex": "#181a33",
+          "hex": "#372d61",
           "rank": 41,
-          "profDesc": "Khẳng định cái tôi đầy kiêu hãnh và uyển chuyển của tlinh, pha trộn mượt mà giữa R&B hiện đại và những nhịp hip-hop cực kỳ quyến rũ.",
+          "profDesc": "Khẳng định cái tôi đầy kiêu hãnh và uyển chuyển của tlinh, pha trộn mượt mà giữa R&B hiện đại và những nhịp hip-hop cực kỳ quyến rũ. Cấu trúc bài hát thông minh cùng flow rap linh hoạt tôn lên một khía cạnh tính nữ phóng khoáng, quyền lực và không thỏa hiệp.",
           "persDesc": ""
         },
         {
@@ -434,9 +434,9 @@
           "artist": "Bích Phương",
           "title": "tâm trạng tan hơi chậm một chút",
           "coverUrl": "https://i.ibb.co/5Xq3LNCb/bich-phuong-tam-trang-tan-hoi-cham-mot-chut.png",
-          "hex": "#3d2b33",
+          "hex": "#735678",
           "rank": 42,
-          "profDesc": "Chuyến du hành êm ái vào thế giới lo-fi pop, vỗ về những tâm hồn chông chênh bằng giai điệu lãng đãng đầy mộng mơ.",
+          "profDesc": "Chuyến du hành êm ái vào thế giới lo-fi pop, vỗ về những tâm hồn chông chênh bằng giai điệu lãng đãng đầy mộng mơ. Khả năng hát như thủ thỉ kết hợp với phần beat tối giản tạo ra một liều thuốc chữa lành mềm mại, tinh tế cho những ngày u ám.",
           "persDesc": ""
         },
         {
@@ -444,9 +444,9 @@
           "artist": "cupcakKe",
           "title": "Dauntless Manifesto",
           "coverUrl": "https://i.ibb.co/QvmBqFks/cupcakke-dauntless-manifesto.png",
-          "hex": "#19363d",
+          "hex": "#30543e",
           "rank": 43,
-          "profDesc": "Tuyên ngôn hip-hop sắc lẹm và không khoan nhượng, phô diễn kỹ năng rap xuất thần và cá tính gai góc không thể bị thuần hóa.",
+          "profDesc": "Tuyên ngôn hip-hop sắc lẹm và không khoan nhượng, phô diễn kỹ năng rap xuất thần và cá tính gai góc không thể bị thuần hóa. Vượt lên trên những ca từ gây sốc thường thấy, tác phẩm bộc lộ sự sắc sảo đáng gờm trong cách cô thêu dệt vần điệu.",
           "persDesc": ""
         },
         {
@@ -454,9 +454,9 @@
           "artist": "Kylie Minogue",
           "title": "Body Language",
           "coverUrl": "https://i.ibb.co/mrFD3v2C/kylie-minogue-body-language.png",
-          "hex": "#2b3d36",
+          "hex": "#d9303e",
           "rank": 44,
-          "profDesc": "Thể nghiệm synth-pop gợi cảm và tinh tế, mượn nhịp đập R&B mượt mà để tôn lên nét quyến rũ trưởng thành của Kylie.",
+          "profDesc": "Thể nghiệm synth-pop gợi cảm và tinh tế, mượn nhịp đập R&B/hip-hop mượt mà để tôn lên nét quyến rũ trưởng thành của Kylie. Sự tiết chế trong giọng hát và những đường bass tối giản tạo nên một không gian lãng mạn đầy xác thịt và cực kỳ lôi cuốn.",
           "persDesc": ""
         },
         {
@@ -464,9 +464,9 @@
           "artist": "Billie Eilish",
           "title": "HIT ME HARD AND SOFT",
           "coverUrl": "https://i.ibb.co/tpHyPtGz/billie-eilish-hit-me-hard-and-soft.png",
-          "hex": "#193b2a",
+          "hex": "#103657",
           "rank": 45,
-          "profDesc": "Sự phát triển vượt bậc của chị em nhà Eilish, bẻ gãy mọi quy chuẩn cấu trúc bài hát thông thường bằng sự đối nghịch hoàn hảo giữa lời thì thầm mộng mị và những nhịp bass bùng nổ.",
+          "profDesc": "Sự phát triển vượt bậc của chị em nhà Eilish, bẻ gãy mọi quy chuẩn cấu trúc bài hát thông thường bằng sự đối nghịch hoàn hảo giữa lời thì thầm mộng mị và những nhịp bass bùng nổ. Tính trần trụi trong cảm xúc biến đây thành dự án chân thực và phức tạp nhất của cô từ trước đến nay.",
           "persDesc": ""
         },
         {
@@ -474,9 +474,9 @@
           "artist": "Beyoncé",
           "title": "RENAISSANCE",
           "coverUrl": "https://i.ibb.co/BHTRcXrW/beyonce-renaissance.png",
-          "hex": "#1a1a1a",
+          "hex": "#171717",
           "rank": 46,
-          "profDesc": "Lễ kỷ niệm huy hoàng của văn hóa club và cộng đồng queer, một tuyệt tác house/dance-pop liền mạch, lộng lẫy và không tì vết.",
+          "profDesc": "Lễ kỷ niệm huy hoàng của văn hóa club và cộng đồng queer, một tuyệt tác house/dance-pop liền mạch, lộng lẫy và không tì vết. Khả năng chuyển bài mượt mà đỉnh cao hòa quyện cùng thông điệp giải phóng xác thịt tạo nên một cuộc đại cách mạng trên sàn nhảy.",
           "persDesc": ""
         },
         {
@@ -484,9 +484,9 @@
           "artist": "Madonna",
           "title": "Madame X",
           "coverUrl": "https://i.ibb.co/tp5TDN99/madonna-madame-x-deluxe.png",
-          "hex": "#2a1f26",
+          "hex": "#a3141f",
           "rank": 47,
-          "profDesc": "Bức chân dung âm nhạc tham vọng và kỳ lạ, kết hợp fado, latindance và art-pop để truyền tải những thông điệp chính trị sắc bén.",
+          "profDesc": "Bức chân dung âm nhạc tham vọng và kỳ lạ, kết hợp fado, latin-dance và art-pop để truyền tải những thông điệp chính trị sắc bén. Dù có phần hỗn loạn, sự đa dạng văn hóa biến tác phẩm thành một chuyến đi đáng giá của một người nữ nghệ sĩ không chịu ngồi yên.",
           "persDesc": ""
         },
         {
@@ -494,9 +494,9 @@
           "artist": "Madonna",
           "title": "American Life",
           "coverUrl": "https://i.ibb.co/RpyvH3Lp/madonna-american-life.png",
-          "hex": "#11261d",
+          "hex": "#59614f",
           "rank": 48,
-          "profDesc": "Nỗ lực giải cấu trúc Giấc mơ Mỹ qua những giai điệu folktronica khô khốc, sắc lạnh và đầy tính châm biếm.",
+          "profDesc": "Nỗ lực giải cấu trúc Giấc mơ Mỹ qua những giai điệu folktronica khô khốc, sắc lạnh và đầy tính châm biếm. Khác xa với vẻ hào nhoáng thường thấy, album là tiếng nói phản chiến và chỉ trích thói sùng bái vật chất một cách cực đoan của xã hội hiện đại.",
           "persDesc": ""
         },
         {
@@ -504,9 +504,9 @@
           "artist": "Phương Mỹ Chi",
           "title": "Vũ Trụ Cò Bay",
           "coverUrl": "https://i.ibb.co/7dx427nM/phuong-my-chi-vu-tru-co-bay.png",
-          "hex": "#1b332b",
+          "hex": "#c27a29",
           "rank": 49,
-          "profDesc": "Sự kết hợp hoàn hảo giữa âm hưởng dân ca ba miền và folktronica hiện đại, tôn vinh những giá trị văn học Việt Nam đầy tự hào.",
+          "profDesc": "Sự kết hợp hoàn hảo giữa âm hưởng dân ca ba miền và folktronica hiện đại, tôn vinh những giá trị văn học Việt Nam đầy tự hào. Tư duy xử lý bài hát thông minh giúp âm nhạc truyền thống khoác lên mình diện mạo mới mẻ, tiếp cận mạnh mẽ đến thế hệ trẻ.",
           "persDesc": ""
         },
         {
@@ -514,9 +514,9 @@
           "artist": "Rose Gray",
           "title": "Louder, Please",
           "coverUrl": "https://i.ibb.co/QFXJyG7k/rose-gray-louder-please.png",
-          "hex": "#301d2c",
+          "hex": "#571f54",
           "rank": 50,
-          "profDesc": "Bữa tiệc nu-disco và house thập niên 90 cuồng nhiệt, đưa người nghe đắm chìm vào không khí hội hè ngập tràn hoan lạc.",
+          "profDesc": "Bữa tiệc nu-disco và house thập niên 90 cuồng nhiệt, đưa người nghe đắm chìm vào không khí hội hè ngập tràn hoan lạc. Âm thanh hoài cổ nhưng được sản xuất với độ nảy hiện đại, tái hiện lại kỷ nguyên hoàng kim của những đêm rave bất tận đến sáng.",
           "persDesc": ""
         },
         {
@@ -524,9 +524,9 @@
           "artist": "Lana Del Rey",
           "title": "Born To Die",
           "coverUrl": "https://i.ibb.co/PGJvDBt9/lana-del-rey-born-to-die-paradise-edition-special-version.jpg",
-          "hex": "#302613",
+          "hex": "#4f8ab3",
           "rank": 51,
-          "profDesc": "Bản thánh ca mở đường cho kỷ nguyên sad-pop, vẽ nên một Hollywood hào nhoáng nhưng mục nát qua lăng kính điện ảnh u buồn.",
+          "profDesc": "Bản thánh ca mở đường cho kỷ nguyên sad-pop, vẽ nên một Hollywood hào nhoáng nhưng mục nát qua lăng kính điện ảnh u buồn. Giai điệu hip-hop giao thoa với dàn nhạc giao hưởng đồ sộ đã định hình lại vĩnh viễn hệ sinh thái âm nhạc đại chúng thập niên 2010.",
           "persDesc": ""
         },
         {
@@ -534,9 +534,9 @@
           "artist": "Jessie Ware",
           "title": "What's Your Pleasure?",
           "coverUrl": "https://i.ibb.co/JwSyMtgS/jessie-ware-whats-your-pleasure.webp",
-          "hex": "#2d1624",
+          "hex": "#1a1a1a",
           "rank": 52,
-          "profDesc": "Tuyệt tác nu-disco sang trọng và thanh lịch, khơi gợi lại ánh hào quang lấp lánh của các sàn nhảy thập niên 70.",
+          "profDesc": "Tuyệt tác nu-disco sang trọng và thanh lịch, khơi gợi lại ánh hào quang lấp lánh của các sàn nhảy thập niên 70. Giọng ca mượt mà tựa nhung quyện chặt vào những tiếng bass nhịp nhàng, tạo ra một trải nghiệm lãng mạn và trưởng thành đến choáng ngợp.",
           "persDesc": ""
         },
         {
@@ -544,9 +544,9 @@
           "artist": "Madonna",
           "title": "Bedtime Stories",
           "coverUrl": "https://i.ibb.co/8gTbJhRY/madonna-bedtime-stories.png",
-          "hex": "#3d3639",
+          "hex": "#819da6",
           "rank": 53,
-          "profDesc": "Cái ôm ấm áp đầy nhục dục của R&B và trip-hop, xoa dịu những tranh cãi bằng sự mềm mại và lãng mạn tột cùng.",
+          "profDesc": "Cái ôm ấm áp đầy nhục dục của R&B và trip-hop, xoa dịu những tranh cãi bằng sự mềm mại và lãng mạn tột cùng. Một bước lùi chiến lược nhưng lại chứng minh khả năng biến hóa khôn lường của Madonna trong việc bắt kịp dòng chảy âm nhạc đương đại.",
           "persDesc": ""
         },
         {
@@ -554,9 +554,9 @@
           "artist": "Madonna",
           "title": "Music",
           "coverUrl": "https://i.ibb.co/ZRTDJFnZ/madonna-music.png",
-          "hex": "#1f1d33",
+          "hex": "#3664a8",
           "rank": 54,
-          "profDesc": "Sự pha trộn mang tính tiên phong giữa electronica, country và dance-pop, khẳng định khả năng tái phát minh vô hạn của nữ hoàng nhạc pop.",
+          "profDesc": "Sự pha trộn mang tính tiên phong giữa electronica, country và dance-pop, khẳng định khả năng tái phát minh vô hạn của nữ hoàng nhạc pop. Những âm thanh vocoder kỳ lạ va chạm với tiếng đàn acoustic tạo ra một thế giới lai tạo đầy rực rỡ và mới mẻ.",
           "persDesc": ""
         },
         {
@@ -564,9 +564,9 @@
           "artist": "Thể Thiên",
           "title": "Trần Thế",
           "coverUrl": "https://i.ibb.co/4R0yFnH3/the-thien-tran-the.png",
-          "hex": "#102326",
+          "hex": "#183f3d",
           "rank": 55,
-          "profDesc": "Bản lề âm nhạc đưa người nghe vào cõi suy tưởng, kết hợp chất liệu tâm linh phương Đông với tư duy điện tử đương đại.",
+          "profDesc": "Bản lề âm nhạc đưa người nghe vào cõi suy tưởng, kết hợp chất liệu tâm linh phương Đông với tư duy điện tử đương đại. Giai điệu ma mị hòa cùng những thanh âm thanh tĩnh vẽ nên một bức tranh nhân sinh quan vừa huyền bí vừa cuốn hút.",
           "persDesc": ""
         },
         {
@@ -574,9 +574,9 @@
           "artist": "Lana Del Rey",
           "title": "Blue Banisters",
           "coverUrl": "https://i.ibb.co/qLrc0DmF/lana-del-rey-blue-banisters.webp",
-          "hex": "#23260c",
+          "hex": "#b8b284",
           "rank": 56,
-          "profDesc": "Cuốn nhật ký âm nhạc mộc mạc và riêng tư nhất, nơi Lana tìm thấy sự bình yên giữa những phím đàn piano và những câu chuyện vụn vặt.",
+          "profDesc": "Cuốn nhật ký âm nhạc mộc mạc và riêng tư nhất, nơi Lana tìm thấy sự bình yên giữa những phím đàn piano và những câu chuyện vụn vặt. Không còn những ảo tưởng xa hoa, album là tiếng thở phào nhẹ nhõm của một người đàn bà đã chấp nhận những vết sẹo của chính mình.",
           "persDesc": ""
         },
         {
@@ -584,9 +584,9 @@
           "artist": "Madonna",
           "title": "Like a Prayer",
           "coverUrl": "https://i.ibb.co/pB2KF0rN/madonna-like-a-prayer.png",
-          "hex": "#331826",
+          "hex": "#52223b",
           "rank": 57,
-          "profDesc": "Đỉnh cao pop kinh điển phá vỡ mọi rào cản tôn giáo và tính dục, vươn tới sự thăng hoa vĩ đại của nghệ thuật và tự do cá nhân.",
+          "profDesc": "Đỉnh cao pop kinh điển phá vỡ mọi rào cản tôn giáo và tính dục, vươn tới sự thăng hoa vĩ đại của nghệ thuật và tự do cá nhân. Những cấu trúc bài hát pop-rock rực rỡ đan xen với dàn đồng ca Phúc âm đã tạo ra những tác phẩm vĩnh cửu vượt mọi thời đại.",
           "persDesc": ""
         },
         {
@@ -594,9 +594,9 @@
           "artist": "Tate McRae",
           "title": "So Close To What",
           "coverUrl": "https://i.ibb.co/ym74cCbn/tate-mcrae-so-close-to-what.png",
-          "hex": "#111426",
+          "hex": "#232f3b",
           "rank": 58,
-          "profDesc": "Tuyển tập pop-punk và dance-pop bộc trực, ghi lại chân thực sự dằn vặt của tuổi trẻ trong những mối quan hệ độc hại.",
+          "profDesc": "Tuyển tập pop-punk và dance-pop bộc trực, ghi lại chân thực sự dằn vặt của tuổi trẻ trong những mối quan hệ độc hại. Năng lượng sắc sảo, dồn dập cùng giọng hát đặc trưng giúp tác phẩm nắm bắt trọn vẹn sự bốc đồng và chông chênh của thế hệ Z.",
           "persDesc": ""
         },
         {
@@ -604,9 +604,9 @@
           "artist": "Lady Gaga",
           "title": "The Fame Monster",
           "coverUrl": "https://i.ibb.co/4Rvd0xmM/lady-gaga-the-fame-monster-deluxe-edition.png",
-          "hex": "#262426",
+          "hex": "#171717",
           "rank": 59,
-          "profDesc": "Cột mốc vĩ đại định hình lại văn hóa pop thập niên 2010, phơi bày những nỗi sợ hãi tăm tối nhất qua các bản dance hoành tráng.",
+          "profDesc": "Cột mốc vĩ đại định hình lại văn hóa pop thập niên 2010, phơi bày những nỗi sợ hãi tăm tối nhất qua các bản dance hoành tráng. Lớp màng công nghiệp ảm đạm hòa với giai điệu pop bất hủ đã tạo nên một con quái vật âm nhạc hoàn hảo về mặt concept lẫn thương mại.",
           "persDesc": ""
         },
         {
@@ -614,9 +614,9 @@
           "artist": "Taylor Swift",
           "title": "evermore",
           "coverUrl": "https://i.ibb.co/CpFJ6zZf/taylor-swift-evermore-deluxe-version.png",
-          "hex": "#2e2e2e",
+          "hex": "#ab673f",
           "rank": 60,
-          "profDesc": "Người chị em ma mị và hướng nội hơn của folklore, đào sâu vào những câu chuyện dân gian mùa đông bằng chất liệu indie-folk tinh tế.",
+          "profDesc": "Người chị em ma mị và hướng nội hơn của folklore, đào sâu vào những câu chuyện dân gian mùa đông bằng chất liệu indie-folk tinh tế. Việc chấp nhận những kết cấu âm thanh phi truyền thống và cách kể chuyện phức tạp chứng minh khả năng sáng tác đạt độ chín muồi xuất chúng.",
           "persDesc": ""
         },
         {
@@ -624,9 +624,9 @@
           "artist": "Björk",
           "title": "Homogenic",
           "coverUrl": "https://i.ibb.co/F4MdNNNR/bjork-homogenic.webp",
-          "hex": "#112e20",
+          "hex": "#8eaeb8",
           "rank": 61,
-          "profDesc": "Sự va chạm hoàn mỹ giữa dàn vĩ cầm băng giá của Iceland và những nhịp đập điện tử núi lửa, thiết lập tiêu chuẩn cho dòng avant-pop.",
+          "profDesc": "Sự va chạm hoàn mỹ giữa dàn vĩ cầm băng giá của Iceland và những nhịp đập điện tử núi lửa, thiết lập tiêu chuẩn cho dòng avant-pop. Vẻ đẹp hoang sơ của tự nhiên và sức mạnh của công nghệ hòa làm một, tạo ra những âm thanh vừa giận dữ vừa yêu thương.",
           "persDesc": ""
         },
         {
@@ -634,9 +634,9 @@
           "artist": "Imogen Heap",
           "title": "Speak for Yourself",
           "coverUrl": "https://i.ibb.co/0jHSHXj9/imogen-heap-speak-for-yourself.png",
-          "hex": "#2a222f",
+          "hex": "#d18228",
           "rank": 62,
-          "profDesc": "Kỳ quan folktronica tiên phong của thế kỷ mới, nơi âm thanh vocoder kỳ ảo dệt nên những tự sự nội tâm vụn vỡ mà tuyệt đẹp.",
+          "profDesc": "Kỳ quan folktronica tiên phong của thế kỷ mới, nơi âm thanh vocoder kỳ ảo dệt nên những tự sự nội tâm vụn vỡ mà tuyệt đẹp. Sự đột phá trong việc sử dụng giọng hát như một loại nhạc cụ độc lập đã truyền cảm hứng sâu sắc cho vô số nghệ sĩ điện tử sau này.",
           "persDesc": ""
         },
         {
@@ -644,9 +644,9 @@
           "artist": "Ms. Lauryn Hill",
           "title": "The Miseducation of Lauryn Hill",
           "coverUrl": "https://i.ibb.co/nMN0X2Ck/ms-lauryn-hill-the-miseducation-of-lauryn-hill.png",
-          "hex": "#212b1d",
+          "hex": "#785a3c",
           "rank": 63,
-          "profDesc": "Tượng đài bất diệt của neo-soul và hip-hop, rực rỡ tính nhân văn và sự kiêu hãnh của một người phụ nữ da màu.",
+          "profDesc": "Tượng đài bất diệt của neo-soul và hip-hop, rực rỡ tính nhân văn và sự kiêu hãnh của một người phụ nữ da màu. Giai điệu hoài cổ cùng thông điệp chữa lành sâu sắc khiến tác phẩm vượt qua bài kiểm tra của thời gian để trở thành di sản văn hóa cốt lõi.",
           "persDesc": ""
         },
         {
@@ -654,9 +654,9 @@
           "artist": "Billie Eilish",
           "title": "Happier Than Ever",
           "coverUrl": "https://i.ibb.co/VyZM7FC/billie-eilish-happier-than-ever.png",
-          "hex": "#372e29",
+          "hex": "#e0bc9d",
           "rank": 64,
-          "profDesc": "Màn lột xác châm biếm về mặt tối của sự nổi tiếng, pha trộn khéo léo giữa jazz, bossa nova và pop-rock đầy trưởng thành.",
+          "profDesc": "Màn lột xác châm biếm về mặt tối của sự nổi tiếng, pha trộn khéo léo giữa jazz, bossa nova và pop-rock đầy trưởng thành. Phản ứng mạnh mẽ trước những áp lực danh vọng được truyền tải qua sự chuyển mình tinh vi về cả thẩm mỹ lẫn cấu trúc bài hát.",
           "persDesc": ""
         },
         {
@@ -664,9 +664,9 @@
           "artist": "Nelly Furtado",
           "title": "Loose",
           "coverUrl": "https://i.ibb.co/svz8TL5f/nelly-furtado-loose.png",
-          "hex": "#2b1a13",
+          "hex": "#8a2020",
           "rank": 65,
-          "profDesc": "Cú bứt phá vĩ đại dưới bàn tay Timbaland, định nghĩa lại R&B/Dance-pop thập niên 2000 bằng nhịp điệu quyến rũ khó cưỡng.",
+          "profDesc": "Cú bứt phá vĩ đại dưới bàn tay Timbaland, định nghĩa lại R&B/Dance-pop thập niên 2000 bằng nhịp điệu quyến rũ khó cưỡng. Sự tự tin bùng nổ cùng những âm thanh hip-hop cách tân đã tạo ra hàng loạt bản siêu hit mãi mãi khắc sâu vào văn hóa đại chúng.",
           "persDesc": ""
         }
       ]
@@ -681,9 +681,9 @@
           "artist": "JADE",
           "title": "THAT'S SHOWBIZ BABY!",
           "coverUrl": "https://i.ibb.co/fYZrQ2q9/jade-thats-showbiz-baby.png",
-          "hex": "#262c3d",
+          "hex": "#2e173d",
           "rank": 66,
-          "profDesc": "Màn ra mắt bùng nổ ôm trọn tinh thần disco-pop và camp, châm biếm sâu cay những góc khuất hào nhoáng của ngành công nghiệp giải trí.",
+          "profDesc": "Màn ra mắt bùng nổ ôm trọn tinh thần disco-pop và camp, châm biếm sâu cay những góc khuất hào nhoáng của ngành công nghiệp giải trí. Bằng cách pha trộn năng lượng sân khấu kịch tính và kỹ thuật thanh nhạc đỉnh cao, JADE mở ra một kỷ nguyên solo đầy hứa hẹn.",
           "persDesc": ""
         },
         {
@@ -691,9 +691,9 @@
           "artist": "ADÉLA",
           "title": "The Provocateur",
           "coverUrl": "https://i.ibb.co/67CHkmw4/adela-the-provocateur.png",
-          "hex": "#3b211f",
+          "hex": "#8a2929",
           "rank": 67,
-          "profDesc": "Tuyên ngôn nghệ thuật lôi cuốn, mượn sự gợi cảm của R&B và những nhịp đập điện tử sắc lạnh để tái định nghĩa quyền lực tính nữ.",
+          "profDesc": "Tuyên ngôn nghệ thuật lôi cuốn, mượn sự gợi cảm của R&B và những nhịp đập điện tử sắc lạnh để tái định nghĩa quyền lực tính nữ. Sự táo bạo trong hình ảnh và giai điệu khẳng định một cá tính âm nhạc độc lập, khiêu khích nhưng không kém phần thanh lịch.",
           "persDesc": ""
         },
         {
@@ -701,9 +701,9 @@
           "artist": "Taylor Swift",
           "title": "1989 (Taylor's Version)",
           "coverUrl": "https://i.ibb.co/7NS63yfh/taylor-swift-1989-taylors-version.png",
-          "hex": "#123c4a",
+          "hex": "#8caac2",
           "rank": 68,
-          "profDesc": "Sự hồi sinh rực rỡ của kỷ nguyên synth-pop vĩ đại, giữ nguyên trọn vẹn ánh đèn neon và khát vọng tự do tuổi trẻ.",
+          "profDesc": "Sự hồi sinh rực rỡ của kỷ nguyên synth-pop vĩ đại, giữ nguyên trọn vẹn ánh đèn neon và khát vọng tự do tuổi trẻ. Việc tái thu âm không chỉ lấy lại quyền làm chủ mà còn tinh chỉnh lại những dải âm thanh mang tính biểu tượng với độ vang vọng và độ chi tiết hoàn hảo hơn.",
           "persDesc": ""
         },
         {
@@ -711,9 +711,9 @@
           "artist": "Billie Eilish",
           "title": "dont smile at me",
           "coverUrl": "https://i.ibb.co/XZhcF1Xz/billie-eilish-dont-smile-at-me.png",
-          "hex": "#401010",
+          "hex": "#cf2b2b",
           "rank": 69,
-          "profDesc": "EP mở đường đen tối và khác biệt, giới thiệu chất giọng thì thầm đặc trưng và tư duy electropop quái dị của Billie.",
+          "profDesc": "EP mở đường đen tối và khác biệt, giới thiệu chất giọng thì thầm đặc trưng và tư duy electropop quái dị của Billie. Những viên gạch nền móng đầu tiên này đã chứng minh tiềm năng phá vỡ mọi tiêu chuẩn khuôn mẫu của một ngôi sao nhạc pop tương lai.",
           "persDesc": ""
         },
         {
@@ -721,9 +721,9 @@
           "artist": "Lady Gaga",
           "title": "MAYHEM",
           "coverUrl": "https://i.ibb.co/ycpRbbXn/lady-gaga-mayhem.png",
-          "hex": "#2f1140",
+          "hex": "#321147",
           "rank": 70,
-          "profDesc": "Bữa tiệc industrial-dance ồn ào, đẫm máu và ngập tràn tính kịch, đưa Gaga trở về với bản ngã đen tối và điên rồ nhất.",
+          "profDesc": "Bữa tiệc industrial-dance ồn ào, đẫm máu và ngập tràn tính kịch, đưa Gaga trở về với bản ngã đen tối và điên rồ nhất. Sự pha trộn giữa kim loại nặng nề và nhịp điệu điện tử tàn khốc đánh dấu bước lột xác triệt để, đập tan mọi giới hạn của nhạc pop đương đại.",
           "persDesc": ""
         },
         {
@@ -731,9 +731,9 @@
           "artist": "Lorde",
           "title": "Melodrama",
           "coverUrl": "https://i.ibb.co/yn0LxRkZ/lorde-melodrama.png",
-          "hex": "#131640",
+          "hex": "#293e78",
           "rank": 71,
-          "profDesc": "Kiệt tác synth-pop thế kỷ gói gọn mọi cung bậc điên rồ, rực rỡ và vụn vỡ của một buổi tiệc tuổi trẻ chông chênh.",
+          "profDesc": "Kiệt tác synth-pop thế kỷ gói gọn mọi cung bậc điên rồ, rực rỡ và vụn vỡ của một buổi tiệc tuổi trẻ chông chênh. Khả năng miêu tả tâm lý thiên tài đan cài cùng những lớp lang âm thanh piano và beat điện tử dồn dập đã tạo ra một lăng kính vạn hoa về nỗi cô đơn.",
           "persDesc": ""
         },
         {
@@ -741,9 +741,9 @@
           "artist": "Chappell Roan",
           "title": "The Rise and Fall of a Midwest Princess",
           "coverUrl": "https://i.ibb.co/LXPCWz3G/chappell-roan-the-rise-and-fall-of-a-midwest-princess.png",
-          "hex": "#40132f",
+          "hex": "#bf3f86",
           "rank": 72,
-          "profDesc": "Hành trình khám phá bản ngã queer lộng lẫy và hoang dã, một album pop rực rỡ tôn vinh sự kịch cỡm và tự do.",
+          "profDesc": "Hành trình khám phá bản ngã queer lộng lẫy và hoang dã, một album pop rực rỡ tôn vinh sự kịch cỡm và tự do. Giọng hát điêu luyện và khả năng viết lời hài hước, chua cay biến tác phẩm thành một bản hùng ca giải phóng cá nhân đầy kiêu hãnh.",
           "persDesc": ""
         },
         {
@@ -751,9 +751,9 @@
           "artist": "Caroline Polachek",
           "title": "Desire, I Want To Turn Into You",
           "coverUrl": "https://i.ibb.co/nNv4h9R8/caroline-polachek-desire-i-want-to-turn-into-you-everasking-edition.png",
-          "hex": "#36161c",
+          "hex": "#ba7443",
           "rank": 73,
-          "profDesc": "Bản hùng ca avant-pop lãng mạn đến choáng ngợp, kết hợp giọng hát thần tiên với những âm thanh hyperpop vượt thời gian.",
+          "profDesc": "Bản hùng ca avant-pop lãng mạn đến choáng ngợp, kết hợp giọng hát thần tiên với những âm thanh hyperpop vượt thời gian. Việc dệt nên thế giới âm thanh lấy cảm hứng từ tiếng đàn flamenco, bagpipes và dải synth kỳ ảo đã biến đây thành một trong những đĩa nhạc vĩ đại nhất của thập kỷ.",
           "persDesc": ""
         },
         {
@@ -761,9 +761,9 @@
           "artist": "St. Vincent",
           "title": "MASSEDUCTION",
           "coverUrl": "https://i.ibb.co/tp01422K/st-vincent-masseduction.png",
-          "hex": "#36112d",
+          "hex": "#eb2f71",
           "rank": 74,
-          "profDesc": "Sự châm biếm sắc bén về quyền lực và dục vọng, được gói gọn trong những cú riff guitar góc cạnh và chất liệu synth-pop quyến rũ.",
+          "profDesc": "Sự châm biếm sắc bén về quyền lực và dục vọng, được gói gọn trong những cú riff guitar góc cạnh và chất liệu synth-pop quyến rũ. Chủ nghĩa tiêu dùng và nỗi khao khát được mổ xẻ dưới một lăng kính neon chói lóa, đầy tính giễu nhại và bi thương.",
           "persDesc": ""
         },
         {
@@ -771,9 +771,9 @@
           "artist": "Olivia Rodrigo",
           "title": "GUTS",
           "coverUrl": "https://i.ibb.co/4vCwSf2/olivia-rodrigo-guts-spilled.png",
-          "hex": "#241030",
+          "hex": "#5e387d",
           "rank": 75,
-          "profDesc": "Tuyển tập pop-punk bực dọc và chua chát, sắc lẹm trong từng câu chữ và trưởng thành vượt bậc về mặt âm thanh so với album đầu tay.",
+          "profDesc": "Tuyển tập pop-punk bực dọc và chua chát, sắc lẹm trong từng câu chữ và trưởng thành vượt bậc về mặt âm thanh so với album đầu tay. Giai điệu rock mạnh mẽ phơi bày những khủng hoảng của quá trình bước vào thế giới người lớn một cách trực diện và đầy mỉa mai.",
           "persDesc": ""
         },
         {
@@ -781,9 +781,9 @@
           "artist": "Olivia Rodrigo",
           "title": "SOUR",
           "coverUrl": "https://i.ibb.co/gMYJ8LLZ/olivia-rodrigo-sour.png",
-          "hex": "#221338",
+          "hex": "#9d83b5",
           "rank": 76,
-          "profDesc": "Hiện tượng pop toàn cầu nắm bắt trọn vẹn sự đau đớn và hờn ghen của tuổi trẻ qua những giai điệu bedroom pop đầy chân thật.",
+          "profDesc": "Hiện tượng pop toàn cầu nắm bắt trọn vẹn sự đau đớn và hờn ghen của tuổi trẻ qua những giai điệu bedroom pop đầy chân thật. Việc kết hợp ballad u sầu cùng pop-punk giận dữ đã tạo nên một cuốn nhật ký âm nhạc làm say đắm cả một thế hệ người nghe.",
           "persDesc": ""
         },
         {
@@ -791,9 +791,9 @@
           "artist": "Orange",
           "title": "CAM'ON",
           "coverUrl": "https://i.ibb.co/V0RhmbQt/orange-camon.png",
-          "hex": "#402010",
+          "hex": "#de6921",
           "rank": 77,
-          "profDesc": "Bức thư tình đầy xúc cảm với R&B/Pop, nơi Orange phô diễn giọng hát nội lực vút bay cùng những trải nghiệm trưởng thành sâu sắc.",
+          "profDesc": "Bức thư tình đầy xúc cảm với R&B/Pop, nơi Orange phô diễn giọng hát nội lực vút bay cùng những trải nghiệm trưởng thành sâu sắc. Những tự sự về sự vấp ngã và chữa lành được lồng ghép khéo léo vào nền hòa âm hiện đại, mang đậm tính quốc tế.",
           "persDesc": ""
         },
         {
@@ -801,9 +801,9 @@
           "artist": "TOWA TEI",
           "title": "SOUND MUSEUM",
           "coverUrl": "https://i.ibb.co/vvTmSjm4/towa-tei-sound-museum.png",
-          "hex": "#2b3b28",
+          "hex": "#587d55",
           "rank": 78,
-          "profDesc": "Viện bảo tàng âm thanh kỳ lạ và cấp tiến, pha trộn bossa nova, house và lounge music đầy tính vị lai từ những năm 90.",
+          "profDesc": "Viện bảo tàng âm thanh kỳ lạ và cấp tiến, pha trộn bossa nova, house và lounge music đầy tính vị lai từ những năm 90. Một di sản điện tử mang tính tiên phong, vạch ra ranh giới mới cho dòng Shibuya-kei với sự tinh tế vượt khỏi chuẩn mực thời đại.",
           "persDesc": ""
         },
         {
@@ -811,9 +811,9 @@
           "artist": "cupcakKe",
           "title": "Cum Cake",
           "coverUrl": "https://i.ibb.co/VWkPYQSg/cupcakke-cum-cake.png",
-          "hex": "#3d192c",
+          "hex": "#e688b1",
           "rank": 79,
-          "profDesc": "Khởi đầu hoang dã và không màng luật lệ, gây sốc bằng những ca từ tình dục trần trụi trên nền beat club thô ráp.",
+          "profDesc": "Khởi đầu hoang dã và không màng luật lệ, gây sốc bằng những ca từ tình dục trần trụi trên nền beat club thô ráp. Khả năng chơi chữ bậc thầy và tốc độ rap choáng ngợp lập tức khẳng định một vị thế độc tôn trong giới rap underground.",
           "persDesc": ""
         },
         {
@@ -821,9 +821,9 @@
           "artist": "cupcakKe",
           "title": "S.T.D",
           "coverUrl": "https://i.ibb.co/DH4Npgfy/cupcakke-std.jpg",
-          "hex": "#183820",
+          "hex": "#42614a",
           "rank": 80,
-          "profDesc": "Sự tiếp nối đầy khiêu khích và hài hước sắc bén, khẳng định vị thế nữ rapper gai góc bậc nhất thế giới ngầm.",
+          "profDesc": "Sự tiếp nối đầy khiêu khích và hài hước sắc bén, khẳng định vị thế nữ rapper gai góc bậc nhất thế giới ngầm. Các chủ đề từ quyền tự do thân thể đến sự giải phóng cá nhân được đưa vào qua nhịp điệu dồn dập, bùng nổ thứ năng lượng thuần khiết nhất.",
           "persDesc": ""
         },
         {
@@ -831,9 +831,9 @@
           "artist": "cupcakKe",
           "title": "The BakKery",
           "coverUrl": "https://i.ibb.co/xK7vX0nk/cupcakke-the-bakkery.png",
-          "hex": "#362016",
+          "hex": "#734633",
           "rank": 81,
-          "profDesc": "Bản tuyên ngôn trưởng thành hơn nhưng không kém phần nổi loạn, phô diễn kỹ thuật bắn vần sắc lẹm như dao.",
+          "profDesc": "Bản tuyên ngôn trưởng thành hơn nhưng không kém phần nổi loạn, phô diễn kỹ thuật bắn vần sắc lẹm như dao. Việc kết hợp những nền beat đa dạng giúp đẩy mạnh hình ảnh một nghệ sĩ toàn diện, không ngừng mở rộng ranh giới và không thể bị đóng khung.",
           "persDesc": ""
         },
         {
@@ -841,9 +841,9 @@
           "artist": "Cardi B",
           "title": "AM I THE DRAMA?",
           "coverUrl": "https://i.ibb.co/S4z6WKfS/cardi-b-am-i-the-drama.png",
-          "hex": "#38192a",
+          "hex": "#a82b4a",
           "rank": 82,
-          "profDesc": "Bản rap rực lửa đầy ngông cuồng, nơi Cardi B đối diện với thị phi bằng nhịp điệu dồn dập và sự kiêu hãnh tuyệt đối.",
+          "profDesc": "Bản rap rực lửa đầy ngông cuồng, nơi Cardi B đối diện với thị phi bằng nhịp điệu dồn dập và sự kiêu hãnh tuyệt đối. Lời đáp trả đanh thép đến truyền thông được thể hiện qua phong thái tự tin và kỹ năng vần điệu ngày một thăng hạng xuất sắc.",
           "persDesc": ""
         },
         {
@@ -851,9 +851,9 @@
           "artist": "Low G",
           "title": "L2K",
           "coverUrl": "https://i.ibb.co/1YjsDFhn/low-g-l2k.png",
-          "hex": "#202a36",
+          "hex": "#243f5e",
           "rank": 83,
-          "profDesc": "Sự trơn tru và điềm tĩnh đặc trưng trong từng nhịp flow, khắc họa chân dung một rapper Hà Nội lạnh lùng nhưng đầy sức hút.",
+          "profDesc": "Sự trơn tru và điềm tĩnh đặc trưng trong từng nhịp flow, khắc họa chân dung một rapper Hà Nội lạnh lùng nhưng đầy sức hút. Các con beat đậm chất chill-hop và lofi tôn lên những vần câu hóm hỉnh, được biến báo một cách cực kỳ thông minh.",
           "persDesc": ""
         },
         {
@@ -861,9 +861,9 @@
           "artist": "2Pillz",
           "title": "PILLZCASSO",
           "coverUrl": "https://i.ibb.co/7N6P9YZf/2pillz-pillzcasso.png",
-          "hex": "#132b1d",
+          "hex": "#356143",
           "rank": 84,
-          "profDesc": "Bản giao hưởng hip-hop thời đại mới của V-Rap, gây nghiện bằng tư duy đánh beat cực kỳ dị biệt và thời thượng.",
+          "profDesc": "Bản giao hưởng hip-hop thời đại mới của V-Rap, gây nghiện bằng tư duy đánh beat cực kỳ dị biệt và thời thượng. Cách xếp đặt âm thanh không theo lối mòn tạo ra những khoảng không đầy năng lượng, chứng tỏ bản lĩnh của một producer hàng đầu.",
           "persDesc": ""
         },
         {
@@ -871,9 +871,9 @@
           "artist": "Esthero",
           "title": "Breath From Another",
           "coverUrl": "https://i.ibb.co/v6nBj9dJ/esthero-breath-from-another.png",
-          "hex": "#32111f",
+          "hex": "#4c6645",
           "rank": 85,
-          "profDesc": "Cuộc khám phá trip-hop đầy mơ màng và bí ẩn, pha trộn tinh tế giữa jazz, jungle và R&B ngọt ngào.",
+          "profDesc": "Cuộc khám phá trip-hop đầy mơ màng và bí ẩn, pha trộn tinh tế giữa jazz, jungle và R&B ngọt ngào. Sự trôi dạt vô định của giai điệu ru người nghe vào một giấc mơ siêu thực mang đậm hơi thở của âm nhạc điện tử thập niên 90.",
           "persDesc": ""
         },
         {
@@ -881,9 +881,9 @@
           "artist": "Taylor Swift",
           "title": "reputation",
           "coverUrl": "https://i.ibb.co/Nd7kJddb/taylor-swift-reputation.png",
-          "hex": "#1a1a1a",
+          "hex": "#4a4a4a",
           "rank": 86,
-          "profDesc": "Màn trả thù ngọt ngào và tăm tối nhất, nơi Taylor mượn lớp vỏ electropop hầm hố để bảo vệ một trái tim khát khao yêu thương.",
+          "profDesc": "Màn trả thù ngọt ngào và tăm tối nhất, nơi Taylor mượn lớp vỏ electropop hầm hố để bảo vệ một trái tim khát khao yêu thương. Đằng sau những âm thanh công nghiệp ồn ào là một bức thư tình lãng mạn, chứng minh bản lĩnh sinh tồn mạnh mẽ giữa tâm bão dư luận.",
           "persDesc": ""
         },
         {
@@ -891,9 +891,9 @@
           "artist": "Tyler, The Creator",
           "title": "IGOR",
           "coverUrl": "https://i.ibb.co/Ps5K3ppC/tyler-the-creator-igor.jpg",
-          "hex": "#3b222d",
+          "hex": "#f29bbd",
           "rank": 87,
-          "profDesc": "Cú lột xác ngoạn mục thành nghệ sĩ neo-soul đầy tổn thương, phá vỡ cấu trúc rap truyền thống bằng những dải synth ma mị.",
+          "profDesc": "Cú lột xác ngoạn mục thành nghệ sĩ neo-soul đầy tổn thương, phá vỡ cấu trúc rap truyền thống bằng những dải synth ma mị. Từ bỏ nhân dạng quen thuộc, Tyler đem đến một chuyện tình đồng tính tan vỡ được nhào nặn với tầm nhìn nghệ thuật cực kỳ xuất chúng.",
           "persDesc": ""
         },
         {
@@ -901,9 +901,9 @@
           "artist": "The Weeknd",
           "title": "Starboy",
           "coverUrl": "https://i.ibb.co/vvfZ9J6C/the-weeknd-starboy-deluxe.png",
-          "hex": "#1a2133",
+          "hex": "#bd2025",
           "rank": 88,
-          "profDesc": "Một vũ trụ R&B pha synth-wave bóng bẩy và xa hoa, định hình lại âm thanh thương mại của dòng nhạc pop thế kỷ 21.",
+          "profDesc": "Một vũ trụ R&B pha synth-wave bóng bẩy và xa hoa, định hình lại âm thanh thương mại của dòng nhạc pop thế kỷ 21. Sự cộng tác với Daft Punk giúp tạo ra một lớp màng khoa học viễn tưởng hoàn hảo, che lấp đi sự rỗng tuếch và hoài nghi nội tâm tăm tối.",
           "persDesc": ""
         },
         {
@@ -911,9 +911,9 @@
           "artist": "Charli xcx",
           "title": "CRASH",
           "coverUrl": "https://i.ibb.co/4RBBJRMQ/charli-xcx-crash-deluxe.jpg",
-          "hex": "#28171f",
+          "hex": "#19192b",
           "rank": 89,
-          "profDesc": "Cú đâm trực diện vào dòng chảy pop đại chúng, biến tấu những công thức radio truyền thống thành một trải nghiệm nghệ thuật xuất sắc.",
+          "profDesc": "Cú đâm trực diện vào dòng chảy pop đại chúng, biến tấu những công thức radio truyền thống thành một trải nghiệm nghệ thuật xuất sắc. Từ bỏ hyperpop gai góc, Charli hóa thân thành một biểu tượng diva thập niên 80 với những nhịp điệu funk-pop không thể cưỡng lại.",
           "persDesc": ""
         },
         {
@@ -921,9 +921,9 @@
           "artist": "Hoàng Thùy Linh",
           "title": "LINK",
           "coverUrl": "https://i.ibb.co/QvqRhG2z/hoang-thuy-linh-link.png",
-          "hex": "#2e1d3d",
+          "hex": "#233a6e",
           "rank": 90,
-          "profDesc": "Tiếp nối sự rực rỡ của V-Pop dân gian đương đại, mang đến một lễ hội âm nhạc rộn ràng, tinh xảo và ngập tràn năng lượng tích cực.",
+          "profDesc": "Tiếp nối sự rực rỡ của V-Pop dân gian đương đại, mang đến một lễ hội âm nhạc rộn ràng, tinh xảo và ngập tràn năng lượng tích cực. Việc tích hợp mượt mà các yếu tố rap, R&B quốc tế cho thấy khát vọng vươn mình ra biển lớn đầy kiêu hãnh và tự tin.",
           "persDesc": ""
         },
         {
@@ -931,9 +931,9 @@
           "artist": "Madonna",
           "title": "Rebel Heart",
           "coverUrl": "https://i.ibb.co/F21Bwrp/madonna-rebel-heart-deluxe.png",
-          "hex": "#2c1719",
+          "hex": "#821114",
           "rank": 91,
-          "profDesc": "Sự kết hợp đầy mâu thuẫn nhưng thú vị giữa những ca khúc pop rạng rỡ và những thể nghiệm dance gai góc tăm tối.",
+          "profDesc": "Sự kết hợp đầy mâu thuẫn nhưng thú vị giữa những ca khúc pop rạng rỡ và những thể nghiệm dance gai góc tăm tối. Dù gặp rò rỉ trước ngày phát hành, album vẫn toát lên tinh thần bất khuất của một biểu tượng văn hóa luôn khát khao thử thách bản thân.",
           "persDesc": ""
         },
         {
@@ -941,9 +941,9 @@
           "artist": "Camila Cabello",
           "title": "C,XOXO",
           "coverUrl": "https://i.ibb.co/tpV0DB1X/camila-cabello-cxoxo.png",
-          "hex": "#112638",
+          "hex": "#7fb4d9",
           "rank": 92,
-          "profDesc": "Bức thư tình gửi thành phố Miami, pha trộn táo bạo giữa hyperpop, reggaeton và những rung động tình yêu đầy rủi ro.",
+          "profDesc": "Bức thư tình gửi thành phố Miami, pha trộn táo bạo giữa hyperpop, reggaeton và những rung động tình yêu đầy rủi ro. Khả năng nắm bắt những xu hướng âm nhạc dị biệt giúp Camila gột rửa hình tượng pop rập khuôn, phơi bày một góc khuất trưởng thành hơn.",
           "persDesc": ""
         }
       ]
@@ -958,9 +958,9 @@
           "artist": "Aphex Twin",
           "title": "Selected Ambient Works 85-92",
           "coverUrl": "https://i.ibb.co/Z6j7WM98/aphex-twin-selected-ambient-works-85-92.png",
-          "hex": "",
+          "hex": "#121212",
           "rank": 93,
-          "profDesc": "Kinh thánh của dòng ambient techno và IDM, dệt nên những dải âm thanh điện tử siêu thực và vượt thời gian từ phòng ngủ của một thiên tài.",
+          "profDesc": "Kinh thánh của dòng ambient techno và IDM, dệt nên những dải âm thanh điện tử siêu thực và vượt thời gian từ phòng ngủ của một thiên tài. Giai điệu bảng lảng như sương mù quyện cùng những nhịp trống sắc bén tạo ra một di sản bất diệt của nghệ thuật điện tử.",
           "persDesc": ""
         },
         {
@@ -968,9 +968,9 @@
           "artist": "Beyoncé",
           "title": "Lemonade",
           "coverUrl": "https://i.ibb.co/gMxydvDg/beyonce-lemonade.png",
-          "hex": "",
+          "hex": "#d6c84b",
           "rank": 94,
-          "profDesc": "Tuyên ngôn văn hóa đồ sộ, hòa quyện xuất sắc blues, rock, hip-hop vào một câu chuyện dữ dội về sự phản bội và vẻ đẹp của phụ nữ da màu.",
+          "profDesc": "Tuyên ngôn văn hóa đồ sộ, hòa quyện xuất sắc blues, rock, hip-hop vào một câu chuyện dữ dội về sự phản bội và vẻ đẹp của phụ nữ da màu. Chuyến hành trình từ sự giận dữ đến lòng tha thứ đã định hình lại vĩnh viễn tiêu chuẩn của một visual album hiện đại.",
           "persDesc": ""
         },
         {
@@ -978,9 +978,9 @@
           "artist": "Thắng",
           "title": "Cái Đầu Tiên",
           "coverUrl": "https://i.ibb.co/WWVrfSB5/thang-cai-dau-tien.png",
-          "hex": "",
+          "hex": "#e39c36",
           "rank": 95,
-          "profDesc": "Màn ra mắt solo ngẫu hứng và bay bổng, nắm bắt trọn vẹn chất lãng mạn tưng tửng đặc trưng của nhạc indie-pop Việt Nam.",
+          "profDesc": "Màn ra mắt solo ngẫu hứng và bay bổng, nắm bắt trọn vẹn chất lãng mạn tưng tửng đặc trưng của nhạc indie-pop Việt Nam. Lối viết lời giàu tính suy tưởng và những giai điệu mộc mạc biến tác phẩm thành một chốn dung thân bình yên cho tâm hồn rạn vỡ.",
           "persDesc": ""
         },
         {
@@ -988,9 +988,9 @@
           "artist": "marzuz",
           "title": "ả",
           "coverUrl": "https://i.ibb.co/4nCRP3yL/marzuz-a.png",
-          "hex": "",
+          "hex": "#2e2e2e",
           "rank": 96,
-          "profDesc": "Chuyến du hành R&B/Alternative tăm tối và thoát tục, nơi giọng ca ma mị của marzuz quyện chặt vào những thanh âm điện tử tối giản.",
+          "profDesc": "Chuyến du hành R&B/Alternative tăm tối và thoát tục, nơi giọng ca ma mị của marzuz quyện chặt vào những thanh âm điện tử tối giản. Những tổn thương nội tâm được mổ xẻ tinh vi qua những cấu trúc sonic đầy tính chiêm nghiệm và ma quái.",
           "persDesc": ""
         },
         {
@@ -998,9 +998,9 @@
           "artist": "Charli xcx",
           "title": "how i'm feeling now",
           "coverUrl": "https://i.ibb.co/hxYyXKPg/charli-xcx-how-im-feeling-now.png",
-          "hex": "",
+          "hex": "#d9d9d9",
           "rank": 97,
-          "profDesc": "Kiệt tác hyperpop DIY thô ráp mùa đại dịch, biến sự cô lập và lo âu thành những bản club banger chát chúa mà tuyệt đẹp.",
+          "profDesc": "Kiệt tác hyperpop DIY thô ráp mùa đại dịch, biến sự cô lập và lo âu thành những bản club banger chát chúa mà tuyệt đẹp. Tính công khai và tương tác trong quá trình sản xuất giúp album nắm bắt trọn vẹn tinh thần thời đại một cách chân thực nhất.",
           "persDesc": ""
         },
         {
@@ -1008,9 +1008,9 @@
           "artist": "Kylie Minogue",
           "title": "Tension II",
           "coverUrl": "https://i.ibb.co/m5rqznM3/kylie-minogue-tension-ii.png",
-          "hex": "#2b1022",
+          "hex": "#cc471d",
           "rank": 98,
-          "profDesc": "Phần tiếp nối rực rỡ của chuỗi ngày thống trị câu lạc bộ đêm, khẳng định đẳng cấp bền vững của nữ hoàng nhạc dance thập niên 2020.",
+          "profDesc": "Phần tiếp nối rực rỡ của chuỗi ngày thống trị câu lạc bộ đêm, khẳng định đẳng cấp bền vững của nữ hoàng nhạc dance thập niên 2020. Những nhịp điệu điện tử tối giản và chất disco hưng phấn tiếp tục tạo ra hàng loạt thánh ca lôi cuốn khán giả trên toàn cầu.",
           "persDesc": ""
         },
         {
@@ -1018,9 +1018,9 @@
           "artist": "Ariana Grande",
           "title": "eternal sunshine",
           "coverUrl": "https://i.ibb.co/4c6G5vz/ariana-grande-eternal-sunshine-deluxe-brighter-days-ahead.png",
-          "hex": "#382329",
+          "hex": "#b52830",
           "rank": 99,
-          "profDesc": "Cuốn băng cassette sưởi ấm tâm hồn, mượn âm hưởng house và R&B dịu nhẹ để xoa dịu những nỗi đau của một cuộc tình vụn vỡ.",
+          "profDesc": "Cuốn băng cassette sưởi ấm tâm hồn, mượn âm hưởng house và R&B dịu nhẹ để xoa dịu những nỗi đau của một cuộc tình vụn vỡ. Sự tiết chế trong kỹ thuật thanh nhạc để ưu tiên cảm xúc chân thật đã mở ra một kỷ nguyên trưởng thành, giàu lòng trắc ẩn của Ariana.",
           "persDesc": ""
         },
         {
@@ -1028,9 +1028,9 @@
           "artist": "Charli xcx",
           "title": "True Romance",
           "coverUrl": "https://i.ibb.co/6RL0H3z7/charli-xcx-true-romance.png",
-          "hex": "#2b192c",
+          "hex": "#612959",
           "rank": 100,
-          "profDesc": "Màn ra mắt u tối nhưng lộng lẫy, thiết lập nền móng goth-pop đẫm nước mắt làm tiền đề cho đế chế hyperpop sau này.",
+          "profDesc": "Màn ra mắt u tối nhưng lộng lẫy, thiết lập nền móng goth-pop đẫm nước mắt làm tiền đề cho đế chế hyperpop sau này. Lớp nền synth uể oải và phong cách hát như hờn dỗi lột tả một tình yêu ám ảnh đầy ngây dại và mộng mị trong văn hóa mạng.",
           "persDesc": ""
         },
         {
@@ -1038,9 +1038,9 @@
           "artist": "Charli xcx",
           "title": "SUCKER",
           "coverUrl": "https://i.ibb.co/5hGfpbjv/charli-xcx-sucker.png",
-          "hex": "#331627",
+          "hex": "#e64789",
           "rank": 101,
-          "profDesc": "Lời đáp trả mạnh mẽ và hỗn xược bằng những nhịp pop-punk bùng nổ, phá bĩnh mọi quy tắc cứng nhắc của nhạc pop.",
+          "profDesc": "Lời đáp trả mạnh mẽ và hỗn xược bằng những nhịp pop-punk bùng nổ, phá bĩnh mọi quy tắc cứng nhắc của nhạc pop. Giai điệu kẹo ngọt được bọc trong những đoạn riff guitar nổi loạn, thể hiện thái độ chống đối ngành công nghiệp âm nhạc truyền thống.",
           "persDesc": ""
         },
         {
@@ -1048,9 +1048,9 @@
           "artist": "Lana Del Rey",
           "title": "Honeymoon",
           "coverUrl": "https://i.ibb.co/C3G3kZkB/lana-del-rey-honeymoon.webp",
-          "hex": "#382419",
+          "hex": "#7e99ba",
           "rank": 102,
-          "profDesc": "Một bản nhạc phim hoang tàn, u uất và đầy ám ảnh, đưa người nghe trôi dạt vào những giấc mơ phù phiếm của một California cũ kỹ.",
+          "profDesc": "Một bản nhạc phim hoang tàn, u uất và đầy ám ảnh, đưa người nghe trôi dạt vào những giấc mơ phù phiếm của một California cũ kỹ. Nhịp điệu chậm rãi như kìm nén hòa cùng dàn nhạc vĩ đại tạo ra một cõi mộng du đẹp đẽ đến nghẹt thở.",
           "persDesc": ""
         },
         {
@@ -1058,9 +1058,9 @@
           "artist": "Lana Del Rey",
           "title": "Chemtrails Over The Country Club",
           "coverUrl": "https://i.ibb.co/1JzHvz72/lana-del-rey-chemtrails-over-the-country-club.webp",
-          "hex": "#1e2b26",
+          "hex": "#292929",
           "rank": 103,
-          "profDesc": "Sự rũ bỏ vẻ hào nhoáng để tìm về chất dân ca mộc mạc vùng Trung Tây, đẹp đẽ, cô liêu và tĩnh lặng đến nao lòng.",
+          "profDesc": "Sự rũ bỏ vẻ hào nhoáng để tìm về chất dân ca mộc mạc vùng Trung Tây, đẹp đẽ, cô liêu và tĩnh lặng đến nao lòng. Bức chân dung nữ tính mỏng manh được phác họa qua thanh âm guitar acoustic và những tự sự thì thầm đầy uẩn khúc sâu kín.",
           "persDesc": ""
         },
         {
@@ -1068,9 +1068,9 @@
           "artist": "Taylor Swift",
           "title": "folklore",
           "coverUrl": "https://i.ibb.co/jP5Y33rp/taylor-swift-folklore-deluxe-version.png",
-          "hex": "#1f221e",
+          "hex": "#949494",
           "rank": 104,
-          "profDesc": "Kiệt tác indie-folk sương khói ra đời giữa đại dịch, bộc lộ năng lực kể chuyện bậc thầy qua những giai điệu mộc mạc và chân thành.",
+          "profDesc": "Kiệt tác indie-folk sương khói ra đời giữa đại dịch, bộc lộ năng lực kể chuyện bậc thầy qua những giai điệu mộc mạc và chân thành. Việc vứt bỏ cấu trúc pop truyền thống để hóa thân thành nhiều nhân vật hư cấu minh chứng cho tư duy văn học xuất sắc của cô.",
           "persDesc": ""
         },
         {
@@ -1078,9 +1078,9 @@
           "artist": "SOPHIE",
           "title": "OIL OF EVERY PEARL'S UN-INSIDES NON-STOP REMIX ALBUM",
           "coverUrl": "https://i.ibb.co/MQRrm0z/sophie-oil-of-every-pearls-un-insides-non-stop-remix-album.png",
-          "hex": "#332230",
+          "hex": "#6e4a80",
           "rank": 105,
-          "profDesc": "Một kỳ quan hyperpop cấp tiến mở đường cho tương lai, thách thức các khái niệm giới tính và căn sắc thông qua những kết cấu âm thanh tổng hợp siêu việt.",
+          "profDesc": "Một kỳ quan hyperpop cấp tiến mở đường cho tương lai, thách thức các khái niệm giới tính và căn sắc thông qua những kết cấu âm thanh tổng hợp siêu việt. Sự dằn vặt của thể xác và khao khát tự do được nhào nặn thành những đoạn sonic vừa tàn bạo vừa lấp lánh.",
           "persDesc": ""
         },
         {
@@ -1088,9 +1088,9 @@
           "artist": "Shawn Mendes",
           "title": "Handwritten",
           "coverUrl": "https://i.ibb.co/KcG5Zssn/shawn-mendes-handwritten-deluxe.png",
-          "hex": "",
+          "hex": "#16283b",
           "rank": 106,
-          "profDesc": "Một album pop acoustic tuổi teen an toàn và dễ nghe, tập trung tôn vinh chất giọng mộc mạc hơn là sự đột phá về mặt âm thanh.",
+          "profDesc": "Một album pop acoustic tuổi teen an toàn và dễ nghe, tập trung tôn vinh chất giọng mộc mạc hơn là sự đột phá về mặt âm thanh. Giai điệu nhẹ nhàng và những ca từ ngây ngô phác họa rõ nét hình ảnh chàng trai nhà bên đang nỗ lực đi tìm tiếng nói nghệ thuật.",
           "persDesc": ""
         },
         {
@@ -1098,9 +1098,9 @@
           "artist": "Shawn Mendes",
           "title": "Illuminate",
           "coverUrl": "https://i.ibb.co/rKdLyLDM/shawn-mendes-illuminate-deluxe.png",
-          "hex": "",
+          "hex": "#112e47",
           "rank": 107,
-          "profDesc": "Sự trưởng thành về mặt cảm xúc với những âm hưởng blues và pop-rock, dù vẫn bám sát công thức thân thiện với radio đại chúng.",
+          "profDesc": "Sự trưởng thành về mặt cảm xúc với những âm hưởng blues và pop-rock, dù vẫn bám sát công thức thân thiện với radio đại chúng. Cấu trúc bài hát vững chãi và lối hát lấy cảm hứng từ John Mayer mở ra một hướng đi nghiêm túc hơn cho sự nghiệp của Shawn.",
           "persDesc": ""
         },
         {
@@ -1108,9 +1108,9 @@
           "artist": "Shawn Mendes",
           "title": "Shawn Mendes",
           "coverUrl": "https://i.ibb.co/jPNW61PV/shawn-mendes-shawn-mendes-deluxe.webp",
-          "hex": "",
+          "hex": "#d68d9d",
           "rank": 108,
-          "profDesc": "Nỗ lực mở rộng ranh giới cá nhân với những ảnh hưởng từ R&B và funk, đánh dấu bước ngoặt sang hình tượng nghệ sĩ chững chạc hơn.",
+          "profDesc": "Nỗ lực mở rộng ranh giới cá nhân với những ảnh hưởng từ R&B và funk, đánh dấu bước ngoặt sang hình tượng nghệ sĩ chững chạc hơn. Dù còn khá chừng mực, album vẫn thể hiện sự dũng cảm khi đào sâu vào những góc khuất tâm lý như sự tổn thương và nỗi bất an.",
           "persDesc": ""
         },
         {
@@ -1118,9 +1118,9 @@
           "artist": "Melanie Martinez",
           "title": "Cry Baby",
           "coverUrl": "https://i.ibb.co/bgSCg14N/melanie-martinez-cry-baby-deluxe-edition.png",
-          "hex": "",
+          "hex": "#f7a6b8",
           "rank": 109,
-          "profDesc": "Một dự án goth-pop sắc sảo và rùng rợn, mượn lăng kính méo mó của những bài hát ru để mổ xẻ những tổn thương tâm lý tuổi thơ.",
+          "profDesc": "Một dự án goth-pop sắc sảo và rùng rợn, mượn lăng kính méo mó của những bài hát ru để mổ xẻ những tổn thương tâm lý tuổi thơ. Concept nhân vật độc đáo cùng thứ âm nhạc ám ảnh giúp Melanie thiết lập một lãnh địa riêng biệt trong thế giới pop đương đại.",
           "persDesc": ""
         },
         {
@@ -1128,9 +1128,9 @@
           "artist": "Melanie Martinez",
           "title": "K-12",
           "coverUrl": "https://i.ibb.co/bgL9HRVw/melanie-martinez-k-12-after-school-deluxe-edition.png",
-          "hex": "",
+          "hex": "#ebb0ca",
           "rank": 110,
-          "profDesc": "Cuộc phiêu lưu điện ảnh thị giác đồ sộ, sử dụng bối cảnh trường học và những giai điệu dark-pop để châm biếm sâu cay các vấn đề xã hội.",
+          "profDesc": "Cuộc phiêu lưu điện ảnh thị giác đồ sộ, sử dụng bối cảnh trường học và những giai điệu dark-pop để châm biếm sâu cay các vấn đề xã hội. Khả năng kết nối âm nhạc với thông điệp nữ quyền và bản sắc cá nhân khiến album trở thành một câu chuyện ngụ ngôn hiện đại rực rỡ.",
           "persDesc": ""
         }
       ]
