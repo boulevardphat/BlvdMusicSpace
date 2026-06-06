@@ -33,27 +33,28 @@ export default function App() {
     setTiers(loadedTiers);
 
     const initialColors: Record<string, any> = {};
-    const albumsBackgroundQueue: Array<{ id: number; coverUrl: string }> = [];
+    const albumsBackgroundQueue: Array<{ id: number; coverUrl: string; staticHex?: string }> = [];
 
     loadedTiers.forEach(tier => {
       tier.albums.forEach(album => {
         const coverUrl = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
-        const cacheKey = `blvd-metro-color-v3-${album.id}`;
+        const cacheKey = `blvd-metro-color-v8-${album.id}`;
         const cached = localStorage.getItem(cacheKey);
 
         if (cached) {
           try {
             const parsed = JSON.parse(cached);
+            parsed.staticHex = album.hex; // dynamically keep staticHex up to date
             initialColors[String(album.id)] = parsed;
           } catch (e) {
-            initialColors[String(album.id)] = { hex: album.hex || "#111115" };
-            albumsBackgroundQueue.push({ id: album.id, coverUrl });
+            initialColors[String(album.id)] = { hex: album.hex || "#111115", staticHex: album.hex };
+            albumsBackgroundQueue.push({ id: album.id, coverUrl, staticHex: album.hex });
           }
         } else {
           // Fallback to static hex inside albums.json
-          initialColors[String(album.id)] = { hex: album.hex || "#111115" };
+          initialColors[String(album.id)] = { hex: album.hex || "#111115", staticHex: album.hex };
           // Add to extraction queue
-          albumsBackgroundQueue.push({ id: album.id, coverUrl });
+          albumsBackgroundQueue.push({ id: album.id, coverUrl, staticHex: album.hex });
         }
       });
     });
@@ -77,11 +78,12 @@ export default function App() {
               const colorObj = {
                 hex: data.dominant,
                 dominant: data.dominant,
-                palette: data.palette
+                palette: data.palette,
+                staticHex: item.staticHex
               };
 
               // Cache computed color configuration safely
-              const cacheKey = `blvd-metro-color-v3-${item.id}`;
+              const cacheKey = `blvd-metro-color-v8-${item.id}`;
               localStorage.setItem(cacheKey, JSON.stringify(colorObj));
 
               setAlbumColors((prev) => ({

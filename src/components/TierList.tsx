@@ -147,6 +147,124 @@ function packTierAlbums(albums: any[], tierId: string) {
   return cols;
 }
 
+export function getAlbumBgColor(colorObj: any, theme?: any): string {
+  if (!colorObj) {
+    if (theme) {
+      const match = theme.accent.match(/\[([^\]]+)\]/);
+      return match ? match[1] : "#12141c";
+    }
+    return "#12141c";
+  }
+
+  const dom1 = colorObj.dominant || colorObj.hex || "#1c1e1f";
+  const palette = colorObj.palette || [];
+
+  // Helper to parse hex to RGB and compute brightness
+  const hexToRgb = (hex: string) => {
+    const cleanHex = hex.replace("#", "");
+    if (cleanHex.length !== 6) return { r: 28, g: 30, b: 31 };
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    return { r, g, b };
+  };
+
+  const getBrightness = (rgb: { r: number; g: number; b: number }) => {
+    return 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
+  };
+
+  // Helper to calculate chroma/saturation to keep colored/vibrant tones instead of grey fallbacks
+  const getChroma = (rgb: { r: number; g: number; b: number }) => {
+    const max = Math.max(rgb.r, rgb.g, rgb.b);
+    const min = Math.min(rgb.r, rgb.g, rgb.b);
+    return max - min;
+  };
+
+  const rgb1 = hexToRgb(dom1);
+  const brightness1 = getBrightness(rgb1);
+  const chroma1 = getChroma(rgb1);
+
+  // Parse all candidate palette colors (temporary 1 to n)
+  const candidates = palette
+    .filter((tempColor: string) => tempColor.toLowerCase() !== dom1.toLowerCase())
+    .map((tempColor: string) => {
+      const rgb = hexToRgb(tempColor);
+      const brightness = getBrightness(rgb);
+      const chroma = getChroma(rgb);
+      const contrastAgainstWhite = 255 - brightness;
+      return {
+        hex: tempColor,
+        rgb,
+        brightness,
+        chroma,
+        contrast: contrastAgainstWhite
+      };
+    });
+
+  // CONDITION A: If dominant 1 does not satisfy readability (too bright, brightness1 > 165)
+  if (brightness1 > 165) {
+    const contrast1 = 255 - brightness1;
+    // Contrast with white text of selected color must be at least 1.45x of dominant 1's contrast
+    const contrastMultiplier = 1.45;
+
+    // Filter candidates that satisfy the contrast increase AND are safe to read white text on top (brightness <= 160)
+    const suitableCandidates = candidates.filter(
+      (c) => c.contrast >= contrast1 * contrastMultiplier && c.brightness <= 160
+    );
+
+    // If suitable candidates exist, choose the most vibrant, colourful one (highest chroma) to protect europop / pop theme!
+    if (suitableCandidates.length > 0) {
+      suitableCandidates.sort((a, b) => b.chroma - a.chroma);
+      return suitableCandidates[0].hex;
+    }
+
+    // Fallback A1: If no candidates strictly satisfied the 1.45x boost, look for any candidate that is darker
+    // than dom1 and has a standard readable brightness (brightness <= 165) to prevent muddy black
+    const darkerCandidates = candidates.filter((c) => c.brightness < brightness1 && c.brightness <= 165);
+    if (darkerCandidates.length > 0) {
+      darkerCandidates.sort((a, b) => b.chroma - a.chroma);
+      return darkerCandidates[0].hex;
+    }
+
+    // Fallback A2: As a complete backstop, if there are no darker/suitable dynamic palette candidates,
+    // we take the most vibrant candidate available and safely darken it, but keeping the hue intact
+    let bestCandidate = candidates[0] || { hex: dom1, rgb: rgb1, brightness: brightness1, chroma: chroma1 };
+    if (candidates.length > 1) {
+      const sortedByChroma = [...candidates].sort((a, b) => b.chroma - a.chroma);
+      bestCandidate = sortedByChroma[0];
+    }
+
+    if (bestCandidate.brightness > 160) {
+      const k = 140 / bestCandidate.brightness;
+      const nr = Math.max(0, Math.min(255, Math.round(bestCandidate.rgb.r * k)));
+      const ng = Math.max(0, Math.min(255, Math.round(bestCandidate.rgb.g * k)));
+      const nb = Math.max(0, Math.min(255, Math.round(bestCandidate.rgb.b * k)));
+      const toHex = (val: number) => {
+        const h = val.toString(16);
+        return h.length === 1 ? "0" + h : h;
+      };
+      return `#${toHex(nr)}${toHex(ng)}${toHex(nb)}`;
+    }
+
+    return bestCandidate.hex;
+  }
+
+  // CONDITION B: Even if dom1 is already dark enough (brightness1 <= 165), if dom1 is very grey/muddy (chroma1 < 30)
+  // but there is a highly vibrant, colorful candidate in the palette, choose the vibrant custom color instead!
+  // This makes sure europop/vibrant albums with dark backgrounds but rich accents look stunningly radiant.
+  if (chroma1 < 30) {
+    const vibrantCandidates = candidates.filter(
+      (c) => c.chroma >= 40 && c.chroma >= chroma1 + 15 && c.brightness <= 160
+    );
+    if (vibrantCandidates.length > 0) {
+      vibrantCandidates.sort((a, b) => b.chroma - a.chroma);
+      return vibrantCandidates[0].hex;
+    }
+  }
+
+  return dom1;
+}
+
 interface MetroTileProps {
   album: any;
   size: "large" | "medium";
@@ -156,7 +274,7 @@ interface MetroTileProps {
   covers: Record<string, string>;
   onAlbumClick: any;
   isLiveFlipped?: boolean;
-  hexColor?: string;
+  colorObj?: any;
 }
 
 function MetroTile({
@@ -168,12 +286,15 @@ function MetroTile({
   covers,
   onAlbumClick,
   isLiveFlipped,
-  hexColor
+  colorObj
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
   const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
   
-  const currentPalette = hexColor ? { bg: hexColor, darkBg: hexColor, text: "text-white" } : { bg: theme.accent, darkBg: theme.accent, text: "text-white" };
+  const bg = getAlbumBgColor(colorObj, theme);
+  const backgroundStyle: React.CSSProperties = {
+    backgroundColor: bg
+  };
 
   let dimensionClasses = size === "large" 
     ? "w-[240px] h-[240px] md:w-[45vh] md:h-[45vh] xl:w-[55vh] xl:h-[55vh]" 
@@ -233,7 +354,7 @@ function MetroTile({
         {/* BACK FACE */}
         <div 
           className={`absolute inset-0 w-full h-full backface-hidden rotate-y-180 p-3 md:p-5 text-left flex flex-col justify-between overflow-hidden text-white`}
-          style={{ backgroundColor: currentPalette.darkBg || currentPalette.bg }}
+          style={backgroundStyle}
         >
           <div className="space-y-1 overflow-hidden h-full flex flex-col justify-between">
             <div>
@@ -315,12 +436,10 @@ export function TierList({
   useEffect(() => {
     if (selectedAlbum && selectedAlbum.id && albumColors[selectedAlbum.id]) {
       const colorData = albumColors[selectedAlbum.id];
-      const bg = colorData.dominant || colorData.hex || "#1c1e1f";
-      const deepBg = colorData.palette?.[1] || colorData.palette?.[0] || "#07080a";
+      const bg = getAlbumBgColor(colorData);
       
       setExpandedPalette({
         bg: bg,
-        darkBg: `linear-gradient(135deg, ${bg} 0%, ${deepBg} 100%)`,
         text: "text-white"
       });
     } else {
@@ -655,7 +774,7 @@ export function TierList({
                                 covers={covers}
                                 onAlbumClick={handleMetroTileClick}
                                 isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
-                                hexColor={albumColors[col.albums[0].id]?.hex}
+                                colorObj={albumColors[col.albums[0].id]}
                               />
                             )
                           )}
@@ -673,7 +792,7 @@ export function TierList({
                                   covers={covers}
                                   onAlbumClick={handleMetroTileClick}
                                   isLiveFlipped={liveFlippedIds.includes(album.id)}
-                                  hexColor={albumColors[album.id]?.hex}
+                                  colorObj={albumColors[album.id]}
                                 />
                               ))}
                             </div>
@@ -690,7 +809,7 @@ export function TierList({
                               exit={{ width: 0, opacity: 0, scale: 0.95 }}
                               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                               className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
-                              style={{ background: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
+                              style={{ backgroundColor: expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover */}
                               <div className="w-[90px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5">

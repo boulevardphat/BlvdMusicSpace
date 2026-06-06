@@ -257,7 +257,7 @@ export class ColorThief {
   }
 }
 
-export function getColorThiefDominant(imageUrl: string, targetSize = 60): Promise<ExtractedPalette> {
+export function getColorThiefDominant(imageUrl: string, targetSize = 120): Promise<ExtractedPalette> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     // Đặt thuộc tính crossorigin bắt buộc để tránh lỗi Tainted Canvas với ImgBB
