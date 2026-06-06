@@ -313,9 +313,16 @@ export function TierList({
   }, []);
 
   useEffect(() => {
-    if (selectedAlbum && selectedAlbum.id && albumColors[selectedAlbum.id]?.hex) {
-      const hex = albumColors[selectedAlbum.id].hex;
-      setExpandedPalette({ bg: hex, darkBg: hex, text: "text-white" });
+    if (selectedAlbum && selectedAlbum.id && albumColors[selectedAlbum.id]) {
+      const colorData = albumColors[selectedAlbum.id];
+      const bg = colorData.darkVibrant || colorData.hex || "#1c1e1f";
+      const deepBg = colorData.darkMuted || colorData.dominant || "#07080a";
+      
+      setExpandedPalette({
+        bg: bg,
+        darkBg: `linear-gradient(135deg, ${bg} 0%, ${deepBg} 100%)`,
+        text: "text-white"
+      });
     } else {
       setExpandedPalette(null);
     }
@@ -683,7 +690,7 @@ export function TierList({
                               exit={{ width: 0, opacity: 0, scale: 0.95 }}
                               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                               className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
-                              style={{ backgroundColor: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
+                              style={{ background: expandedPalette?.darkBg || expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover */}
                               <div className="w-[90px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5">

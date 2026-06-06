@@ -150,3 +150,202 @@ export function getImgbbCoverUrl(artist: string, title: string): string {
 export async function fetchAlbumCover(artist: string, title: string): Promise<string | undefined> {
   return getImgbbCoverUrl(artist, title);
 }
+
+export interface ExtractedPalette {
+  dominant: string;
+  vibrant: string;
+  darkVibrant: string;
+  lightVibrant: string;
+  muted: string;
+  darkMuted: string;
+}
+
+// Convert RGB to HEX string format
+function rgbToHex(r: number, g: number, b: number): string {
+  const clamp = (val: number) => Math.max(0, Math.min(255, Math.round(val)));
+  const hex = (x: number) => {
+    const h = clamp(x).toString(16);
+    return h.length === 1 ? "0" + h : h;
+  };
+  return `#${hex(r)}${hex(g)}${hex(b)}`;
+}
+
+// Convert RGB to HSL values
+function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h = 0;
+  let s = 0;
+  const l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+  return { h, s, l };
+}
+
+/**
+ * Robust, client-side, browser-safe API providing high-fidelity Color Thief and Vibrant.js style palette extraction
+ * utilizing a canvas-based quantization technique designed with full CORS security fail-safes.
+ */
+export function getPaletteFromExternalUrl(imageUrl: string, targetSize = 64): Promise<ExtractedPalette> {
+  return new Promise((resolve) => {
+    // Beautiful Modernist Slate Metro Neutral Palette
+    const defaultPalette: ExtractedPalette = {
+      dominant: "#12141c",
+      vibrant: "#0078d7",
+      darkVibrant: "#1e3a8a",
+      lightVibrant: "#60a5fa",
+      muted: "#475569",
+      darkMuted: "#1e293b"
+    };
+
+    if (!imageUrl) {
+      resolve(defaultPalette);
+      return;
+    }
+
+    const img = new Image();
+    // Critical: CORS header attribute declaration prior to URL loading assignment
+    img.crossOrigin = "anonymous";
+
+    img.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = targetSize;
+        canvas.height = targetSize;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve(defaultPalette);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, targetSize, targetSize);
+        const imgData = ctx.getImageData(0, 0, targetSize, targetSize);
+        const data = imgData.data;
+
+        const buckets: Record<string, { r: number; g: number; b: number; count: number }> = {};
+        const colorsList: Array<{ r: number; g: number; b: number; count: number; h: number; s: number; l: number }> = [];
+
+        // Group colors through basic grouping (step of 16 to consolidate shades)
+        const quantStep = 16;
+        let totalPixels = 0;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+
+          // Skip low-alpha/transparent elements
+          if (a < 128) continue;
+
+          totalPixels++;
+
+          const qr = Math.round(r / quantStep) * quantStep;
+          const qg = Math.round(g / quantStep) * quantStep;
+          const qb = Math.round(b / quantStep) * quantStep;
+          const key = `${qr},${qg},${qb}`;
+
+          if (!buckets[key]) {
+            buckets[key] = { r, g, b, count: 0 };
+          }
+          buckets[key].count++;
+        }
+
+        if (totalPixels === 0) {
+          resolve(defaultPalette);
+          return;
+        }
+
+        // Convert key mappings back to HSL lists
+        for (const key in buckets) {
+          const b = buckets[key];
+          const hsl = rgbToHsl(b.r, b.g, b.b);
+          colorsList.push({
+            r: b.r,
+            g: b.g,
+            b: b.b,
+            count: b.count,
+            h: hsl.h,
+            s: hsl.s,
+            l: hsl.l
+          });
+        }
+
+        // Sort descending by weight frequency
+        colorsList.sort((x, y) => y.count - x.count);
+
+        // Dominant color is the heaviest frequency block
+        const dominantColor = colorsList[0]
+          ? rgbToHex(colorsList[0].r, colorsList[0].g, colorsList[0].b)
+          : defaultPalette.dominant;
+
+        // Custom scoring targeting vibrant parameters safely
+        const findTargetColor = (targetS: number, targetL: number, minL: number, maxL: number) => {
+          let bestColor = colorsList[0];
+          let bestScore = -1;
+
+          for (const c of colorsList) {
+            if (c.l < minL || c.l > maxL) continue;
+
+            const sDiff = Math.abs(c.s - targetS);
+            const lDiff = Math.abs(c.l - targetL);
+
+            // Mathematical target scoring formula favoring ideal saturation and lightness proportions
+            const score = (1 - sDiff) * 5 + (1 - lDiff) * 5 + (c.count / totalPixels) * 1.5;
+
+            if (score > bestScore) {
+              bestScore = score;
+              bestColor = c;
+            }
+          }
+
+          return bestColor ? rgbToHex(bestColor.r, bestColor.g, bestColor.b) : null;
+        };
+
+        const vibrant = findTargetColor(0.9, 0.5, 0.3, 0.7) || dominantColor;
+        const lightVibrant = findTargetColor(0.9, 0.74, 0.55, 1.0) || vibrant;
+        const darkVibrant = findTargetColor(0.9, 0.26, 0.0, 0.45) || dominantColor;
+        const muted = findTargetColor(0.3, 0.5, 0.3, 0.7) || dominantColor;
+        const darkMuted = findTargetColor(0.3, 0.26, 0.0, 0.45) || darkVibrant;
+
+        resolve({
+          dominant: dominantColor,
+          vibrant,
+          darkVibrant,
+          lightVibrant,
+          muted,
+          darkMuted
+        });
+
+      } catch (err) {
+        console.error("Failed executing dynamic color extraction logic, defaulting:", err);
+        resolve(defaultPalette);
+      }
+    };
+
+    img.onerror = () => {
+      // Elegant, silent error recovery returning default palette to completely block CORS runtime crashes
+      resolve(defaultPalette);
+    };
+
+    img.src = imageUrl;
+  });
+}
