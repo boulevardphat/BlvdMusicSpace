@@ -315,8 +315,8 @@ export function TierList({
   useEffect(() => {
     if (selectedAlbum && selectedAlbum.id && albumColors[selectedAlbum.id]) {
       const colorData = albumColors[selectedAlbum.id];
-      const bg = colorData.darkVibrant || colorData.hex || "#1c1e1f";
-      const deepBg = colorData.darkMuted || colorData.dominant || "#07080a";
+      const bg = colorData.dominant || colorData.hex || "#1c1e1f";
+      const deepBg = colorData.palette?.[1] || colorData.palette?.[0] || "#07080a";
       
       setExpandedPalette({
         bg: bg,

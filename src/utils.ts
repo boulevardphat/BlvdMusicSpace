@@ -153,14 +153,10 @@ export async function fetchAlbumCover(artist: string, title: string): Promise<st
 
 export interface ExtractedPalette {
   dominant: string;
-  vibrant: string;
-  darkVibrant: string;
-  lightVibrant: string;
-  muted: string;
-  darkMuted: string;
+  palette: string[];
 }
 
-// Convert RGB to HEX string format
+// Hàm bổ trợ chuyển đổi màu RGB sang HEX
 function rgbToHex(r: number, g: number, b: number): string {
   const clamp = (val: number) => Math.max(0, Math.min(255, Math.round(val)));
   const hex = (x: number) => {
@@ -170,182 +166,166 @@ function rgbToHex(r: number, g: number, b: number): string {
   return `#${hex(r)}${hex(g)}${hex(b)}`;
 }
 
-// Convert RGB to HSL values
-function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
-  r /= 255;
-  g /= 255;
-  b /= 255;
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h = 0;
-  let s = 0;
-  const l = (max + min) / 2;
+// 1. Lớp ColorThief độc lập, hiệu năng cao phục vụ phân tích điểm ảnh chuẩn xác trên môi trường Browser
+export class ColorThief {
+  getColor(canvas: HTMLCanvasElement): [number, number, number] {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return [0, 0, 0];
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imgData.data;
 
-  if (max !== min) {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    switch (max) {
-      case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
-        break;
-      case g:
-        h = (b - r) / d + 2;
-        break;
-      case b:
-        h = (r - g) / d + 4;
-        break;
+    const colorMap: Record<string, { r: number; g: number; b: number; count: number }> = {};
+    const step = 8; // Gom nhóm sắc độ gần nhau
+
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3] < 128) continue; // Bỏ qua pixel trong suốt
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+
+      const qr = Math.round(r / step) * step;
+      const qg = Math.round(g / step) * step;
+      const qb = Math.round(b / step) * step;
+      const key = `${qr},${qg},${qb}`;
+
+      if (!colorMap[key]) {
+        colorMap[key] = { r, g, b, count: 0 };
+      }
+      colorMap[key].count++;
     }
-    h /= 6;
+
+    const colors = Object.values(colorMap).sort((a, b) => b.count - a.count);
+    if (colors.length === 0) return [0, 0, 0];
+    return [colors[0].r, colors[0].g, colors[0].b];
   }
-  return { h, s, l };
+
+  getPalette(canvas: HTMLCanvasElement, count = 5): [number, number, number][] {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return [];
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imgData.data;
+
+    const colorMap: Record<string, { r: number; g: number; b: number; count: number }> = {};
+    const step = 16;
+
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3] < 128) continue;
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+
+      const qr = Math.round(r / step) * step;
+      const qg = Math.round(g / step) * step;
+      const qb = Math.round(b / step) * step;
+      const key = `${qr},${qg},${qb}`;
+
+      if (!colorMap[key]) {
+        colorMap[key] = { r, g, b, count: 0 };
+      }
+      colorMap[key].count++;
+    }
+
+    const sortedColors = Object.values(colorMap).sort((a, b) => b.count - a.count);
+    const palette: [number, number, number][] = [];
+
+    // Chọn ra các màu sắc khác nhau rõ rệt (khoảng cách màu Euclide)
+    for (const c of sortedColors) {
+      if (palette.length >= count) break;
+
+      const isTooClose = palette.some(([pr, pg, pb]) => {
+        const distance = Math.sqrt((c.r - pr) ** 2 + (c.g - pg) ** 2 + (c.b - pb) ** 2);
+        return distance < 45; // Ngưỡng khác biệt tối thiểu
+      });
+
+      if (!isTooClose) {
+        palette.push([c.r, c.g, c.b]);
+      }
+    }
+
+    // Điền thêm các màu phổ biến nếu chưa đủ
+    let index = 0;
+    while (palette.length < count && index < sortedColors.length) {
+      const c = sortedColors[index];
+      const alreadyAdded = palette.some(([pr, pg, pb]) => pr === c.r && pg === c.g && pb === c.b);
+      if (!alreadyAdded) {
+        palette.push([c.r, c.g, c.b]);
+      }
+      index++;
+    }
+
+    return palette;
+  }
 }
 
-/**
- * Robust, client-side, browser-safe API providing high-fidelity Color Thief and Vibrant.js style palette extraction
- * utilizing a canvas-based quantization technique designed with full CORS security fail-safes.
- */
-export function getPaletteFromExternalUrl(imageUrl: string, targetSize = 64): Promise<ExtractedPalette> {
-  return new Promise((resolve) => {
-    // Beautiful Modernist Slate Metro Neutral Palette
-    const defaultPalette: ExtractedPalette = {
-      dominant: "#12141c",
-      vibrant: "#0078d7",
-      darkVibrant: "#1e3a8a",
-      lightVibrant: "#60a5fa",
-      muted: "#475569",
-      darkMuted: "#1e293b"
-    };
-
-    if (!imageUrl) {
-      resolve(defaultPalette);
-      return;
-    }
-
+export function getColorThiefDominant(imageUrl: string, targetSize = 60): Promise<ExtractedPalette> {
+  return new Promise((resolve, reject) => {
     const img = new Image();
-    // Critical: CORS header attribute declaration prior to URL loading assignment
-    img.crossOrigin = "anonymous";
-
+    // Đặt thuộc tính crossorigin bắt buộc để tránh lỗi Tainted Canvas với ImgBB
+    img.crossOrigin = "anonymous"; 
+    
     img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = targetSize;
+      canvas.height = targetSize;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        reject(new Error("Không thể tạo Context 2D"));
+        return;
+      }
+      
+      // Vẽ ảnh nén cực nhỏ để tăng tốc độ phân tích pixel
+      ctx.drawImage(img, 0, 0, targetSize, targetSize);
+
       try {
-        const canvas = document.createElement("canvas");
-        canvas.width = targetSize;
-        canvas.height = targetSize;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) {
-          resolve(defaultPalette);
-          return;
-        }
-
-        ctx.drawImage(img, 0, 0, targetSize, targetSize);
-        const imgData = ctx.getImageData(0, 0, targetSize, targetSize);
-        const data = imgData.data;
-
-        const buckets: Record<string, { r: number; g: number; b: number; count: number }> = {};
-        const colorsList: Array<{ r: number; g: number; b: number; count: number; h: number; s: number; l: number }> = [];
-
-        // Group colors through basic grouping (step of 16 to consolidate shades)
-        const quantStep = 16;
-        let totalPixels = 0;
-
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          const a = data[i + 3];
-
-          // Skip low-alpha/transparent elements
-          if (a < 128) continue;
-
-          totalPixels++;
-
-          const qr = Math.round(r / quantStep) * quantStep;
-          const qg = Math.round(g / quantStep) * quantStep;
-          const qb = Math.round(b / quantStep) * quantStep;
-          const key = `${qr},${qg},${qb}`;
-
-          if (!buckets[key]) {
-            buckets[key] = { r, g, b, count: 0 };
-          }
-          buckets[key].count++;
-        }
-
-        if (totalPixels === 0) {
-          resolve(defaultPalette);
-          return;
-        }
-
-        // Convert key mappings back to HSL lists
-        for (const key in buckets) {
-          const b = buckets[key];
-          const hsl = rgbToHsl(b.r, b.g, b.b);
-          colorsList.push({
-            r: b.r,
-            g: b.g,
-            b: b.b,
-            count: b.count,
-            h: hsl.h,
-            s: hsl.s,
-            l: hsl.l
-          });
-        }
-
-        // Sort descending by weight frequency
-        colorsList.sort((x, y) => y.count - x.count);
-
-        // Dominant color is the heaviest frequency block
-        const dominantColor = colorsList[0]
-          ? rgbToHex(colorsList[0].r, colorsList[0].g, colorsList[0].b)
-          : defaultPalette.dominant;
-
-        // Custom scoring targeting vibrant parameters safely
-        const findTargetColor = (targetS: number, targetL: number, minL: number, maxL: number) => {
-          let bestColor = colorsList[0];
-          let bestScore = -1;
-
-          for (const c of colorsList) {
-            if (c.l < minL || c.l > maxL) continue;
-
-            const sDiff = Math.abs(c.s - targetS);
-            const lDiff = Math.abs(c.l - targetL);
-
-            // Mathematical target scoring formula favoring ideal saturation and lightness proportions
-            const score = (1 - sDiff) * 5 + (1 - lDiff) * 5 + (c.count / totalPixels) * 1.5;
-
-            if (score > bestScore) {
-              bestScore = score;
-              bestColor = c;
-            }
-          }
-
-          return bestColor ? rgbToHex(bestColor.r, bestColor.g, bestColor.b) : null;
-        };
-
-        const vibrant = findTargetColor(0.9, 0.5, 0.3, 0.7) || dominantColor;
-        const lightVibrant = findTargetColor(0.9, 0.74, 0.55, 1.0) || vibrant;
-        const darkVibrant = findTargetColor(0.9, 0.26, 0.0, 0.45) || dominantColor;
-        const muted = findTargetColor(0.3, 0.5, 0.3, 0.7) || dominantColor;
-        const darkMuted = findTargetColor(0.3, 0.26, 0.0, 0.45) || darkVibrant;
+        const colorThief = new ColorThief();
+        // Đọc màu Dominant (chiếm ưu thế nhất) dạng mảng [r, g, b]
+        const rgb = colorThief.getColor(canvas);
+        const hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+        
+        // Lấy thêm bảng màu phối hợp (Palette gồm 5 màu phụ)
+        const paletteRgb = colorThief.getPalette(canvas, 5);
+        const paletteHex = paletteRgb.map((c: [number, number, number]) => rgbToHex(c[0], c[1], c[2]));
 
         resolve({
-          dominant: dominantColor,
-          vibrant,
-          darkVibrant,
-          lightVibrant,
-          muted,
-          darkMuted
+          dominant: hex,
+          palette: paletteHex
         });
-
       } catch (err) {
-        console.error("Failed executing dynamic color extraction logic, defaulting:", err);
-        resolve(defaultPalette);
+        reject(err);
       }
     };
-
-    img.onerror = () => {
-      // Elegant, silent error recovery returning default palette to completely block CORS runtime crashes
-      resolve(defaultPalette);
-    };
-
+    img.onerror = () => reject(new Error("Không thể tải ảnh"));
     img.src = imageUrl;
   });
+}
+
+// 2. Hàm điều khiển Batch Queue (Chạy đồng thời có giới hạn để chống đơ trình duyệt)
+export async function processColorThiefBatch(
+  urls: string[],
+  concurrencyLimit = 4
+): Promise<Array<{ url: string; dominant: string; palette: string[] }>> {
+  const results: Array<{ url: string; dominant: string; palette: string[] }> = [];
+  const executing = new Set<Promise<void>>();
+
+  for (const url of urls) {
+    const promise = getColorThiefDominant(url)
+      .then((data) => {
+        results.push({ url, dominant: data.dominant, palette: data.palette });
+        executing.delete(promise);
+      })
+      .catch((err) => {
+        console.error("Lỗi tải ảnh:", url, err);
+        executing.delete(promise);
+      });
+    
+    executing.add(promise);
+
+    // Đợi bớt luồng nếu chạm giới hạn chạy song song
+    if (executing.size >= concurrencyLimit) {
+      await Promise.race(executing);
+    }
+  }
+  
+  await Promise.all(executing);
+  return results;
 }

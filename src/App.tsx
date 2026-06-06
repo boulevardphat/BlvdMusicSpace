@@ -5,7 +5,7 @@ import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
 import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
-import { getImgbbCoverUrl, getPaletteFromExternalUrl } from "./utils";
+import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
 
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
@@ -66,37 +66,44 @@ export default function App() {
     // Process extraction queue asynchronously in background to protect UI fluidity
     if (albumsBackgroundQueue.length > 0) {
       const processQueue = async () => {
+        const executing = new Set<Promise<void>>();
+
         for (const item of albumsBackgroundQueue) {
           if (!isSubscribed) break;
 
-          try {
-            const palette = await getPaletteFromExternalUrl(item.coverUrl);
-            const colorObj = {
-              hex: palette.darkVibrant || palette.dominant,
-              dominant: palette.dominant,
-              vibrant: palette.vibrant,
-              darkVibrant: palette.darkVibrant,
-              lightVibrant: palette.lightVibrant,
-              muted: palette.muted,
-              darkMuted: palette.darkMuted
-            };
+          const promise = getColorThiefDominant(item.coverUrl)
+            .then((data) => {
+              if (!isSubscribed) return;
+              const colorObj = {
+                hex: data.dominant,
+                dominant: data.dominant,
+                palette: data.palette
+              };
 
-            const cacheKey = `blvd-metro-color-v3-${item.id}`;
-            localStorage.setItem(cacheKey, JSON.stringify(colorObj));
+              // Cache computed color configuration safely
+              const cacheKey = `blvd-metro-color-v3-${item.id}`;
+              localStorage.setItem(cacheKey, JSON.stringify(colorObj));
 
-            if (isSubscribed) {
-              setAlbumColors(prev => ({
+              setAlbumColors((prev) => ({
                 ...prev,
                 [String(item.id)]: colorObj
               }));
-            }
+              executing.delete(promise);
+            })
+            .catch((error) => {
+              console.error(`Failed executing dynamic color extraction for album ${item.id}`, error);
+              executing.delete(promise);
+            });
 
-            // Brief margin to safeguard browser rendering threads
-            await new Promise(resolve => setTimeout(resolve, 80));
-          } catch (error) {
-            console.error(`Failed executing dynamic color extraction for album ${item.id}`, error);
+          executing.add(promise);
+
+          // Concurrency limit of 4 to avoid UI stutter and browser freeze
+          if (executing.size >= 4) {
+            await Promise.race(executing);
           }
         }
+
+        await Promise.all(executing);
       };
 
       setTimeout(processQueue, 150);
