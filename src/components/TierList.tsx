@@ -275,6 +275,8 @@ interface MetroTileProps {
   onAlbumClick: any;
   isLiveFlipped?: boolean;
   colorObj?: any;
+  shouldLoadImage: boolean;
+  onImageLoad: (albumId: number) => void;
 }
 
 function MetroTile({
@@ -286,7 +288,9 @@ function MetroTile({
   covers,
   onAlbumClick,
   isLiveFlipped,
-  colorObj
+  colorObj,
+  shouldLoadImage,
+  onImageLoad
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
   const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
@@ -329,14 +333,15 @@ function MetroTile({
         }`}
       >
         {/* FRONT FACE */}
-        <div className="absolute inset-0 w-full h-full backface-hidden bg-slate-900 relative overflow-hidden flex items-center justify-center">
-          {mCover ? (
+        <div className="absolute inset-0 w-full h-full backface-hidden bg-slate-950 relative overflow-hidden flex items-center justify-center">
+          {mCover && shouldLoadImage ? (
             <>
               <img
                 src={mCover}
                 alt={album.title}
-                className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105 animate-fade-in"
                 referrerPolicy="no-referrer"
+                onLoad={() => onImageLoad(album.id)}
               />
               {/* Rank bottom-left badge */}
               <div className="absolute bottom-1 left-1 md:bottom-2 md:left-2 bg-black/85 text-white font-mono font-black text-[9px] md:text-[11px] leading-none px-1.5 py-0.5 md:px-2 md:py-1 pointer-events-none select-none z-10 border border-white/10">
@@ -344,9 +349,12 @@ function MetroTile({
               </div>
             </>
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-450 uppercase font-mono font-bold">
-              <DiscoverPulse />
-              <span className="mt-1 text-[7px] md:text-[9.5px] text-slate-400">Quét mạng...</span>
+            <div className="w-full h-full flex flex-col items-center justify-center bg-slate-950/80 text-slate-700 uppercase font-mono font-bold animate-pulse">
+              <Music className="w-5 h-5 text-slate-800" />
+              {/* Rank bottom-left badge */}
+              <div className="absolute bottom-1 left-1 md:bottom-2 md:left-2 bg-black/85 text-slate-700 font-mono font-black text-[9px] md:text-[11px] leading-none px-1.5 py-0.5 md:px-2 md:py-1 pointer-events-none select-none z-10 border border-white/10 opacity-40">
+                #{album.globalRank}
+              </div>
             </div>
           )}
         </div>
@@ -425,6 +433,51 @@ export function TierList({
   const [liveFlippedIds, setLiveFlippedIds] = useState<number[]>([]);
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Sequenced progress of tiers from top to bottom
+  const [activeLoadTierIdx, setActiveLoadTierIdx] = useState(0);
+  const [loadedImageIds, setLoadedImageIds] = useState<Set<number>>(new Set());
+
+  const handleImageLoad = (albumId: number) => {
+    setLoadedImageIds(prev => {
+      if (prev.has(albumId)) return prev;
+      const next = new Set(prev);
+      next.add(albumId);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (activeLoadTierIdx >= tiers.length - 1) return;
+
+    const currentTier = tiers[activeLoadTierIdx];
+    if (!currentTier || !currentTier.albums || currentTier.albums.length === 0) {
+      setActiveLoadTierIdx(prev => prev + 1);
+      return;
+    }
+
+    const currentTierAlbumIds = currentTier.albums.map(a => a.id);
+    const allLoaded = currentTierAlbumIds.every(id => loadedImageIds.has(id));
+
+    if (allLoaded) {
+      setActiveLoadTierIdx(prev => prev + 1);
+    }
+  }, [loadedImageIds, activeLoadTierIdx, tiers]);
+
+  useEffect(() => {
+    if (activeLoadTierIdx >= tiers.length - 1) return;
+
+    const timer = setTimeout(() => {
+      setActiveLoadTierIdx(prev => {
+        if (prev === activeLoadTierIdx) {
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 450);
+
+    return () => clearTimeout(timer);
+  }, [activeLoadTierIdx, tiers.length]);
 
   useEffect(() => {
     const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
@@ -597,10 +650,11 @@ export function TierList({
 
         {/* Vertical Tiers Feed */}
         <div className="flex flex-col gap-8 pb-16">
-          {albumsWithRank.map((tier) => {
+          {albumsWithRank.map((tier, tierIdx) => {
             const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
             const gradientClass = TIER_GRADIENTS[tier.id] || "from-slate-50 to-slate-20";
             const cleanedName = cleanTierName(tier.name);
+            const shouldLoadImage = tierIdx <= activeLoadTierIdx;
 
             return (
               <div 
@@ -653,16 +707,19 @@ export function TierList({
                           </div>
 
                           {/* Cover Image square */}
-                          <div className="w-16 h-16 bg-slate-900 flex-none overflow-hidden border border-white/10 relative shadow-inner">
-                            {mCover ? (
+                          <div className="w-16 h-16 bg-slate-950 flex-none overflow-hidden border border-white/10 relative shadow-inner">
+                            {mCover && shouldLoadImage ? (
                               <img
                                 src={mCover}
                                 alt={album.title}
                                 className="w-full h-full object-cover animate-fade-in"
                                 referrerPolicy="no-referrer"
+                                onLoad={() => handleImageLoad(album.id)}
                               />
                             ) : (
-                              <Music className="w-5 h-5 text-slate-600 absolute inset-0 m-auto" />
+                              <div className="w-full h-full flex items-center justify-center bg-slate-950 animate-pulse">
+                                <Music className="w-4 h-4 text-slate-800" />
+                              </div>
                             )}
                           </div>
 
@@ -712,11 +769,12 @@ export function TierList({
         ref={scrollContainerRef}
         className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto"
       >
-        {albumsWithRank.map((tier) => {
+        {albumsWithRank.map((tier, tierIdx) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
           const IconComponent = TIER_ICONS[tier.id] || Disc;
           const cleanedName = cleanTierName(tier.name);
           const gradientClass = TIER_GRADIENTS[tier.id] || "from-slate-50 to-slate-20; border-l-4 border-l-slate-400";
+          const shouldLoadImage = tierIdx <= activeLoadTierIdx;
 
           // Packed columns for this tier
           const cols = packTierAlbums(tier.mappedAlbums, tier.id);
@@ -775,6 +833,8 @@ export function TierList({
                                 onAlbumClick={handleMetroTileClick}
                                 isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
                                 colorObj={albumColors[col.albums[0].id]}
+                                shouldLoadImage={shouldLoadImage}
+                                onImageLoad={handleImageLoad}
                               />
                             )
                           )}
@@ -793,6 +853,8 @@ export function TierList({
                                   onAlbumClick={handleMetroTileClick}
                                   isLiveFlipped={liveFlippedIds.includes(album.id)}
                                   colorObj={albumColors[album.id]}
+                                  shouldLoadImage={shouldLoadImage}
+                                  onImageLoad={handleImageLoad}
                                 />
                               ))}
                             </div>
