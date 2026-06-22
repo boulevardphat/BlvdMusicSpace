@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { INITIAL_TIERS, Tier, Album } from "./data";
 import { TierList } from "./components/TierList";
+import { SpotifyPlayer } from "./components/SpotifyPlayer";
 import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
 import { Music, X, Laptop } from "lucide-react";
@@ -37,7 +38,7 @@ export default function App() {
 
     loadedTiers.forEach(tier => {
       tier.albums.forEach(album => {
-        const coverUrl = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
+        const coverUrl = album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'thumb');
         const cacheKey = `blvd-metro-color-v8-${album.id}`;
         const cached = localStorage.getItem(cacheKey);
 
@@ -137,7 +138,7 @@ export default function App() {
                     tiers={tiers}
                     selectedAlbum={selectedAlbum}
                     setSelectedAlbum={setSelectedAlbum}
-                    onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title) })} 
+                    onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'full') })} 
                   />
                 </div>
               </motion.div>
@@ -199,6 +200,47 @@ export default function App() {
                 <div className="text-center mt-2 px-1">
                   <h3 className="text-lg font-sans font-black text-slate-950 uppercase leading-tight tracking-tight">{selectedAlbum.title}</h3>
                   <p className="text-xs text-blue-600 font-mono tracking-widest uppercase font-black mt-1">{selectedAlbum.artist}</p>
+
+                  {/* Mobile AOTY Scores Section */}
+                  {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
+                    <div className="flex justify-center items-center gap-3 mt-3">
+                      <div className="flex items-center justify-center opacity-80">
+                        <img 
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlY11yUpdRoW-co_5wbhURqCyvyxJX7GTh8w&s" 
+                          alt="AOTY Logo" 
+                          className="h-3 w-auto object-contain drop-shadow-sm filter grayscale contrast-125"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <div className="w-px h-3 bg-slate-300"></div>
+                      <div className="flex gap-3">
+                        {selectedAlbum.aotyCriticScore !== undefined && (
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-sans font-bold tracking-wider text-slate-400 uppercase">Critic</span>
+                            <span className={`text-[12px] font-sans font-black ${
+                              selectedAlbum.aotyCriticScore >= 90 ? 'text-emerald-500' :
+                              selectedAlbum.aotyCriticScore >= 80 ? 'text-emerald-500' :
+                              selectedAlbum.aotyCriticScore >= 60 ? 'text-amber-500' : 'text-rose-500'
+                            }`}>
+                              {selectedAlbum.aotyCriticScore}
+                            </span>
+                          </div>
+                        )}
+                        {selectedAlbum.aotyUserScore !== undefined && (
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-sans font-bold tracking-wider text-slate-400 uppercase">User</span>
+                            <span className={`text-[12px] font-sans font-black ${
+                              selectedAlbum.aotyUserScore >= 8.5 ? 'text-emerald-500' :
+                              selectedAlbum.aotyUserScore >= 8.0 ? 'text-emerald-500' :
+                              selectedAlbum.aotyUserScore >= 6.0 ? 'text-amber-500' : 'text-rose-500'
+                            }`}>
+                              {selectedAlbum.aotyUserScore}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-3">
@@ -214,6 +256,13 @@ export default function App() {
                       {selectedAlbum.persDesc || `Chưa có miêu tả cá nhân (sửa qua albums.json).`}
                     </p>
                   </div>
+
+                  {/* Mobile Spotify player embed */}
+                  {selectedAlbum.spotifyId && (
+                    <div className="mt-2 w-full">
+                      <SpotifyPlayer spotifyId={selectedAlbum.spotifyId} variant="light" />
+                    </div>
+                  )}
                 </div>
 
               </div>
@@ -247,7 +296,7 @@ export default function App() {
               </div>
               
               <p className="text-zinc-650 text-xs font-sans leading-relaxed mb-6">
-                Bảng phân hạng <strong className="text-slate-950 font-black">BLVD Metro</strong> được thiết kế tối ưu nhất cho màn hình lớn của <strong className="text-slate-950 font-black">máy tính</strong> để thao tác kéo thả và trải nghiệm thị giác hoạt động mượt mà hoàn mỹ. Bạn vẫn có thể tiếp tục xem trên di động với giao diện cuộn dọc thích ứng.
+                Bảng xếp hạng <strong className="text-slate-950 font-black">Album của BLVD</strong> được thiết kế tối ưu nhất cho màn hình lớn của <strong className="text-slate-950 font-black">máy tính</strong> để thao tác kéo thả và trải nghiệm thị giác hoạt động mượt mà hoàn mỹ. Bạn vẫn có thể tiếp tục xem trên di động với giao diện cuộn dọc thích ứng.
               </p>
 
               <button

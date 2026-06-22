@@ -19,6 +19,9 @@ export type Album = {
   hex?: string;
   profDesc?: string;
   persDesc?: string;
+  spotifyId?: string;
+  aotyCriticScore?: number;
+  aotyUserScore?: number;
 };
 
 // Build INITIAL_TIERS directly from the single albums.json file containing everything

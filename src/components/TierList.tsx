@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Tier, Album } from "../data";
 import { getImgbbCoverUrl } from "../utils";
+import { SpotifyPlayer } from "./SpotifyPlayer";
 import { motion, AnimatePresence } from "motion/react";
 import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight, Pencil } from "lucide-react";
 
@@ -293,7 +294,7 @@ function MetroTile({
   onImageLoad
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
+  const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'thumb');
   
   const bg = getAlbumBgColor(colorObj, theme);
   const backgroundStyle: React.CSSProperties = {
@@ -342,6 +343,7 @@ function MetroTile({
                 className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105 animate-fade-in"
                 referrerPolicy="no-referrer"
                 onLoad={() => onImageLoad(album.id)}
+                onError={() => onImageLoad(album.id)}
               />
               {/* Rank bottom-left badge */}
               <div className="absolute bottom-1 left-1 md:bottom-2 md:left-2 bg-black/85 text-white font-mono font-black text-[9px] md:text-[11px] leading-none px-1.5 py-0.5 md:px-2 md:py-1 pointer-events-none select-none z-10 border border-white/10">
@@ -474,7 +476,7 @@ export function TierList({
         }
         return prev;
       });
-    }, 450);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, [activeLoadTierIdx, tiers.length]);
@@ -644,7 +646,7 @@ export function TierList({
         {/* Metro Header */}
         <div className="flex-none flex items-center justify-between border-b border-white/10 pb-4 bg-transparent mb-6">
           <h1 className="text-2xl font-sans font-black text-white tracking-tighter leading-none">
-            BẢNG PHÂN HẠNG METRO
+            BẢNG XẾP HẠNG ALBUM CỦA BLVD
           </h1>
         </div>
 
@@ -690,7 +692,7 @@ export function TierList({
                     </div>
                   ) : (
                     tier.mappedAlbums.map((album) => {
-                      const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title);
+                      const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'thumb');
                       const isSelected = selectedAlbum && selectedAlbum.id === album.id;
                       
                       return (
@@ -715,6 +717,7 @@ export function TierList({
                                 className="w-full h-full object-cover animate-fade-in"
                                 referrerPolicy="no-referrer"
                                 onLoad={() => handleImageLoad(album.id)}
+                                onError={() => handleImageLoad(album.id)}
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center bg-slate-950 animate-pulse">
@@ -759,7 +762,7 @@ export function TierList({
       <div className="flex-none flex items-end justify-between border-b border-white/10 pb-4 bg-transparent animate-fade-in mx-4 md:mx-8 mt-[18px] md:mt-[22px]">
         <div>
           <h1 className="text-2xl md:text-[32px] font-sans font-black text-white tracking-tighter leading-none">
-            BẢNG PHÂN HẠNG METRO
+            BẢNG XẾP HẠNG ALBUM CỦA BLVD
           </h1>
         </div>
       </div>
@@ -887,6 +890,11 @@ export function TierList({
                                     <Music className="w-7 h-7 text-slate-600" />
                                   )}
                                 </div>
+                                {selectedAlbum.spotifyId && (
+                                  <div className="hidden md:block w-full mt-auto pt-3">
+                                    <SpotifyPlayer spotifyId={selectedAlbum.spotifyId} variant="dark" />
+                                  </div>
+                                )}
                               </div>
 
                               {/* Right Block: Content Details */}
@@ -911,6 +919,47 @@ export function TierList({
                                     <p className={`text-[10px] md:text-base font-mono tracking-widest uppercase font-black mt-1.5 text-white/90`}>
                                       {selectedAlbum.artist}
                                     </p>
+
+                                    {/* AOTY Scores Section */}
+                                    {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
+                                      <div className="flex items-center gap-3 mt-3 opacity-90">
+                                        <div className="flex items-center justify-center opacity-70">
+                                          <img
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlY11yUpdRoW-co_5wbhURqCyvyxJX7GTh8w&s"
+                                            alt="AOTY Logo"
+                                            className="h-3 md:h-3.5 w-auto object-contain filter grayscale contrast-125"
+                                            referrerPolicy="no-referrer"
+                                          />
+                                        </div>
+                                        <div className="w-px h-3 bg-white/20"></div>
+                                        <div className="flex items-center gap-4">
+                                          {selectedAlbum.aotyCriticScore !== undefined && (
+                                            <div className="flex items-center gap-1.5">
+                                              <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">Critic</span>
+                                              <span className={`text-xs md:text-[13px] font-sans font-black ${
+                                                selectedAlbum.aotyCriticScore >= 90 ? 'text-[#34d399]' :
+                                                selectedAlbum.aotyCriticScore >= 80 ? 'text-[#34d399]' :
+                                                selectedAlbum.aotyCriticScore >= 60 ? 'text-amber-400' : 'text-rose-500'
+                                              }`}>
+                                                {selectedAlbum.aotyCriticScore}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {selectedAlbum.aotyUserScore !== undefined && (
+                                            <div className="flex items-center gap-1.5">
+                                              <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">User</span>
+                                              <span className={`text-xs md:text-[13px] font-sans font-black ${
+                                                selectedAlbum.aotyUserScore >= 8.5 ? 'text-[#34d399]' :
+                                                selectedAlbum.aotyUserScore >= 8.0 ? 'text-[#34d399]' :
+                                                selectedAlbum.aotyUserScore >= 6.0 ? 'text-amber-400' : 'text-rose-500'
+                                              }`}>
+                                                {selectedAlbum.aotyUserScore}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    )}
 
                                     <div className={`mt-3 md:mt-5 bg-white/5 border-white/30 text-white p-3 md:p-4 border-l-[3px] md:border-l-[4px] text-left`}>
                                       <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block mb-1.5 text-white/50`}>
