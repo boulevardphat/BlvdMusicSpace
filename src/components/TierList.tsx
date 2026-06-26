@@ -305,7 +305,7 @@ function MetroTile({
     ? "w-[240px] h-[240px] md:w-[45vh] md:h-[45vh] xl:w-[55vh] xl:h-[55vh]" 
     : "w-[115px] h-[115px] md:w-[calc(22.5vh-10px)] md:h-[calc(22.5vh-10px)] xl:w-[calc(27.5vh-10px)] xl:h-[calc(27.5vh-10px)]";
 
-  const flipActive = isHovered || isLiveFlipped;
+  const flipActive = !isAlbumSelected && (isHovered || isLiveFlipped);
 
   return (
     <div
@@ -607,14 +607,19 @@ export function TierList({
     // Open detailing info card panel
     onAlbumClick(album, tierName, globalRank, mCover);
 
-    // Auto-centering active element elegantly
+    // Auto-centering active element elegantly without vertically hijacking the window
     setTimeout(() => {
-      const el = document.getElementById("expanded-album-panel");
-      if (el) {
-        el.scrollIntoView({
-          behavior: "smooth",
-          inline: "center",
-          block: "nearest"
+      const el = document.getElementById(`expanded-album-panel-${album.id}`);
+      const container = document.getElementById("main-scroll-container");
+      if (el && container) {
+        const elRect = el.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const offsetLeft = elRect.left - containerRect.left + container.scrollLeft;
+        const centerPos = offsetLeft - (containerRect.width / 2) + (elRect.width / 2);
+        
+        container.scrollTo({
+          left: centerPos,
+          behavior: "smooth"
         });
       }
     }, 450); // slight delay ensures animation resolves
@@ -769,6 +774,7 @@ export function TierList({
 
       {/* 2. Scrolling grid body - Stretched vertically */}
       <div 
+        id="main-scroll-container"
         ref={scrollContainerRef}
         className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto"
       >
@@ -820,65 +826,66 @@ export function TierList({
                   cols.map((col, colIdx) => {
                     const hasSelectedAlbumInCol = selectedAlbum && col.albums.some((a: any) => a.id === selectedAlbum.id);
 
-                    return (
-                      <React.Fragment key={`${tier.id}-col-${colIdx}`}>
-                        {/* COLUMN CONTAINER */}
-                        <div className="flex flex-col justify-center gap-2.5 md:gap-5 shrink-0">
-                          {col.type === "large" && (
-                            col.albums[0] && (
-                              <MetroTile
-                                album={col.albums[0]}
-                                size="large"
-                                theme={theme}
-                                cleanedName={cleanedName}
-                                isAlbumSelected={selectedAlbum && selectedAlbum.id === col.albums[0].id}
-                                covers={covers}
-                                onAlbumClick={handleMetroTileClick}
-                                isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
-                                colorObj={albumColors[col.albums[0].id]}
-                                shouldLoadImage={shouldLoadImage}
-                                onImageLoad={handleImageLoad}
-                              />
-                            )
-                          )}
-
-                          {col.type === "medium-stack" && (
-                            <div className="flex flex-col gap-2.5 md:gap-5">
-                              {col.albums.map((album: any) => (
+                      return (
+                        <React.Fragment key={`${tier.id}-col-${colIdx}`}>
+                          {/* COLUMN CONTAINER */}
+                          <div className="flex flex-col justify-center gap-2.5 md:gap-5 shrink-0">
+                            {col.type === "large" && (
+                              col.albums[0] && (
                                 <MetroTile
-                                  key={album.id}
-                                  album={album}
-                                  size="medium"
+                                  album={col.albums[0]}
+                                  size="large"
                                   theme={theme}
                                   cleanedName={cleanedName}
-                                  isAlbumSelected={selectedAlbum && selectedAlbum.id === album.id}
+                                  isAlbumSelected={selectedAlbum && selectedAlbum.id === col.albums[0].id}
                                   covers={covers}
                                   onAlbumClick={handleMetroTileClick}
-                                  isLiveFlipped={liveFlippedIds.includes(album.id)}
-                                  colorObj={albumColors[album.id]}
+                                  isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
+                                  colorObj={albumColors[col.albums[0].id]}
                                   shouldLoadImage={shouldLoadImage}
                                   onImageLoad={handleImageLoad}
                                 />
-                              ))}
-                            </div>
-                          )}
-                        </div>
+                              )
+                            )}
 
-                        {/* HIGH-FIDELITY SELECTIVE INLINE DETAIL EXPANSION CLOSURE RIGHT NEXT TO IT */}
-                        <AnimatePresence mode="popLayout">
-                          {hasSelectedAlbumInCol && selectedAlbum && (
-                            <motion.div
-                              id="expanded-album-panel"
-                              initial={{ width: 0, opacity: 0, scale: 0.95 }}
+                            {col.type === "medium-stack" && (
+                              <div className="flex flex-col gap-2.5 md:gap-5">
+                                {col.albums.map((album: any) => (
+                                  <MetroTile
+                                    key={album.id}
+                                    album={album}
+                                    size="medium"
+                                    theme={theme}
+                                    cleanedName={cleanedName}
+                                    isAlbumSelected={selectedAlbum && selectedAlbum.id === album.id}
+                                    covers={covers}
+                                    onAlbumClick={handleMetroTileClick}
+                                    isLiveFlipped={liveFlippedIds.includes(album.id)}
+                                    colorObj={albumColors[album.id]}
+                                    shouldLoadImage={shouldLoadImage}
+                                    onImageLoad={handleImageLoad}
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* HIGH-FIDELITY SELECTIVE INLINE DETAIL EXPANSION CLOSURE RIGHT NEXT TO IT */}
+                          <AnimatePresence>
+                            {hasSelectedAlbumInCol && selectedAlbum && (
+                              <motion.div
+                                key={selectedAlbum.id}
+                                id={`expanded-album-panel-${selectedAlbum.id}`}
+                                initial={{ width: 0, opacity: 0, scale: 0.95 }}
                               animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 800 : 900, opacity: 1, scale: 1 }}
                               exit={{ width: 0, opacity: 0, scale: 0.95 }}
                               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                              className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white animate-fade-in custom-scrollbar`}
+                              className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white custom-scrollbar`}
                               style={{ backgroundColor: expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover */}
-                              <div className="w-[90px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5">
-                                <div className="w-full aspect-square border border-white/20 bg-slate-900 flex items-center justify-center overflow-hidden shadow-md relative group">
+                              <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
+                                <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
                                   {selectedAlbum.coverUrl ? (
                                     <img
                                       src={selectedAlbum.coverUrl}
@@ -891,8 +898,14 @@ export function TierList({
                                   )}
                                 </div>
                                 {selectedAlbum.spotifyId && (
-                                  <div className="hidden md:block w-full mt-auto pt-3">
-                                    <SpotifyPlayer spotifyId={selectedAlbum.spotifyId} variant="dark" />
+                                  <div className="hidden md:block w-full mt-4 pb-4">
+                                    <SpotifyPlayer 
+                                       key={selectedAlbum.spotifyId}
+                                       spotifyId={selectedAlbum.spotifyId} 
+                                       variant="dark"
+                                       dominantColor={expandedPalette?.bg || '#111111'}
+                                       coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
+                                    />
                                   </div>
                                 )}
                               </div>
@@ -936,11 +949,7 @@ export function TierList({
                                           {selectedAlbum.aotyCriticScore !== undefined && (
                                             <div className="flex items-center gap-1.5">
                                               <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">Critic</span>
-                                              <span className={`text-xs md:text-[13px] font-sans font-black ${
-                                                selectedAlbum.aotyCriticScore >= 90 ? 'text-[#34d399]' :
-                                                selectedAlbum.aotyCriticScore >= 80 ? 'text-[#34d399]' :
-                                                selectedAlbum.aotyCriticScore >= 60 ? 'text-amber-400' : 'text-rose-500'
-                                              }`}>
+                                              <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
                                                 {selectedAlbum.aotyCriticScore}
                                               </span>
                                             </div>
@@ -948,11 +957,7 @@ export function TierList({
                                           {selectedAlbum.aotyUserScore !== undefined && (
                                             <div className="flex items-center gap-1.5">
                                               <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">User</span>
-                                              <span className={`text-xs md:text-[13px] font-sans font-black ${
-                                                selectedAlbum.aotyUserScore >= 8.5 ? 'text-[#34d399]' :
-                                                selectedAlbum.aotyUserScore >= 8.0 ? 'text-[#34d399]' :
-                                                selectedAlbum.aotyUserScore >= 6.0 ? 'text-amber-400' : 'text-rose-500'
-                                              }`}>
+                                              <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
                                                 {selectedAlbum.aotyUserScore}
                                               </span>
                                             </div>
@@ -963,7 +968,7 @@ export function TierList({
 
                                     <div className={`mt-3 md:mt-5 bg-white/5 border-white/30 text-white p-3 md:p-4 border-l-[3px] md:border-l-[4px] text-left`}>
                                       <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block mb-1.5 text-white/50`}>
-                                        THẨM ĐỊNH CHUYÊN MÔN
+                                        NGƯỜI ĐỜI HAY NÓI
                                       </span>
                                       <p className="text-[10.5px] md:text-[14px] leading-relaxed italic font-semibold font-sans drop-shadow-sm text-white">
                                         "{selectedAlbum.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
@@ -973,12 +978,12 @@ export function TierList({
                                     <div className="mt-3 bg-white/5 border-l-[3px] md:border-l-[4px] border-white/20 p-3 md:p-4 text-left group/pers">
                                       <div className="flex items-center justify-between mb-1.5">
                                         <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block text-white/50`}>
-                                          MIÊU TẢ CÁ NHÂN
+                                          PHÁT NÓI
                                         </span>
                                       </div>
                                       <div className="p-1 -ml-1 transition-colors rounded-sm">
                                         <p className="text-[10.5px] md:text-[14px] leading-relaxed font-sans text-slate-300">
-                                          {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có miêu tả cá nhân (sửa qua albums.json).</span>}
+                                          {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có chia sẻ từ Phát.</span>}
                                         </p>
                                       </div>
                                     </div>
@@ -989,7 +994,6 @@ export function TierList({
                                   </div>
                                 </div>
                               </div>
-
                             </motion.div>
                           )}
                         </AnimatePresence>

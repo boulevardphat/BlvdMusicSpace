@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { INITIAL_TIERS, Tier, Album } from "./data";
-import { TierList } from "./components/TierList";
+import { TierList, getAlbumBgColor } from "./components/TierList";
 import { SpotifyPlayer } from "./components/SpotifyPlayer";
-import { TasteProfile } from "./components/TasteProfile";
 import { motion, AnimatePresence } from "motion/react";
 import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
@@ -123,37 +122,13 @@ export default function App() {
       {/* 2. Main content area with pristine TierList viewport */}
       <div className="flex-1 flex flex-row h-full overflow-hidden relative rounded-none">
         <div className="flex-grow overflow-hidden flex flex-col bg-[#0b0c0e] w-full">
-          <AnimatePresence mode="wait">
-            {activeTab === "ranking" ? (
-              <motion.div
-                key="ranking-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="w-full h-full flex flex-col overflow-hidden"
-              >
-                <div className="flex-grow min-h-0 overflow-hidden">
-                  <TierList 
-                    albumColors={albumColors}
-                    tiers={tiers}
-                    selectedAlbum={selectedAlbum}
-                    setSelectedAlbum={setSelectedAlbum}
-                    onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'full') })} 
-                  />
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="dna-view"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="w-full h-full flex flex-col p-4 md:p-6"
-              >
-                <TasteProfile tiers={tiers} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <TierList 
+            albumColors={albumColors}
+            tiers={tiers}
+            selectedAlbum={selectedAlbum}
+            setSelectedAlbum={setSelectedAlbum}
+            onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'full') })} 
+          />
         </div>
       </div>
 
@@ -169,41 +144,46 @@ export default function App() {
               initial={{ scale: 0.94, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.94, opacity: 0 }}
-              className="bg-white border-4 border-slate-950 p-5 rounded-none shadow-2xl w-full max-w-sm relative z-10 text-slate-950"
+              className="bg-white border-4 border-slate-950 pt-6 pb-6 px-5 rounded-none shadow-2xl w-full max-w-sm relative z-10 text-slate-950"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-300">
-                <span className="bg-[#0078d7] text-white px-2 py-0.5 text-[8.5px] font-mono font-extrabold uppercase">
-                  RANK #{selectedAlbum.rankNumber}
-                </span>
-                <button
-                  onClick={() => setSelectedAlbum(null)}
-                  className="p-1 text-slate-550 hover:text-black transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-4 mt-4">
-                <div className="w-28 h-28 border border-slate-300 self-center bg-slate-50 flex-none overflow-hidden relative">
-                  {selectedAlbum.coverUrl ? (
-                    <img
-                      src={selectedAlbum.coverUrl}
-                      alt={selectedAlbum.title}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
+              <div className="flex flex-col gap-2.5 mt-0">
+                {selectedAlbum.spotifyId ? (
+                  <div className="w-full flex justify-center mb-0">
+                    <SpotifyPlayer 
+                      key={selectedAlbum.spotifyId}
+                      spotifyId={selectedAlbum.spotifyId} 
+                      variant="mobile" 
+                      dominantColor={albumColors[selectedAlbum.id] ? getAlbumBgColor(albumColors[selectedAlbum.id]) : '#0c1015'}
+                      coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
                     />
-                  ) : (
-                    <Music className="w-8 h-8 text-slate-300 absolute inset-0 m-auto" />
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className="w-28 h-28 border border-slate-300 self-center bg-slate-50 flex-none overflow-hidden relative mb-2">
+                    {selectedAlbum.coverUrl ? (
+                      <img
+                        src={selectedAlbum.coverUrl}
+                        alt={selectedAlbum.title}
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <Music className="w-8 h-8 text-slate-300 absolute inset-0 m-auto" />
+                    )}
+                  </div>
+                )}
 
-                <div className="text-center mt-2 px-1">
-                  <h3 className="text-lg font-sans font-black text-slate-950 uppercase leading-tight tracking-tight">{selectedAlbum.title}</h3>
+                <div className="text-center mt-1 px-1 flex flex-col items-center">
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <span className="bg-[#0078d7] text-white px-1.5 py-0.5 text-[9px] font-mono font-black uppercase tracking-wider leading-none shrink-0">
+                      #{selectedAlbum.rankNumber}
+                    </span>
+                    <h3 className="text-base sm:text-lg font-sans font-black text-slate-950 uppercase leading-tight tracking-tight">{selectedAlbum.title}</h3>
+                  </div>
                   <p className="text-xs text-blue-600 font-mono tracking-widest uppercase font-black mt-1">{selectedAlbum.artist}</p>
 
                   {/* Mobile AOTY Scores Section */}
                   {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
-                    <div className="flex justify-center items-center gap-3 mt-3">
+                    <div className="flex justify-center items-center gap-3 mt-1.5">
                       <div className="flex items-center justify-center opacity-80">
                         <img 
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlY11yUpdRoW-co_5wbhURqCyvyxJX7GTh8w&s" 
@@ -217,11 +197,7 @@ export default function App() {
                         {selectedAlbum.aotyCriticScore !== undefined && (
                           <div className="flex items-center gap-1.5">
                             <span className="text-[9px] font-sans font-bold tracking-wider text-slate-400 uppercase">Critic</span>
-                            <span className={`text-[12px] font-sans font-black ${
-                              selectedAlbum.aotyCriticScore >= 90 ? 'text-emerald-500' :
-                              selectedAlbum.aotyCriticScore >= 80 ? 'text-emerald-500' :
-                              selectedAlbum.aotyCriticScore >= 60 ? 'text-amber-500' : 'text-rose-500'
-                            }`}>
+                            <span className={`text-[12px] font-sans font-black text-slate-950`}>
                               {selectedAlbum.aotyCriticScore}
                             </span>
                           </div>
@@ -229,11 +205,7 @@ export default function App() {
                         {selectedAlbum.aotyUserScore !== undefined && (
                           <div className="flex items-center gap-1.5">
                             <span className="text-[9px] font-sans font-bold tracking-wider text-slate-400 uppercase">User</span>
-                            <span className={`text-[12px] font-sans font-black ${
-                              selectedAlbum.aotyUserScore >= 8.5 ? 'text-emerald-500' :
-                              selectedAlbum.aotyUserScore >= 8.0 ? 'text-emerald-500' :
-                              selectedAlbum.aotyUserScore >= 6.0 ? 'text-amber-500' : 'text-rose-500'
-                            }`}>
+                            <span className={`text-[12px] font-sans font-black text-slate-950`}>
                               {selectedAlbum.aotyUserScore}
                             </span>
                           </div>
@@ -243,31 +215,24 @@ export default function App() {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2 mt-1">
                   <div className="bg-slate-50 p-3 pb-2 border-l-[3px] border-slate-900 text-left">
-                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Thẩm định chuyên gia</span>
+                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Người đời hay nói</span>
                     <p className="text-[12px] leading-relaxed font-sans text-slate-700 italic select-text">
                       "{selectedAlbum.profDesc || `Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình.`}"
                     </p>
                   </div>
                   <div className="bg-slate-50 p-3 pb-2 border-l-[3px] border-blue-500 text-left">
-                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Miêu tả cá nhân</span>
+                    <span className="text-[9px] font-sans font-black uppercase tracking-wider text-slate-400 block mb-1">Phát nói</span>
                     <p className="text-[12px] leading-relaxed font-sans text-slate-700 select-text">
-                      {selectedAlbum.persDesc || `Chưa có miêu tả cá nhân (sửa qua albums.json).`}
+                      {selectedAlbum.persDesc || `Chưa có chia sẻ từ Phát.`}
                     </p>
                   </div>
-
-                  {/* Mobile Spotify player embed */}
-                  {selectedAlbum.spotifyId && (
-                    <div className="mt-2 w-full">
-                      <SpotifyPlayer spotifyId={selectedAlbum.spotifyId} variant="light" />
-                    </div>
-                  )}
                 </div>
 
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-200 flex justify-end">
+              <div className="mt-4 pt-3 border-t border-slate-200 flex justify-end">
                 <button
                   onClick={() => setSelectedAlbum(null)}
                   className="px-4 py-1.5 bg-slate-900 text-white font-bold font-sans text-[10px] uppercase cursor-pointer"
