@@ -309,6 +309,7 @@ export const MetroTile = memo(function MetroTile({
 
   return (
     <div
+      id={`metro-tile-${album.id}`}
       onClick={(e) => onAlbumClick(e, album, cleanedName, album.globalRank, mCover)}
       onPointerEnter={(e) => {
         if (e.pointerType === "mouse") setIsHovered(true);
@@ -618,17 +619,15 @@ export function TierList({
         // Offset left relative to the container's scroll content
         const offsetLeft = elRect.left - containerRect.left + container.scrollLeft;
         
-        // Target width based on viewport breakpoints (matching the framer-motion config)
-        let targetWidth = 320;
-        if (window.innerWidth >= 1280) targetWidth = 900;
-        else if (window.innerWidth >= 768) targetWidth = 800;
+        // Use actual element width in real-time to avoid any hardcoded breakpoint mismatches
+        const actualWidth = elRect.width;
 
         // To center it exactly in the middle of the browser tab (window), 
         // the desired center in the container's visible area is (window.innerWidth / 2 - containerRect.left)
         const screenCenterOffset = (window.innerWidth / 2) - containerRect.left;
         
-        // Center position = element's left position + half its target width - desired screen center
-        const centerPos = offsetLeft + (targetWidth / 2) - screenCenterOffset;
+        // Center position = element's left position + half its actual width - desired screen center
+        const centerPos = offsetLeft + (actualWidth / 2) - screenCenterOffset;
         
         container.scrollTo({
           left: centerPos,
@@ -717,6 +716,7 @@ export function TierList({
                       return (
                         <div
                           key={album.id}
+                          id={`album-item-${album.id}`}
                           onClick={(e) => handleMetroTileClick(e, album, cleanedName, album.globalRank, mCover)}
                           className={`flex items-center gap-4 p-3 border border-white/10 hover:border-blue-500/55 bg-white/5 hover:bg-white/10 active:scale-[0.99] transition-all cursor-pointer relative ${
                             isSelected ? "ring-2 ring-blue-500 bg-white/12 border-blue-500/50" : ""
@@ -790,7 +790,7 @@ export function TierList({
       <div 
         id="main-scroll-container"
         ref={scrollContainerRef}
-        className="flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 md:pr-12 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto"
+        className={`flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto transition-all duration-500 ${selectedAlbum ? "md:pr-[55vw]" : "md:pr-12"}`}
       >
         {albumsWithRank.map((tier, tierIdx) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
