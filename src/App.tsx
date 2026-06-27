@@ -198,7 +198,7 @@ export default function App() {
                     <div className="flex justify-center items-center gap-3 mt-1.5">
                       <div className="flex items-center justify-center opacity-80">
                         <img 
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlY11yUpdRoW-co_5wbhURqCyvyxJX7GTh8w&s" 
+                          src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19" 
                           alt="AOTY Logo" 
                           className="h-3 w-auto object-contain drop-shadow-sm filter grayscale contrast-125"
                           referrerPolicy="no-referrer"

@@ -609,7 +609,7 @@ export function TierList({
     onAlbumClick(album, tierName, globalRank, mCover);
 
     // Auto-centering active element elegantly without vertically hijacking the window
-    setTimeout(() => {
+    const performScroll = () => {
       const el = document.getElementById(`expanded-album-panel-${album.id}`);
       const container = document.getElementById("main-scroll-container");
       if (el && container) {
@@ -634,7 +634,13 @@ export function TierList({
           behavior: "smooth"
         });
       }
-    }, 450); // slight delay ensures animation resolves
+    };
+
+    // Run scrolling centering at multiple stages to adjust smoothly and center perfectly
+    // once the DOM, animations, and exiting layout unmounts have fully stabilized.
+    setTimeout(performScroll, 150); // Fast initial scroll start as panel begins opening
+    setTimeout(performScroll, 450); // Secondary adjustment as animations finish (400ms)
+    setTimeout(performScroll, 750); // Final pixel-perfect alignment after previous element unmounts & layout reflows
   }, [onAlbumClick]);
 
   // Pre-calculate continuous global ranks
@@ -959,7 +965,7 @@ export function TierList({
                                       <div className="flex items-center gap-3 mt-3 opacity-90">
                                         <div className="flex items-center justify-center opacity-70">
                                           <img
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlY11yUpdRoW-co_5wbhURqCyvyxJX7GTh8w&s"
+                                            src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19"
                                             alt="AOTY Logo"
                                             className="h-3 md:h-3.5 w-auto object-contain filter grayscale contrast-125"
                                             referrerPolicy="no-referrer"
