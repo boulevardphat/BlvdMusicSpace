@@ -389,32 +389,39 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
           {/* Elegant Vinyl Tonearm (Que) - static relative to disk parent (no hover/play scaling) */}
           <svg 
-            className="absolute -top-1.5 -right-2 sm:-top-3 sm:-right-4 h-[95px] sm:h-[135px] overflow-visible pointer-events-none z-30 transition-transform duration-[800ms] ease-in-out"
+            className="absolute -top-1.5 -right-2 sm:-top-3 sm:-right-4 h-[95px] sm:h-[135px] overflow-visible pointer-events-none z-30"
             style={{
-              width: '35px',
-              transformOrigin: '24px 14px',
-              transform: isPlaying ? 'rotate(8deg)' : 'rotate(-12deg)'
+              width: '35px'
             }}
             viewBox="0 0 35 110"
           >
-            {/* Pivot Base */}
+            {/* Pivot Base (Static - does not rotate) */}
             <circle cx="24" cy="14" r="9" fill={isDark ? "#2a2a2a" : "#d1d5db"} stroke={isDark ? "#444" : "#9ca3af"} strokeWidth="1" />
             <circle cx="24" cy="14" r="4" fill={isDark ? "#111" : "#4b5563"} />
             
-            {/* S-shaped arm */}
-            <path 
-              d="M 24 14 Q 20 48 10 82 L 10 92" 
-              fill="none" 
-              stroke={isDark ? "#a1a1aa" : "#4b5563"} 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-            />
-            
-            {/* Counterweight */}
-            <rect x="20" y="2" width="8" height="6" rx="1" fill={isDark ? "#444" : "#6b7280"} />
-            
-            {/* Headshell / Cartridge */}
-            <rect x="6" y="90" width="8" height="14" rx="1" fill={isPlaying ? "#ef4444" : (isDark ? "#1f1f22" : "#374151")} />
+            {/* Rotating Arm Assembly (Pivots precisely around 24, 14) */}
+            <g
+              className="transition-transform duration-[800ms] ease-in-out"
+              style={{
+                transformOrigin: '24px 14px',
+                transform: isPlaying ? 'rotate(8deg)' : 'rotate(-12deg)'
+              }}
+            >
+              {/* S-shaped arm */}
+              <path 
+                d="M 24 14 Q 20 48 10 82 L 10 92" 
+                fill="none" 
+                stroke={isDark ? "#a1a1aa" : "#4b5563"} 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+              />
+              
+              {/* Counterweight */}
+              <rect x="20" y="2" width="8" height="6" rx="1" fill={isDark ? "#444" : "#6b7280"} />
+              
+              {/* Headshell / Cartridge */}
+              <rect x="6" y="90" width="8" height="14" rx="1" fill={isPlaying ? "#ef4444" : (isDark ? "#1f1f22" : "#374151")} />
+            </g>
           </svg>
         </div>
 
