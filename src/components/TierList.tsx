@@ -614,8 +614,21 @@ export function TierList({
       if (el && container) {
         const elRect = el.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
+        
+        // Offset left relative to the container's scroll content
         const offsetLeft = elRect.left - containerRect.left + container.scrollLeft;
-        const centerPos = offsetLeft - (containerRect.width / 2) + (elRect.width / 2);
+        
+        // Target width based on viewport breakpoints (matching the framer-motion config)
+        let targetWidth = 320;
+        if (window.innerWidth >= 1280) targetWidth = 900;
+        else if (window.innerWidth >= 768) targetWidth = 800;
+
+        // To center it exactly in the middle of the browser tab (window), 
+        // the desired center in the container's visible area is (window.innerWidth / 2 - containerRect.left)
+        const screenCenterOffset = (window.innerWidth / 2) - containerRect.left;
+        
+        // Center position = element's left position + half its target width - desired screen center
+        const centerPos = offsetLeft + (targetWidth / 2) - screenCenterOffset;
         
         container.scrollTo({
           left: centerPos,
@@ -633,7 +646,8 @@ export function TierList({
       return {
         ...album,
         globalRank: rank,
-        tierName: cleanTierName(tier.name)
+        tierName: cleanTierName(tier.name),
+        tierId: tier.id
       };
     });
     return {
@@ -884,7 +898,7 @@ export function TierList({
                               style={{ backgroundColor: expandedPalette?.bg || '#0c1015' }}
                             >
                               {/* Left Block: cover */}
-                              <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-start h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
+                              <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
                                 <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
                                   {selectedAlbum.coverUrl ? (
                                     <img
@@ -898,7 +912,7 @@ export function TierList({
                                   )}
                                 </div>
                                 {selectedAlbum.spotifyId && (
-                                  <div className="hidden md:block w-full mt-4 pb-4">
+                                  <div className="hidden md:block w-full mt-auto">
                                     <SpotifyPlayer 
                                        key={selectedAlbum.spotifyId}
                                        spotifyId={selectedAlbum.spotifyId} 
@@ -915,9 +929,16 @@ export function TierList({
                                 <div className="overflow-y-auto pr-1 md:pr-2 select-text h-full no-scrollbar text-left flex flex-col justify-between">
                                   <div>
                                     <div className="flex justify-between items-center pb-2 border-b border-white/20">
-                                      <span className={`text-[#0c1015] px-2.5 py-1 md:py-1.5 font-mono text-[8px] md:text-[11px] font-black uppercase tracking-[0.25em] leading-none bg-white`}>
-                                        RANK #{selectedAlbum.rankNumber}
-                                      </span>
+                                      {(() => {
+                                        const tierId = (selectedAlbum as any).tierId;
+                                        const badgeBg = tierId && METRO_ACCENTS[tierId] ? METRO_ACCENTS[tierId].bgBlock : 'bg-white';
+                                        const badgeText = tierId && METRO_ACCENTS[tierId] ? 'text-white' : 'text-[#0c1015]';
+                                        return (
+                                          <span className={`${badgeBg} ${badgeText} px-2.5 py-1 md:py-1.5 font-mono text-[8px] md:text-[11px] font-black uppercase tracking-[0.25em] leading-none`}>
+                                            RANK #{selectedAlbum.rankNumber}
+                                          </span>
+                                        );
+                                      })()}
                                       <button
                                         onClick={() => setSelectedAlbum(null)}
                                         className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20"

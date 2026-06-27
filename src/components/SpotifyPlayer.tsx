@@ -54,6 +54,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [isAutoplayingCue, setIsAutoplayingCue] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(30000);
   const [showNativeWidget, setShowNativeWidget] = useState(false);
@@ -81,26 +82,31 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   }, [isPlaying]);
 
   useEffect(() => {
-    if (isReady && variant === 'mobile' && !hasStarted && controllerRef.current) {
+    if (isReady && !hasStarted && controllerRef.current) {
       const timer = setTimeout(() => {
         try {
-          if (!isPlaying) controllerRef.current.togglePlay();
+          if (!isPlaying) {
+            controllerRef.current.togglePlay();
+            setIsAutoplayingCue(true);
+            setTimeout(() => {
+              setIsAutoplayingCue(false);
+            }, 2500);
+          }
         } catch (e) {}
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [isReady, variant, hasStarted, isPlaying]);
+  }, [isReady, hasStarted, isPlaying]);
 
   useEffect(() => {
     setIsPlaying(false);
     setPosition(0);
     setDuration(30000);
     setTrackName("");
+    setHasStarted(false);
+    setIsReady(false);
+    setIsAutoplayingCue(false);
   }, [spotifyId]);
-
-  useEffect(() => {
-    if (isPlaying) setHasStarted(true);
-  }, [isPlaying]);
 
   useEffect(() => {
     let active = true;
@@ -352,22 +358,64 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
       `}</style>
       
       {/* Vinyl Player Frame */}
-      <div className={`w-full flex flex-row items-center p-4 sm:p-5 rounded-none shadow-none relative transition-all duration-300 backdrop-blur-xl ${isDark ? 'bg-black/60 border border-white/10' : 'bg-white/90 border border-slate-200'}`}>
+      <div className={`w-full flex flex-row items-center p-4 sm:p-5 rounded-none shadow-none relative transition-all duration-300 backdrop-blur-xl ${isDark ? 'bg-black/40 border-t border-white/10' : 'bg-white/90 border border-slate-200'}`}>
         
         {/* Left: The Vinyl Disk */}
-        <div className="shrink-0 hover:scale-[1.07] transition-transform duration-300 ease-out cursor-pointer" onClick={handlePlayPause}>
+        <div className="shrink-0 relative w-[90px] h-[90px] sm:w-[126px] sm:h-[126px]">
+          {/* Platter disk wrapper (with hover/active scaling but NO glow) */}
           <div 
-            className={`relative w-[90px] h-[90px] sm:w-[126px] sm:h-[126px] rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.5)] overflow-hidden ${diskClasses} group/disk`}
-            style={diskStyle}
+            className={`w-full h-full transition-all duration-500 ease-out cursor-pointer relative ${
+              isAutoplayingCue 
+                ? 'scale-[1.08]' 
+                : isPlaying 
+                  ? 'scale-[1.06] hover:scale-[1.10]' 
+                  : 'hover:scale-[1.07]'
+            }`} 
+            onClick={handlePlayPause}
           >
-            {/* Label (Cover) */}
             <div 
-              className="w-[42%] h-[42%] rounded-full relative z-10 bg-cover bg-center border border-white/20"
-              style={{ backgroundImage: `url(${coverUrl})` }}
-            ></div>
-            {/* Hole */}
-            <div className="w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
+              className={`absolute inset-0 rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.5)] overflow-hidden ${diskClasses} group/disk`}
+              style={diskStyle}
+            >
+              {/* Label (Cover) */}
+              <div 
+                className="w-[42%] h-[42%] rounded-full relative z-10 bg-cover bg-center border border-white/20"
+                style={{ backgroundImage: `url(${coverUrl})` }}
+              ></div>
+              {/* Hole */}
+              <div className="w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
+            </div>
           </div>
+
+          {/* Elegant Vinyl Tonearm (Que) - static relative to disk parent (no hover/play scaling) */}
+          <svg 
+            className="absolute -top-1.5 -right-2 sm:-top-3 sm:-right-4 h-[95px] sm:h-[135px] overflow-visible pointer-events-none z-30 transition-transform duration-[800ms] ease-in-out"
+            style={{
+              width: '35px',
+              transformOrigin: '24px 14px',
+              transform: isPlaying ? 'rotate(8deg)' : 'rotate(-12deg)'
+            }}
+            viewBox="0 0 35 110"
+          >
+            {/* Pivot Base */}
+            <circle cx="24" cy="14" r="9" fill={isDark ? "#2a2a2a" : "#d1d5db"} stroke={isDark ? "#444" : "#9ca3af"} strokeWidth="1" />
+            <circle cx="24" cy="14" r="4" fill={isDark ? "#111" : "#4b5563"} />
+            
+            {/* S-shaped arm */}
+            <path 
+              d="M 24 14 Q 20 48 10 82 L 10 92" 
+              fill="none" 
+              stroke={isDark ? "#a1a1aa" : "#4b5563"} 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+            />
+            
+            {/* Counterweight */}
+            <rect x="20" y="2" width="8" height="6" rx="1" fill={isDark ? "#444" : "#6b7280"} />
+            
+            {/* Headshell / Cartridge */}
+            <rect x="6" y="90" width="8" height="14" rx="1" fill={isPlaying ? "#ef4444" : (isDark ? "#1f1f22" : "#374151")} />
+          </svg>
         </div>
 
         {/* Center: Track Info */}

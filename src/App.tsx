@@ -7,6 +7,14 @@ import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
 
+const TIER_BG_COLORS: Record<string, string> = {
+  "t1": "bg-[#0078d7]",
+  "t2": "bg-[#d13438]",
+  "t3": "bg-[#008272]",
+  "t4": "bg-[#ca5010]",
+  "t5": "bg-[#107c41]"
+};
+
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
   const [loading, setLoading] = useState(true);
@@ -174,7 +182,7 @@ export default function App() {
 
                 <div className="text-center mt-1 px-1 flex flex-col items-center">
                   <div className="flex items-center justify-center gap-2 flex-wrap">
-                    <span className="bg-[#0078d7] text-white px-1.5 py-0.5 text-[9px] font-mono font-black uppercase tracking-wider leading-none shrink-0">
+                    <span className={`${selectedAlbum.tierId ? TIER_BG_COLORS[selectedAlbum.tierId] || 'bg-[#0078d7]' : 'bg-[#0078d7]'} text-white px-1.5 py-0.5 text-[9px] font-mono font-black uppercase tracking-wider leading-none shrink-0`}>
                       #{selectedAlbum.rankNumber}
                     </span>
                     <h3 className="text-base sm:text-lg font-sans font-black text-slate-950 uppercase leading-tight tracking-tight">{selectedAlbum.title}</h3>

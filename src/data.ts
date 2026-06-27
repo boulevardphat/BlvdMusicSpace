@@ -15,6 +15,8 @@ export type Album = {
   coverUrl?: string;
   globalRank?: number;
   tierName?: string;
+  tierId?: string;
+  rankNumber?: number;
   rank?: number;
   hex?: string;
   profDesc?: string;
