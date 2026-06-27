@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, memo, useCallback } from "react";
 import { Tier, Album } from "../data";
 import { getImgbbCoverUrl } from "../utils";
 import { SpotifyPlayer } from "./SpotifyPlayer";
@@ -280,7 +280,7 @@ interface MetroTileProps {
   onImageLoad: (albumId: number) => void;
 }
 
-function MetroTile({
+export const MetroTile = memo(function MetroTile({
   album,
   size,
   theme,
@@ -413,7 +413,7 @@ function MetroTile({
       </motion.div>
     </div>
   );
-}
+});
 
 export interface TierListProps {
   albumColors?: Record<string, any>;
@@ -440,14 +440,14 @@ export function TierList({
   const [activeLoadTierIdx, setActiveLoadTierIdx] = useState(0);
   const [loadedImageIds, setLoadedImageIds] = useState<Set<number>>(new Set());
 
-  const handleImageLoad = (albumId: number) => {
+  const handleImageLoad = useCallback((albumId: number) => {
     setLoadedImageIds(prev => {
       if (prev.has(albumId)) return prev;
       const next = new Set(prev);
       next.add(albumId);
       return next;
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (activeLoadTierIdx >= tiers.length - 1) return;
@@ -597,7 +597,7 @@ export function TierList({
     return name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim();
   };
 
-  const handleMetroTileClick = (
+  const handleMetroTileClick = useCallback((
     e: React.MouseEvent,
     album: any,
     tierName: string,
@@ -636,7 +636,7 @@ export function TierList({
         });
       }
     }, 450); // slight delay ensures animation resolves
-  };
+  }, [onAlbumClick]);
 
   // Pre-calculate continuous global ranks
   let currentRank = 1;
@@ -851,7 +851,7 @@ export function TierList({
                                   size="large"
                                   theme={theme}
                                   cleanedName={cleanedName}
-                                  isAlbumSelected={selectedAlbum && selectedAlbum.id === col.albums[0].id}
+                                  isAlbumSelected={selectedAlbum?.id === col.albums[0].id}
                                   covers={covers}
                                   onAlbumClick={handleMetroTileClick}
                                   isLiveFlipped={liveFlippedIds.includes(col.albums[0].id)}
@@ -871,7 +871,7 @@ export function TierList({
                                     size="medium"
                                     theme={theme}
                                     cleanedName={cleanedName}
-                                    isAlbumSelected={selectedAlbum && selectedAlbum.id === album.id}
+                                    isAlbumSelected={selectedAlbum?.id === album.id}
                                     covers={covers}
                                     onAlbumClick={handleMetroTileClick}
                                     isLiveFlipped={liveFlippedIds.includes(album.id)}

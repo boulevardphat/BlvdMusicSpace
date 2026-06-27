@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { INITIAL_TIERS, Tier, Album } from "./data";
 import { TierList, getAlbumBgColor } from "./components/TierList";
 import { SpotifyPlayer } from "./components/SpotifyPlayer";
@@ -124,6 +124,10 @@ export default function App() {
     };
   }, []);
 
+  const handleAlbumClick = useCallback((album: any, tierName: string, rankNumber: number) => {
+    setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'full') });
+  }, []);
+
   return (
     <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden">
 
@@ -135,7 +139,7 @@ export default function App() {
             tiers={tiers}
             selectedAlbum={selectedAlbum}
             setSelectedAlbum={setSelectedAlbum}
-            onAlbumClick={(album, tierName, rankNumber) => setSelectedAlbum({ ...album, tierName, rankNumber, coverUrl: album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'full') })} 
+            onAlbumClick={handleAlbumClick} 
           />
         </div>
       </div>
