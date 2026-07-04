@@ -270,7 +270,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
             
             {/* Vinyl disk that slides out */}
             <div 
-              className={`absolute w-[130px] h-[130px] transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? 'translate-x-[45px]' : 'translate-x-[22px]'} cursor-pointer z-10`}
+              className={`absolute w-[130px] h-[130px] transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? 'translate-x-[45px]' : 'translate-x-[22px]'} cursor-pointer z-10 cursor-target`}
               onClick={handlePlayPause}
             >
               <div 
@@ -288,7 +288,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
             {/* The Album Cover */}
             <div 
-              className={`absolute w-[140px] h-[140px] shadow-[0_15px_30px_rgba(0,0,0,0.3)] z-30 cursor-pointer overflow-hidden border border-black/10 bg-slate-900 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? '-translate-x-[45px]' : '-translate-x-[22px]'}`}
+              className={`absolute w-[140px] h-[140px] shadow-[0_15px_30px_rgba(0,0,0,0.3)] z-30 cursor-pointer overflow-hidden border border-black/10 bg-slate-900 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? '-translate-x-[45px]' : '-translate-x-[22px]'} cursor-target`}
               onClick={handlePlayPause}
             >
                {coverUrl ? (
@@ -364,7 +364,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
         <div className="shrink-0 relative w-[90px] h-[90px] sm:w-[126px] sm:h-[126px]">
           {/* Platter disk wrapper (with hover/active scaling but NO glow) */}
           <div 
-            className={`w-full h-full transition-all duration-500 ease-out cursor-pointer relative ${
+            className={`w-full h-full transition-all duration-500 ease-out cursor-pointer relative cursor-target ${
               isAutoplayingCue 
                 ? 'scale-[1.08]' 
                 : isPlaying 
@@ -434,7 +434,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
            )}
            
            {/* Progress bar */}
-           <div className={`h-1.5 w-full mt-1.5 sm:mt-2 rounded-full overflow-hidden cursor-pointer ${isDark ? 'bg-white/10' : 'bg-slate-200'}`} onClick={handleProgressBarClick}>
+           <div className={`h-1.5 w-full mt-1.5 sm:mt-2 rounded-full overflow-hidden cursor-pointer cursor-target ${isDark ? 'bg-white/10' : 'bg-slate-200'}`} onClick={handleProgressBarClick}>
               <div 
                 className="h-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
@@ -449,7 +449,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
         {/* Bottom Right: Menu */}
         <div className="absolute bottom-3 right-3" ref={menuRef}>
-           <button onClick={() => setShowMenu(!showMenu)} className={`p-1.5 rounded-full transition-colors ${isDark ? 'text-white/50 hover:text-white hover:bg-white/10' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'}`}>
+           <button onClick={() => setShowMenu(!showMenu)} className={`p-1.5 rounded-full transition-colors cursor-target ${isDark ? 'text-white/50 hover:text-white hover:bg-white/10' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'}`}>
               <MoreVertical className="w-4 h-4" />
            </button>
            
@@ -460,7 +460,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
                     setShowNativeWidget(!showNativeWidget);
                     setShowMenu(false);
                   }}
-                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
+                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
                 >
                   <LayoutTemplate className="w-3.5 h-3.5" />
                   {showNativeWidget ? "Ẩn danh sách phát" : "Mở danh sách phát"}
@@ -469,7 +469,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
                   href={`https://open.spotify.com/album/${spotifyId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
+                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
                   onClick={() => setShowMenu(false)}
                 >
                   <ExternalLink className="w-3.5 h-3.5" />

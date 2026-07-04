@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
+import TargetCursor from "./components/TargetCursor";
 
 const TIER_BG_COLORS: Record<string, string> = {
   "t1": "bg-[#0078d7]",
@@ -130,6 +131,14 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden">
+      <TargetCursor 
+        targetSelector=".cursor-target"
+        spinDuration={4}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+        cursorColor="#ffffff"
+        cursorColorOnTarget="#3b82f6"
+      />
 
       {/* 2. Main content area with pristine TierList viewport */}
       <div className="flex-1 flex flex-row h-full overflow-hidden relative rounded-none">

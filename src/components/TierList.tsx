@@ -317,7 +317,7 @@ export const MetroTile = memo(function MetroTile({
       onPointerLeave={(e) => {
         if (e.pointerType === "mouse") setIsHovered(false);
       }}
-      className={`${dimensionClasses} relative cursor-pointer perspective-1200 select-none shrink-0`}
+      className={`${dimensionClasses} relative cursor-pointer perspective-1200 select-none shrink-0 cursor-target`}
     >
       <motion.div
         animate={{
@@ -370,7 +370,7 @@ export const MetroTile = memo(function MetroTile({
           <div className="space-y-1 overflow-hidden h-full flex flex-col justify-between">
             <div>
               <div className="font-mono text-[7px] md:text-[9.5px] uppercase opacity-75 flex justify-between font-bold tracking-wider mb-1">
-                <span>NK #{album.globalRank}</span>
+                <span>#{album.globalRank}</span>
                 <span className="truncate max-w-[60px] md:max-w-[120px]">{cleanedName}</span>
               </div>
               
@@ -724,7 +724,7 @@ export function TierList({
                           key={album.id}
                           id={`album-item-${album.id}`}
                           onClick={(e) => handleMetroTileClick(e, album, cleanedName, album.globalRank, mCover)}
-                          className={`flex items-center gap-4 p-3 border border-white/10 hover:border-blue-500/55 bg-white/5 hover:bg-white/10 active:scale-[0.99] transition-all cursor-pointer relative ${
+                          className={`flex items-center gap-4 p-3 border border-white/10 hover:border-blue-500/55 bg-white/5 hover:bg-white/10 active:scale-[0.99] transition-all cursor-pointer relative cursor-target ${
                             isSelected ? "ring-2 ring-blue-500 bg-white/12 border-blue-500/50" : ""
                           }`}
                         >
@@ -947,7 +947,7 @@ export function TierList({
                                       })()}
                                       <button
                                         onClick={() => setSelectedAlbum(null)}
-                                        className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20"
+                                        className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
                                       >
                                         <X className="w-4 h-4 md:w-5 md:h-5" />
                                       </button>
@@ -1014,10 +1014,6 @@ export function TierList({
                                         </p>
                                       </div>
                                     </div>
-                                  </div>
-
-                                  <div className={`text-[7.5px] md:text-[10px] text-white/40 border-white/10 font-mono font-black uppercase tracking-[0.3em] border-t pt-3 md:pt-4 mt-4 text-right`}>
-                                    [ HỒ SƠ PHÂN TÍCH ]
                                   </div>
                                 </div>
                               </div>
