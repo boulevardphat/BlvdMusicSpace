@@ -179,7 +179,7 @@ export default function App() {
                 ) : (
                   <div className="w-28 h-28 border border-slate-300 self-center bg-slate-50 flex-none overflow-hidden relative mb-2">
                     {selectedAlbum.coverUrl ? (
-                      <img
+                      <img decoding="sync"
                         src={selectedAlbum.coverUrl}
                         alt={selectedAlbum.title}
                         className="w-full h-full object-cover"
@@ -204,7 +204,7 @@ export default function App() {
                   {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
                     <div className="flex justify-center items-center gap-3 mt-1.5">
                       <div className="flex items-center justify-center opacity-80">
-                        <img 
+                        <img decoding="sync" 
                           src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19" 
                           alt="AOTY Logo" 
                           className="h-3 w-auto object-contain drop-shadow-sm filter grayscale contrast-125"

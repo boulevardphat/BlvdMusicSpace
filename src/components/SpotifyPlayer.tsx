@@ -278,10 +278,13 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
                 style={diskStyle}
               >
                 {/* Label (Cover) */}
-                <div 
-                  className="w-[42%] h-[42%] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-cover bg-center border border-white/20"
-                  style={{ backgroundImage: `url(${coverUrl})` }}
-                ></div>
+                <img 
+                  src={coverUrl}
+                  className="w-[42%] h-[42%] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 object-cover border border-white/20"
+                  decoding="sync"
+                  referrerPolicy="no-referrer"
+                  alt="Label Cover"
+                />
                 <div className="w-[3px] h-[3px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
               </div>
             </div>
@@ -378,10 +381,13 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
               style={diskStyle}
             >
               {/* Label (Cover) */}
-              <div 
-                className="w-[42%] h-[42%] rounded-full relative z-10 bg-cover bg-center border border-white/20"
-                style={{ backgroundImage: `url(${coverUrl})` }}
-              ></div>
+              <img 
+                src={coverUrl}
+                className="w-[42%] h-[42%] rounded-full relative z-10 object-cover border border-white/20"
+                decoding="sync"
+                referrerPolicy="no-referrer"
+                alt="Label Cover"
+              />
               {/* Hole */}
               <div className="w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
             </div>

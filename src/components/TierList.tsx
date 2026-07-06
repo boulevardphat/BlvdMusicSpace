@@ -338,7 +338,7 @@ export const MetroTile = memo(function MetroTile({
         <div className="absolute inset-0 w-full h-full backface-hidden bg-slate-950 relative overflow-hidden flex items-center justify-center">
           {mCover && shouldLoadImage ? (
             <>
-              <img
+              <img decoding="sync"
                 src={mCover}
                 alt={album.title}
                 className="w-full h-full object-cover transition-transform duration-350 group-hover:scale-105 animate-fade-in"
@@ -736,7 +736,7 @@ export function TierList({
                           {/* Cover Image square */}
                           <div className="w-16 h-16 bg-slate-950 flex-none overflow-hidden border border-white/10 relative shadow-inner">
                             {mCover && shouldLoadImage ? (
-                              <img
+                              <img decoding="sync"
                                 src={mCover}
                                 alt={album.title}
                                 className="w-full h-full object-cover animate-fade-in"
@@ -907,10 +907,10 @@ export function TierList({
                               <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
                                 <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
                                   {selectedAlbum.coverUrl ? (
-                                    <img
+                                    <img decoding="sync"
                                       src={selectedAlbum.coverUrl}
                                       alt={selectedAlbum.title}
-                                      className="w-full h-full object-cover animate-fade-in transition-transform duration-500"
+                                      className="w-full h-full object-cover transition-transform duration-500"
                                       referrerPolicy="no-referrer"
                                     />
                                   ) : (
@@ -964,7 +964,7 @@ export function TierList({
                                     {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
                                       <div className="flex items-center gap-3 mt-3 opacity-90">
                                         <div className="flex items-center justify-center opacity-70">
-                                          <img
+                                          <img decoding="sync"
                                             src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19"
                                             alt="AOTY Logo"
                                             className="h-3 md:h-3.5 w-auto object-contain filter grayscale contrast-125"
