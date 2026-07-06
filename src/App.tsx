@@ -102,7 +102,6 @@ export default function App() {
               executing.delete(promise);
             })
             .catch((error) => {
-              console.error(`Failed executing dynamic color extraction for album ${item.id}`, error);
               executing.delete(promise);
             });
 
@@ -133,11 +132,10 @@ export default function App() {
     <div className="flex flex-col h-screen w-full bg-[#fbfbfa] text-[#111111] overflow-hidden">
       <TargetCursor 
         targetSelector=".cursor-target"
-        spinDuration={4}
+        spinDuration={5}
         hideDefaultCursor={true}
         parallaxOn={true}
         cursorColor="#ffffff"
-        cursorColorOnTarget="#3b82f6"
       />
 
       {/* 2. Main content area with pristine TierList viewport */}

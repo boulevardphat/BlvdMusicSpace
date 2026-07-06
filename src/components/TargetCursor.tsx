@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import './TargetCursor.css';
 
@@ -67,20 +67,51 @@ const TargetCursor = ({
   const tickerFnRef = useRef<(() => void) | null>(null);
   const activeStrengthRef = useRef<{ current: number }>({ current: 0 });
 
-  const isMobile = useMemo(() => {
+  const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false;
     const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const isSmallScreen = window.innerWidth <= 768;
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera || '';
     const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
     const isMobileUserAgent = mobileRegex.test(userAgent.toLowerCase());
-    return (hasTouchScreen && isSmallScreen) || isMobileUserAgent;
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    return (hasTouchScreen && isSmallScreen) || isMobileUserAgent || isCoarsePointer;
+  });
+
+  const [isTouchActive, setIsTouchActive] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const checkMobile = () => {
+      const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera || '';
+      const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+      const isMobileUserAgent = mobileRegex.test(userAgent.toLowerCase());
+      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      setIsMobile((hasTouchScreen && isSmallScreen) || isMobileUserAgent || isCoarsePointer);
+    };
+
+    const handleTouchStart = () => {
+      setIsTouchActive(true);
+    };
+
+    window.addEventListener('resize', checkMobile);
+    window.addEventListener('orientationchange', checkMobile);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', checkMobile);
+      window.removeEventListener('touchstart', handleTouchStart);
+    };
   }, []);
 
   const constants = useMemo(
     () => ({
-      borderWidth: 3,
-      cornerSize: 12
+      borderWidth: 1.5,
+      cornerSize: 10
     }),
     []
   );
@@ -97,7 +128,7 @@ const TargetCursor = ({
   }, []);
 
   useEffect(() => {
-    if (isMobile || !cursorRef.current) return;
+    if (isMobile || isTouchActive || !cursorRef.current) return;
 
     const originalCursor = document.body.style.cursor;
     if (hideDefaultCursor) {
@@ -105,7 +136,15 @@ const TargetCursor = ({
     }
 
     const cursor = cursorRef.current;
-    cornersRef.current = cursor.querySelectorAll('.target-cursor-corner') as NodeListOf<HTMLDivElement>;
+    const corners = cursor.querySelectorAll('.target-cursor-corner') as NodeListOf<HTMLDivElement>;
+    cornersRef.current = corners;
+
+    if (corners.length === 4) {
+      gsap.set(corners[0], { xPercent: -100, yPercent: -100 }); // tl
+      gsap.set(corners[1], { xPercent: 0, yPercent: -100 });    // tr
+      gsap.set(corners[2], { xPercent: 0, yPercent: 0 });       // br
+      gsap.set(corners[3], { xPercent: -100, yPercent: 0 });    // bl
+    }
 
     containingBlockRef.current = getContainingBlock(cursor);
     const getOffset = () => getContainingBlockOffset(containingBlockRef.current);
@@ -150,6 +189,25 @@ const TargetCursor = ({
 
       const cursorX = gsap.getProperty(cursorRef.current, 'x') as number;
       const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
+
+      if (activeTarget) {
+        if (!document.body.contains(activeTarget)) {
+          if (currentLeaveHandler) {
+            currentLeaveHandler();
+          }
+          return;
+        }
+        
+        const rect = activeTarget.getBoundingClientRect();
+        const { borderWidth, cornerSize } = constants;
+        const { x: offsetX, y: offsetY } = getOffset();
+        targetCornerPositionsRef.current = [
+          { x: rect.left - borderWidth + cornerSize - offsetX, y: rect.top - borderWidth + cornerSize - offsetY },
+          { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.top - borderWidth + cornerSize - offsetY },
+          { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY },
+          { x: rect.left - borderWidth + cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY }
+        ];
+      }
 
       const corners = Array.from(cornersRef.current);
       corners.forEach((corner, i) => {
@@ -262,10 +320,10 @@ const TargetCursor = ({
       const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
 
       targetCornerPositionsRef.current = [
-        { x: rect.left - borderWidth - offsetX, y: rect.top - borderWidth - offsetY },
-        { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.top - borderWidth - offsetY },
+        { x: rect.left - borderWidth + cornerSize - offsetX, y: rect.top - borderWidth + cornerSize - offsetY },
+        { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.top - borderWidth + cornerSize - offsetY },
         { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY },
-        { x: rect.left - borderWidth - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY }
+        { x: rect.left - borderWidth + cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY }
       ];
 
       isActiveRef.current = true;
@@ -318,10 +376,10 @@ const TargetCursor = ({
           gsap.killTweensOf(corners, 'x,y');
           const { cornerSize } = constants;
           const positions = [
-            { x: -cornerSize * 1.5, y: -cornerSize * 1.5 },
-            { x: cornerSize * 0.5, y: -cornerSize * 1.5 },
-            { x: cornerSize * 0.5, y: cornerSize * 0.5 },
-            { x: -cornerSize * 1.5, y: cornerSize * 0.5 }
+            { x: 0, y: 0 },
+            { x: 0, y: 0 },
+            { x: 0, y: 0 },
+            { x: 0, y: 0 }
           ];
           const tl = gsap.timeline();
           corners.forEach((corner, index) => {
@@ -402,6 +460,7 @@ const TargetCursor = ({
     constants,
     hideDefaultCursor,
     isMobile,
+    isTouchActive,
     hoverDuration,
     parallaxOn,
     cursorColor,
@@ -409,16 +468,16 @@ const TargetCursor = ({
   ]);
 
   useEffect(() => {
-    if (isMobile || !cursorRef.current || !spinTl.current) return;
+    if (isMobile || isTouchActive || !cursorRef.current || !spinTl.current) return;
     if (spinTl.current.isActive()) {
       spinTl.current.kill();
       spinTl.current = gsap
         .timeline({ repeat: -1 })
         .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
     }
-  }, [spinDuration, isMobile]);
+  }, [spinDuration, isMobile, isTouchActive]);
 
-  if (isMobile) {
+  if (isMobile || isTouchActive) {
     return null;
   }
 
