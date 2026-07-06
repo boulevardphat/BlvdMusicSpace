@@ -77,4 +77,9 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  /* Tối ưu hiệu suất render phần tử ngoài màn hình */
+  .content-vis-auto {
+    content-visibility: auto;
+  }
 }
