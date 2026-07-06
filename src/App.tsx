@@ -7,6 +7,7 @@ import { Music, X, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
 import TargetCursor from "./components/TargetCursor";
+import LoadingIntro from "./components/LoadingIntro";
 
 const TIER_BG_COLORS: Record<string, string> = {
   "t1": "bg-[#0078d7]",
@@ -19,6 +20,7 @@ const TIER_BG_COLORS: Record<string, string> = {
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
   const [loading, setLoading] = useState(true);
+  const [introVisible, setIntroVisible] = useState(true);
   // TasteProfile and DNA tabs are removed to keep the interface pristine and single-purpose
   const activeTab = "ranking";
   
@@ -296,6 +298,10 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+
+      {introVisible && (
+        <LoadingIntro onComplete={() => setIntroVisible(false)} />
+      )}
 
     </div>
   );
