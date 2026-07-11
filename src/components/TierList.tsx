@@ -302,8 +302,8 @@ export const MetroTile = memo(function MetroTile({
   };
 
   let dimensionClasses = size === "large" 
-    ? "w-[240px] h-[240px] md:w-[45vh] md:h-[45vh] xl:w-[55vh] xl:h-[55vh]" 
-    : "w-[115px] h-[115px] md:w-[calc(22.5vh-10px)] md:h-[calc(22.5vh-10px)] xl:w-[calc(27.5vh-10px)] xl:h-[calc(27.5vh-10px)]";
+    ? "w-full aspect-square h-auto md:w-[45vh] md:h-[45vh] xl:w-[55vh] xl:h-[55vh]" 
+    : "w-full aspect-square h-auto md:w-[calc(22.5vh-10px)] md:h-[calc(22.5vh-10px)] xl:w-[calc(27.5vh-10px)] xl:h-[calc(27.5vh-10px)]";
 
   const flipActive = !isAlbumSelected && (isHovered || isLiveFlipped);
 
@@ -396,7 +396,7 @@ export const MetroTile = memo(function MetroTile({
             </div>
 
             {size === "large" && (
-              <div className="hidden md:block flex-grow overflow-y-auto mt-2 pt-2 border-t border-white/20 select-text custom-scrollbar">
+              <div className="flex-grow overflow-y-auto mt-2 pt-2 border-t border-white/20 select-text custom-scrollbar">
                 <p className="text-[12px] md:text-[13px] leading-relaxed italic text-white/95 font-medium font-sans">
                   "{album.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
                 </p>
@@ -440,6 +440,21 @@ export function TierList({
   // Sequenced progress of tiers from top to bottom
   const [activeLoadTierIdx, setActiveLoadTierIdx] = useState(0);
   const [loadedImageIds, setLoadedImageIds] = useState<Set<number>>(new Set());
+
+  // Pre-calculate continuous global ranks
+  let currentRank = 1;
+  const albumsWithRank = tiers.map(tier => {
+    const mappedAlbums = tier.albums.map(album => {
+      const rank = currentRank++;
+      return {
+        ...album,
+        globalRank: rank,
+        tierName: tier.name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim(),
+        tierId: tier.id
+      };
+    });
+    return { ...tier, mappedAlbums };
+  });
 
   const handleImageLoad = useCallback((albumId: number) => {
     setLoadedImageIds(prev => {
@@ -513,7 +528,7 @@ export function TierList({
     if (allAlbumIds.length === 0) return;
 
     const interval = setInterval(() => {
-      // Pick 3 to 4 tiles for every 10 albums to flip concurrently
+      // Pick 3 to 4 tiles for every 10 albums to flip concurrently (More on mobile)
       const allAlbumsWithRanks = albumsWithRank.flatMap((t: any) => t.mappedAlbums).sort((a: any, b: any) => a.globalRank - b.globalRank);
       const totalGroupsOfTen = Math.ceil(allAlbumsWithRanks.length / 10);
       const chosenIds: number[] = [];
@@ -521,16 +536,16 @@ export function TierList({
       
       for (let g = 0; g < totalGroupsOfTen; g++) {
         const groupElements = allAlbumsWithRanks.slice(g * 10, (g + 1) * 10);
-        const flipCount = Math.floor(Math.random() * 2) + 3; // 3 or 4
+        const flipCount = isMobile ? Math.floor(Math.random() * 4) + 4 : Math.floor(Math.random() * 2) + 3; // 4 to 7 on mobile, 3 to 4 on desktop
         
         // Shuffle current group
         const shuffled = [...groupElements].sort(() => 0.5 - Math.random());
         let groupChosenCount = 0;
         
         for (const album of shuffled) {
-          // Ensure no 2 consecutively ranked albums flip at the same time
+          // Ensure no 2 consecutively ranked albums flip at the same time, except on mobile where it's chaotic
           const isConsecutive = chosenRanks.some(rank => Math.abs(rank - album.globalRank) === 1);
-          if (!isConsecutive) {
+          if (!isConsecutive || isMobile) {
              chosenIds.push(album.id);
              chosenRanks.push(album.globalRank);
              groupChosenCount++;
@@ -544,12 +559,137 @@ export function TierList({
       // Flip back to normal state after 2.8 seconds
       setTimeout(() => {
         setLiveFlippedIds(prev => prev.filter(id => !chosenIds.includes(id)));
-      }, 2800);
+      }, isMobile ? 1800 : 2800);
 
-    }, 2800); // Waves trigger every 2.8s
+    }, isMobile ? 1800 : 2800); // Waves trigger faster on mobile
 
     return () => clearInterval(interval);
-  }, [tiers]);
+  }, [tiers, albumsWithRank, isMobile]); // Added albumsWithRank to deps since it was used
+
+  const renderExpandedPanel = () => {
+    if (!selectedAlbum) return null;
+    return (
+      <div 
+        className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white custom-scrollbar w-full`}
+        style={{ backgroundColor: expandedPalette?.bg || '#0c1015' }}
+      >
+        {/* Left Block: cover */}
+        <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
+          <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
+            {selectedAlbum.coverUrl ? (
+              <img decoding="sync"
+                src={selectedAlbum.coverUrl}
+                alt={selectedAlbum.title}
+                className="w-full h-full object-cover transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <Music className="w-7 h-7 text-slate-600" />
+            )}
+          </div>
+          {selectedAlbum.spotifyId && (
+            <div className="hidden md:block w-full mt-auto">
+              <SpotifyPlayer 
+                 key={selectedAlbum.spotifyId}
+                 spotifyId={selectedAlbum.spotifyId} 
+                 variant="dark"
+                 dominantColor={expandedPalette?.bg || '#111111'}
+                 coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Right Block: Content Details */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between h-full relative z-20">
+          <div className="overflow-y-auto pr-1 md:pr-2 select-text h-full no-scrollbar text-left flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-center pb-2 border-b border-white/20">
+                {(() => {
+                  const tierId = (selectedAlbum as any).tierId;
+                  const badgeBg = tierId && METRO_ACCENTS[tierId] ? METRO_ACCENTS[tierId].bgBlock : 'bg-white';
+                  const badgeText = tierId && METRO_ACCENTS[tierId] ? 'text-white' : 'text-[#0c1015]';
+                  return (
+                    <span className={`${badgeBg} ${badgeText} px-2.5 py-1 md:py-1.5 font-mono text-[8px] md:text-[11px] font-black uppercase tracking-[0.25em] leading-none`}>
+                      RANK #{selectedAlbum.rankNumber}
+                    </span>
+                  );
+                })()}
+                <button
+                  onClick={() => setSelectedAlbum(null)}
+                  className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
+                >
+                  <X className="w-4 h-4 md:w-5 md:h-5" />
+                </button>
+              </div>
+
+              <h3 className="font-sans font-black text-sm md:text-[26px] mt-3 md:mt-4 uppercase tracking-tighter leading-[1.1] drop-shadow-md">
+                {selectedAlbum.title}
+              </h3>
+              <p className={`text-[10px] md:text-base font-mono tracking-widest uppercase font-black mt-1.5 text-white/90`}>
+                {selectedAlbum.artist}
+              </p>
+
+              {/* AOTY Scores Section */}
+              {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
+                <div className="flex items-center gap-3 mt-3 opacity-90">
+                  <div className="flex items-center justify-center opacity-70">
+                    <img decoding="sync"
+                      src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19"
+                      alt="AOTY Logo"
+                      className="h-3 md:h-3.5 w-auto object-contain filter grayscale contrast-125"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="w-px h-3 bg-white/20"></div>
+                  <div className="flex items-center gap-4">
+                    {selectedAlbum.aotyCriticScore !== undefined && (
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">Critic</span>
+                        <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
+                          {selectedAlbum.aotyCriticScore}
+                        </span>
+                      </div>
+                    )}
+                    {selectedAlbum.aotyUserScore !== undefined && (
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">User</span>
+                        <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
+                          {selectedAlbum.aotyUserScore}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className={`mt-3 md:mt-5 bg-white/5 border-white/30 text-white p-3 md:p-4 border-l-[3px] md:border-l-[4px] text-left`}>
+                <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block mb-1.5 text-white/50`}>
+                  NGƯỜI ĐỜI HAY NÓI
+                </span>
+                <p className="text-[10.5px] md:text-[14px] leading-relaxed italic font-semibold font-sans drop-shadow-sm text-white">
+                  "{selectedAlbum.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
+                </p>
+              </div>
+              
+              <div className="mt-3 bg-white/5 border-l-[3px] md:border-l-[4px] border-white/20 p-3 md:p-4 text-left group/pers">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block text-white/50`}>
+                    PHÁT NÓI
+                  </span>
+                </div>
+                <div className="p-1 -ml-1 transition-colors rounded-sm">
+                  <p className="text-[10.5px] md:text-[14px] leading-relaxed font-sans text-slate-300">
+                    {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có chia sẻ từ Phát.</span>}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   // Smooth Horizontal Trackpad Scrolling with Vertical Exclusions
   useEffect(() => {
@@ -629,162 +769,24 @@ export function TierList({
         // Center position = element's left position + half its actual width - desired screen center
         const centerPos = offsetLeft + (actualWidth / 2) - screenCenterOffset;
         
-        container.scrollTo({
-          left: centerPos,
-          behavior: "smooth"
-        });
+        container.scrollTo({ left: centerPos, behavior: 'smooth' });
       }
     };
 
-    // Run scrolling centering at multiple stages to adjust smoothly and center perfectly
-    // once the DOM, animations, and exiting layout unmounts have fully stabilized.
-    setTimeout(performScroll, 150); // Fast initial scroll start as panel begins opening
-    setTimeout(performScroll, 450); // Secondary adjustment as animations finish (400ms)
+    setTimeout(performScroll, 50);
+    setTimeout(performScroll, 400); // Intermediate adjustment during animation
     setTimeout(performScroll, 750); // Final pixel-perfect alignment after previous element unmounts & layout reflows
   }, [onAlbumClick]);
 
-  // Pre-calculate continuous global ranks
-  let currentRank = 1;
-  const albumsWithRank = tiers.map(tier => {
-    const mappedAlbums = tier.albums.map(album => {
-      const rank = currentRank++;
-      return {
-        ...album,
-        globalRank: rank,
-        tierName: cleanTierName(tier.name),
-        tierId: tier.id
-      };
-    });
-    return {
-      ...tier,
-      mappedAlbums
-    };
-  });
 
   const totalAlbumsCount = currentRank - 1;
 
-  if (isMobile) {
-    return (
-      <div className="flex-1 flex flex-col h-full bg-[#0b0c0e] overflow-y-auto px-4 py-6 text-white text-left select-none">
-        
-        {/* Metro Header */}
-        <div className="flex-none flex items-center justify-between border-b border-white/10 pb-4 bg-transparent mb-6">
-          <h1 className="text-2xl font-sans font-black text-white tracking-tighter leading-none">
-            BẢNG XẾP HẠNG ALBUM CỦA BLVD
-          </h1>
-        </div>
-
-        {/* Vertical Tiers Feed */}
-        <div className="flex flex-col gap-8 pb-16">
-          {albumsWithRank.map((tier, tierIdx) => {
-            const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
-            const gradientClass = TIER_GRADIENTS[tier.id] || "from-slate-50 to-slate-20";
-            const cleanedName = cleanTierName(tier.name);
-            const shouldLoadImage = tierIdx <= activeLoadTierIdx;
-
-            return (
-              <div 
-                key={tier.id}
-                className="flex flex-col gap-4 border-b border-white/5 pb-2 last:border-b-0"
-              >
-                {/* Custom Tier Header Card */}
-                <div className={`p-4 bg-gradient-to-br ${gradientClass} flex flex-col gap-2 rounded-none shadow-lg relative overflow-hidden`}>
-                  <div className="flex justify-between items-center z-10">
-                    <h2 className="text-2xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-md">
-                      {cleanedName}
-                    </h2>
-                    <span className="text-[10px] font-mono text-white/90 font-black tracking-widest uppercase bg-black/25 px-2 py-0.5">
-                      [ {tier.albums.length} RECORDINGS ]
-                    </span>
-                  </div>
-                  <p className="text-xs leading-snug text-slate-100/90 italic font-medium mt-1 select-text border-l-2 border-white/30 pl-2.5 z-10">
-                    "{tier.description}"
-                  </p>
-                  
-                  {/* Subtle decorative background detail */}
-                  <div className="absolute right-0 bottom-0 translate-y-4 translate-x-4 opacity-5 pointer-events-none select-none">
-                    <Disc className="w-32 h-32 animate-spin-slow" />
-                  </div>
-                </div>
-
-                {/* Vertical Album List */}
-                <div className="flex flex-col gap-3">
-                  {tier.mappedAlbums.length === 0 ? (
-                    <div className="border border-dashed border-white/10 py-8 px-4 text-center bg-white/5 shrink-0 flex flex-col items-center justify-center">
-                      <Music className="w-5 h-5 text-slate-500 mb-1" />
-                      <p className="text-[10px] text-slate-400 font-mono">Trống bậc này</p>
-                    </div>
-                  ) : (
-                    tier.mappedAlbums.map((album) => {
-                      const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'thumb');
-                      const isSelected = selectedAlbum && selectedAlbum.id === album.id;
-                      
-                      return (
-                        <div
-                          key={album.id}
-                          id={`album-item-${album.id}`}
-                          onClick={(e) => handleMetroTileClick(e, album, cleanedName, album.globalRank, mCover)}
-                          className={`flex items-center gap-4 p-3 border border-white/10 hover:border-blue-500/55 bg-white/5 hover:bg-white/10 active:scale-[0.99] transition-all cursor-pointer relative cursor-target ${
-                            isSelected ? "ring-2 ring-blue-500 bg-white/12 border-blue-500/50" : ""
-                          }`}
-                        >
-                          {/* Album Index Badge */}
-                          <div className="text-sm font-mono font-black text-slate-400/90 shrink-0 w-6 text-center">
-                            {album.globalRank}
-                          </div>
-
-                          {/* Cover Image square */}
-                          <div className="w-16 h-16 bg-slate-950 flex-none overflow-hidden border border-white/10 relative shadow-inner">
-                            {mCover && shouldLoadImage ? (
-                              <img decoding="sync"
-                                src={mCover}
-                                alt={album.title}
-                                className="w-full h-full object-cover animate-fade-in"
-                                referrerPolicy="no-referrer"
-                                onLoad={() => handleImageLoad(album.id)}
-                                onError={() => handleImageLoad(album.id)}
-                              />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-slate-950 animate-pulse">
-                                <Music className="w-4 h-4 text-slate-800" />
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Info Block */}
-                          <div className="flex-1 min-w-0 pr-2 pb-0.5">
-                            <h3 className="font-sans font-black text-sm text-white uppercase leading-tight truncate tracking-tight">
-                              {album.title}
-                            </h3>
-                            <p className="font-mono text-[10px] text-blue-400 font-bold uppercase tracking-wider truncate mt-0.5">
-                              {album.artist}
-                            </p>
-                            
-                            {/* Short preview snippet of the profDesc if exists */}
-                            {album.profDesc && (
-                              <p className="text-[11px] leading-normal text-slate-350 italic line-clamp-1 mt-1.5 border-l border-white/20 pl-2">
-                                "{album.profDesc}"
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden select-none">
       
-      {/* 1. Metro Dashboard Header - Fitted with responsive margins to align with top layouts */}
-      <div className="flex-none flex items-end justify-between border-b border-white/10 pb-4 bg-transparent animate-fade-in mx-4 md:mx-8 mt-[18px] md:mt-[22px]">
+      {/* 1. Metro Dashboard Header - Hidden on mobile */}
+      <div className="hidden md:flex flex-none items-end justify-between border-b border-white/10 pb-4 bg-transparent animate-fade-in mx-4 md:mx-8 mt-[18px] md:mt-[22px]">
         <div>
           <h1 className="text-2xl md:text-[32px] font-sans font-black text-white tracking-tighter leading-none">
             BẢNG XẾP HẠNG ALBUM CỦA BLVD
@@ -811,34 +813,105 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} px-4 md:px-8 pt-0 pb-16 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
+              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 pb-8 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
-               {/* STICKY MASTER LANE BANNER & INFO PANEL - Floating Typography directly centered vertically within distance X */}
-              <div className="flex-grow flex flex-col justify-center select-none py-2 md:py-4 xl:py-6">
-                <div className="sticky left-4 md:left-8 z-30 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12 w-full md:w-max max-w-full drop-shadow-xl">
+               {/* STICKY MASTER LANE BANNER & INFO PANEL - Desktop */}
+              <div className="hidden md:flex flex-grow flex-col justify-center select-none py-4 xl:py-6 relative z-30">
+                <div className="sticky left-8 z-30 flex flex-row items-center gap-12 w-max max-w-full drop-shadow-xl">
                   {/* Text Group - NO BOX background, floating purely */}
-                  <div className="text-left flex items-center pr-3 md:pr-12 border-b md:border-b-0 md:border-r border-white/20 pb-3 md:pb-0">
-                    <h2 className="text-5xl md:text-8xl xl:text-9xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-2xl" title={cleanedName}>
+                  <div className="text-left flex items-center pr-12 border-r border-white/20">
+                    <h2 className="text-8xl xl:text-9xl font-sans font-black tracking-tighter uppercase leading-none text-white drop-shadow-2xl" title={cleanedName}>
                       {cleanedName}
                     </h2>
                   </div>
 
                   {/* Exhibition Description floating right beside */}
-                  <div className="flex flex-col justify-center max-w-[280px] md:max-w-[500px] xl:max-w-[640px]">
-                     <div className="text-[10px] md:text-[14px] xl:text-[15px] font-mono text-white/95 font-black tracking-widest uppercase mb-1.5 md:mb-3 drop-shadow-md">
+                  <div className="flex flex-col justify-center max-w-[500px] xl:max-w-[640px]">
+                     <div className="text-[14px] xl:text-[15px] font-mono text-white/95 font-black tracking-widest uppercase mb-3 drop-shadow-md">
                        [ {tier.albums.length} RECORDINGS ]
                      </div>
-                     <p className="text-[12.5px] md:text-[18px] xl:text-[20.5px] leading-snug text-slate-100 italic font-semibold border-l-2 md:border-l-[4px] border-white/40 pl-3 md:pl-6 drop-shadow-xl">
+                     <p className="text-[18px] xl:text-[20.5px] leading-snug text-slate-100 italic font-semibold border-l-[4px] border-white/40 pl-6 drop-shadow-xl">
                        "{tier.description}"
                      </p>
                   </div>
                 </div>
               </div>
 
-              {/* Album tiles flow area - Anchored at the bottom with fixed-aligned dimensions */}
-              <div className="flex-none h-[240px] md:h-[45vh] xl:h-[55vh] flex flex-row items-center gap-2.5 md:gap-5 select-none pl-1 md:pl-0 overflow-x-auto md:overflow-x-visible no-scrollbar w-full max-w-full">
+              {/* STICKY MASTER LANE BANNER & INFO PANEL - Mobile */}
+              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-4 pb-3 px-4 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/5 mb-6 shadow-xl">
+                 <div className="flex flex-row items-end justify-between gap-3">
+                    <div className="text-left flex items-center flex-1 min-w-0">
+                      <h2 className="text-[32px] font-sans font-black tracking-tighter uppercase leading-[1.1] text-white drop-shadow-md truncate pt-1" title={cleanedName}>
+                        {cleanedName}
+                      </h2>
+                    </div>
+                    <div className="flex flex-col items-end shrink-0 max-w-[50%] pb-1">
+                       <div className="text-[10px] font-mono text-white/70 font-black tracking-widest uppercase mb-0.5">
+                         {tier.albums.length} RECS
+                       </div>
+                    </div>
+                 </div>
+                 <p className="text-[12px] leading-snug text-slate-300 italic font-medium mt-2 opacity-90">
+                   "{tier.description}"
+                 </p>
+              </div>
+
+              {/* Album tiles flow area - Mobile (Grid Layout) */}
+              <div className="md:hidden w-full grid grid-cols-3 sm:grid-cols-4 gap-[8px] select-none px-4 max-w-full pb-8">
+                {tier.mappedAlbums.length === 0 ? (
+                  <div className="col-span-full aspect-square border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5">
+                    <Music className="w-6 h-6 text-slate-400 mb-1" />
+                    <p className="text-[9px] text-slate-300 font-mono">Trống bậc</p>
+                  </div>
+                ) : (
+                  tier.mappedAlbums.map((album: any, idx: number) => {
+                    const isSelected = selectedAlbum?.id === album.id;
+                    const isLargeTile = idx === 0 || idx % 5 === 0; // Make every 5th tile large as well
+                    
+                    return (
+                      <React.Fragment key={`mob-${album.id}`}>
+                        <div className={isLargeTile ? "col-span-2 row-span-2" : "col-span-1"}>
+                          <MetroTile
+                            album={album}
+                            size={isLargeTile ? "large" : "medium"}
+                            theme={theme}
+                            cleanedName={cleanedName}
+                            isAlbumSelected={isSelected}
+                            covers={covers}
+                            onAlbumClick={handleMetroTileClick}
+                            isLiveFlipped={liveFlippedIds.includes(album.id)}
+                            colorObj={albumColors[album.id]}
+                            shouldLoadImage={shouldLoadImage}
+                            onImageLoad={handleImageLoad}
+                          />
+                        </div>
+                        
+                        <AnimatePresence>
+                          {isSelected && (
+                            <motion.div
+                              key={`mob-expand-${album.id}`}
+                              initial={{ height: 0, opacity: 0, scale: 0.95 }}
+                              animate={{ height: "auto", opacity: 1, scale: 1 }}
+                              exit={{ height: 0, opacity: 0, scale: 0.95 }}
+                              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                              className="col-span-full w-full overflow-hidden"
+                            >
+                              <div className="py-2">
+                                {renderExpandedPanel()}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </React.Fragment>
+                    );
+                  })
+                )}
+              </div>
+
+              {/* Album tiles flow area - Desktop (Horizontal Flow) */}
+              <div className="hidden md:flex flex-none h-[45vh] xl:h-[55vh] flex-row items-center gap-5 select-none pl-0 overflow-x-visible no-scrollbar w-max max-w-max">
                 {cols.length === 0 ? (
-                  <div className="w-[150px] md:w-[45vh] xl:w-[55vh] h-[240px] md:h-[45vh] xl:h-[55vh] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-4 md:ml-8">
+                  <div className="w-[45vh] xl:w-[55vh] h-[45vh] xl:h-[55vh] border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5 shrink-0 ml-8">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />
                     <p className="text-[9px] text-slate-300 font-mono">Trống bậc</p>
                   </div>
@@ -849,7 +922,7 @@ export function TierList({
                       return (
                         <React.Fragment key={`${tier.id}-col-${colIdx}`}>
                           {/* COLUMN CONTAINER */}
-                          <div className="flex flex-col justify-center gap-2.5 md:gap-5 shrink-0">
+                          <div className="flex flex-col justify-center gap-5 shrink-0">
                             {col.type === "large" && (
                               col.albums[0] && (
                                 <MetroTile
@@ -869,7 +942,7 @@ export function TierList({
                             )}
 
                             {col.type === "medium-stack" && (
-                              <div className="flex flex-col gap-2.5 md:gap-5">
+                              <div className="flex flex-col gap-5">
                                 {col.albums.map((album: any) => (
                                   <MetroTile
                                     key={album.id}
@@ -897,129 +970,15 @@ export function TierList({
                                 key={selectedAlbum.id}
                                 id={`expanded-album-panel-${selectedAlbum.id}`}
                                 initial={{ width: 0, opacity: 0, scale: 0.95 }}
-                              animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 800 : 900, opacity: 1, scale: 1 }}
-                              exit={{ width: 0, opacity: 0, scale: 0.95 }}
-                              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                              className={`h-[240px] md:h-[45vh] xl:h-[55vh] border-2 border-white/20 p-4 md:p-6 shrink-0 flex flex-row gap-3 md:gap-6 relative overflow-hidden z-25 shadow-2xl self-center mx-1 rounded-none text-white custom-scrollbar`}
-                              style={{ backgroundColor: expandedPalette?.bg || '#0c1015' }}
-                            >
-                              {/* Left Block: cover */}
-                              <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
-                                <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
-                                  {selectedAlbum.coverUrl ? (
-                                    <img decoding="sync"
-                                      src={selectedAlbum.coverUrl}
-                                      alt={selectedAlbum.title}
-                                      className="w-full h-full object-cover transition-transform duration-500"
-                                      referrerPolicy="no-referrer"
-                                    />
-                                  ) : (
-                                    <Music className="w-7 h-7 text-slate-600" />
-                                  )}
-                                </div>
-                                {selectedAlbum.spotifyId && (
-                                  <div className="hidden md:block w-full mt-auto">
-                                    <SpotifyPlayer 
-                                       key={selectedAlbum.spotifyId}
-                                       spotifyId={selectedAlbum.spotifyId} 
-                                       variant="dark"
-                                       dominantColor={expandedPalette?.bg || '#111111'}
-                                       coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
-                                    />
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Right Block: Content Details */}
-                              <div className="flex-1 min-w-0 flex flex-col justify-between h-full relative z-20">
-                                <div className="overflow-y-auto pr-1 md:pr-2 select-text h-full no-scrollbar text-left flex flex-col justify-between">
-                                  <div>
-                                    <div className="flex justify-between items-center pb-2 border-b border-white/20">
-                                      {(() => {
-                                        const tierId = (selectedAlbum as any).tierId;
-                                        const badgeBg = tierId && METRO_ACCENTS[tierId] ? METRO_ACCENTS[tierId].bgBlock : 'bg-white';
-                                        const badgeText = tierId && METRO_ACCENTS[tierId] ? 'text-white' : 'text-[#0c1015]';
-                                        return (
-                                          <span className={`${badgeBg} ${badgeText} px-2.5 py-1 md:py-1.5 font-mono text-[8px] md:text-[11px] font-black uppercase tracking-[0.25em] leading-none`}>
-                                            RANK #{selectedAlbum.rankNumber}
-                                          </span>
-                                        );
-                                      })()}
-                                      <button
-                                        onClick={() => setSelectedAlbum(null)}
-                                        className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
-                                      >
-                                        <X className="w-4 h-4 md:w-5 md:h-5" />
-                                      </button>
-                                    </div>
-
-                                    <h3 className="font-sans font-black text-sm md:text-[26px] mt-3 md:mt-4 uppercase tracking-tighter leading-[1.1] drop-shadow-md">
-                                      {selectedAlbum.title}
-                                    </h3>
-                                    <p className={`text-[10px] md:text-base font-mono tracking-widest uppercase font-black mt-1.5 text-white/90`}>
-                                      {selectedAlbum.artist}
-                                    </p>
-
-                                    {/* AOTY Scores Section */}
-                                    {(selectedAlbum.aotyCriticScore !== undefined || selectedAlbum.aotyUserScore !== undefined) && (
-                                      <div className="flex items-center gap-3 mt-3 opacity-90">
-                                        <div className="flex items-center justify-center opacity-70">
-                                          <img decoding="sync"
-                                            src="https://i.scdn.co/image/ab6775700000ee851bccb00a41e6fd7a00efee19"
-                                            alt="AOTY Logo"
-                                            className="h-3 md:h-3.5 w-auto object-contain filter grayscale contrast-125"
-                                            referrerPolicy="no-referrer"
-                                          />
-                                        </div>
-                                        <div className="w-px h-3 bg-white/20"></div>
-                                        <div className="flex items-center gap-4">
-                                          {selectedAlbum.aotyCriticScore !== undefined && (
-                                            <div className="flex items-center gap-1.5">
-                                              <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">Critic</span>
-                                              <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
-                                                {selectedAlbum.aotyCriticScore}
-                                              </span>
-                                            </div>
-                                          )}
-                                          {selectedAlbum.aotyUserScore !== undefined && (
-                                            <div className="flex items-center gap-1.5">
-                                              <span className="text-[10px] font-sans font-bold tracking-wider text-white/50 uppercase">User</span>
-                                              <span className={`text-xs md:text-[13px] font-sans font-black text-white`}>
-                                                {selectedAlbum.aotyUserScore}
-                                              </span>
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    )}
-
-                                    <div className={`mt-3 md:mt-5 bg-white/5 border-white/30 text-white p-3 md:p-4 border-l-[3px] md:border-l-[4px] text-left`}>
-                                      <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block mb-1.5 text-white/50`}>
-                                        NGƯỜI ĐỜI HAY NÓI
-                                      </span>
-                                      <p className="text-[10.5px] md:text-[14px] leading-relaxed italic font-semibold font-sans drop-shadow-sm text-white">
-                                        "{selectedAlbum.profDesc || "Đánh giá chuyên môn đang được cập nhật, ghi nhận ý kiến từ hội đồng phê bình."}"
-                                      </p>
-                                    </div>
-                                    
-                                    <div className="mt-3 bg-white/5 border-l-[3px] md:border-l-[4px] border-white/20 p-3 md:p-4 text-left group/pers">
-                                      <div className="flex items-center justify-between mb-1.5">
-                                        <span className={`text-[8px] md:text-[11px] font-sans font-black uppercase tracking-[0.2em] block text-white/50`}>
-                                          PHÁT NÓI
-                                        </span>
-                                      </div>
-                                      <div className="p-1 -ml-1 transition-colors rounded-sm">
-                                        <p className="text-[10.5px] md:text-[14px] leading-relaxed font-sans text-slate-300">
-                                          {selectedAlbum.persDesc ? selectedAlbum.persDesc : <span className="italic text-white/30">Chưa có chia sẻ từ Phát.</span>}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                                animate={{ width: window.innerWidth < 768 ? 320 : window.innerWidth < 1280 ? 800 : 900, opacity: 1, scale: 1 }}
+                                exit={{ width: 0, opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                className="flex-none"
+                              >
+                                {renderExpandedPanel()}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                       </React.Fragment>
                     );
                   })
