@@ -1,0 +1,21 @@
+--- src/App.tsx
++++ src/App.tsx
+@@ -21,8 +21,7 @@
+ export default function App() {
+   const [tiers, setTiers] = useState<Tier[]>([]);
+   const [loading, setLoading] = useState(true);
+-  const [introVisible, setIntroVisible] = useState(true);
+   // TasteProfile and DNA tabs are removed to keep the interface pristine and single-purpose
+   const activeTab = "ranking";
+   
+@@ -298,10 +297,6 @@
+         )}
+       </AnimatePresence>
+ 
+-      {introVisible && (
+-        <LoadingIntro onComplete={() => setIntroVisible(false)} />
+-      )}
+-
+     </div>
+   );
+ }

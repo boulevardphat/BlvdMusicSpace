@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, memo, useCallback } from "react";
 import { Tier, Album } from "../data";
 import { getImgbbCoverUrl } from "../utils";
 import { SpotifyPlayer } from "./SpotifyPlayer";
+import LoadingIntro from "./LoadingIntro";
 import { motion, AnimatePresence } from "motion/react";
 import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight, Pencil } from "lucide-react";
 
@@ -785,21 +786,23 @@ export function TierList({
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden select-none">
       
-      {/* 1. Metro Dashboard Header - Hidden on mobile */}
-      <div className="hidden md:flex flex-none items-end justify-between border-b border-white/10 pb-4 bg-transparent animate-fade-in mx-4 md:mx-8 mt-[18px] md:mt-[22px]">
-        <div>
-          <h1 className="text-2xl md:text-[32px] font-sans font-black text-white tracking-tighter leading-none">
-            BẢNG XẾP HẠNG ALBUM CỦA BLVD
-          </h1>
-        </div>
-      </div>
-
       {/* 2. Scrolling grid body - Stretched vertically */}
       <div 
         id="main-scroll-container"
         ref={scrollContainerRef}
-        className={`flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto transition-all duration-500 ${selectedAlbum ? "md:pr-[55vw]" : "md:pr-12"}`}
+        className={`flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto transition-all duration-500 overscroll-none ${selectedAlbum ? "md:pr-[55vw]" : "md:pr-12"}`}
       >
+        <LoadingIntro />
+        <div className="flex flex-col md:flex-row h-full relative">
+          <div className="hidden md:flex sticky top-0 left-0 z-40 w-0 h-full">
+            <div className="absolute top-0 left-0 w-screen h-[90px] flex-none items-center justify-between border-b border-white/10 py-4 px-4 md:px-8 bg-[#0b0c0e]">
+              <div className="pt-2 pb-1">
+                <h1 className="text-2xl md:text-[clamp(20px,2.5vw,32px)] font-sans font-black text-white tracking-tighter leading-normal uppercase">
+                  BẢNG XẾP HẠNG ALBUM CỦA BLVD
+                </h1>
+              </div>
+            </div>
+          </div>
         {albumsWithRank.map((tier, tierIdx) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
           const IconComponent = TIER_ICONS[tier.id] || Disc;
@@ -813,7 +816,7 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 pb-8 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
+              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 md:pt-[90px] pb-8 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
                {/* STICKY MASTER LANE BANNER & INFO PANEL - Desktop */}
               <div className="hidden md:flex flex-grow flex-col justify-center select-none py-4 xl:py-6 relative z-30">
@@ -838,26 +841,26 @@ export function TierList({
               </div>
 
               {/* STICKY MASTER LANE BANNER & INFO PANEL - Mobile */}
-              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-4 pb-3 px-4 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/5 mb-6 shadow-xl">
-                 <div className="flex flex-row items-end justify-between gap-3">
-                    <div className="text-left flex items-center flex-1 min-w-0">
-                      <h2 className="text-[32px] font-sans font-black tracking-tighter uppercase leading-[1.1] text-white drop-shadow-md truncate pt-1" title={cleanedName}>
+              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-6 pb-5 px-5 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 mb-6 shadow-2xl w-full">
+                 <div className="flex flex-row items-start justify-between gap-4">
+                    <div className="text-left flex items-start flex-1 min-w-0 py-1">
+                      <h2 className="text-[36px] sm:text-[44px] font-sans font-black tracking-tighter uppercase leading-[1.2] text-white drop-shadow-md pb-1" title={cleanedName}>
                         {cleanedName}
                       </h2>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 max-w-[50%] pb-1">
-                       <div className="text-[10px] font-mono text-white/70 font-black tracking-widest uppercase mb-0.5">
+                    <div className="flex flex-col items-end shrink-0 pt-2 pb-1">
+                       <div className="text-[11px] font-mono text-white/90 font-black tracking-widest uppercase bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">
                          {tier.albums.length} RECS
                        </div>
                     </div>
                  </div>
-                 <p className="text-[12px] leading-snug text-slate-300 italic font-medium mt-2 opacity-90">
+                 <p className="text-[14px] leading-relaxed text-slate-300 italic font-medium mt-3 border-l-2 border-white/20 pl-3">
                    "{tier.description}"
                  </p>
               </div>
 
               {/* Album tiles flow area - Mobile (Grid Layout) */}
-              <div className="md:hidden w-full grid grid-cols-3 sm:grid-cols-4 gap-[8px] select-none px-4 max-w-full pb-8">
+              <div className="md:hidden w-full grid grid-cols-3 sm:grid-cols-4 gap-2 select-none px-4 max-w-full pb-8 grid-flow-dense">
                 {tier.mappedAlbums.length === 0 ? (
                   <div className="col-span-full aspect-square border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />
@@ -866,7 +869,7 @@ export function TierList({
                 ) : (
                   tier.mappedAlbums.map((album: any, idx: number) => {
                     const isSelected = selectedAlbum?.id === album.id;
-                    const isLargeTile = idx === 0 || idx % 5 === 0; // Make every 5th tile large as well
+                    const isLargeTile = idx === 0 || idx % 7 === 0; // Slightly sparser large tiles to look better with dense flow
                     
                     return (
                       <React.Fragment key={`mob-${album.id}`}>
@@ -987,6 +990,7 @@ export function TierList({
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );

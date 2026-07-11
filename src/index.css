@@ -83,3 +83,7 @@
     content-visibility: auto;
   }
 }
+
+body {
+  overscroll-behavior: none;
+}

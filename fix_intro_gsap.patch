@@ -1,0 +1,55 @@
+--- src/components/LoadingIntro.tsx
++++ src/components/LoadingIntro.tsx
+@@ -4,9 +4,6 @@
+ import { ArrowRight, ArrowDown } from "lucide-react";
+ import albumsData from "../albums.json";
+-import gsap from "gsap";
+-import { ScrollTrigger } from "gsap/ScrollTrigger";
+-
+-gsap.registerPlugin(ScrollTrigger);
+ 
+ export default function LoadingIntro() {
+   const [startGlow, setStartGlow] = useState(false);
+@@ -118,22 +115,5 @@
+ 
+-  // Use GSAP ScrollTrigger to create a physical bounce/parallax effect as you scroll away from the intro
+-  useEffect(() => {
+-    const isMobile = window.innerWidth < 768;
+-    const scrollContainer = document.getElementById("main-scroll-container");
+-    
+-    if (gridRef.current && scrollContainer) {
+-      // Create a smooth parallax as it scrolls out of view
+-      gsap.to(gridRef.current, {
+-        scrollTrigger: {
+-          trigger: containerRef.current,
+-          scroller: scrollContainer,
+-          start: "top top",
+-          end: isMobile ? "bottom top" : "right left",
+-          scrub: 1.5,
+-          horizontal: !isMobile,
+-        },
+-        y: isMobile ? window.innerHeight * 0.4 : 0,
+-        x: isMobile ? 0 : window.innerWidth * 0.4,
+-        opacity: 0,
+-        ease: "power3.out"
+-      });
+-    }
+-  }, [gridDims]);
+ 
+@@ -278,13 +258,13 @@
+                ) : (
+                  <>
+                     {/* Horizontal text for desktop, easy to read, with right-pointing arrow */}
+-                    <span className="font-mono text-white text-[28px] font-black tracking-widest uppercase">
++                    <span className="font-mono text-white text-[clamp(18px,2vw,28px)] font-black tracking-widest uppercase">
+                        Bắt Đầu
+                     </span>
+                     <motion.div
+-                      animate={{ x: [0, 16, 0] }}
++                      animate={{ x: [0, 12, 0] }}
+                       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                     >
+-                       <ArrowRight className="w-12 h-12 text-white" />
++                       <ArrowRight className="w-[clamp(24px,3vw,36px)] h-[clamp(24px,3vw,36px)] text-white" />
+                     </motion.div>
+                  </>

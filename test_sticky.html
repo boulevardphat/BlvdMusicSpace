@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; }
+  .scroll-container {
+    display: flex;
+    overflow-x: auto;
+    width: 100vw;
+    height: 100vh;
+  }
+  .intro {
+    flex: 0 0 100vw;
+    height: 100vh;
+    background: red;
+  }
+  .tiers-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  .sticky-anchor {
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100vh;
+    z-index: 40;
+  }
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 90px;
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  .tier {
+    width: 50vw;
+    height: 100vh;
+    background: blue;
+    border-right: 1px solid white;
+  }
+</style>
+</head>
+<body>
+  <div class="scroll-container">
+    <div class="intro">Intro</div>
+    <div class="tiers-wrapper">
+      <div class="sticky-anchor">
+        <div class="header">Header</div>
+      </div>
+      <div class="tier">Tier 1</div>
+      <div class="tier">Tier 2</div>
+      <div class="tier">Tier 3</div>
+    </div>
+  </div>
+</body>
+</html>
