@@ -295,6 +295,7 @@ export const MetroTile = memo(function MetroTile({
   onImageLoad
 }: MetroTileProps) {
   const [isHovered, setIsHovered] = useState(false);
+
   const mCover = album.coverUrl || getImgbbCoverUrl(album.artist, album.title, 'thumb');
   
   const bg = getAlbumBgColor(colorObj, theme);
@@ -519,7 +520,7 @@ export function TierList({
     }
   }, [selectedAlbum, albumColors]);
 
-  // Live flipping loop to emulate active Live Windows 8 Tiles
+  // Robust central live flipping loop with Fisher-Yates shuffle to ensure true randomness
   useEffect(() => {
     const allAlbumIds: number[] = [];
     tiers.forEach(t => {
@@ -529,43 +530,52 @@ export function TierList({
     if (allAlbumIds.length === 0) return;
 
     const interval = setInterval(() => {
-      // Pick 3 to 4 tiles for every 10 albums to flip concurrently (More on mobile)
-      const allAlbumsWithRanks = albumsWithRank.flatMap((t: any) => t.mappedAlbums).sort((a: any, b: any) => a.globalRank - b.globalRank);
-      const totalGroupsOfTen = Math.ceil(allAlbumsWithRanks.length / 10);
+      const allAlbumsWithRanks = albumsWithRank.flatMap((t: any) => t.mappedAlbums);
+      
+      // True Fisher-Yates shuffle
+      const shuffled = [...allAlbumsWithRanks];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
       const chosenIds: number[] = [];
       const chosenRanks: number[] = [];
       
-      for (let g = 0; g < totalGroupsOfTen; g++) {
-        const groupElements = allAlbumsWithRanks.slice(g * 10, (g + 1) * 10);
-        const flipCount = isMobile ? Math.floor(Math.random() * 4) + 4 : Math.floor(Math.random() * 2) + 3; // 4 to 7 on mobile, 3 to 4 on desktop
-        
-        // Shuffle current group
-        const shuffled = [...groupElements].sort(() => 0.5 - Math.random());
-        let groupChosenCount = 0;
-        
-        for (const album of shuffled) {
-          // Ensure no 2 consecutively ranked albums flip at the same time, except on mobile where it's chaotic
-          const isConsecutive = chosenRanks.some(rank => Math.abs(rank - album.globalRank) === 1);
-          if (!isConsecutive || isMobile) {
-             chosenIds.push(album.id);
-             chosenRanks.push(album.globalRank);
-             groupChosenCount++;
-          }
-          if (groupChosenCount >= flipCount) break;
+      // Calculate dynamic flip count based on total albums and screen size
+      const totalAlbums = allAlbumsWithRanks.length;
+      // Around 15-20% of albums on desktop, 25-30% on mobile
+      const percentage = isMobile ? (Math.random() * 0.1 + 0.2) : (Math.random() * 0.05 + 0.15);
+      const flipCount = Math.max(3, Math.floor(totalAlbums * percentage));
+      
+      let groupChosenCount = 0;
+      
+      for (const album of shuffled) {
+        // Ensure no 2 consecutively ranked albums flip at the same time to avoid visual clumps
+        const isConsecutive = chosenRanks.some(rank => Math.abs(rank - album.globalRank) === 1);
+        if (!isConsecutive) {
+           chosenIds.push(album.id);
+           chosenRanks.push(album.globalRank);
+           groupChosenCount++;
         }
+        if (groupChosenCount >= flipCount) break;
       }
       
-      setLiveFlippedIds(prev => [...prev, ...chosenIds]);
+      setLiveFlippedIds(prev => {
+        // Only add new ids that aren't already flipped
+        const newIds = chosenIds.filter(id => !prev.includes(id));
+        return [...prev, ...newIds];
+      });
 
-      // Flip back to normal state after 2.8 seconds
+      // Staggered flip back
       setTimeout(() => {
         setLiveFlippedIds(prev => prev.filter(id => !chosenIds.includes(id)));
-      }, isMobile ? 1800 : 2800);
+      }, isMobile ? 2000 : 3500);
 
-    }, isMobile ? 1800 : 2800); // Waves trigger faster on mobile
+    }, isMobile ? 2500 : 4500); // Trigger frequency
 
     return () => clearInterval(interval);
-  }, [tiers, albumsWithRank, isMobile]); // Added albumsWithRank to deps since it was used
+  }, [tiers, albumsWithRank, isMobile]);
 
   const renderExpandedPanel = () => {
     if (!selectedAlbum) return null;
@@ -841,22 +851,24 @@ export function TierList({
               </div>
 
               {/* STICKY MASTER LANE BANNER & INFO PANEL - Mobile */}
-              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-6 pb-5 px-5 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 mb-6 shadow-2xl w-full">
-                 <div className="flex flex-row items-start justify-between gap-4">
-                    <div className="text-left flex items-start flex-1 min-w-0 py-1">
-                      <h2 className="text-[36px] sm:text-[44px] font-sans font-black tracking-tighter uppercase leading-[1.2] text-white drop-shadow-md pb-1" title={cleanedName}>
-                        {cleanedName}
-                      </h2>
+              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-4 pb-3.5 px-4 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 mb-5 w-full">
+                 <div className="flex flex-row items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                       {/* Clean color bar indicator matching the tier's unique branding */}
+                       <div className={`w-[5px] h-[18px] ${theme.barColor} shrink-0`} />
+                       <h2 className="text-[20px] font-sans font-black tracking-normal uppercase leading-normal text-white pt-[3px] select-none" title={cleanedName}>
+                         {cleanedName}
+                       </h2>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 pt-2 pb-1">
-                       <div className="text-[11px] font-mono text-white/90 font-black tracking-widest uppercase bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">
-                         {tier.albums.length} RECS
-                       </div>
-                    </div>
+                    <span className="text-[11px] font-mono text-white/40 font-bold tracking-widest uppercase select-none">
+                       {tier.albums.length} RECS
+                    </span>
                  </div>
-                 <p className="text-[14px] leading-relaxed text-slate-300 italic font-medium mt-3 border-l-2 border-white/20 pl-3">
-                   "{tier.description}"
-                 </p>
+                 <div className="mt-1.5 pl-[15px]">
+                   <p className="text-[12.5px] leading-relaxed text-slate-400 italic font-medium">
+                     "{tier.description}"
+                   </p>
+                 </div>
               </div>
 
               {/* Album tiles flow area - Mobile (Grid Layout) */}
@@ -888,23 +900,6 @@ export function TierList({
                             onImageLoad={handleImageLoad}
                           />
                         </div>
-                        
-                        <AnimatePresence>
-                          {isSelected && (
-                            <motion.div
-                              key={`mob-expand-${album.id}`}
-                              initial={{ height: 0, opacity: 0, scale: 0.95 }}
-                              animate={{ height: "auto", opacity: 1, scale: 1 }}
-                              exit={{ height: 0, opacity: 0, scale: 0.95 }}
-                              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                              className="col-span-full w-full overflow-hidden"
-                            >
-                              <div className="py-2">
-                                {renderExpandedPanel()}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
                       </React.Fragment>
                     );
                   })
