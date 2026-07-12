@@ -29,12 +29,3 @@ export type Album = {
 // Build INITIAL_TIERS directly from the single albums.json file containing everything
 export const INITIAL_TIERS: Tier[] = albumsData.tiers;
 
-export const formatRankingForPrompt = (tiers: Tier[] = INITIAL_TIERS) => {
-  return tiers
-    .map(
-      (t) =>
-        `\n${t.name}\n` +
-        t.albums.map((a) => `${a.id}. ${a.artist} - ${a.title}`).join("\n"),
-    )
-    .join("\n");
-};

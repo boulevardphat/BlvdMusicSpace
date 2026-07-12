@@ -4,15 +4,7 @@ import { getImgbbCoverUrl } from "../utils";
 import { SpotifyPlayer } from "./SpotifyPlayer";
 import LoadingIntro from "./LoadingIntro";
 import { motion, AnimatePresence } from "motion/react";
-import { Crown, Gem, Sparkles, Layers, Disc, Music, Award, RotateCcw, X, Trash2, ArrowRight, Pencil } from "lucide-react";
-
-const TIER_ICONS: Record<string, any> = {
-  "t1": Crown,
-  "t2": Gem,
-  "t3": Sparkles,
-  "t4": Layers,
-  "t5": Disc
-};
+import { Disc, Music, X, ArrowRight } from "lucide-react";
 
 // Start high-contrast, beautiful Windows 8 Metro color accents (Sáng - Light supportive)
 const METRO_ACCENTS: Record<string, {
@@ -73,35 +65,6 @@ const TIER_GRADIENTS: Record<string, string> = {
   "t4": "from-[#e65100] via-[#d84315] to-[#bf360c] text-white", // Vibrant Orange and Blazing Copper
   "t5": "from-[#2e7d32] via-[#1b5e20] to-[#0a3d13] text-white"  // Intense Energetic Forest Green
 };
-
-// Gradient overlays matching the start color of the lanes for visual fade-out portal
-const TIER_MOCK_SOLID: Record<string, string> = {
-  "t1": "from-[#0d47a1] to-transparent",
-  "t2": "from-[#c2185b] to-transparent",
-  "t3": "from-[#00796b] to-transparent",
-  "t4": "from-[#e65100] to-transparent",
-  "t5": "from-[#2e7d32] to-transparent"
-};
-
-// Metro dynamic backface custom palettes for generic generation
-const METRO_PALETTES = [
-  { bg: "bg-[#0078d7]", text: "text-white" }, // Blue
-  { bg: "bg-[#d13438]", text: "text-white" }, // Red
-  { bg: "bg-[#008272]", text: "text-white" }, // Teal
-  { bg: "bg-[#ca5010]", text: "text-white" }, // Orange
-  { bg: "bg-[#107c41]", text: "text-white" }, // Green
-  { bg: "bg-[#5c2d91]", text: "text-white" }, // Purple
-  { bg: "bg-[#881798]", text: "text-white" }, // Magenta
-  { bg: "bg-[#00a4ef]", text: "text-white" }, // Light Blue
-  { bg: "bg-[#ffb900]", text: "text-[#111]" }, // Yellow
-  { bg: "bg-[#e81123]", text: "text-white" }, // Vivid Red
-];
-
-function getAlbumPalette(albumId: number, tierId: string): { bg: string; text: string } {
-  // Stable pseudo-random choice for other albums
-  const index = Math.abs(albumId * 13 + 7) % METRO_PALETTES.length;
-  return METRO_PALETTES[index];
-}
 
 // Metro Dynamic packing grids models
 
@@ -803,7 +766,7 @@ export function TierList({
         className={`flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto transition-all duration-500 overscroll-none ${selectedAlbum ? "md:pr-[55vw]" : "md:pr-12"}`}
       >
         <LoadingIntro />
-        <div className="flex flex-col md:flex-row h-full relative">
+        <div className="flex flex-col md:flex-row h-auto md:h-full relative w-full">
           <div className="hidden md:flex sticky top-0 left-0 z-40 w-0 h-full">
             <div className="absolute top-0 left-0 w-screen h-[90px] flex-none items-center justify-between border-b border-white/10 py-4 px-4 md:px-8 bg-[#0b0c0e]">
               <div className="pt-2 pb-1">
@@ -815,7 +778,6 @@ export function TierList({
           </div>
         {albumsWithRank.map((tier, tierIdx) => {
           const theme = METRO_ACCENTS[tier.id] || METRO_ACCENTS["t5"];
-          const IconComponent = TIER_ICONS[tier.id] || Disc;
           const cleanedName = cleanTierName(tier.name);
           const gradientClass = TIER_GRADIENTS[tier.id] || "from-slate-50 to-slate-20; border-l-4 border-l-slate-400";
           const shouldLoadImage = tierIdx <= activeLoadTierIdx;
@@ -826,7 +788,8 @@ export function TierList({
           return (
             <div 
               key={tier.id}
-              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 md:pt-[90px] pb-8 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
+              style={{ zIndex: albumsWithRank.length - tierIdx }}
+              className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 md:pt-[90px] pb-0 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
                {/* STICKY MASTER LANE BANNER & INFO PANEL - Desktop */}
               <div className="hidden md:flex flex-grow flex-col justify-center select-none py-4 xl:py-6 relative z-30">
@@ -851,7 +814,7 @@ export function TierList({
               </div>
 
               {/* STICKY MASTER LANE BANNER & INFO PANEL - Mobile */}
-              <div className="md:hidden sticky top-[-1px] z-40 flex flex-col select-none pt-4 pb-3.5 px-4 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 mb-5 w-full">
+              <div className="md:hidden sticky top-0 z-40 flex flex-col select-none pt-4 pb-3.5 px-4 bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 w-full">
                  <div className="flex flex-row items-center justify-between">
                     <div className="flex items-center gap-2.5">
                        {/* Clean color bar indicator matching the tier's unique branding */}
@@ -872,7 +835,7 @@ export function TierList({
               </div>
 
               {/* Album tiles flow area - Mobile (Grid Layout) */}
-              <div className="md:hidden w-full grid grid-cols-3 sm:grid-cols-4 gap-2 select-none px-4 max-w-full pb-8 grid-flow-dense">
+              <div className="md:hidden w-full grid grid-cols-3 sm:grid-cols-4 gap-2 select-none px-4 max-w-full pb-8 pt-5 grid-flow-dense">
                 {tier.mappedAlbums.length === 0 ? (
                   <div className="col-span-full aspect-square border-[2px] border-dashed border-white/20 flex flex-col items-center justify-center p-4 text-center bg-white/5">
                     <Music className="w-6 h-6 text-slate-400 mb-1" />

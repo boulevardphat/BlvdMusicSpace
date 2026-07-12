@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { INITIAL_TIERS, Tier, Album } from "./data";
+import { Tier, Album } from "./data";
 import { TierList, getAlbumBgColor } from "./components/TierList";
 import { SpotifyPlayer } from "./components/SpotifyPlayer";
 import { motion, AnimatePresence } from "motion/react";
-import { Music, X, Laptop } from "lucide-react";
+import { Music, Laptop } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
 import TargetCursor from "./components/TargetCursor";
@@ -19,9 +19,6 @@ const TIER_BG_COLORS: Record<string, string> = {
 
 export default function App() {
   const [tiers, setTiers] = useState<Tier[]>([]);
-  const [loading, setLoading] = useState(true);
-  // TasteProfile and DNA tabs are removed to keep the interface pristine and single-purpose
-  const activeTab = "ranking";
   
   // Selected Album detailing state (held globally for synchronization)
   const [selectedAlbum, setSelectedAlbum] = useState<(Album & { tierName: string; rankNumber: number; coverUrl?: string; isEditingPersDesc?: boolean }) | null>(null);
@@ -70,7 +67,6 @@ export default function App() {
     });
 
     setAlbumColors(initialColors);
-    setLoading(false);
 
     let isSubscribed = true;
 
