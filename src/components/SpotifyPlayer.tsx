@@ -81,35 +81,35 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   const [errorCount, setErrorCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
   const [trackName, setTrackName] = useState("");
-  const [glyphLevels, setGlyphLevels] = useState<number[]>([0, 0, 0]);
+  const [glyphLevels, setGlyphLevels] = useState<number[]>([0, 0, 0, 0, 0, 0]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    let currentLevels = [0, 0, 0];
+    let currentLevels = [0, 0, 0, 0, 0, 0];
     if (isPlaying) {
       interval = setInterval(() => {
         currentLevels = currentLevels.map((prev, index) => {
           let next = prev;
           const rand = Math.random();
           
-          if (index === 0) {
-            // Treble (Row 0): rapid spikes, decays fast
+          if (index === 0 || index === 1) {
+            // Treble (Row 0, 1): rapid spikes, decays fast, up to 8
             if (rand < 0.45) {
-              next = Math.floor(Math.random() * 3) + 2; // 2, 3, 4
+              next = Math.floor(Math.random() * 5) + 3; // 3 to 7
             } else {
               next = Math.max(0, next - 2);
             }
-          } else if (index === 1) {
-            // Mid (Row 1): balanced, up to 5
-            if (rand < 0.35) {
-              next = Math.floor(Math.random() * 4) + 2; // 2, 3, 4, 5
+          } else if (index === 2 || index === 3) {
+            // Mid (Row 2, 3): balanced, up to 8
+            if (rand < 0.38) {
+              next = Math.floor(Math.random() * 6) + 2; // 2 to 7
             } else {
               next = Math.max(0, next - 1);
             }
           } else {
-            // Bass (Row 2): heavy, slower decay, up to 5
-            if (rand < 0.25) {
-              next = Math.floor(Math.random() * 3) + 3; // 3, 4, 5
+            // Bass (Row 4, 5): heavy, slower decay, up to 8
+            if (rand < 0.28) {
+              next = Math.floor(Math.random() * 5) + 4; // 4 to 8
             } else {
               if (Math.random() < 0.6) {
                 next = Math.max(0, next - 1);
@@ -121,7 +121,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
         setGlyphLevels([...currentLevels]);
       }, 70);
     } else {
-      setGlyphLevels([0, 0, 0]);
+      setGlyphLevels([0, 0, 0, 0, 0, 0]);
     }
     return () => clearInterval(interval);
   }, [isPlaying, variant]);
@@ -317,85 +317,79 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
            </div>
         </div>
 
-        {/* 3 LED strips stacked vertically with no gap */}
-        <div className="flex flex-col w-full mt-auto border border-white/20 bg-black/25 overflow-hidden select-none shrink-0">
-          {/* Row 0: Top strip (Status Red + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isRedActive ? '#ef4444' : '#4c0505',
-                boxShadow: isRedActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(239,68,68,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[0] >= levelThreshold;
-              return (
-                <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
-                  style={{ 
-                    opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
-                  }} 
-                />
-              );
-            })}
-          </div>
+        {/* 3 Status LED + 6x8 White LED grid */}
+        <div 
+          className="grid w-full mt-auto border border-white/20 bg-black/25 overflow-hidden select-none shrink-0"
+          style={{
+            gridTemplateColumns: '1.5fr repeat(8, 1fr)',
+            gridTemplateRows: 'repeat(6, minmax(0, 1fr))'
+          }}
+        >
+          {/* Status Red (spans rows 1-2, col 1) */}
+          <div 
+            className="border-r border-b border-black/30 transition-all duration-[200ms]"
+            style={{
+              gridRow: '1 / 3',
+              gridColumn: '1',
+              backgroundColor: isRedActive ? '#ef4444' : '#4c0505',
+              boxShadow: isRedActive 
+                ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(239,68,68,0.95)' 
+                : 'inset 0 0 6px rgba(0,0,0,0.6)'
+            }}
+          />
 
-          {/* Row 1: Middle strip (Status Yellow + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isYellowActive ? '#eab308' : '#423c06',
-                boxShadow: isYellowActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(234,179,8,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[1] >= levelThreshold;
-              return (
-                <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
-                  style={{ 
-                    opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
-                  }} 
-                />
-              );
-            })}
-          </div>
+          {/* Status Yellow (spans rows 3-4, col 1) */}
+          <div 
+            className="border-r border-b border-black/30 transition-all duration-[200ms]"
+            style={{
+              gridRow: '3 / 5',
+              gridColumn: '1',
+              backgroundColor: isYellowActive ? '#eab308' : '#423c06',
+              boxShadow: isYellowActive 
+                ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(234,179,8,0.95)' 
+                : 'inset 0 0 6px rgba(0,0,0,0.6)'
+            }}
+          />
 
-          {/* Row 2: Bottom strip (Status Green + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isGreenActive ? '#22c55e' : '#062e14',
-                boxShadow: isGreenActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(34,197,94,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[2] >= levelThreshold;
+          {/* Status Green (spans rows 5-6, col 1) */}
+          <div 
+            className="border-r border-black/30 transition-all duration-[200ms]"
+            style={{
+              gridRow: '5 / 7',
+              gridColumn: '1',
+              backgroundColor: isGreenActive ? '#22c55e' : '#062e14',
+              boxShadow: isGreenActive 
+                ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(34,197,94,0.95)' 
+                : 'inset 0 0 6px rgba(0,0,0,0.6)'
+            }}
+          />
+
+          {/* 6 rows x 8 columns of smaller white LEDs */}
+          {Array.from({ length: 6 }).map((_, r) => {
+            return Array.from({ length: 8 }).map((_, c) => {
+              const active = glyphLevels[r] > c;
+              const isLastRow = r === 5;
+              const isLastCol = c === 7;
               return (
                 <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
+                  key={`white-led-${r}-${c}`}
+                  className={`bg-white transition-all duration-[80ms] rounded-none ${
+                    !isLastCol ? 'border-r border-black/30' : ''
+                  } ${
+                    !isLastRow ? 'border-b border-black/20' : ''
+                  }`}
                   style={{ 
+                    gridRow: `${r + 1} / ${r + 2}`,
+                    gridColumn: `${c + 2} / ${c + 3}`,
                     opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
+                    boxShadow: active 
+                      ? 'inset 0 0 2px rgba(255,255,255,1), inset 0 0 4px rgba(0,0,0,0.15), 0 0 16px rgba(255,255,255,1), 0 0 6px rgba(255,255,255,0.8)' 
+                      : 'inset 0 0 4px rgba(0,0,0,0.5)'
                   }} 
                 />
               );
-            })}
-          </div>
+            });
+          })}
         </div>
 
         {/* Hidden native widget container */}
@@ -416,6 +410,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
     const rgb = hexToRgb(dominantColor || '#10b981');
     const cy = 3;
     const cx = 7;
+    const musicEnergy = glyphLevels.reduce((a, b) => a + b, 0) / (glyphLevels.length * 8);
 
     const gridCells = [];
     for (let r = 0; r < 7; r++) {
@@ -506,15 +501,15 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
               
               let intensity = 0.08; // base idle dim state
               if (isPlaying) {
-                // Pulsing wave from center outwards
-                const time = Date.now() / 140; // speed of the wave propagation
-                const waveVal = Math.sin(dist * 1.1 - time);
-                const sharpWave = Math.max(0, Math.pow((waveVal + 1) / 2, 4.5));
-                intensity = 0.12 + 0.88 * sharpWave * (1.1 - dist / 9);
+                // Highly precise propagation from center out to edges driven by real music energy
+                const normDist = dist / 7; // distance ranges from 0 to 7
+                const wave = Math.sin(dist * 1.5 - (Date.now() / 120)) * 0.5 + 0.5;
+                const intensityFactor = musicEnergy * 1.25 - normDist * 0.95 + wave * 0.25;
+                intensity = 0.08 + 0.92 * Math.max(0, Math.min(1, intensityFactor));
               } else {
                 // Subtle static breathing from center outwards
-                const breathe = Math.sin(Date.now() / 800) * 0.03 + 0.09;
-                intensity = breathe * (1.2 - dist / 10);
+                const breathe = Math.sin(Date.now() / 800) * 0.5 + 0.5;
+                intensity = 0.08 + 0.06 * breathe * (1.0 - dist / 8);
               }
 
               // Ensure intensity is bound nicely

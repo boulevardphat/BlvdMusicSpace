@@ -10,6 +10,24 @@ export default function LoadingIntro() {
   
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.01 }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.unobserve(el);
+    };
+  }, []);
 
   useEffect(() => {
     function calculateGrid() {
@@ -178,7 +196,7 @@ export default function LoadingIntro() {
             >
               <div
                 className={`absolute inset-0 opacity-0 transition-opacity ease-out pointer-events-none ${
-                  cell.shouldFlicker && startGlow ? "intro-tile-flicker" : ""
+                  isInView && cell.shouldFlicker && startGlow ? "intro-tile-flicker" : ""
                 }`}
                 style={{
                   background: `radial-gradient(circle at center, ${cell.color}cc 0%, ${cell.color}15 70%, transparent 100%)`,
@@ -191,7 +209,7 @@ export default function LoadingIntro() {
               
               <div
                 className={`absolute w-6 h-6 rounded-full bg-white/40 blur-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity ease-out pointer-events-none ${
-                  cell.shouldFlicker && startGlow ? "intro-tile-flicker" : ""
+                  isInView && cell.shouldFlicker && startGlow ? "intro-tile-flicker" : ""
                 }`}
                 style={{
                   transitionDuration: "900ms",

@@ -403,6 +403,39 @@ export function TierList({
   const [liveFlippedIds, setLiveFlippedIds] = useState<number[]>([]);
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [visibleTierIds, setVisibleTierIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setVisibleTierIds((prev) => {
+          const next = new Set(prev);
+          entries.forEach((entry) => {
+            const tierId = entry.target.getAttribute("data-tier-id");
+            if (tierId) {
+              if (entry.isIntersecting) {
+                next.add(tierId);
+              } else {
+                next.delete(tierId);
+              }
+            }
+          });
+          return next;
+        });
+      },
+      {
+        root: null,
+        threshold: 0.05,
+      }
+    );
+
+    const elements = document.querySelectorAll("[data-tier-id]");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [tiers]);
 
   // Sequenced progress of tiers from top to bottom
   const [activeLoadTierIdx, setActiveLoadTierIdx] = useState(0);
@@ -487,6 +520,12 @@ export function TierList({
 
   // Robust central live flipping loop with Fisher-Yates shuffle to ensure true randomness
   useEffect(() => {
+    if (isMobile && selectedAlbum) {
+      // Suspend flipping on mobile when detail view is open
+      setLiveFlippedIds([]);
+      return;
+    }
+
     const allAlbumIds: number[] = [];
     tiers.forEach(t => {
       t.albums.forEach(a => allAlbumIds.push(a.id));
@@ -497,8 +536,16 @@ export function TierList({
     const interval = setInterval(() => {
       const allAlbumsWithRanks = albumsWithRank.flatMap((t: any) => t.mappedAlbums);
       
+      // Filter albums to only those inside the visible tiers
+      const activeAlbums = allAlbumsWithRanks.filter((album: any) => {
+        if (visibleTierIds.size === 0) return true;
+        return visibleTierIds.has(album.tierId);
+      });
+
+      if (activeAlbums.length === 0) return;
+
       // True Fisher-Yates shuffle
-      const shuffled = [...allAlbumsWithRanks];
+      const shuffled = [...activeAlbums];
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -508,7 +555,7 @@ export function TierList({
       const chosenRanks: number[] = [];
       
       // Calculate dynamic flip count based on total albums and screen size
-      const totalAlbums = allAlbumsWithRanks.length;
+      const totalAlbums = activeAlbums.length;
       // Around 15-20% of albums on desktop, 25-30% on mobile
       const percentage = isMobile ? (Math.random() * 0.1 + 0.2) : (Math.random() * 0.05 + 0.15);
       const flipCount = Math.max(3, Math.floor(totalAlbums * percentage));
@@ -522,7 +569,7 @@ export function TierList({
            chosenIds.push(album.id);
            chosenRanks.push(album.globalRank);
            groupChosenCount++;
-        }
+         }
         if (groupChosenCount >= flipCount) break;
       }
       
@@ -540,7 +587,7 @@ export function TierList({
     }, isMobile ? 2500 : 4500); // Trigger frequency
 
     return () => clearInterval(interval);
-  }, [tiers, albumsWithRank, isMobile]);
+  }, [tiers, albumsWithRank, isMobile, selectedAlbum, visibleTierIds]);
 
   const renderExpandedPanel = () => {
     if (!selectedAlbum) return null;
@@ -844,6 +891,7 @@ export function TierList({
           return (
             <div 
               key={tier.id}
+              data-tier-id={tier.id}
               style={{ zIndex: albumsWithRank.length - tierIdx }}
               className={`flex-none flex flex-col h-auto md:h-full w-full md:w-auto bg-gradient-to-br ${gradientClass} md:px-8 pt-0 md:pt-[90px] pb-0 md:pb-12 border-b md:border-b-0 md:border-r border-white/10 relative min-w-0 md:min-w-[max-content] rounded-none`}
             >
