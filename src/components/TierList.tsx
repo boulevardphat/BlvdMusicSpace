@@ -759,18 +759,19 @@ export function TierList({
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden select-none">
       
-      {/* 2. Scrolling grid body - Stretched vertically */}
+      {/* Scrolling grid body - Stretched vertically */}
       <div 
         id="main-scroll-container"
         ref={scrollContainerRef}
         className={`flex-grow flex flex-col md:flex-row items-stretch overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden gap-0 py-0 pr-0 no-scrollbar scroll-smooth min-h-0 w-full md:w-auto transition-all duration-500 overscroll-none ${selectedAlbum ? "md:pr-[55vw]" : "md:pr-12"}`}
       >
         <LoadingIntro />
-        <div className="flex flex-col md:flex-row h-auto md:h-full relative w-full">
-          <div className="hidden md:flex sticky top-0 left-0 z-40 w-0 h-full">
-            <div className="absolute top-0 left-0 w-screen h-[90px] flex-none items-center justify-between border-b border-white/10 py-4 px-4 md:px-8 bg-[#0b0c0e]">
-              <div className="pt-2 pb-1">
-                <h1 className="text-2xl md:text-[clamp(20px,2.5vw,32px)] font-sans font-black text-white tracking-tighter leading-normal uppercase">
+        <div className="flex flex-col md:flex-row h-auto md:h-full relative w-full md:w-max">
+          {/* Dashboard Header - Stuck to Zone B on desktop */}
+          <div className="hidden md:flex sticky top-0 left-0 z-40 w-0 h-full pointer-events-none">
+            <div className="absolute top-0 left-0 w-screen flex-none items-end justify-between border-b border-white/10 pb-4 bg-[#0b0c0e] px-4 md:px-8 pt-[18px] md:pt-[22px] pointer-events-auto">
+              <div>
+                <h1 className="text-2xl md:text-[32px] font-sans font-black text-white tracking-tighter leading-none">
                   BẢNG XẾP HẠNG ALBUM CỦA BLVD
                 </h1>
               </div>
