@@ -43,6 +43,7 @@ interface SpotifyPlayerProps {
   variant?: "dark" | "light" | "mobile";
   dominantColor?: string;
   coverUrl?: string;
+  showNativeWidget?: boolean;
 }
 
 export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
@@ -50,6 +51,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   variant = "dark",
   dominantColor = "#111111",
   coverUrl = "",
+  showNativeWidget: showNativeWidgetProp,
 }) => {
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -57,10 +59,37 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   const [isAutoplayingCue, setIsAutoplayingCue] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(30000);
-  const [showNativeWidget, setShowNativeWidget] = useState(false);
+  const [showNativeWidgetState, setShowNativeWidgetState] = useState(false);
+  const showNativeWidget = showNativeWidgetProp !== undefined ? showNativeWidgetProp : showNativeWidgetState;
+  const setShowNativeWidget = showNativeWidgetProp !== undefined ? () => {} : setShowNativeWidgetState;
   const [errorCount, setErrorCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
   const [trackName, setTrackName] = useState("");
+  const [glyphLevel, setGlyphLevel] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    let currentLevel = 0;
+    if (isPlaying && variant !== "mobile") {
+      interval = setInterval(() => {
+        // 35% chance of a high spike (up to 5), simulating a beat
+        if (Math.random() < 0.35) {
+          currentLevel = Math.floor(Math.random() * 3) + 3; // 3, 4, 5
+        } else {
+          // Otherwise, decay steadily by 1 level per tick
+          currentLevel = Math.max(0, currentLevel - 1);
+          // 40% chance of a tiny bounce when near bottom
+          if (currentLevel === 0 && Math.random() < 0.4) {
+            currentLevel = 1;
+          }
+        }
+        setGlyphLevel(currentLevel);
+      }, 70); // 70ms tick rate makes it very snappy and responsive
+    } else {
+      setGlyphLevel(0);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying, variant]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -361,10 +390,10 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
       `}</style>
       
       {/* Vinyl Player Frame */}
-      <div className={`w-full flex flex-row items-center p-4 sm:p-5 rounded-none shadow-none relative transition-all duration-300 backdrop-blur-xl ${isDark ? 'bg-black/40 border-t border-white/10' : 'bg-white/90 border border-slate-200'}`}>
+      <div className={`w-full flex flex-row items-center pl-4 sm:pl-5 pr-[44px] sm:pr-[60px] py-4 sm:py-5 rounded-none shadow-none relative transition-all duration-300 backdrop-blur-xl overflow-hidden ${isDark ? 'bg-black/40 border-t border-white/10' : 'bg-white/90 border border-slate-200'}`}>
         
         {/* Left: The Vinyl Disk */}
-        <div className="shrink-0 relative w-[90px] h-[90px] sm:w-[126px] sm:h-[126px]">
+        <div className="shrink-0 relative w-[80px] h-[80px] sm:w-[116px] sm:h-[116px]">
           {/* Platter disk wrapper (with hover/active scaling but NO glow) */}
           <div 
             className={`w-full h-full transition-all duration-500 ease-out cursor-pointer relative cursor-target ${
@@ -393,46 +422,10 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
             </div>
           </div>
 
-          {/* Elegant Vinyl Tonearm (Que) - static relative to disk parent (no hover/play scaling) */}
-          <svg 
-            className="absolute -top-1.5 -right-2 sm:-top-3 sm:-right-4 h-[95px] sm:h-[135px] overflow-visible pointer-events-none z-30"
-            style={{
-              width: '35px'
-            }}
-            viewBox="0 0 35 110"
-          >
-            {/* Pivot Base (Static - does not rotate) */}
-            <circle cx="24" cy="14" r="9" fill={isDark ? "#2a2a2a" : "#d1d5db"} stroke={isDark ? "#444" : "#9ca3af"} strokeWidth="1" />
-            <circle cx="24" cy="14" r="4" fill={isDark ? "#111" : "#4b5563"} />
-            
-            {/* Rotating Arm Assembly (Pivots precisely around 24, 14) */}
-            <g
-              className="transition-transform duration-[800ms] ease-in-out"
-              style={{
-                transformOrigin: '24px 14px',
-                transform: isPlaying ? 'rotate(8deg)' : 'rotate(-12deg)'
-              }}
-            >
-              {/* S-shaped arm */}
-              <path 
-                d="M 24 14 Q 20 48 10 82 L 10 92" 
-                fill="none" 
-                stroke={isDark ? "#a1a1aa" : "#4b5563"} 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-              />
-              
-              {/* Counterweight */}
-              <rect x="20" y="2" width="8" height="6" rx="1" fill={isDark ? "#444" : "#6b7280"} />
-              
-              {/* Headshell / Cartridge */}
-              <rect x="6" y="90" width="8" height="14" rx="1" fill={isPlaying ? "#ef4444" : (isDark ? "#1f1f22" : "#374151")} />
-            </g>
-          </svg>
         </div>
 
         {/* Center: Track Info */}
-        <div className="flex-1 min-w-0 ml-4 sm:ml-6 flex flex-col justify-center pr-10">
+        <div className="flex-1 min-w-0 ml-4 sm:ml-6 flex flex-col justify-center pr-2">
            {trackName && (
              <div className={`text-[11px] sm:text-xs font-bold font-sans truncate ${isDark ? 'text-white' : 'text-slate-800'}`} title={trackName}>
                 {trackName}
@@ -448,41 +441,28 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
            </div>
         </div>
 
-        {/* Top Right: LED Indicator */}
-        <div className="absolute top-4 right-4 flex items-center">
-           <span className={`w-3 h-3 rounded-full block transition-all duration-300 ${isPlaying ? 'bg-green-500 shadow-[0_0_12px_rgba(34,197,94,1)] animate-pulse' : (isReady ? 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]')}`}></span>
-        </div>
-
-        {/* Bottom Right: Menu */}
-        <div className="absolute bottom-3 right-3" ref={menuRef}>
-           <button onClick={() => setShowMenu(!showMenu)} className={`p-1.5 rounded-full transition-colors cursor-target ${isDark ? 'text-white/50 hover:text-white hover:bg-white/10' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'}`}>
-              <MoreVertical className="w-4 h-4" />
-           </button>
-           
-           {showMenu && (
-             <div className={`absolute right-0 bottom-full mb-2 w-44 shadow-2xl py-1 rounded-md border z-50 ${isDark ? 'bg-neutral-900 border-white/10' : 'bg-white border-slate-200'}`}>
-                <button 
-                  onClick={() => {
-                    setShowNativeWidget(!showNativeWidget);
-                    setShowMenu(false);
-                  }}
-                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
-                >
-                  <LayoutTemplate className="w-3.5 h-3.5" />
-                  {showNativeWidget ? "Ẩn danh sách phát" : "Mở danh sách phát"}
-                </button>
-                <a
-                  href={`https://open.spotify.com/album/${spotifyId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target ${isDark ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
-                  onClick={() => setShowMenu(false)}
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Mở trên Spotify
-                </a>
-             </div>
-           )}
+        {/* Right Edge: Glyph Interface */}
+        <div className="absolute right-0 top-0 bottom-0 flex flex-col gap-0 items-center z-40 w-7 sm:w-10 bg-black/20 border-l border-white/5">
+          {[5, 4, 3, 2].map((levelThreshold) => (
+             <div 
+               key={levelThreshold} 
+               className="w-full flex-1 bg-white transition-all duration-[80ms] rounded-none" 
+               style={{ 
+                 opacity: glyphLevel >= levelThreshold ? 1 : 0.5,
+                 boxShadow: glyphLevel >= levelThreshold ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.3)'
+               }} 
+             />
+          ))}
+          <div className={`w-full flex-1 rounded-none transition-all duration-[200ms] ${isPlaying ? 'bg-green-500' : (isReady ? 'bg-yellow-500' : 'bg-red-500')}`} 
+               style={{ 
+                 opacity: 1,
+                 boxShadow: isPlaying 
+                   ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(34,197,94,0.95)' 
+                   : isReady 
+                     ? 'inset 0 0 4px rgba(0,0,0,0.15), 0 0 10px rgba(234,179,8,0.85)' 
+                     : 'inset 0 0 4px rgba(0,0,0,0.15), 0 0 10px rgba(239,68,68,0.85)'
+               }}
+          />
         </div>
       </div>
 

@@ -4,7 +4,7 @@ import { getImgbbCoverUrl } from "../utils";
 import { SpotifyPlayer } from "./SpotifyPlayer";
 import LoadingIntro from "./LoadingIntro";
 import { motion, AnimatePresence } from "motion/react";
-import { Disc, Music, X, ArrowRight } from "lucide-react";
+import { Disc, Music, X, ArrowRight, MoreVertical, LayoutTemplate, ExternalLink } from "lucide-react";
 
 // Start high-contrast, beautiful Windows 8 Metro color accents (Sáng - Light supportive)
 const METRO_ACCENTS: Record<string, {
@@ -397,6 +397,8 @@ export function TierList({
   onAlbumClick
 }: TierListProps) {
   const [covers] = useState<Record<string, string>>({});
+  const [showNativeWidget, setShowNativeWidget] = useState(false);
+  const [showPlayerMenu, setShowPlayerMenu] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [liveFlippedIds, setLiveFlippedIds] = useState<number[]>([]);
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
@@ -563,7 +565,7 @@ export function TierList({
           </div>
           {selectedAlbum.spotifyId && (
             <div className="hidden md:block w-full mt-auto">
-              <SpotifyPlayer 
+              <SpotifyPlayer showNativeWidget={showNativeWidget} 
                  key={selectedAlbum.spotifyId}
                  spotifyId={selectedAlbum.spotifyId} 
                  variant="dark"
@@ -589,12 +591,48 @@ export function TierList({
                     </span>
                   );
                 })()}
-                <button
-                  onClick={() => setSelectedAlbum(null)}
-                  className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
-                >
-                  <X className="w-4 h-4 md:w-5 md:h-5" />
-                </button>
+                <div className="flex items-center gap-1">
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowPlayerMenu(!showPlayerMenu)}
+                      className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
+                    >
+                      <MoreVertical className="w-4 h-4 md:w-5 md:h-5" />
+                    </button>
+                    {showPlayerMenu && (
+                      <div className="absolute right-0 top-full mt-1 w-44 shadow-2xl py-1 rounded-md border z-50 bg-neutral-900 border-white/10">
+                        <button 
+                          onClick={() => {
+                            setShowNativeWidget(!showNativeWidget);
+                            setShowPlayerMenu(false);
+                          }}
+                          className="w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target text-white/80 hover:bg-white/10 hover:text-white"
+                        >
+                          <LayoutTemplate className="w-3.5 h-3.5" />
+                          {showNativeWidget ? "Ẩn danh sách phát" : "Mở danh sách phát"}
+                        </button>
+                        {selectedAlbum.spotifyId && (
+                          <a
+                            href={`https://open.spotify.com/album/${selectedAlbum.spotifyId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 cursor-target text-white/80 hover:bg-white/10 hover:text-white"
+                            onClick={() => setShowPlayerMenu(false)}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            Mở trên Spotify
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => setSelectedAlbum(null)}
+                    className="p-1 md:p-1.5 text-white/50 hover:text-white transition-colors rounded-none bg-white/5 hover:bg-white/20 cursor-target"
+                  >
+                    <X className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                </div>
               </div>
 
               <h3 className="font-sans font-black text-sm md:text-[26px] mt-3 md:mt-4 uppercase tracking-tighter leading-[1.1] drop-shadow-md">
