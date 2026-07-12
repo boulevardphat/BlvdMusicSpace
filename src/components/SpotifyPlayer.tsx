@@ -40,7 +40,7 @@ const loadSpotifyIframeApi = (): Promise<any> => {
 
 interface SpotifyPlayerProps {
   spotifyId: string;
-  variant?: "dark" | "light" | "mobile";
+  variant?: "dark" | "light" | "mobile" | "cover-integrated";
   dominantColor?: string;
   coverUrl?: string;
   showNativeWidget?: boolean;
@@ -65,28 +65,47 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   const [errorCount, setErrorCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
   const [trackName, setTrackName] = useState("");
-  const [glyphLevel, setGlyphLevel] = useState(0);
+  const [glyphLevels, setGlyphLevels] = useState<number[]>([0, 0, 0]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    let currentLevel = 0;
+    let currentLevels = [0, 0, 0];
     if (isPlaying && variant !== "mobile") {
       interval = setInterval(() => {
-        // 35% chance of a high spike (up to 5), simulating a beat
-        if (Math.random() < 0.35) {
-          currentLevel = Math.floor(Math.random() * 3) + 3; // 3, 4, 5
-        } else {
-          // Otherwise, decay steadily by 1 level per tick
-          currentLevel = Math.max(0, currentLevel - 1);
-          // 40% chance of a tiny bounce when near bottom
-          if (currentLevel === 0 && Math.random() < 0.4) {
-            currentLevel = 1;
+        currentLevels = currentLevels.map((prev, index) => {
+          let next = prev;
+          const rand = Math.random();
+          
+          if (index === 0) {
+            // Treble (Row 0): rapid spikes, decays fast
+            if (rand < 0.45) {
+              next = Math.floor(Math.random() * 3) + 2; // 2, 3, 4
+            } else {
+              next = Math.max(0, next - 2);
+            }
+          } else if (index === 1) {
+            // Mid (Row 1): balanced, up to 5
+            if (rand < 0.35) {
+              next = Math.floor(Math.random() * 4) + 2; // 2, 3, 4, 5
+            } else {
+              next = Math.max(0, next - 1);
+            }
+          } else {
+            // Bass (Row 2): heavy, slower decay, up to 5
+            if (rand < 0.25) {
+              next = Math.floor(Math.random() * 3) + 3; // 3, 4, 5
+            } else {
+              if (Math.random() < 0.6) {
+                next = Math.max(0, next - 1);
+              }
+            }
           }
-        }
-        setGlyphLevel(currentLevel);
-      }, 70); // 70ms tick rate makes it very snappy and responsive
+          return next;
+        });
+        setGlyphLevels([...currentLevels]);
+      }, 70);
     } else {
-      setGlyphLevel(0);
+      setGlyphLevels([0, 0, 0]);
     }
     return () => clearInterval(interval);
   }, [isPlaying, variant]);
@@ -173,6 +192,10 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
             if (!active) return;
             setIsReady(true);
           });
+          
+          setTimeout(() => {
+            if (active) setIsReady(true);
+          }, 1500);
 
           EmbedController.on("playback_update", (e: any) => {
             if (!active) return;
@@ -274,6 +297,133 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
     ? (isPlaying ? "spinning-disk" : "spinning-disk paused-disk") 
     : "";
 
+  if (variant === "cover-integrated") {
+    const isRedActive = !isPlaying && !isReady;
+    const isYellowActive = !isPlaying && isReady;
+    const isGreenActive = isPlaying;
+
+    return (
+      <div className="w-full h-full flex flex-col justify-between relative" ref={containerRef}>
+        {/* The Album Cover */}
+        <div 
+          className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md overflow-hidden shrink-0 mt-1 md:mt-0 cursor-pointer cursor-target group"
+          onClick={handlePlayPause}
+        >
+           {coverUrl ? (
+             <img src={coverUrl} className="w-full h-full object-cover transition-transform duration-500" referrerPolicy="no-referrer" />
+           ) : (
+             <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white/50">
+               <Music className="w-8 h-8" />
+             </div>
+           )}
+           
+           {/* Dark overlay and Play/Pause icon */}
+           <div className="absolute inset-0 bg-black/60 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
+              <div className="flex items-center justify-center text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-all duration-200 hover:scale-110 active:scale-90">
+                {isPlaying ? (
+                  <Pause className="w-12 h-12" fill="currentColor" stroke="none" />
+                ) : (
+                  <Play className="w-12 h-12 ml-1" fill="currentColor" stroke="none" />
+                )}
+              </div>
+           </div>
+        </div>
+
+        {/* 3 LED strips stacked vertically with no gap */}
+        <div className="flex flex-col w-full mt-auto border border-white/20 bg-black/25 overflow-hidden select-none shrink-0">
+          {/* Row 0: Top strip (Status Red + 4 White LEDs) */}
+          <div className="grid grid-cols-5 w-full shrink-0">
+            <div 
+              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
+              style={{
+                backgroundColor: isRedActive ? '#ef4444' : '#4c0505',
+                boxShadow: isRedActive 
+                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(239,68,68,0.95)' 
+                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
+              }}
+            />
+            {[2, 3, 4, 5].map((levelThreshold) => {
+              const active = glyphLevels[0] >= levelThreshold;
+              return (
+                <div 
+                  key={levelThreshold} 
+                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
+                  style={{ 
+                    opacity: active ? 1 : 0.08,
+                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
+                  }} 
+                />
+              );
+            })}
+          </div>
+
+          {/* Row 1: Middle strip (Status Yellow + 4 White LEDs) */}
+          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
+            <div 
+              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
+              style={{
+                backgroundColor: isYellowActive ? '#eab308' : '#423c06',
+                boxShadow: isYellowActive 
+                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(234,179,8,0.95)' 
+                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
+              }}
+            />
+            {[2, 3, 4, 5].map((levelThreshold) => {
+              const active = glyphLevels[1] >= levelThreshold;
+              return (
+                <div 
+                  key={levelThreshold} 
+                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
+                  style={{ 
+                    opacity: active ? 1 : 0.08,
+                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
+                  }} 
+                />
+              );
+            })}
+          </div>
+
+          {/* Row 2: Bottom strip (Status Green + 4 White LEDs) */}
+          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
+            <div 
+              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
+              style={{
+                backgroundColor: isGreenActive ? '#22c55e' : '#062e14',
+                boxShadow: isGreenActive 
+                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(34,197,94,0.95)' 
+                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
+              }}
+            />
+            {[2, 3, 4, 5].map((levelThreshold) => {
+              const active = glyphLevels[2] >= levelThreshold;
+              return (
+                <div 
+                  key={levelThreshold} 
+                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
+                  style={{ 
+                    opacity: active ? 1 : 0.08,
+                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
+                  }} 
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Hidden native widget container */}
+        <div 
+          className={`w-full outline-none select-none transition-all duration-300 overflow-hidden bg-transparent ${
+            showNativeWidget 
+              ? "mt-4 opacity-100 h-[152px] relative" 
+              : "absolute w-full h-[152px] opacity-[0.001] pointer-events-none top-0 left-0 -z-10"
+          }`}
+        >
+          <div id={widgetId.current} className="w-full h-full border-0 rounded-none overflow-hidden" />
+        </div>
+      </div>
+    );
+  }
+
   if (variant === "mobile") {
     return (
       <div className="w-full relative flex flex-col items-center mt-0 mb-0" ref={containerRef}>
@@ -364,8 +514,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
         <div 
           className={`w-full outline-none select-none transition-all duration-300 overflow-hidden bg-transparent ${
             showNativeWidget 
-              ? "mt-4 opacity-100 h-[80px]" 
-              : "absolute w-[1px] h-[1px] opacity-0 pointer-events-none -top-10 -left-10"
+              ? "mt-4 opacity-100 h-[80px] relative" 
+              : "absolute w-full h-[80px] opacity-[0.001] pointer-events-none top-0 left-0 -z-10"
           }`}
         >
           <div id={widgetId.current} className="w-full h-full border-0 rounded-none overflow-hidden bg-black/10 border border-slate-200/20" />
@@ -448,8 +598,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
                key={levelThreshold} 
                className="w-full flex-1 bg-white transition-all duration-[80ms] rounded-none" 
                style={{ 
-                 opacity: glyphLevel >= levelThreshold ? 1 : 0.5,
-                 boxShadow: glyphLevel >= levelThreshold ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.3)'
+                 opacity: glyphLevels[1] >= levelThreshold ? 1 : 0.5,
+                 boxShadow: glyphLevels[1] >= levelThreshold ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.3)'
                }} 
              />
           ))}
@@ -469,8 +619,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
       <div 
         className={`w-full outline-none select-none transition-all duration-300 overflow-hidden bg-transparent ${
           showNativeWidget 
-            ? "mt-0 opacity-100 h-[152px]" 
-            : "absolute w-[1px] h-[1px] opacity-0 pointer-events-none -top-10 -left-10"
+            ? "mt-0 opacity-100 h-[152px] relative" 
+            : "absolute w-full h-[152px] opacity-[0.001] pointer-events-none top-0 left-0 -z-10"
         }`}
       >
         <div id={widgetId.current} className="w-full h-full border-0 rounded-none overflow-hidden" />
@@ -478,5 +628,4 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
     </div>
   );
 };
-
 

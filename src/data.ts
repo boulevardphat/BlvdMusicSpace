@@ -28,4 +28,3 @@ export type Album = {
 
 // Build INITIAL_TIERS directly from the single albums.json file containing everything
 export const INITIAL_TIERS: Tier[] = albumsData.tiers;
-

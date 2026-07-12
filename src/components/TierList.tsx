@@ -551,7 +551,33 @@ export function TierList({
       >
         {/* Left Block: cover */}
         <div className="w-[100px] md:w-[220px] shrink-0 flex flex-col justify-between h-full relative z-20 border-r border-white/10 pr-3 md:pr-5 overflow-y-auto no-scrollbar">
-          <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0">
+          {selectedAlbum.spotifyId ? (
+            <div className="w-full h-full relative mt-1 md:mt-0 hidden md:flex flex-col justify-between">
+              <SpotifyPlayer showNativeWidget={showNativeWidget} 
+                 key={selectedAlbum.spotifyId}
+                 spotifyId={selectedAlbum.spotifyId} 
+                 variant="cover-integrated"
+                 dominantColor={expandedPalette?.bg || '#111111'}
+                 coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
+              />
+            </div>
+          ) : (
+            <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:mt-0 hidden md:flex">
+              {selectedAlbum.coverUrl ? (
+                <img decoding="sync"
+                  src={selectedAlbum.coverUrl}
+                  alt={selectedAlbum.title}
+                  className="w-full h-full object-cover transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <Music className="w-7 h-7 text-slate-600" />
+              )}
+            </div>
+          )}
+          
+          {/* Mobile cover view (unchanged) */}
+          <div className="w-full relative aspect-square border border-white/20 bg-slate-900 flex items-center justify-center shadow-md group overflow-hidden shrink-0 mt-1 md:hidden">
             {selectedAlbum.coverUrl ? (
               <img decoding="sync"
                 src={selectedAlbum.coverUrl}
@@ -563,17 +589,8 @@ export function TierList({
               <Music className="w-7 h-7 text-slate-600" />
             )}
           </div>
-          {selectedAlbum.spotifyId && (
-            <div className="hidden md:block w-full mt-auto">
-              <SpotifyPlayer showNativeWidget={showNativeWidget} 
-                 key={selectedAlbum.spotifyId}
-                 spotifyId={selectedAlbum.spotifyId} 
-                 variant="dark"
-                 dominantColor={expandedPalette?.bg || '#111111'}
-                 coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
-              />
-            </div>
-          )}
+          
+          {/* Native Widget rendered separately for mobile if needed, though mobile already uses SpotifyPlayer mobile variant inside TierList? No, mobile uses SpotifyPlayer inside the list view if selected. Wait, I should make sure the spacing is right. */}
         </div>
 
         {/* Right Block: Content Details */}
