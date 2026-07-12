@@ -38,6 +38,22 @@ const loadSpotifyIframeApi = (): Promise<any> => {
   return spotifyIframeApiPromise;
 };
 
+const hexToRgb = (hex: string) => {
+  const cleanHex = hex.replace('#', '');
+  if (cleanHex.length === 3) {
+    const r = parseInt(cleanHex[0] + cleanHex[0], 16);
+    const g = parseInt(cleanHex[1] + cleanHex[1], 16);
+    const b = parseInt(cleanHex[2] + cleanHex[2], 16);
+    return { r, g, b };
+  } else if (cleanHex.length === 6) {
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    return { r, g, b };
+  }
+  return { r: 16, g: 185, b: 129 };
+};
+
 interface SpotifyPlayerProps {
   spotifyId: string;
   variant?: "dark" | "light" | "mobile" | "cover-integrated";
@@ -70,7 +86,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let currentLevels = [0, 0, 0];
-    if (isPlaying && variant !== "mobile") {
+    if (isPlaying) {
       interval = setInterval(() => {
         currentLevels = currentLevels.map((prev, index) => {
           let next = prev;
@@ -268,34 +284,6 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
   const progressPercent = duration > 0 ? (position / duration) * 100 : 0;
   const isDark = variant === "dark";
-  
-  const diskStyle = {
-    backgroundColor: '#111111',
-    backgroundImage: `
-         conic-gradient(
-             from 0deg,
-             transparent 0deg,
-             rgba(255, 255, 255, 0.05) 20deg,
-             rgba(255, 255, 255, 0.35) 45deg, 
-             rgba(255, 255, 255, 0.05) 70deg,
-             transparent 90deg,
-             transparent 180deg,
-             rgba(255, 255, 255, 0.05) 200deg,
-             rgba(255, 255, 255, 0.35) 225deg, 
-             rgba(255, 255, 255, 0.05) 250deg,
-             transparent 270deg
-         ),
-         repeating-radial-gradient(
-             rgba(0, 0, 0, 0.85) 0, 
-             rgba(0, 0, 0, 0.85) 2px, 
-             transparent 3px, 
-             transparent 4px
-         )`
-  };
-
-  const diskClasses = hasStarted 
-    ? (isPlaying ? "spinning-disk" : "spinning-disk paused-disk") 
-    : "";
 
   if (variant === "cover-integrated") {
     const isRedActive = !isPlaying && !isReady;
@@ -425,88 +413,135 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
   }
 
   if (variant === "mobile") {
+    const rgb = hexToRgb(dominantColor || '#10b981');
+    const cy = 3;
+    const cx = 7;
+
+    const gridCells = [];
+    for (let r = 0; r < 7; r++) {
+      for (let c = 0; c < 15; c++) {
+        if (r >= 1 && r <= 5 && c >= 5 && c <= 9) {
+          continue;
+        }
+        gridCells.push({ r, c });
+      }
+    }
+
+    const darkBg = `rgb(${Math.round(rgb.r * 0.35)}, ${Math.round(rgb.g * 0.35)}, ${Math.round(rgb.b * 0.35)})`;
+
     return (
       <div className="w-full relative flex flex-col items-center mt-0 mb-0" ref={containerRef}>
-        <style>{`
-          @keyframes spinRecord {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-          .spinning-disk {
-            animation: spinRecord 6s linear infinite;
-          }
-          .paused-disk {
-            animation-play-state: paused;
-          }
-        `}</style>
         {/* Frame acting as the 'table' */}
         <div 
-           className="w-[100%] max-w-[340px] h-[160px] rounded-none relative transition-all duration-300 border border-black/5 flex items-center justify-center overflow-hidden"
-           style={{ backgroundColor: dominantColor || '#f8fafc' }}
+           className="w-[100%] max-w-[340px] aspect-[15/7] rounded-none relative transition-all duration-300 flex items-center justify-center overflow-hidden border border-white/10"
+           style={{ backgroundColor: darkBg }}
         >
-          {/* Container for Cover and Disk to keep them centered together */}
-          <div className="relative w-[140px] h-[140px] flex items-center justify-center">
-            
-            {/* Vinyl disk that slides out */}
+          {/* LED grid */}
+          <div 
+            className="absolute inset-0 grid gap-0 select-none"
+            style={{ 
+              gridTemplateColumns: 'repeat(15, minmax(0, 1fr))', 
+              gridTemplateRows: 'repeat(7, minmax(0, 1fr))',
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            {/* The Album Cover inside the grid */}
             <div 
-              className={`absolute w-[130px] h-[130px] transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? 'translate-x-[45px]' : 'translate-x-[22px]'} cursor-pointer z-10 cursor-target`}
-              onClick={handlePlayPause}
-            >
-              <div 
-                className={`w-full h-full rounded-full overflow-hidden ${diskClasses} shadow-inner`}
-                style={diskStyle}
-              >
-                {/* Label (Cover) */}
-                <img 
-                  src={coverUrl}
-                  className="w-[42%] h-[42%] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 object-cover border border-white/20"
-                  decoding="sync"
-                  referrerPolicy="no-referrer"
-                  alt="Label Cover"
-                />
-                <div className="w-[3px] h-[3px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
-              </div>
-            </div>
-
-            {/* The Album Cover */}
-            <div 
-              className={`absolute w-[140px] h-[140px] shadow-[0_15px_30px_rgba(0,0,0,0.3)] z-30 cursor-pointer overflow-hidden border border-black/10 bg-slate-900 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isPlaying ? '-translate-x-[45px]' : '-translate-x-[22px]'} cursor-target`}
+              className="relative shadow-[0_15px_30px_rgba(0,0,0,0.5)] z-30 cursor-pointer overflow-hidden bg-slate-900 cursor-target group/cover"
+              style={{ gridRow: "2 / 7", gridColumn: "6 / 11" }}
               onClick={handlePlayPause}
             >
                {coverUrl ? (
-                 <img src={coverUrl} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src={coverUrl} className="w-full h-full object-cover" referrerPolicy="no-referrer" alt="Album Cover" />
                ) : (
                  <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white/50">
                    <Music className="w-8 h-8" />
                  </div>
                )}
-            </div>
-          </div>
-          
-          {/* LED Indicator (top right) */}
-          <div className="absolute top-4 right-4 flex items-center z-40">
-             <span className={`w-3 h-3 rounded-full block transition-all duration-300 ${isPlaying ? 'bg-green-500 shadow-[0_0_12px_rgba(34,197,94,1)] animate-pulse' : (isReady ? 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]')}`}></span>
-          </div>
-
-          {/* Menu 3-dots (bottom right) */}
-          <div className="absolute bottom-3 right-3 z-40" ref={menuRef}>
-             <button onClick={() => setShowMenu(!showMenu)} className="p-1.5 rounded-full text-white/70 hover:text-white hover:bg-white/20 transition-colors bg-black/10 backdrop-blur-md">
-                <MoreVertical className="w-4 h-4" />
-             </button>
-             
-             {showMenu && (
-               <div className="absolute right-0 bottom-full mb-2 w-44 shadow-2xl py-1 rounded-md border z-50 bg-neutral-900 border-white/10">
-                  <button 
-                    onClick={() => {
-                      setShowNativeWidget(!showNativeWidget);
-                      setShowMenu(false);
-                    }}
-                    className="w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 text-white/80 hover:bg-white/10 hover:text-white"
-                  >
-                    {showNativeWidget ? "Hide Native Widget" : "Show Native Widget"}
-                  </button>
+               
+               {/* Dark overlay and Play/Pause icon */}
+               <div className="absolute inset-0 bg-black/60 flex items-center justify-center transition-all duration-300 opacity-0 group-hover/cover:opacity-100">
+                  <div className="flex items-center justify-center text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-all duration-200 hover:scale-110 active:scale-90">
+                    {isPlaying ? (
+                      <Pause className="w-10 h-10" fill="currentColor" stroke="none" />
+                    ) : (
+                      <Play className="w-10 h-10 ml-1" fill="currentColor" stroke="none" />
+                    )}
+                  </div>
                </div>
-             )}
+            </div>
+
+            {/* LED cells */}
+            {gridCells.map(({ r, c }) => {
+              const isStatusLed = r === 0 && c === 14;
+              
+              if (isStatusLed) {
+                // Status LED in the top-right corner
+                let statusColor = '#ef4444';
+                let glowColor = 'rgba(239, 68, 68, 0.95)';
+                if (isPlaying) {
+                  statusColor = '#22c55e';
+                  glowColor = 'rgba(34, 197, 94, 0.95)';
+                } else if (isReady) {
+                  statusColor = '#eab308';
+                  glowColor = 'rgba(234, 179, 8, 0.95)';
+                }
+                return (
+                  <div 
+                    key={`led-${r}-${c}`}
+                    className="w-full h-full transition-all duration-[200ms]"
+                    style={{
+                      backgroundColor: statusColor,
+                      boxShadow: `inset 0 0 4px rgba(0,0,0,0.3), 0 0 12px ${glowColor}`,
+                      gridRow: `${r + 1} / ${r + 2}`,
+                      gridColumn: `${c + 1} / ${c + 2}`,
+                    }}
+                  />
+                );
+              }
+
+              // Normal LED cell
+              const dist = Math.max(Math.abs(r - cy), Math.abs(c - cx));
+              
+              let intensity = 0.08; // base idle dim state
+              if (isPlaying) {
+                // Pulsing wave from center outwards
+                const time = Date.now() / 140; // speed of the wave propagation
+                const waveVal = Math.sin(dist * 1.1 - time);
+                const sharpWave = Math.max(0, Math.pow((waveVal + 1) / 2, 4.5));
+                intensity = 0.12 + 0.88 * sharpWave * (1.1 - dist / 9);
+              } else {
+                // Subtle static breathing from center outwards
+                const breathe = Math.sin(Date.now() / 800) * 0.03 + 0.09;
+                intensity = breathe * (1.2 - dist / 10);
+              }
+
+              // Ensure intensity is bound nicely
+              const finalIntensity = Math.min(1, Math.max(0.04, intensity));
+              const isLit = finalIntensity > 0.28;
+
+              const cellBg = isLit
+                ? `rgba(${Math.round(rgb.r + (255 - rgb.r) * 0.85)}, ${Math.round(rgb.g + (255 - rgb.g) * 0.85)}, ${Math.round(rgb.b + (255 - rgb.b) * 0.85)}, 1)`
+                : `rgba(255, 255, 255, 0.08)`;
+
+              const cellShadow = isLit
+                ? `inset 0 0 2px rgba(255,255,255,1), inset 0 0 4px rgba(0,0,0,0.15), 0 0 16px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1), 0 0 6px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`
+                : `inset 0 0 2px rgba(255,255,255,0.05), inset 0 0 5px rgba(0,0,0,0.6)`;
+
+              return (
+                <div 
+                  key={`led-${r}-${c}`}
+                  className="w-full h-full transition-all duration-[80ms]"
+                  style={{
+                    backgroundColor: cellBg,
+                    boxShadow: cellShadow,
+                    gridRow: `${r + 1} / ${r + 2}`,
+                    gridColumn: `${c + 1} / ${c + 2}`,
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
 
@@ -526,52 +561,36 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
   return (
     <div className="w-full relative group" ref={containerRef}>
-      <style>{`
-        @keyframes spinRecord {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .spinning-disk {
-          animation: spinRecord 6s linear infinite;
-        }
-        .paused-disk {
-          animation-play-state: paused;
-        }
-      `}</style>
       
-      {/* Vinyl Player Frame */}
+      {/* Mobile Player Frame */}
       <div className={`w-full flex flex-row items-center pl-4 sm:pl-5 pr-[44px] sm:pr-[60px] py-4 sm:py-5 rounded-none shadow-none relative transition-all duration-300 backdrop-blur-xl overflow-hidden ${isDark ? 'bg-black/40 border-t border-white/10' : 'bg-white/90 border border-slate-200'}`}>
         
-        {/* Left: The Vinyl Disk */}
-        <div className="shrink-0 relative w-[80px] h-[80px] sm:w-[116px] sm:h-[116px]">
-          {/* Platter disk wrapper (with hover/active scaling but NO glow) */}
-          <div 
-            className={`w-full h-full transition-all duration-500 ease-out cursor-pointer relative cursor-target ${
-              isAutoplayingCue 
-                ? 'scale-[1.08]' 
-                : isPlaying 
-                  ? 'scale-[1.06] hover:scale-[1.10]' 
-                  : 'hover:scale-[1.07]'
-            }`} 
-            onClick={handlePlayPause}
-          >
-            <div 
-              className={`absolute inset-0 rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.5)] overflow-hidden ${diskClasses} group/disk`}
-              style={diskStyle}
-            >
-              {/* Label (Cover) */}
-              <img 
-                src={coverUrl}
-                className="w-[42%] h-[42%] rounded-full relative z-10 object-cover border border-white/20"
-                decoding="sync"
-                referrerPolicy="no-referrer"
-                alt="Label Cover"
-              />
-              {/* Hole */}
-              <div className="w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] bg-[#111111] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.8)] border border-white/10"></div>
-            </div>
-          </div>
-
+        {/* Left: The Album Cover */}
+        <div className="shrink-0 relative w-[80px] h-[80px] sm:w-[116px] sm:h-[116px] border border-white/20 bg-slate-900 flex items-center justify-center shadow-md overflow-hidden cursor-pointer cursor-target group/cover" onClick={handlePlayPause}>
+           {coverUrl ? (
+             <img 
+               src={coverUrl}
+               className="w-full h-full object-cover"
+               decoding="sync"
+               referrerPolicy="no-referrer"
+               alt="Album Cover"
+             />
+           ) : (
+             <div className="w-full h-full flex items-center justify-center text-white/30 bg-slate-900">
+               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/></svg>
+             </div>
+           )}
+           
+           {/* Dark overlay and Play/Pause icon */}
+           <div className="absolute inset-0 bg-black/60 flex items-center justify-center transition-all duration-300 opacity-0 group-hover/cover:opacity-100">
+              <div className="flex items-center justify-center text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-all duration-200 hover:scale-110 active:scale-90">
+                {isPlaying ? (
+                  <Pause className="w-8 h-8 sm:w-12 sm:h-12" fill="currentColor" stroke="none" />
+                ) : (
+                  <Play className="w-8 h-8 sm:w-12 sm:h-12 ml-1" fill="currentColor" stroke="none" />
+                )}
+              </div>
+           </div>
         </div>
 
         {/* Center: Track Info */}
@@ -628,4 +647,3 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
     </div>
   );
 };
-

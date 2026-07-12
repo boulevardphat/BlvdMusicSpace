@@ -3,7 +3,7 @@ import { Tier, Album } from "./data";
 import { TierList, getAlbumBgColor } from "./components/TierList";
 import { SpotifyPlayer } from "./components/SpotifyPlayer";
 import { motion, AnimatePresence } from "motion/react";
-import { Music, Laptop } from "lucide-react";
+import { Music, Laptop, MoreVertical, ExternalLink, LayoutTemplate } from "lucide-react";
 import albumsData from "./albums.json";
 import { getImgbbCoverUrl, getColorThiefDominant } from "./utils";
 import TargetCursor from "./components/TargetCursor";
@@ -25,6 +25,8 @@ export default function App() {
 
   const [albumColors, setAlbumColors] = useState<Record<string, any>>({});
   const [showMobileWarning, setShowMobileWarning] = useState(false);
+  const [showNativeWidget, setShowNativeWidget] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     // Check if user is on mobile (<768px) and hasn't dismissed it in the current session
@@ -153,7 +155,10 @@ export default function App() {
         {selectedAlbum && (
           <div className="md:hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs">
             <div 
-              onClick={() => setSelectedAlbum(null)} 
+              onClick={() => {
+                setSelectedAlbum(null);
+                setShowMobileMenu(false);
+              }} 
               className="absolute inset-0 cursor-default bg-transparent" 
             />
             <motion.div
@@ -171,6 +176,7 @@ export default function App() {
                       variant="mobile" 
                       dominantColor={albumColors[selectedAlbum.id] ? getAlbumBgColor(albumColors[selectedAlbum.id]) : '#0c1015'}
                       coverUrl={selectedAlbum.coverUrl || getImgbbCoverUrl(selectedAlbum.artist, selectedAlbum.title, 'thumb')}
+                      showNativeWidget={showNativeWidget}
                     />
                   </div>
                 ) : (
@@ -248,9 +254,46 @@ export default function App() {
 
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-200 flex justify-end">
+              <div className="mt-4 pt-3 border-t border-slate-200 flex justify-end items-center gap-2">
+                <div className="relative">
+                  <button
+                    onClick={() => setShowMobileMenu(!showMobileMenu)}
+                    className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors border border-slate-300 flex items-center justify-center cursor-pointer"
+                  >
+                    <MoreVertical className="w-4 h-4" />
+                  </button>
+                  {showMobileMenu && (
+                    <div className="absolute right-0 bottom-full mb-2 w-44 shadow-2xl py-1 border z-50 bg-neutral-900 border-white/10 text-white text-left">
+                      <button 
+                        onClick={() => {
+                          setShowNativeWidget(!showNativeWidget);
+                          setShowMobileMenu(false);
+                        }}
+                        className="w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 hover:bg-white/10 hover:text-white cursor-pointer"
+                      >
+                        <LayoutTemplate className="w-3.5 h-3.5" />
+                        {showNativeWidget ? "Ẩn danh sách phát" : "Mở danh sách phát"}
+                      </button>
+                      {selectedAlbum.spotifyId && (
+                        <a
+                          href={`https://open.spotify.com/album/${selectedAlbum.spotifyId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full text-left px-3 py-2.5 text-[10px] font-sans font-semibold flex items-center gap-2 hover:bg-white/10 hover:text-white cursor-pointer"
+                          onClick={() => setShowMobileMenu(false)}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Mở trên Spotify
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
                 <button
-                  onClick={() => setSelectedAlbum(null)}
+                  onClick={() => {
+                    setSelectedAlbum(null);
+                    setShowMobileMenu(false);
+                  }}
                   className="px-4 py-1.5 bg-slate-900 text-white font-bold font-sans text-[10px] uppercase cursor-pointer"
                 >
                   Đóng
