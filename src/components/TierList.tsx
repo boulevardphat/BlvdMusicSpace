@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, memo, useCallback } from "react";
+import React, { useEffect, useState, useRef, memo, useCallback, useMemo } from "react";
 import { Tier, Album } from "../data";
 import { getImgbbCoverUrl } from "../utils";
 import { SpotifyPlayer } from "./SpotifyPlayer";
@@ -404,6 +404,10 @@ export function TierList({
   const [expandedPalette, setExpandedPalette] = useState<{ bg: string; text: string; darkBg?: string } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [visibleTierIds, setVisibleTierIds] = useState<Set<string>>(new Set());
+  const visibleTierIdsRef = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    visibleTierIdsRef.current = visibleTierIds;
+  }, [visibleTierIds]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -442,19 +446,20 @@ export function TierList({
   const [loadedImageIds, setLoadedImageIds] = useState<Set<number>>(new Set());
 
   // Pre-calculate continuous global ranks
-  let currentRank = 1;
-  const albumsWithRank = tiers.map(tier => {
-    const mappedAlbums = tier.albums.map(album => {
-      const rank = currentRank++;
-      return {
-        ...album,
-        globalRank: rank,
-        tierName: tier.name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim(),
-        tierId: tier.id
-      };
+  const albumsWithRank = useMemo(() => {
+    let rank = 1;
+    return tiers.map(tier => {
+      const mappedAlbums = tier.albums.map(album => {
+        return {
+          ...album,
+          globalRank: rank++,
+          tierName: tier.name.replace(/^[\s\p{Emoji}\p{Extended_Pictographic}]+/gu, "").trim(),
+          tierId: tier.id
+        };
+      });
+      return { ...tier, mappedAlbums };
     });
-    return { ...tier, mappedAlbums };
-  });
+  }, [tiers]);
 
   const handleImageLoad = useCallback((albumId: number) => {
     setLoadedImageIds(prev => {
@@ -522,7 +527,7 @@ export function TierList({
   useEffect(() => {
     if (isMobile && selectedAlbum) {
       // Suspend flipping on mobile when detail view is open
-      setLiveFlippedIds([]);
+      setLiveFlippedIds(prev => prev.length > 0 ? [] : prev);
       return;
     }
 
@@ -538,8 +543,9 @@ export function TierList({
       
       // Filter albums to only those inside the visible tiers
       const activeAlbums = allAlbumsWithRanks.filter((album: any) => {
-        if (visibleTierIds.size === 0) return true;
-        return visibleTierIds.has(album.tierId);
+        const visibleIds = visibleTierIdsRef.current;
+        if (visibleIds.size === 0) return true;
+        return visibleIds.has(album.tierId);
       });
 
       if (activeAlbums.length === 0) return;
@@ -587,7 +593,7 @@ export function TierList({
     }, isMobile ? 2500 : 4500); // Trigger frequency
 
     return () => clearInterval(interval);
-  }, [tiers, albumsWithRank, isMobile, selectedAlbum, visibleTierIds]);
+  }, [tiers, albumsWithRank, isMobile, selectedAlbum]);
 
   const renderExpandedPanel = () => {
     if (!selectedAlbum) return null;
@@ -855,7 +861,9 @@ export function TierList({
   }, [onAlbumClick]);
 
 
-  const totalAlbumsCount = currentRank - 1;
+  const totalAlbumsCount = useMemo(() => {
+    return tiers.reduce((acc, tier) => acc + (tier.albums?.length || 0), 0);
+  }, [tiers]);
 
 
   return (

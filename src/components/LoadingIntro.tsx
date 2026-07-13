@@ -233,8 +233,8 @@ export default function LoadingIntro() {
             className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
           >
              <div className="bg-slate-950/80 px-8 py-6 border-4 border-slate-900/50 backdrop-blur-md shadow-2xl flex flex-col items-center justify-center">
-                <h1 className="text-[clamp(32px,5vw,72px)] font-sans font-black text-white tracking-tighter leading-[1.3] uppercase text-center drop-shadow-lg pb-1 pt-1">
-                  Bảng Xếp Hạng<br/>Album của BLVD
+                <h1 className="text-[clamp(32px,5vw,72px)] font-sans font-black text-white tracking-tighter leading-[1.3] text-center drop-shadow-lg pb-1 pt-1">
+                  BlvdMusicSpace
                 </h1>
              </div>
           </motion.div>

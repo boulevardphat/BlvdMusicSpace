@@ -229,7 +229,13 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
         });
       } catch (err) {
         console.error("Spotify Iframe API load failed:", err);
-        setErrorCount((prev) => prev + 1);
+        if (errorCount < 3) {
+          setTimeout(() => {
+            if (active) {
+              setErrorCount((prev) => prev + 1);
+            }
+          }, 3000);
+        }
       }
     };
 
