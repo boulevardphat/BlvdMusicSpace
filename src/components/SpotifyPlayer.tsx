@@ -429,8 +429,41 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
     const darkBg = `rgb(${Math.round(rgb.r * 0.35)}, ${Math.round(rgb.g * 0.35)}, ${Math.round(rgb.b * 0.35)})`;
 
+    // Pre-calculate CSS variables once per dominantColor change to avoid redundant rendering computations
+    const ledLitBg = `rgba(${Math.round(rgb.r + (255 - rgb.r) * 0.85)}, ${Math.round(rgb.g + (255 - rgb.g) * 0.85)}, ${Math.round(rgb.b + (255 - rgb.b) * 0.85)}, 1)`;
+    const ledLitShadow = `inset 0 0 2px rgba(255,255,255,1), inset 0 0 4px rgba(0,0,0,0.15), 0 0 16px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1), 0 0 6px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`;
+    const ledBreatheBg = `rgba(${Math.round(rgb.r + (255 - rgb.r) * 0.3)}, ${Math.round(rgb.g + (255 - rgb.g) * 0.3)}, ${Math.round(rgb.b + (255 - rgb.b) * 0.3)}, 0.45)`;
+    const ledBreatheShadow = `inset 0 0 2px rgba(255,255,255,0.4), inset 0 0 4px rgba(0,0,0,0.15), 0 0 10px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`;
+
     return (
       <div className="w-full relative flex flex-col items-center mt-0 mb-0" ref={containerRef}>
+        <style>{`
+          @keyframes led-pulse-${spotifyId} {
+            0% {
+              background-color: rgba(255, 255, 255, 0.08);
+              box-shadow: inset 0 0 2px rgba(255,255,255,0.05), inset 0 0 5px rgba(0,0,0,0.6);
+            }
+            30% {
+              background-color: ${ledLitBg};
+              box-shadow: ${ledLitShadow};
+            }
+            100% {
+              background-color: rgba(255, 255, 255, 0.08);
+              box-shadow: inset 0 0 2px rgba(255,255,255,0.05), inset 0 0 5px rgba(0,0,0,0.6);
+            }
+          }
+
+          @keyframes led-breathe-${spotifyId} {
+            0%, 100% {
+              background-color: rgba(255, 255, 255, 0.06);
+              box-shadow: inset 0 0 2px rgba(255,255,255,0.03), inset 0 0 5px rgba(0,0,0,0.6);
+            }
+            50% {
+              background-color: ${ledBreatheBg};
+              box-shadow: ${ledBreatheShadow};
+            }
+          }
+        `}</style>
         {/* Frame acting as the 'table' */}
         <div 
            className="w-[100%] max-w-[340px] aspect-[15/7] rounded-none relative transition-all duration-300 flex items-center justify-center overflow-hidden border border-white/10"
@@ -503,42 +536,32 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
 
               // Normal LED cell
               const dist = Math.max(Math.abs(r - cy), Math.abs(c - cx));
-              
-              let intensity = 0.08; // base idle dim state
-              if (isPlaying) {
-                // Pulsing wave from center outwards
-                const time = Date.now() / 140; // speed of the wave propagation
-                const waveVal = Math.sin(dist * 1.1 - time);
-                const sharpWave = Math.max(0, Math.pow((waveVal + 1) / 2, 4.5));
-                intensity = 0.12 + 0.88 * sharpWave * (1.1 - dist / 9);
-              } else {
-                // Subtle static breathing from center outwards
-                const breathe = Math.sin(Date.now() / 800) * 0.03 + 0.09;
-                intensity = breathe * (1.2 - dist / 10);
-              }
 
-              // Ensure intensity is bound nicely
-              const finalIntensity = Math.min(1, Math.max(0.04, intensity));
-              const isLit = finalIntensity > 0.28;
-
-              const cellBg = isLit
-                ? `rgba(${Math.round(rgb.r + (255 - rgb.r) * 0.85)}, ${Math.round(rgb.g + (255 - rgb.g) * 0.85)}, ${Math.round(rgb.b + (255 - rgb.b) * 0.85)}, 1)`
-                : `rgba(255, 255, 255, 0.08)`;
-
-              const cellShadow = isLit
-                ? `inset 0 0 2px rgba(255,255,255,1), inset 0 0 4px rgba(0,0,0,0.15), 0 0 16px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 1), 0 0 6px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`
-                : `inset 0 0 2px rgba(255,255,255,0.05), inset 0 0 5px rgba(0,0,0,0.6)`;
+              const animationStyle: React.CSSProperties = isPlaying 
+                ? {
+                    animationName: `led-pulse-${spotifyId}`,
+                    animationDuration: "1.4s",
+                    animationIterationCount: "infinite",
+                    animationTimingFunction: "ease-in-out",
+                    animationDelay: `${dist * 0.08}s`,
+                    gridRow: `${r + 1} / ${r + 2}`,
+                    gridColumn: `${c + 1} / ${c + 2}`,
+                  }
+                : {
+                    animationName: `led-breathe-${spotifyId}`,
+                    animationDuration: "2.4s",
+                    animationIterationCount: "infinite",
+                    animationTimingFunction: "ease-in-out",
+                    animationDelay: `${dist * 0.15}s`,
+                    gridRow: `${r + 1} / ${r + 2}`,
+                    gridColumn: `${c + 1} / ${c + 2}`,
+                  };
 
               return (
                 <div 
                   key={`led-${r}-${c}`}
-                  className="w-full h-full transition-all duration-[80ms]"
-                  style={{
-                    backgroundColor: cellBg,
-                    boxShadow: cellShadow,
-                    gridRow: `${r + 1} / ${r + 2}`,
-                    gridColumn: `${c + 1} / ${c + 2}`,
-                  }}
+                  className="w-full h-full will-change-[background-color,box-shadow]"
+                  style={animationStyle}
                 />
               );
             })}

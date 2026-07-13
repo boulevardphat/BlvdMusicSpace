@@ -187,8 +187,6 @@ export default function LoadingIntro() {
                 transform: startGlow ? "scale(1)" : "scale(0.98)",
                 transitionDuration: "800ms",
                 transitionDelay: `${cell.delay}s`,
-                backdropFilter: "blur(4px)",
-                WebkitBackdropFilter: "blur(4px)",
                 boxShadow: startGlow 
                   ? `inset 0 0 12px rgba(255, 255, 255, 0.12), 0 0 15px ${cell.color}40`
                   : "none"
@@ -203,7 +201,8 @@ export default function LoadingIntro() {
                   transitionDuration: "900ms",
                   transitionDelay: `${cell.delay}s`,
                   opacity: startGlow ? 1 : 0,
-                  animationDelay: `${cell.delay}s`
+                  animationDelay: `${cell.delay}s`,
+                  willChange: cell.shouldFlicker ? "transform, opacity" : "auto"
                 }}
               />
               
@@ -215,7 +214,8 @@ export default function LoadingIntro() {
                   transitionDuration: "900ms",
                   transitionDelay: `${cell.delay}s`,
                   opacity: startGlow ? 0.3 : 0,
-                  animationDelay: `${cell.delay}s`
+                  animationDelay: `${cell.delay}s`,
+                  willChange: cell.shouldFlicker ? "transform, opacity" : "auto"
                 }}
               />
             </div>
