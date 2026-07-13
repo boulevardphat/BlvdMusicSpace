@@ -317,85 +317,93 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
            </div>
         </div>
 
-        {/* 3 LED strips stacked vertically with no gap */}
-        <div className="flex flex-col w-full mt-auto border border-white/20 bg-black/25 overflow-hidden select-none shrink-0">
-          {/* Row 0: Top strip (Status Red + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isRedActive ? '#ef4444' : '#4c0505',
-                boxShadow: isRedActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(239,68,68,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[0] >= levelThreshold;
-              return (
-                <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
-                  style={{ 
-                    opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
-                  }} 
-                />
-              );
-            })}
-          </div>
+        {/* 6 LED strips stacked vertically in a high-density 6x10 grid */}
+        <div className="grid grid-cols-10 w-full mt-auto border border-white/20 bg-black/25 overflow-hidden select-none shrink-0 aspect-[10/6]">
+          {Array.from({ length: 6 }).map((_, r) => {
+            return Array.from({ length: 10 }).map((_, c) => {
+              const isColorLed = c < 2;
+              
+              if (isColorLed) {
+                // Color LEDs (Columns 0 & 1): 2x2 grid per color
+                // Row 0, 1: Red
+                // Row 2, 3: Yellow
+                // Row 4, 5: Green
+                let colorType: "red" | "yellow" | "green" = "red";
+                if (r === 2 || r === 3) colorType = "yellow";
+                if (r >= 4) colorType = "green";
 
-          {/* Row 1: Middle strip (Status Yellow + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isYellowActive ? '#eab308' : '#423c06',
-                boxShadow: isYellowActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(234,179,8,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[1] >= levelThreshold;
-              return (
-                <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
-                  style={{ 
-                    opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
-                  }} 
-                />
-              );
-            })}
-          </div>
+                const isThisActive = 
+                  (colorType === "red" && isRedActive) ||
+                  (colorType === "yellow" && isYellowActive) ||
+                  (colorType === "green" && isGreenActive);
 
-          {/* Row 2: Bottom strip (Status Green + 4 White LEDs) */}
-          <div className="grid grid-cols-5 w-full border-t border-black/20 shrink-0">
-            <div 
-              className="w-full h-auto aspect-square shrink-0 border-r border-black/30 transition-all duration-[200ms]"
-              style={{
-                backgroundColor: isGreenActive ? '#22c55e' : '#062e14',
-                boxShadow: isGreenActive 
-                  ? 'inset 0 0 4px rgba(0,0,0,0.1), 0 0 15px rgba(34,197,94,0.95)' 
-                  : 'inset 0 0 6px rgba(0,0,0,0.6)'
-              }}
-            />
-            {[2, 3, 4, 5].map((levelThreshold) => {
-              const active = glyphLevels[2] >= levelThreshold;
-              return (
-                <div 
-                  key={levelThreshold} 
-                  className="w-full h-auto aspect-square shrink-0 bg-white transition-all duration-[80ms] rounded-none border-r border-black/30 last:border-r-0" 
-                  style={{ 
-                    opacity: active ? 1 : 0.08,
-                    boxShadow: active ? 'inset 0 0 4px rgba(0,0,0,0.2), 0 0 15px rgba(255,255,255,0.8)' : 'inset 0 0 4px rgba(0,0,0,0.5)'
-                  }} 
-                />
-              );
-            })}
-          </div>
+                // If active, it is fully ON.
+                // If inactive, it stays completely OFF (no custom patterns)
+                const active = isThisActive;
+
+                // Determine CSS colors and shadows
+                let bgColor = "#12141c";
+                let shadow = "inset 0 0 4px rgba(0,0,0,0.6)";
+                
+                if (colorType === "red") {
+                  bgColor = active ? "#ef4444" : "#4c0505";
+                  shadow = active 
+                    ? "inset 0 0 2px rgba(255,255,255,0.4), 0 0 10px rgba(239,68,68,0.85)" 
+                    : "inset 0 0 4px rgba(0,0,0,0.6)";
+                } else if (colorType === "yellow") {
+                  bgColor = active ? "#eab308" : "#423c06";
+                  shadow = active 
+                    ? "inset 0 0 2px rgba(255,255,255,0.4), 0 0 10px rgba(234,179,8,0.85)" 
+                    : "inset 0 0 4px rgba(0,0,0,0.6)";
+                } else if (colorType === "green") {
+                  bgColor = active ? "#22c55e" : "#062e14";
+                  shadow = active 
+                    ? "inset 0 0 2px rgba(255,255,255,0.4), 0 0 10px rgba(34,197,94,0.85)" 
+                    : "inset 0 0 4px rgba(0,0,0,0.6)";
+                }
+
+                return (
+                  <div 
+                    key={`color-led-${r}-${c}`}
+                    className="w-full h-full border-r border-b border-black/30 transition-all duration-[200ms]"
+                    style={{
+                      backgroundColor: bgColor,
+                      boxShadow: shadow
+                    }}
+                  />
+                );
+              } else {
+                // White LEDs (Columns 2 to 9): 8 columns of white squares
+                const whiteColIndex = c - 2; // 0 to 7
+                const bandIndex = Math.floor(r / 2); // 0 (Treble), 1 (Mid), 2 (Bass)
+                const level = glyphLevels[bandIndex];
+
+                // Scale the level (0-5) to 0-8 white LEDs
+                let maxActive = level * 1.6;
+                
+                // Add tiny organic variations between row pairs so they are dynamic
+                if (r % 2 === 1) {
+                  // Odd row has a slightly offset trigger to feel extremely fluid and dynamic
+                  maxActive = Math.max(0, level - 0.4 + (Math.sin(Date.now() / 150 + r) * 0.2)) * 1.6;
+                }
+
+                const active = whiteColIndex < maxActive;
+
+                return (
+                  <div 
+                    key={`white-led-${r}-${c}`}
+                    className="w-full h-full bg-white border-r border-b border-black/30 last:border-r-0 transition-all duration-[80ms]"
+                    style={{
+                      opacity: active ? 1 : 0.08,
+                      boxShadow: active 
+                        ? "inset 0 0 2px rgba(0,0,0,0.2), 0 0 10px rgba(255,255,255,0.8)" 
+                        : "inset 0 0 3px rgba(0,0,0,0.5)"
+                    }}
+                  />
+                );
+              }
+            });
+          })}
         </div>
 
         {/* Hidden native widget container */}
@@ -537,31 +545,60 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({
               // Normal LED cell
               const dist = Math.max(Math.abs(r - cy), Math.abs(c - cx));
 
-              const animationStyle: React.CSSProperties = isPlaying 
-                ? {
-                    animationName: `led-pulse-${spotifyId}`,
-                    animationDuration: "1.4s",
-                    animationIterationCount: "infinite",
-                    animationTimingFunction: "ease-in-out",
-                    animationDelay: `${dist * 0.08}s`,
-                    gridRow: `${r + 1} / ${r + 2}`,
-                    gridColumn: `${c + 1} / ${c + 2}`,
-                  }
-                : {
-                    animationName: `led-breathe-${spotifyId}`,
-                    animationDuration: "2.4s",
-                    animationIterationCount: "infinite",
-                    animationTimingFunction: "ease-in-out",
-                    animationDelay: `${dist * 0.15}s`,
-                    gridRow: `${r + 1} / ${r + 2}`,
-                    gridColumn: `${c + 1} / ${c + 2}`,
-                  };
+              let finalBg = "";
+              let finalShadow = "";
+              let customStyle: React.CSSProperties = {};
+
+              if (isPlaying) {
+                const treble = glyphLevels[0];
+                const mid = glyphLevels[1];
+                const bass = glyphLevels[2];
+                const activeRadius = (bass * 1.3) + (mid * 0.4); // Ranges from 0 to ~8.5
+
+                const diff = activeRadius - dist;
+                let intensity = 0.08;
+                if (diff >= 0) {
+                  // Inside the pulse wave
+                  intensity = 0.2 + (diff * 0.15) + (treble * 0.08);
+                  intensity = Math.min(1.0, Math.max(0.08, intensity));
+                } else {
+                  // Outside the pulse wave (fading trailing edges)
+                  intensity = 0.08 + Math.max(0, 0.12 - Math.abs(diff) * 0.05);
+                }
+                
+                const isLit = intensity > 0.25;
+                finalBg = isLit
+                  ? `rgba(${Math.round(rgb.r + (255 - rgb.r) * 0.8)}, ${Math.round(rgb.g + (255 - rgb.g) * 0.8)}, ${Math.round(rgb.b + (255 - rgb.b) * 0.8)}, ${intensity})`
+                  : `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${intensity * 0.35})`;
+                  
+                finalShadow = isLit
+                  ? `inset 0 0 2px rgba(255,255,255,1), inset 0 0 4px rgba(0,0,0,0.15), 0 0 ${Math.round(6 + intensity * 12)}px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${intensity}), 0 0 6px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`
+                  : `inset 0 0 2px rgba(255,255,255,0.05), inset 0 0 5px rgba(0,0,0,0.6)`;
+
+                customStyle = {
+                  backgroundColor: finalBg,
+                  boxShadow: finalShadow,
+                  gridRow: `${r + 1} / ${r + 2}`,
+                  gridColumn: `${c + 1} / ${c + 2}`,
+                };
+              } else {
+                // Not playing: use beautiful slow breathing animation (pre-calculated with CSS Keyframes for zero overhead)
+                customStyle = {
+                  animationName: `led-breathe-${spotifyId}`,
+                  animationDuration: "2.4s",
+                  animationIterationCount: "infinite",
+                  animationTimingFunction: "ease-in-out",
+                  animationDelay: `${dist * 0.15}s`,
+                  gridRow: `${r + 1} / ${r + 2}`,
+                  gridColumn: `${c + 1} / ${c + 2}`,
+                };
+              }
 
               return (
                 <div 
                   key={`led-${r}-${c}`}
                   className="w-full h-full will-change-[background-color,box-shadow]"
-                  style={animationStyle}
+                  style={customStyle}
                 />
               );
             })}
